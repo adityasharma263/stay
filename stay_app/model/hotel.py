@@ -7,6 +7,21 @@ from stay_app.model.base import Base
 #     1 = "Crunchy apple"
 #     BANANA = "Sweet banana
 
+class HotelCollection(Base):
+    __tablename__ = 'hotel_collection'
+
+    collection_name = db.Column(db.String, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String, nullable=True)
+    products = db.relationship('CollectionProduct', backref='hotel_collection')
+    hotels = db.relationship('Hotel', backref='hotel_collection')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<collection %r>' % self.collection
 
 class Hotel(Base):
     __tablename__ = 'hotel'
@@ -25,7 +40,7 @@ class Hotel(Base):
     latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
     longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
-    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'), unique=True, nullable=True)
+    collection_id = db.Column(db.Integer, db.ForeignKey('hotel_collection.id'), unique=True, nullable=True)
 
 
     def __init__(self, *args, **kwargs):
@@ -33,24 +48,6 @@ class Hotel(Base):
 
     def __repr__(self):
         return '<name %r>' % self.name
-
-
-class HotelCollection(Base):
-    __tablename__ = 'hotel_collection'
-
-
-    collection_name = db.Column(db.String, nullable=True)
-    featured = db.Column(db.Boolean, default=False, nullable=True)
-    desc = db.Column(db.Text, nullable=True)
-    image = db.Column(db.String, nullable=True)
-    products = db.relationship('CollectionProduct', backref='hotel_collection')
-    hotels = db.relationship('Hotel', backref='hotel_collection')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<collection %r>' % self.collection
 
 
 class CollectionProduct(Base):
@@ -97,6 +94,7 @@ class Room(Base):
 
 class Amenity(Base):
     __tablename__ = 'amenity'
+
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True, nullable=False)
     conference_room = db.Column(db.Boolean, default=False, nullable=True)
     parking = db.Column(db.Boolean, default=False, nullable=True)
@@ -135,6 +133,7 @@ class Amenity(Base):
 
 class Image(Base):
     __tablename__ = 'image'
+
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
     image_url = db.Column(db.String, nullable=True)
 
