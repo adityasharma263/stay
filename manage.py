@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'aditya'
 from flask_script import Manager, Server
