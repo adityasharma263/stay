@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!-- saved from url=(0054)http://www.soaptheme.net/html/travelo/hotel-index.html -->
 <html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]-->
@@ -422,75 +423,7 @@
         </header>
         <section id="">
             <div class="search-box-wrapper">
-                <!-- <section id="content" style="background-image:url('/images/hotelhome.jpg'); height: 350px;">
-
-                
-        
                
-                <div class="search-box-wrapper style2">
-                    <div class="container">
-                        <h1>heading</h1>
-                        <p style="color:white">write here</p>
-                    </div>
-                    <div class="search-box container">
-                        <ul class="search-tabs clearfix">
-                            <li class="advanced-search visible-lg">
-                                <a href="http://www.soaptheme.net/html/travelo/search-style3.html#advanced-search-tab" data-toggle="tab">
-                                    <span></span></a></li>
-                        </ul>
-                        <div class="visible-mobile">
-                            <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;">
-                                <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
-                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"></li>
-                            </ul>
-                        </div>
-                    </div>
-                        </div>
-                        
-                        <div class="search-tab-content">
-                            <div class="tab-pane fade active in" id="hotels-tab" onmousemove="myFunction(event)" onmouseout="clearCoor()">
-                                <form autocomplete="off">
-                                    <h4 class="title">Where do you want to go?</h4>
-                                    <div class="row">
-                                        <div class="form-group col-sm-7 col-md-7">
-                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" onmousemove="myFunction(event)" onmouseout="clearCoor()"  ng-model="hotel.search" placeholder="CITY OR HOTEL NAME">
-                                            <div class="row" id="demo">
-                                                    <div class="col-sm-12">
-                                                <table class="table table-hover " style="background-color:white">
-        
-                                                        <tbody>
-                                                          <tr ng-repeat="city in cities">
-                                                            <td ng-click="result([[city]],'city')">[[city]]</td>
-        
-                                                          </tr>
-                                                          <tr ng-repeat="name in names">
-                                                            <td ng-click="result([[name]],'name')">[[name]]</td>
-        
-                                                          </tr>
-                                                          <tr ng-if="resp">
-                                                              <td>No result found</td>
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        
-                                                <div class="col-xs-5">
-                                                    <button type="submit" class="full-width"  ng-click="getHotel()">SEARCH NOW</button>
-                                                </div>
-                                            </div>
-                                           
-        
-                                </form>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-    
-        </section> -->
 
 
         <section id="content" class="tour">
@@ -545,7 +478,7 @@
                             </div>
                             <div class="row col-md-8" id="demo" style="margin-left:10px; top:-19px; z-index:999"  onmouseover="myFunction(event)" onmouseout="clearCoor()">
                                 <div class="col-sm-12" style="position: relative; z-index: 99;"> 
-                                    <div style="max-height:100px; overflow-y:scroll; text-align: left;
+                                    <div style="max-height:100px; text-align: left;
                                     margin: 0;
                                     box-sizing: border-box;
                                     z-index: 99;
@@ -555,11 +488,11 @@
                                 <table class="table table-hover " style="background-color:white">
 
                                         <tbody>
-                                          <tr ng-repeat="city in cities">
+                                          <tr ng-repeat="city in cities | limitTo:3">
                                             <td ng-click="result([[city]],'city')">[[city]]</td>
 
                                           </tr>
-                                          <tr ng-repeat="name in names">
+                                          <tr ng-repeat="name in names | limitTo:3">
                                             <td ng-click="result([[name]],'name')">[[name]]</td>
 
                                           </tr>
@@ -1171,7 +1104,7 @@
                             <div class="col-sm-4">
                                 <article class="box">
                                     <figure>
-                                        <a class="hover-effect" href=/hotel/collection/"hotel-with-jaccuzi-travel-beans" title=""><img src="images/hotel_collections/hotel/collection-with-jacuzzi-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                        <a class="hover-effect" href=/hotel/collection/"hotel-with-jaccuzi-travel-beans" title=""><img src="images/hotel_collections/hotel-with-jacuzzi-travel-beans.jpg" alt="" width="370" height="172"></a>
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Hotel with Jacuzzi</h4>
