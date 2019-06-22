@@ -3,12 +3,14 @@
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct
 from stay_app import app
 # from sqlalchemy import or_
+from sqlalchemy import func
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema
 import datetime
 from itertools import cycle
 # import simplejson as json
-import json
+# import json
+
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
 def hotel_api():
@@ -16,6 +18,12 @@ def hotel_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
+        room_type = request.args.get('room_type', 1)
+        args.pop('room_type', None)
+        breakfast = request.args.get('breakfast', False)
+        args.pop('breakfast', None)
+        balcony = request.args.get('balcony', False)
+        args.pop('balcony', None)
         # check_in = request.args.get('check_in')
         # check_out = request.args.get('check_out')
         price_start = request.args.get('price_start', None)
@@ -65,14 +73,14 @@ def hotel_api():
             deals_list = Deal.query.filter(Deal.price >= price_start, Deal.price <= price_end).all()
             for deal_obj in deals_list:
                 hotel_room_id.append(deal_obj.room_id)
-            room_list = Room.query.filter(Room.id.in_(hotel_room_id)).all()
+            room_list = Room.query.filter(Room.id.in_(hotel_room_id), Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).all()
             for room_obj in room_list:
                 price_hotel_list.append(room_obj.hotel_id)
             hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(price_hotel_list)).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         elif rating:
-            hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+            hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating, Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         else:
-            hotels = Hotel.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+            hotels = Hotel.query.filter_by(**args).filter(Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -573,10 +581,10 @@ def hotel_search():
     search = search['search']
     cities = []
     names = []
-    hotel_cities = Hotel.query.distinct(Hotel.city).filter(Hotel.city.like('%' + search + '%')).order_by(Hotel.city).all()
+    hotel_cities = Hotel.query.distinct(func.lower(Hotel.city)).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).all()
     for hotel_city in hotel_cities:
         cities.append(hotel_city.city)
-    hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.like('%' + search + '%')).order_by(Hotel.name).all()
+    hotel_names = Hotel.query.distinct(func.lower(Hotel.name)).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).all()
     for hotel_name in hotel_names:
         names.append(hotel_name.name)
     return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})
