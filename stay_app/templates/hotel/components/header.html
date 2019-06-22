@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]-->
+<html ng-app="comparetravel" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]-->
 <head>
     <!-- <base href="/"> -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,8 +55,8 @@
     <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>  
     <script type="text/javascript" charset="UTF-8" src="/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="/js/stats.js"></script></head>
 
-    <body ng-app="comparetravel">
-    <div ng-controller="stayController">
+    <body ng-controller="{% block controller%}{% endblock %}" >
+    <div>
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="topnav hidden-xs">
