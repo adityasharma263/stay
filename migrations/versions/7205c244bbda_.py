@@ -226,3 +226,4 @@ def downgrade():
     op.drop_index(op.f('ix_hotel_collection_id'), table_name='hotel_collection')
     op.drop_table('hotel_collection')
     # ### end Alembic commands ###
+True
