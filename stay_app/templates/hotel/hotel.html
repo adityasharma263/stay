@@ -82,7 +82,7 @@
                                     </div>
                                     </div>
                                 </div>
-                            <div class="text-center" style="margin-top:40px;">
+                            <div class="text-center" style="margin-top:40px;" ng-if="[[hotel.is_partner]]=='false'">
                                 <a href="#collections" class="button btn-medium yellow uppercase animated" data-animation-type="bounceInDown">View All Collections</a>
                                 &nbsp;&nbsp;
                             </div>
@@ -108,13 +108,13 @@
                                 <li ng-repeat="hotel in hotels" style="width: 270px; float: left; display: block;">
                                     <article class="box">
                                         <figure>
-                                            <a href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" class="hover-effect popup-gallery"><img style="height:150px"  alt="" src="[[hotel.images[0].image_url]]"></a>
+                                            <a href="#" class=""><img style="height:150px"  alt="" src="[[hotel.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
-                                            <span class="price">
+                                            <!-- <span class="price">
                                                 <small>avg/night</small>
                                                 ₹[[hotel.deals[0].price]]
-                                            </span>
+                                            </span> -->
                                             <h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
                                             <!-- <div class="feedback">
                                                 <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
@@ -134,8 +134,8 @@
                                 
                                     <ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li>
                                         <li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav">
-                                            <li><a class="flex-prev" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Previous</a></li>
-                                            <li><a class="flex-next" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Next</a></li></ul>
+                                            <li><a class="flex-prev" href="#">Previous</a></li>
+                                            <li><a class="flex-next" href="#">Next</a></li></ul>
                         </div>
 
 
@@ -371,7 +371,7 @@
                     </div> -->
 
 
-                    <div id="collections" class="block">
+                    <div id="collections" class="block" ng-if="[[hotel.is_partner]]=='false'">
                         <h1>Not Just Hotels , Travel Beans is About More ! <a href="#collections" class="active">#Collections</a></h1>
                         <p>To Make Your Vacations Best , We Have a Collection of The Most Awesome and Unique Places to Experience .</p>
                         <div class="row image-box style4">
@@ -383,7 +383,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Campsites</h4>
-                                        <a href="/hotel/collection/campsite-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/campsite-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -395,7 +395,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Bed and Breakfast</h4>
-                                        <a href="/hotel/collection/bed-and-breakfast-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/bed-and-breakfast-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -406,7 +406,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Boat stays</h4>
-                                        <a href="/hotel/collection/boatstays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/boatstays-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div><div class="col-sm-4">
@@ -416,7 +416,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Botique hotels</h4>
-                                        <a href="/hotel/collection/boutique-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/boutique-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div><div class="col-sm-4">
@@ -426,7 +426,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Budget hotel</h4>
-                                        <a href="/hotel/collection/budget-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/budget-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div><div class="col-sm-4">
@@ -436,7 +436,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Appartments</h4>
-                                        <a href="/hotel/collection/appartments-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/appartments-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div><div class="col-sm-4">
@@ -446,7 +446,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Cabins</h4>
-                                        <a href="/hotel/collection/cabins-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/cabins-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -459,7 +459,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Capsules</h4>
-                                        <a href="/hotel/collection/capsules-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/capsules-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -471,7 +471,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Country House</h4>
-                                        <a href="/hotel/collection/country-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/country-houses-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -482,7 +482,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Army Mess</h4>
-                                        <a href="/hotel/collection/army-mess-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/army-mess-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -494,7 +494,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Cottages</h4>
-                                        <a href="/hotel/collection/cottages-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/cottages-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -506,7 +506,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Resorts</h4>
-                                        <a href="/hotel/collection/resorts-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/resorts-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -518,7 +518,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Country Side</h4>
-                                        <a href="/hotel/collection/country-side-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/country-side-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -530,7 +530,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Dharamshala</h4>
-                                        <a href="/hotel/collection/dharamshala-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/dharamshala-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -542,7 +542,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Economy Hotels</h4>
-                                        <a href="/hotel/collection/economy-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/economy-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -554,7 +554,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Family Hotels</h4>
-                                        <a href="/hotel/collection/family-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/family-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -566,7 +566,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Farm Stays</h4>
-                                        <a href="/hotel/collection/farm-stays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/farm-stays-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -578,7 +578,7 @@
                                     </figure>
                                     <div class="details">	
                                         <h4 class="box-title">Golf Hotels</h4>
-                                        <a href="/hotel/collection/golf-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/golf-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -590,7 +590,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Guest House</h4>
-                                        <a href="/hotel/collection/guest-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/guest-houses-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -602,7 +602,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">High Rise View</h4>
-                                        <a href="/hotel/collection/high-rise-view-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/high-rise-view-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -614,7 +614,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Holiday Homes</h4>
-                                        <a href="/hotel/collection//hotel/collection/holiday-homes-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection//hotel/collection/holiday-homes-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -626,7 +626,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Holiday Parks</h4>
-                                        <a href="/hotel/collection/holiday-parks-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/holiday-parks-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -638,7 +638,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Holiday Rentals</h4>
-                                        <a href="/hotel/collection/holiday-rentals-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/holiday-rentals-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -650,7 +650,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Home Stays</h4>
-                                        <a href="/hotel/collection/home-stays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/home-stays-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -662,7 +662,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Horror Houses</h4>
-                                        <a href="/hotel/collection/horror-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/horror-houses-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -674,7 +674,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Hostels</h4>
-                                        <a href="/hotel/collection/hostels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/hostels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -686,7 +686,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Hotel with Jacuzzi</h4>
-                                        <a href="/hotel/collection/hotel-with-jaccuzi-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/hotel-with-jaccuzi-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -698,7 +698,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Igloo House</h4>
-                                        <a href="/hotel/collection/igloo-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/igloo-houses-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -710,7 +710,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Inns</h4>
-                                        <a href="/hotel/collection/inns-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/inns-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -722,7 +722,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Lodges</h4>
-                                        <a href="/hotel/collection/lodges-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/lodges-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -734,7 +734,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Love Hotels</h4>
-                                        <a href="/hotel/collection/love-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/love-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -746,7 +746,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Luxury Hotels</h4>
-                                        <a href="/hotel/collection/luxury-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/luxury-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -758,7 +758,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Luxury Tents</h4>
-                                        <a href="/hotel/collection/luxury-tents-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/luxury-tents-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -770,7 +770,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Motels</h4>
-                                        <a href="/hotel/collection/motels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/motels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -782,7 +782,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Palaces Stay</h4>
-                                        <a href="/hotel/collection/palaces-stay-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/palaces-stay-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -794,7 +794,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Pet Friendly</h4>
-                                        <a href="/hotel/collection/pet-friendly-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/pet-friendly-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -806,7 +806,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">PG</h4>
-                                        <a href="/hotel/collection/pg-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/pg-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -818,7 +818,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Rest House</h4>
-                                        <a href="/hotel/collection/rest-house-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/rest-house-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -830,7 +830,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Riads</h4>
-                                        <a href="/hotel/collection/riads-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/riads-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -842,7 +842,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Romantic Hotels</h4>
-                                        <a href="/hotel/collection/romantic-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/romantic-hotels-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -854,7 +854,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Ryokans</h4>
-                                        <a href="/hotel/collection/ryokans-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/ryokans-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -866,7 +866,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Self Catering</h4>
-                                        <a href="/hotel/collection/self-catering-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/self-catering-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -878,7 +878,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Serviced Appartments</h4>
-                                        <a href="/hotel/collection/serviced-appartments-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/serviced-appartments-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -890,7 +890,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">SPA Hotels</h4>
-                                        <a href="/hotel/collection/spa-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/spa-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -902,7 +902,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Tent House</h4>
-                                        <a href="/hotel/collection/tent-house-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/tent-house-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -914,7 +914,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Theme House</h4>
-                                        <a href="/hotel/collection/theme-house-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/theme-house-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -926,7 +926,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Village Stays</h4>
-                                        <a href="/hotel/collection/village-stays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/village-stays-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
@@ -938,7 +938,7 @@
                                     </figure>
                                     <div class="details">
                                         <h4 class="box-title">Villas</h4>
-                                        <a href="/hotel/collection/villas-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                        <a href="/hotel/collection/villas-travel-beans" class="goto-detail"></a>
                                     </div>
                                 </article>
                             </div>
