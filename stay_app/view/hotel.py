@@ -3,6 +3,7 @@
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct
 from stay_app import app
 # from sqlalchemy import or_
+from sqlalchemy import func
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema
 import datetime
@@ -580,10 +581,10 @@ def hotel_search():
     search = search['search']
     cities = []
     names = []
-    hotel_cities = Hotel.query.distinct(Hotel.city).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).all()
+    hotel_cities = Hotel.query.distinct(func.lower(Hotel.city)).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).all()
     for hotel_city in hotel_cities:
         cities.append(hotel_city.city)
-    hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).all()
+    hotel_names = Hotel.query.distinct(func.lower(Hotel.name)).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).all()
     for hotel_name in hotel_names:
         names.append(hotel_name.name)
     return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})
