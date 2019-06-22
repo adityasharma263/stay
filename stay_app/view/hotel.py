@@ -8,7 +8,7 @@ from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealS
 import datetime
 from itertools import cycle
 # import simplejson as json
-import json
+# import json
 
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])

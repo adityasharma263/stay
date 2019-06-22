@@ -40,7 +40,7 @@ class Hotel(Base):
     latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
     longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
-    collection_id = db.Column(db.Integer, db.ForeignKey('hotel_collection.id'), unique=True, nullable=True)
+    collection_id = db.Column(db.Integer, db.ForeignKey('hotel_collection.id'), nullable=True)
 
 
     def __init__(self, *args, **kwargs):
