@@ -10,7 +10,6 @@ from stay_app.model.hotel import Website
 from stay_app.model.hotel import Room
 from stay_app.model.hotel import HotelCollection
 from stay_app.model.hotel import CollectionProduct
-
 from stay_app import ma
 
 
