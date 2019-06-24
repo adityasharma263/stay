@@ -18,20 +18,16 @@ def hotel_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
-        room_type = request.args.get('room_type', 1)
-        args.pop('room_type', None)
-        breakfast = request.args.get('breakfast', False)
-        args.pop('breakfast', None)
-        balcony = request.args.get('balcony', False)
-        args.pop('balcony', None)
-        # check_in = request.args.get('check_in')
-        # check_out = request.args.get('check_out')
+        city = request.args.get('city')
+        args.pop('city', None)
         price_start = request.args.get('price_start', None)
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
         args.pop('price_end', None)
         page = request.args.get('page', 1)
         per_page = request.args.get('per_page', 10)
+        # check_in = request.args.get('check_in')
+        # check_out = request.args.get('check_out')
         hotel_room_id = []
         price_hotel_list = []
         # weekend_hotel_list = []
@@ -79,6 +75,8 @@ def hotel_api():
                 q = q.filter(getattr(Room, key) == args[key])
             elif key in Deal.__dict__:
                 q = q.filter(getattr(Deal, key) == args[key])
+        if city:
+            q = q.filter(func.lower(Hotel.city) == func.lower(city))
         if price_start and price_end:
             q = q.filter(Deal.price >= price_start, Deal.price <= price_end)
         if rating:
@@ -597,10 +595,10 @@ def hotel_search():
     search = search['search']
     cities = []
     names = []
-    hotel_cities = Hotel.query.distinct(Hotel.city.lower()).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).limit(5).all()
+    hotel_cities = Hotel.query.distinct(Hotel.city).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).limit(5).all()
     for hotel_city in hotel_cities:
         cities.append(hotel_city.city)
-    hotel_names = Hotel.query.distinct(Hotel.name.lower()).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).limit(5).all()
+    hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).limit(5).all()
     for hotel_name in hotel_names:
         names.append(hotel_name.name)
     return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})
