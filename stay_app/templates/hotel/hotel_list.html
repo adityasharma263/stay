@@ -608,6 +608,22 @@
             // });
         // });
     </script>
+    <!--Spinner JS Goes Here-->
+    <script>
+            $(document).ready(function() {
+            //Preloader
+            $(window).on("load", function() {
+            var preloaderFadeOutTime = 500;
+            function hidePreloader() {
+            var preloader = $('.spinner-wrapper');
+            preloader.fadeOut(preloaderFadeOutTime);
+            }
+            hidePreloader();
+            });
+            });
+            </script>
+            <!--Spinner Js Ends Here-->
+
 </body>
 </html>
 {% endblock %}
