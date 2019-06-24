@@ -1,12 +1,5 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}staylistController{% endblock %} {% block
     content%}
-
-    <!--CSS Spinner-->
-    <div class="spinner-wrapper">
-            <div class="spinner">
-            </div>
-            </div>
-            
         <div class="page-title-container">
             <div class="container">
                 <div class="page-title pull-left">
@@ -18,52 +11,6 @@
                 </ul>
             </div>
         </div>
-
-        
-
-        <style>
-            .spinner {
-                width: 40px;
-                height: 40px;
-                background-color: #333;
-
-                position: absolute;
-                top: 48%;
-                left: 48%;
-                -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
-                animation: sk-rotateplane 1.2s infinite ease-in-out;
-                }
-
-                @-webkit-keyframes sk-rotateplane {
-                0% { -webkit-transform: perspective(120px) }
-                50% { -webkit-transform: perspective(120px) rotateY(180deg) }
-                100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
-                }
-
-                @keyframes sk-rotateplane {
-                0% { 
-                    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-                    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
-                } 50% { 
-                    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-                    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
-                } 100% { 
-                    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-                    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-                }
-                }
-                .spinner-wrapper {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background-color: #ff6347;
-                    z-index: 999999;
-
-        </style>
-
-
         <section id="content">
             <div class="container">
                 <div id="main">
@@ -368,17 +315,17 @@
                                 </div>
                                 
                             </div>
-                            <!-- <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'roomdata.hotel' | limitTo:limit">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'roomdata.hotel' | limitTo:limit">
                                     <div ng-repeat="room in deal.roomdata.hoteldata.rooms">
                                         <article class="box" ng-if="[[room.room_type]]==1 && [[room.breakfast]]=='false' && [[room.balcony]]=='false'">
-                                            <figure class="col-sm-5 col-md-4"> -->
-                                                    <!-- <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(deal.roomdata.hoteldata)" style="height:150px; cursor: pointer" src="[[deal.roomdata.hoteldata.images[0].image_url]]" alt="Travel Beans"> -->
+                                            <figure class="col-sm-5 col-md-4">
+                                                    <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(deal.roomdata.hoteldata)" style="height:150px; cursor: pointer" src="[[deal.roomdata.hoteldata.images[0].image_url]]" alt="Travel Beans">
                                                     <!-- Modal -->
-                                                    <!-- <div class="modal fade" id="myModal" role="dialog">
-                                                        <div class="modal-dialog"> -->
+                                                    <div class="modal fade" id="myModal" role="dialog">
+                                                        <div class="modal-dialog">
                                                         
                                                         <!-- Modal content-->
-                                                        <!-- <div class="modal-content">
+                                                        <div class="modal-content">
                                                             
 
                                                             <div id="photos-tab" class="tab-pane fade active in">
@@ -419,9 +366,9 @@
                                                             
                                                         <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
-                                                             -->
+                                                            
                                                             <!-- Modal content-->
-                                                            <!-- <div class="modal-content">
+                                                            <div class="modal-content">
                                                                 
                                                                     
                                                                     <div class="modal-body">
@@ -480,10 +427,10 @@
                                                         <span class="price"><a href="[[deal.hotel_url]]"><small>[[deal.website.website]]</small>₹[[deal.price]]</a></span><center>
                                                         <a class="button btn-small green" ng-click="showDetail(room.id)">View Detail</a>
                                                         <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[deal.roomdata.hoteldata.id]]">More Deals</a>    
-                                             -->
+                                            
 
                                                         <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
-                                                    <!-- </div>
+                                                    </div>
                                                     <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 " style="float: left;">
                                                             <span class="price" style="text-align: left"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
                                                     </div>    
@@ -494,10 +441,10 @@
                                                         <span class="price"><a href="[[deal.hotel_url]]"><small>[[deal.website.website]]</small>₹[[deal.price]]</a></span><center>
                                                         <a class="button btn-small green" ng-click="showDetail(room.id)">View Detail</a>
                                                         <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[deal.roomdata.hoteldata.id]]">More Deals</a>    
-                                             -->
+                                            
 
                                                         <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
-                                                    <!-- </div>
+                                                    </div>
                                                     <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 " style="float: left;">
                                                             <span class="price" style="text-align: left"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
                                                     </div>    
@@ -512,48 +459,48 @@
                                                     
                                                             <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" style="border-top: 0px solid #ddd;">
                                                             <tr ng-repeat="deal in rm.deals | limitTo:lim " ng-if="[[deal.primary_deal]]=='false'">
-                                                                <td><img src="[[deal.website.logo_image]]"></td> -->
+                                                                <td><img src="[[deal.website.logo_image]]"></td>
                                                                 <!-- <td ng-if="[[rm.room_type]]==1">Premium</td>
                                                                 <td ng-if="[[rm.room_type]]==2">Executive</td>
                                                                 <td ng-if="[[rm.room_type]]==3">Sweet</td>
                                                                 <td ng-if="[[rm.room_type]]==4">Super_Deluxe</td> -->
-                                                                <!-- <td>[[rm.other_room_type]]</td>
+                                                                <td>[[rm.other_room_type]]</td>
                                                                 <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Detail</a></td>
                                                                 <td class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></td>
-                                                            </tr> -->
+                                                            </tr>
                                                             
                                                             <!-- <tr>
                                                                 <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
                                                             </tr> -->
-                                                            <!-- </tbody> -->
+                                                            </tbody>
                                                         
-                                                        <!-- </table>
+                                                        </table>
 
                                                 <table class="table table-hover" ng-if="[[deal.roomdata.hoteldata.is_partner]]=='true'">
                                                     
                                                         <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" style="border-top: 0px solid #ddd;">
                                                         <tr ng-repeat="deal in rm.deals | limitTo:lim " ng-if="[[deal.primary_deal]]=='true'">
-                                                            <td><img src="[[deal.website.logo_image]]"></td> -->
+                                                            <td><img src="[[deal.website.logo_image]]"></td>
                                                             <!-- <td ng-if="[[rm.room_type]]==1">Premium</td>
                                                             <td ng-if="[[rm.room_type]]==2">Executive</td>
                                                             <td ng-if="[[rm.room_type]]==3">Sweet</td>
                                                             <td ng-if="[[rm.room_type]]==4">Super_Deluxe</td> -->
-                                                            <!-- <td>[[rm.other_room_type]]</td>
+                                                            <td>[[rm.other_room_type]]</td>
                                                             <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Detail</a></td>
                                                             <td class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></td>
-                                                        </tr> -->
+                                                        </tr>
                                                         
                                                         <!-- <tr>
                                                             <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
                                                         </tr> -->
-                                                        <!-- </tbody>
+                                                        </tbody>
                                                     
                                                     </table>
                                                 
                                                 </div>
 
                                         </article>
-                                    </div> -->
+                                    </div>
                                 </div>
 
                                 <div class="hotel-list listing-style3 hotel">
@@ -661,20 +608,6 @@
             // });
         // });
     </script>
-    <script>
-        $(document).ready(function() {
-        //Preloader
-        $(window).on("load", function() {
-        preloaderFadeOutTime = 500;
-        function hidePreloader() {
-        var preloader = $('.spinner-wrapper');
-        preloader.fadeOut(preloaderFadeOutTime);
-        }
-        hidePreloader();
-        });
-        });
-    </script>
-
 </body>
 </html>
 {% endblock %}
