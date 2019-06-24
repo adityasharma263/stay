@@ -1,4 +1,4 @@
-from  stay_app import ma
+from stay_app import ma
 import time
 
 

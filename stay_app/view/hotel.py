@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct
-from stay_app import app
+from stay_app import app, db
 # from sqlalchemy import or_
 from sqlalchemy import func
 from flask import jsonify, request
@@ -69,18 +69,34 @@ def hotel_api():
         #     for room_obj in room_list:
         #         weekend_hotel_list.append(room_obj.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(weekend_hotel_list)).all()
+        q = db.session.query(Hotel).outerjoin(Hotel.amenities).outerjoin(Hotel.rooms).outerjoin(Hotel.deals)
+        for key in args:
+            if key in Hotel.__dict__:
+                q = q.filter(getattr(Hotel, key) == args[key])
+            elif key in Amenity.__dict__:
+                q = q.filter(getattr(Amenity, key) == args[key])
+            elif key in Room.__dict__:
+                q = q.filter(getattr(Room, key) == args[key])
+            elif key in Deal.__dict__:
+                q = q.filter(getattr(Deal, key) == args[key])
         if price_start and price_end:
-            deals_list = Deal.query.filter(Deal.price >= price_start, Deal.price <= price_end).all()
-            for deal_obj in deals_list:
-                hotel_room_id.append(deal_obj.room_id)
-            room_list = Room.query.filter(Room.id.in_(hotel_room_id), Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).all()
-            for room_obj in room_list:
-                price_hotel_list.append(room_obj.hotel_id)
-            hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(price_hotel_list)).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
-        elif rating:
-            hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating, Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
-        else:
-            hotels = Hotel.query.filter_by(**args).filter(Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+            q = q.filter(Deal.price >= price_start, Deal.price <= price_end)
+        if rating:
+            q = q.filter(Hotel.rating >= rating)
+        hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        # result = HotelSchema(many=True).dump(hotels)
+        # if price_start and price_end:
+        #     deals_list = Deal.query.filter(Deal.price >= price_start, Deal.price <= price_end).all()
+        #     for deal_obj in deals_list:
+        #         hotel_room_id.append(deal_obj.room_id)
+        #     room_list = Room.query.filter(Room.id.in_(hotel_room_id), Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).all()
+        #     for room_obj in room_list:
+        #         price_hotel_list.append(room_obj.hotel_id)
+        #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(price_hotel_list)).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        # elif rating:
+        #     hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating, Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        # else:
+        #     hotels = Hotel.query.filter_by(**args).filter(Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -581,10 +597,10 @@ def hotel_search():
     search = search['search']
     cities = []
     names = []
-    hotel_cities = Hotel.query.distinct(Hotel.city).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).limit(5).all()
+    hotel_cities = Hotel.query.distinct(Hotel.city.lower()).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).limit(5).all()
     for hotel_city in hotel_cities:
         cities.append(hotel_city.city)
-    hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).limit(5).all()
+    hotel_names = Hotel.query.distinct(Hotel.name.lower()).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).limit(5).all()
     for hotel_name in hotel_names:
         names.append(hotel_name.name)
     return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})
