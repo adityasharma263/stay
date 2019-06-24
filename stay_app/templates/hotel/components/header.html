@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html ng-app="comparetravel" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]-->
+<head>
+    <!-- <base href="/"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Page Title -->
+    <title>Travel Beans- Hotel</title>
+
+
+    <!-- Meta Tags -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link href="/css/css.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    
+    <!-- Current Page Styles -->
+    <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="/css/settings.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/styles.css" media="screen">
+
+    <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
+    
+    
+   
+    
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="/css/updates.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+  
+    
+   <script>
+    function clearCoor() {
+        document.getElementById("demo").style.display = "none";
+    }
+    function myFunction(e) {
+        document.getElementById("demo").style.display="block"
+    }
+   </script>
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>  
+    <script type="text/javascript" charset="UTF-8" src="/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="/js/stats.js"></script></head>
+
+    <body ng-controller="{% block controller%}{% endblock %}" >
+    <div>
+    <div id="page-wrapper">
+        <header id="header" class="navbar-static-top">
+            <div class="topnav hidden-xs">
+                <div class="container">
+                    <ul class="quick-menu pull-left">
+                        
+						<li class="ribbon currency">
+                            <a href="" title="">INR</a>
+                            <ul class="menu mini left">
+                            </ul>
+                        </li>
+                        <li class="ribbon">
+                            <a href="">English</a>
+                            <ul class="menu mini">
+                            </ul>
+                        </li>
+						<li class="ribbon">
+                            <a href="">India</a>
+                            <ul class="menu mini">
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="quick-menu pull-right">
+                        <li><a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
+						<i class="soap-icon-shopping"></i> SIGN UP</a></li>
+                        <li><a href="#" class="soap-popupbox">LOGIN</a></li>
+						<li><a href="">Business CAPITAL</a></li>
+                        <li><a href="#" class="soap-popupbox">Customer Care</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="main-header">
+                
+               
+                <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+        
+                </a>
+
+
+                <div class="container">
+                   
+                    <h1 class="logo navbar-brand">
+                        <a href="index.html" title="Travel Beans">
+                            <img src="" alt="Travel Beans">
+                        </a>
+                    </h1>
+                    
+                    
+                    <nav id="main-menu" role="navigation">
+                        <ul class="menu">
+                            <li class="menu-item-has-children">
+                                <a href="/home">Home</a>
+                            </li>
+                            <li class="menu-item-has-children active">
+                                <a href="/hotel">Hotels</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/flight">Flights</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/restaurant">Restaurants</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/cab">Cars</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/cruise">Cruises</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/tour">Tour</a>
+                            </li>
+                           
+                        </ul>
+                    </nav>
+                </div>
+                
+                <nav id="mobile-menu-01" class="mobile-menu collapse" aria-expanded="false" style="height: 0px;">
+                    <ul id="mobile-primary-menu" class="menu">
+                        <li class="menu-item-has-children">
+                            <a href="/home">Home</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
+                        </li>
+                        <li class="menu-item-has-children active">
+                            <a href="/hotel">Hotels</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-1"></button>
+                           
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/flight">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
+                            
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/restaurant">Restaurants</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/cab">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
+                            
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/cruise">Cruises</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-4"></button>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/tour">Tour</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-5"></button>
+                    
+                        </li>
+                        
+                    </ul>
+                    
+                </nav>
+            </div>
+               
+
+        </header>
+        <section class="">
+            
+                {% block content%} {% endblock %}
+            
+        </section>
