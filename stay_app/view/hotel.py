@@ -26,16 +26,16 @@ def hotel_api():
         args.pop('price_end', None)
         page = request.args.get('page', 1)
         per_page = request.args.get('per_page', 10)
-        # check_in = request.args.get('check_in')
-        # check_out = request.args.get('check_out')
-        hotel_room_id = []
-        price_hotel_list = []
+        check_in = request.args.get('check_in')
+        check_out = request.args.get('check_out')
+        args.pop('check_in', None)
+        args.pop('check_out', None)
         # weekend_hotel_list = []
-        # if check_in and check_out:
-        #     no_of_days = int(check_out) - int(check_in)
-        #     sec = datetime.timedelta(seconds=int(no_of_days))
-        #     d = datetime.datetime(1, 1, 1) + sec
-        #     no_of_days = d.day - 1
+        if check_in and check_out:
+            no_of_days = int(check_out) - int(check_in)
+            sec = datetime.timedelta(seconds=int(no_of_days))
+            d = datetime.datetime(1, 1, 1) + sec
+            no_of_days = d.day - 1
         #     check_in = datetime.datetime.fromtimestamp(
         #         int(check_in)).weekday()
         #     check_out = datetime.datetime.fromtimestamp(
@@ -514,65 +514,64 @@ def website_api():
 def deal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        check_in = request.args.get('check_in')
-        check_out = request.args.get('check_out')
-        no_of_days = 1
         price_start = request.args.get('price_start', None)
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
         args.pop('price_end', None)
         hotel_id = request.args.get('hotel_id', None)
         args.pop('hotel_id', None)
-        if check_in and check_out:
-            no_of_days = int(check_out) - int(check_in)
-            sec = datetime.timedelta(seconds=int(no_of_days))
-            d = datetime.datetime(1, 1, 1) + sec
-            no_of_days = d.day - 1
-            check_in = datetime.datetime.fromtimestamp(
-                int(check_in)).weekday()
-            check_out = datetime.datetime.fromtimestamp(
-                int(check_out)).weekday()
-            a = [0, 1, 2, 3, 4, 5, 6]
-            pool = cycle(a)
-            start = False
-            days = []
-            weekend = False
-            for i, val in enumerate(pool):
-                if start and val == check_out and len(days) == no_of_days:
-                    break
-                if start:
-                    days.append(val)
-                if val == check_in and start is False:
-                    start = True
-                    days.append(val)
-            for day in days:
-                if day == 5:
-                    weekend = True
-                elif day == 6:
-                    weekend = True
-            args['weekend'] = weekend
+        page = request.args.get('page', None)
         args.pop('page', None)
+        per_page = request.args.get('per_page', None)
         args.pop('per_page', None)
-        args.pop('check_in', None)
-        args.pop('check_out', None)
+        # if check_in and check_out:
+        #     no_of_days = int(check_out) - int(check_in)
+        #     sec = datetime.timedelta(seconds=int(no_of_days))
+        #     d = datetime.datetime(1, 1, 1) + sec
+        #     no_of_days = d.day - 1
+        #     check_in = datetime.datetime.fromtimestamp(
+        #         int(check_in)).weekday()
+        #     check_out = datetime.datetime.fromtimestamp(
+        #         int(check_out)).weekday()
+        #     a = [0, 1, 2, 3, 4, 5, 6]
+        #     pool = cycle(a)
+        #     start = False
+        #     days = []
+        #     weekend = False
+        #     for i, val in enumerate(pool):
+        #         if start and val == check_out and len(days) == no_of_days:
+        #             break
+        #         if start:
+        #             days.append(val)
+        #         if val == check_in and start is False:
+        #             start = True
+        #             days.append(val)
+        #     for day in days:
+        #         if day == 5:
+        #             weekend = True
+        #         elif day == 6:
+        #             weekend = True
+        #     args['weekend'] = weekend
+
+        # args.pop('check_in', None)
+        # args.pop('check_out', None)
         hotel_room_id = []
         price = []
         if hotel_id:
             rooms_list = Room.query.filter(Room.hotel_id == hotel_id).all()
             for room_obj in rooms_list:
-                hotel_room_id.append(room_obj.id)
-                price = Deal.query.filter_by(**args).filter(Deal.room_id.in_(hotel_room_id)).all()
+                deals = Deal.query.filter_by(**args).filter(Deal.room_id.in_(room_obj.id)).all()
         elif price_start and price_end:
-            price = Deal.query.filter_by(**args)\
-                .filter(Deal.price >= price_start, Deal.price <= price_end).all()
+            deals = Deal.query.filter_by(**args)\
+                .filter(Deal.price >= price_start, Deal.price <= price_end).offset((page - 1) * per_page).limit(per_page).all()
         else:
-            price = Deal.query.filter_by(**args).all()
-        result = DealSchema(many=True).dump(price)
-        for deal in result.data:
-            # if deal["room"]:
-            #     deal["hotel_id"] = Room.query.filter(Room.id == deal["room"]).first().hotel_id
-            if no_of_days >= 1 and deal['price']:
-                deal['price'] = int(deal["price"]) * no_of_days
+            deals = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = DealSchema(many=True).dump(deals)
+        # for deal in result.data:
+        #     # if deal["room"]:
+        #     #     deal["hotel_id"] = Room.query.filter(Room.id == deal["room"]).first().hotel_id
+        #     if no_of_days >= 1 and deal['price']:
+        #         deal['price'] = int(deal["price"]) * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
