@@ -3,7 +3,7 @@
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct
 from stay_app import app, db
 # from sqlalchemy import or_
-# from sqlalchemy import func
+from sqlalchemy import func
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema
 import datetime
