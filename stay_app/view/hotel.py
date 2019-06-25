@@ -65,7 +65,7 @@ def hotel_api():
         #     for room_obj in room_list:
         #         weekend_hotel_list.append(room_obj.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(weekend_hotel_list)).all()
-        q = db.session.query(Hotel, Room).outerjoin(Hotel.amenities).outerjoin(Room.deals)
+        q = db.session.query(Hotel).outerjoin(Room).outerjoin(Deal)
         for key in args:
             if key in Hotel.__dict__:
                 q = q.filter(getattr(Hotel, key) == args[key])
