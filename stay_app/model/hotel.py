@@ -219,7 +219,7 @@ class Deal(Base):
     price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
     weekend = db.Column(db.Boolean, default=False, nullable=True)
-    business_deal = db.Column(db.Boolean, default=False, nullable=False)
+    business_deal = db.Column(db.Boolean, default=False, nullable=True)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)
