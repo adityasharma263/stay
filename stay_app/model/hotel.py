@@ -7,6 +7,7 @@ from stay_app.model.base import Base
 #     1 = "Crunchy apple"
 #     BANANA = "Sweet banana
 
+
 class HotelCollection(Base):
     __tablename__ = 'hotel_collection'
 
@@ -217,7 +218,8 @@ class Deal(Base):
 
     price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
-    weekend = db.Column(db.Boolean, default=False, nullable=False)
+    weekend = db.Column(db.Boolean, default=False, nullable=True)
+    business_deal = db.Column(db.Boolean, default=False, nullable=False)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)

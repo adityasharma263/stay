@@ -81,6 +81,7 @@ class HotelSchema(ma.ModelSchema):
     images = ma.Nested(ImageSchema, many=True)
     rooms = ma.Nested(RoomSchema, many=True)
 
+
     class Meta:
         model = Hotel
         exclude = ('updated_at', 'created_at')

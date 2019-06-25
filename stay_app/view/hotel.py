@@ -65,23 +65,32 @@ def hotel_api():
         #     for room_obj in room_list:
         #         weekend_hotel_list.append(room_obj.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(weekend_hotel_list)).all()
-        q = db.session.query(Hotel, Room).outerjoin(Hotel.amenities).outerjoin(Room.deals)
+        q = db.session.query(Hotel).outerjoin(Hotel.amenities)
+        q_room = db.session.query(Room)
+        q_deal = db.session.query(Deal)
         for key in args:
             if key in Hotel.__dict__:
                 q = q.filter(getattr(Hotel, key) == args[key])
             elif key in Amenity.__dict__:
                 q = q.filter(getattr(Amenity, key) == args[key])
             elif key in Room.__dict__:
-                q = q.filter(getattr(Room, key) == args[key])
+                q_room = q_room.filter(getattr(Room, key) == args[key])
             elif key in Deal.__dict__:
-                q = q.filter(getattr(Deal, key) == args[key])
+                q_deal = q.filter(getattr(Deal, key) == args[key])
         if city:
             q = q.filter(func.lower(Hotel.city) == func.lower(city))
         if price_start and price_end:
-            q = q.filter(Deal.price >= price_start, Deal.price <= price_end)
+            q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if rating:
             q = q.filter(Hotel.rating >= rating)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        for hotel in hotels:
+            rooms = q_room.filter(Room.hotel_id == hotel.id).all()
+            for room in rooms:
+                deals = q_deal.filter(Deal.room_id == room.id).all()
+                room.deals = deals
+            hotel.rooms = rooms
+        # room_result = RoomSchema(many=True).dump(rooms)
         # result = HotelSchema(many=True).dump(hotels)
         # if price_start and price_end:
         #     deals_list = Deal.query.filter(Deal.price >= price_start, Deal.price <= price_end).all()
