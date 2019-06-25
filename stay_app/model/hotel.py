@@ -7,6 +7,7 @@ from stay_app.model.base import Base
 #     1 = "Crunchy apple"
 #     BANANA = "Sweet banana
 
+
 class HotelCollection(Base):
     __tablename__ = 'hotel_collection'
 
@@ -32,6 +33,7 @@ class Hotel(Base):
     rating = db.Column(db.DECIMAL, nullable=True)
     phone = db.Column(db.String, nullable=True, unique=True)
     city = db.Column(db.String, nullable=True)
+    country = db.Column(db.String, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     category = db.Column(db.Integer, nullable=True)
     address = db.Column(db.String, nullable=True)
@@ -75,8 +77,8 @@ class Room(Base):
     room_type = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     other_room_type = db.Column(db.String, nullable=True)
-    check_in = db.Column(db.DateTime(timezone=True), nullable=True)
-    check_out = db.Column(db.DateTime(timezone=True), nullable=True)
+    # check_in = db.Column(db.DateTime(timezone=True), nullable=True)
+    # check_out = db.Column(db.DateTime(timezone=True), nullable=True)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
     balcony = db.Column(db.Boolean, default=False, nullable=True)
     member = db.relationship('Member', uselist=False, backref='room')
@@ -217,7 +219,8 @@ class Deal(Base):
 
     price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
-    weekend = db.Column(db.Boolean, default=False, nullable=False)
+    weekend = db.Column(db.Boolean, default=False, nullable=True)
+    business_deal = db.Column(db.Boolean, default=False, nullable=True)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)

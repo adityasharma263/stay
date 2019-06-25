@@ -2,8 +2,8 @@
 __author__ = 'aditya'
 """base class for every model class"""
 from stay_app import db
-from sqlalchemy.sql import func
-from sqlalchemy.orm import load_only
+# from sqlalchemy.sql import func
+# from sqlalchemy.orm import load_only
 
 
 class Base(db.Model):
