@@ -9,5 +9,5 @@ Flask-SQLAlchemy==1.0
 requests==2.19.1
 SQLAlchemy==1.0.13
 marshmallow-sqlalchemy==0.13.1
-numpy==1.13.1
+numpy==1.16.4
 psycopg2>=2.6.2
