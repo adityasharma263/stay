@@ -240,6 +240,7 @@ class Booking(Base):
     guest_name = db.Column(db.String, nullable=True)
     contact_no = db.Column(db.String, nullable=True)
     email = db.Column(db.String(120), nullable=True)
+    vendor_id = db.Column(db.Integer, nullable=False)
     deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), nullable=False)
 
     def __init__(self, *args, **kwargs):
