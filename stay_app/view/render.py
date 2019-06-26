@@ -62,37 +62,37 @@ def Business_admin():
 
     
 @app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
+def Business_about():
     return render_template('hotel/footer_pages/about.html')
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
+def Business_contact_us():
     return render_template('hotel/footer_pages/contact-us.html')
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
+def Business_customer_care():
     return render_template('hotel/footer_pages/customer-care.html')
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
+def Business_jobs():
     return render_template('hotel/footer_pages/job-and-internship-application-form.html')
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
+def Business_legal():
     return render_template('hotel/footer_pages/legal.html')
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
+def Business_partner_care():
     return render_template('hotel/footer_pages/partner-care.html')
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
+def Business_press_release():
     return render_template('hotel/footer_pages/press-release.html')
 
 
