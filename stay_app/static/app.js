@@ -370,10 +370,31 @@ console.log("map",map);
 
 //+++++++++++
   // loadMore function
-
+  var page = 1;
   $scope.loadMore = function() {
     $scope.limit =   $scope.limit + 10;
-    
+    page=page + 1;
+
+    $http({
+      method: 'GET',
+      url: '/api/v1/hotel'+document.location.search+'&page=' + page
+    }).then(function successCallback(response) {
+        var str = document.location.search;
+        var key = str.split("?");
+        var key1 = key[1].split("=");
+        $scope.newhotels = response.data.result.hotel;
+        console.log("$scope.newhotels",$scope.newhotels);
+              for(var j=0;j<$scope.newhotels.length;j++){
+                $scope.hotelData.push($scope.newhotels[j]);
+              }
+              console.log("new",$scope.hotelData);
+       
+       
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
+
   }
 
   $scope.loadmoredeals = function() {
