@@ -634,12 +634,12 @@ def booking_api():
         per_page = int(request.args.get('per_page', 10))
         data = Booking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = BookingSchema(many=True).dump(data)
-        return jsonify({'result': {'images': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
     else:
         post = Booking(**request.json)
         post.save()
         result = BookingSchema().dump(post)
-        return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'booking': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/booking/<int:id>', methods=['PUT', 'DELETE'])
