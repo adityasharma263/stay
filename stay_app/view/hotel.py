@@ -117,7 +117,7 @@ def hotel_api():
         #     hotels = Hotel.query.filter_by(**args).filter(Room.room_type == room_type, Room.balcony == balcony, Room.breakfast == breakfast).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelSchema(many=True).dump(hotels)
         print(result.data, "swsdfd")
-        return jsonify({'result': {'hotel': "hotel data"}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
         hotel = request.json
         images = hotel.get("images", None)
