@@ -10,6 +10,17 @@ import datetime
 from itertools import cycle
 # import simplejson as json
 # import json
+import decimal
+import flask.json
+
+class MyJSONEncoder(flask.json.JSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, decimal.Decimal):
+            # Convert decimal instances to strings.
+            return str(obj)
+        return super(MyJSONEncoder, self).default(obj)
+app.json_encoder = MyJSONEncoder
 
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
@@ -166,7 +177,7 @@ def hotel_collection_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        data = HotelCollection.query.filter_by(**args).all()
+        data = HotelCollection.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelCollectionSchema(many=True).dump(data)
         return jsonify({'result': {'collection': result.data}, 'message': "Success", 'error': False})
     else:
