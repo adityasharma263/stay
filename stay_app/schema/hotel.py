@@ -98,6 +98,7 @@ class HotelCollectionSchema(ma.ModelSchema):
 
 
 class BookingSchema(ma.ModelSchema):
+    deal = ma.Nested(DealSchema, many=False)
     class Meta:
         model = Booking
         exclude = ('updated_at', 'created_at')
