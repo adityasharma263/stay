@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct
+from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct, Booking
 from stay_app import app, db
 # from sqlalchemy import or_
 from sqlalchemy import func
 from flask import jsonify, request
-from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema
+from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema
 import datetime
 from itertools import cycle
 # import simplejson as json
@@ -621,3 +621,40 @@ def hotel_search():
     for hotel_name in hotel_names:
         names.append(hotel_name.name.lower())
     return jsonify({'result': {'cities': list(set(cities)), "names": list(set(names))}, 'message': "Success", 'error': False})
+
+
+
+
+@app.route('/api/v1/booking', methods=['GET', 'POST'])
+def booking_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        data = Booking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = BookingSchema(many=True).dump(data)
+        return jsonify({'result': {'images': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = Booking(**request.json)
+        post.save()
+        result = BookingSchema().dump(post)
+        return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/booking/<int:id>', methods=['PUT', 'DELETE'])
+def booking_id(id):
+    if request.method == 'PUT':
+        put = Booking.query.filter_by(id=id).update(request.json)
+        if put:
+            Booking.update_db()
+            s = Booking.query.filter_by(id=id).first()
+            result = BookingSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        bookings = Booking.query.filter_by(id=id).first()
+        if not bookings:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Booking.delete_db(bookings)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
