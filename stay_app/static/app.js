@@ -105,7 +105,7 @@ angular.module('comparetravel', ['angular.filter'])
       for(var j=0;j<$scope.hotels.length;j++){
         $scope.hotelid[$scope.hotels[j].id]= $scope.hotels[j];
       }
-      console.log("body.value",x.value);
+      
       console.log("$scope.hotelid",$scope.hotelid);
       console.log("$scope.hotels=====",$scope.hotels);
       // this callback will be called asynchronously
@@ -138,7 +138,19 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.min= 0;
   $scope.max= 200000;
   var api_url = 'http://134.209.150.124';
+  var fil = [];
   // $scope.max_price= 0;
+  console.log(document.location.search);
+  var str = document.location.search;
+        var keys = str.split("?");
+        var values = keys[1].split("&");
+        for(var f=0;f<values.length;f++){
+          fil.push(values[f].split("="));
+        }
+
+        console.log(fil);
+        
+        
 
    // Get the modal
   //  var mymodal= ;
@@ -542,8 +554,18 @@ $scope.showDetail=function(roomid){
   
   $scope.getHotelPrice = function(){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
+    var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
+    for(var k=0;k<fil.length;k++){
+      if(fil[k][0] == 'price_start'){
+          bool=true;
+          break;
+      }
+    }
+    if(!bool){
+        window.location.href = '/business/hotel/list' + document.location.search + '&price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
+    }
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
@@ -633,9 +655,18 @@ $scope.showDetail=function(roomid){
 
   $scope.getHotelRating = function(){
     console.log("$$scope.hotel.rating",$scope.hotel.rating);
+    var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
-
+    for(var k=0;k<fil.length;k++){
+      if(fil[k][0] == 'rating'){
+          bool=true;
+          break;
+      }
+    }
+    if(!bool){
+         window.location.href = '/business/hotel/list' + document.location.search + '&rating=' + $scope.hotel.rating
+    } 
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
@@ -660,8 +691,21 @@ $scope.showDetail=function(roomid){
 
   $scope.getHotelStar = function(){
     console.log("$$scope.hotel.star",$scope.hotel.star);
+    var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
+    for(var k=0;k<fil.length;k++){
+          if(fil[k][0] == 'star'){
+              bool=true;
+              break;
+          }
+    }
+    if(!bool){
+        window.location.href = '/business/hotel/list' + document.location.search + '&star=' + $scope.hotel.star
+    }  
+    else{
+      
+    }
 
     $http({
       method: 'GET',
