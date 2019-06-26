@@ -20,22 +20,22 @@ def page_not_found():
 
 @app.route('/hotel', methods=['GET'])
 def hotel():
-    return render_template('hotel/hotel.html')
+    return render_template('hotel/b2c_hotels/hotel.html')
 
 
 @app.route('/hotel/list', methods=['GET'])
 def hotel_list():
-    return render_template('hotel/hotel_list.html')
+    return render_template('hotel/b2c_hotels/hotel_list.html')
 
 
 @app.route('/hotel/<hotel_id>', methods=['GET'])
 def hotel_detail(hotel_id):
-    return render_template('hotel/hotel_detail.html')
+    return render_template('hotel/b2c_hotels/hotel_detail.html')
 
 
 @app.route('/admin/hotel', methods=['GET'])
 def admin():
-    return render_template('hotel/admin_hotel.html')
+    return render_template('hotel/b2c_hotels/admin_hotel.html')
 
 @app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
 def collection1():
