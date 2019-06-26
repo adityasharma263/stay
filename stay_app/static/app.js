@@ -8,7 +8,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
 .controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
-
+  var api_url = 'http://134.209.150.124';
 
   $scope.hotelid = {};// hotel object on the basis of id
   $scope.hotel = {};
@@ -19,6 +19,7 @@ angular.module('comparetravel', ['angular.filter'])
   
  // $location.search=
 
+ 
    $scope.result = function(data,status){
     $scope.hotel.search = data;
     searchKey = status;
@@ -64,7 +65,7 @@ angular.module('comparetravel', ['angular.filter'])
     console.log("$scope.hotel",$scope.hotel);
   $http({
     method: 'POST',
-    url: '/hotel/search',
+    url: api_url + '/hotel/search',
     data: $scope.hotel
 
   }).then(function successCallback(response){
@@ -98,12 +99,13 @@ angular.module('comparetravel', ['angular.filter'])
 
   $http({
     method: 'GET',
-    url: '/api/v1/hotel' 
+    url: api_url + '/api/v1/hotel' 
   }).then(function successCallback(response) {
       $scope.hotels = response.data.result.hotel;
       for(var j=0;j<$scope.hotels.length;j++){
         $scope.hotelid[$scope.hotels[j].id]= $scope.hotels[j];
       }
+      console.log("body.value",x.value);
       console.log("$scope.hotelid",$scope.hotelid);
       console.log("$scope.hotels=====",$scope.hotels);
       // this callback will be called asynchronously
@@ -135,6 +137,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.imagesData={};
   $scope.min= 0;
   $scope.max= 200000;
+  var api_url = 'http://134.209.150.124';
   // $scope.max_price= 0;
 
    // Get the modal
@@ -377,7 +380,7 @@ console.log("map",map);
 
     $http({
       method: 'GET',
-      url: '/api/v1/hotel'+document.location.search+'&page=' + page
+      url: api_url + '/api/v1/hotel' + document.location.search + '&page=' + page
     }).then(function successCallback(response) {
         var str = document.location.search;
         var key = str.split("?");
@@ -420,7 +423,7 @@ $scope.showDetail=function(roomid){
   
   $http({
     method: 'GET',
-    url: '/api/v1/hotel'+document.location.search
+    url: api_url + '/api/v1/hotel'+document.location.search
   }).then(function successCallback(response) {
       var str = document.location.search;
       var key = str.split("?");
@@ -543,7 +546,7 @@ $scope.showDetail=function(roomid){
     $scope.deals=[];
     $http({
       method: 'GET',
-      url: '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
+      url: api_url + '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
     }).then(function successCallback(response) {
         $scope.hotelData = response.data.result.hotel;
         console.log("$scope.deals",$scope.deals);
@@ -600,7 +603,7 @@ $scope.showDetail=function(roomid){
     console.log("$scope.hotel.check_in",$scope.hotel.check_in);
     $http({
       method: 'GET',
-      url: '/api/v1/deal?check_in=' + $scope.hotel.check_in + '&check_out=' + $scope.hotel.check_out
+      url: api_url + '/api/v1/deal?check_in=' + $scope.hotel.check_in + '&check_out=' + $scope.hotel.check_out
     }).then(function successCallback(response) {
         $scope.deals = response.data.result.deal;
         if($scope.deals.length==0){
@@ -635,7 +638,7 @@ $scope.showDetail=function(roomid){
 
     $http({
       method: 'GET',
-      url: '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
+      url: api_url + '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
     }).then(function successCallback(response) {
         $scope.hotelData = response.data.result.hotel;
         if($scope.hotelData.length==0){
@@ -662,7 +665,7 @@ $scope.showDetail=function(roomid){
 
     $http({
       method: 'GET',
-      url: '/api/v1/hotel' + document.location.search + '&star=' + $scope.hotel.star
+      url: api_url + '/api/v1/hotel' + document.location.search + '&star=' + $scope.hotel.star
     }).then(function successCallback(response) {
         $scope.hotelData = response.data.result.hotel;
         if($scope.hotelData.length==0){
@@ -705,6 +708,7 @@ $scope.showDetail=function(roomid){
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
+  var api_url = 'http://134.209.150.124';
 
   $scope.showCreate=function(){
     $scope.hotelDetail=true;
@@ -1091,6 +1095,7 @@ $scope.createHotel = function() {
   $scope.similarhotels=[];
   $scope.limit=10;
   $scope.deallimit=1;
+  var api_url = 'http://134.209.150.124';
 
   // window.onresize = function(){ location.reload(); }
   $scope.openHome=function(){
@@ -1165,7 +1170,7 @@ $scope.createHotel = function() {
   }
   $http({
     method: 'GET',
-    url: '/api/v1/hotel'
+    url: api_url + '/api/v1/hotel'
   }).then(function successCallback(response) {
       $scope.hotelsData = response.data.result.hotel;
       for(var j=0;j<$scope.hotelsData.length;j++){
@@ -1185,7 +1190,7 @@ var getrooms=function(){
   var id = search.split("/");
   $http({
     method: 'GET',
-    url: '/api/v1/room?id='+id[2]
+    url: api_url +'/api/v1/room?id='+id[2]
   }).then(function successCallback(response) {
       for(var i=0; i<response.data.result.rooms.length; i++){
         $scope.roomData= response.data.result.rooms[i];
@@ -1209,7 +1214,7 @@ var getrooms=function(){
 var getSimilarHotels=function(city){
   $http({
     method: 'GET',
-    url: '/api/v1/hotel?city='+city,
+    url: api_url + '/api/v1/hotel?city='+city,
   }).then(function successCallback(response) {
 
       for(var i=0; i<response.data.result.hotel.length; i++){

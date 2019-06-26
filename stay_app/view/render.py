@@ -20,6 +20,7 @@ def page_not_found():
 
 @app.route('/hotel', methods=['GET'])
 def hotel():
+    API_URL = app.config['API_URL']
     return render_template('hotel/b2c_hotels/hotel.html')
 
 
