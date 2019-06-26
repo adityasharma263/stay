@@ -37,6 +37,8 @@ def hotel_api():
         args.pop('price_end', None)
         page = request.args.get('page', 1)
         per_page = request.args.get('per_page', 10)
+        args.pop('page', None)
+        args.pop('per_page', None)
         check_in = request.args.get('check_in')
         check_out = request.args.get('check_out')
         args.pop('check_in', None)
@@ -531,9 +533,9 @@ def deal_api():
         args.pop('price_end', None)
         hotel_id = request.args.get('hotel_id', None)
         args.pop('hotel_id', None)
-        page = request.args.get('page', None)
+        page = request.args.get('page', 1)
+        per_page = request.args.get('per_page', 10)
         args.pop('page', None)
-        per_page = request.args.get('per_page', None)
         args.pop('per_page', None)
         # if check_in and check_out:
         #     no_of_days = int(check_out) - int(check_in)
@@ -576,7 +578,7 @@ def deal_api():
             deals = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).offset((page - 1) * per_page).limit(per_page).all()
         else:
-            deals = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+            deals = Deal.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = DealSchema(many=True).dump(deals)
         # for deal in result.data:
         #     # if deal["room"]:
@@ -628,10 +630,10 @@ def hotel_search():
 def booking_api():
     if request.method == 'GET':
         args = request.args.to_dict()
+        page = request.args.get('page', 1)
+        per_page = request.args.get('per_page', 10)
         args.pop('page', None)
         args.pop('per_page', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
         data = Booking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = BookingSchema(many=True).dump(data)
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})

@@ -241,7 +241,8 @@ class Booking(Base):
     contact_no = db.Column(db.String, nullable=True)
     email = db.Column(db.String(120), nullable=True)
     vendor_id = db.Column(db.Integer, nullable=False)
-    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), nullable=False)
+    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
+    deal = db.relationship('Deal', foreign_keys=deal_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
