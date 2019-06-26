@@ -138,13 +138,19 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.min= 0;
   $scope.max= 200000;
   var api_url = 'http://134.209.150.124';
+  var fil = [];
   // $scope.max_price= 0;
   console.log(document.location.search);
   var str = document.location.search;
         var keys = str.split("?");
         var values = keys[1].split("&");
-        // var fil = values[1].split("=");
-  console.log(keys,values);      
+        for(var f=0;f<values.length;f++){
+          fil.push(values[f].split("="));
+        }
+
+        console.log(fil);
+        
+        
 
    // Get the modal
   //  var mymodal= ;
@@ -548,9 +554,18 @@ $scope.showDetail=function(roomid){
   
   $scope.getHotelPrice = function(){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
+    var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
-    window.location.href = '/hotel/list' + document.location.search + '&price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
+    for(var k=0;k<fil.length;k++){
+      if(fil[k][0] == 'price_start'){
+          bool=true;
+          break;
+      }
+    }
+    if(!bool){
+        window.location.href = '/business/hotel/list' + document.location.search + '&price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
+    }
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
@@ -640,9 +655,18 @@ $scope.showDetail=function(roomid){
 
   $scope.getHotelRating = function(){
     console.log("$$scope.hotel.rating",$scope.hotel.rating);
+    var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
-    window.location.href = '/hotel/list' + document.location.search + '&rating=' + $scope.hotel.rating
+    for(var k=0;k<fil.length;k++){
+      if(fil[k][0] == 'rating'){
+          bool=true;
+          break;
+      }
+    }
+    if(!bool){
+         window.location.href = '/business/hotel/list' + document.location.search + '&rating=' + $scope.hotel.rating
+    } 
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
@@ -667,9 +691,21 @@ $scope.showDetail=function(roomid){
 
   $scope.getHotelStar = function(){
     console.log("$$scope.hotel.star",$scope.hotel.star);
+    var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
-    window.location.href = '/hotel/list' + document.location.search + '&star=' + $scope.hotel.star
+    for(var k=0;k<fil.length;k++){
+          if(fil[k][0] == 'star'){
+              bool=true;
+              break;
+          }
+    }
+    if(!bool){
+        window.location.href = '/business/hotel/list' + document.location.search + '&star=' + $scope.hotel.star
+    }  
+    else{
+      
+    }
 
     $http({
       method: 'GET',
