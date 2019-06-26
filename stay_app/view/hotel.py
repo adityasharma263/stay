@@ -624,7 +624,6 @@ def hotel_search():
 
 
 
-
 @app.route('/api/v1/booking', methods=['GET', 'POST'])
 def booking_api():
     if request.method == 'GET':

@@ -38,6 +38,31 @@ def hotel_detail(hotel_id):
 def admin():
     return render_template('hotel/b2c_hotels/admin_hotel.html')
 
+#================= B2B hotels ==========================
+
+@app.route('/business/hotel', methods=['GET'])
+def Business_hotel():
+    API_URL = app.config['API_URL']
+    return render_template('hotel/b2b_hotels/hotel.html')
+
+
+@app.route('/business/hotel/list', methods=['GET'])
+def Business_hotel_list():
+    return render_template('hotel/b2b_hotels/hotel_list.html')
+
+
+@app.route('/business/hotel/<hotel_id>', methods=['GET'])
+def Business_hotel_detail(hotel_id):
+    return render_template('hotel/b2b_hotels/hotel_detail.html')
+
+
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_admin():
+    return render_template('hotel/b2b_hotels/admin_hotel.html')
+
+
+
+
 @app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
 def collection1():
     return render_template('hotel/collections/bed-and-breakfast.html')   
