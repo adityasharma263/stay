@@ -105,7 +105,7 @@ angular.module('comparetravel', ['angular.filter'])
       for(var j=0;j<$scope.hotels.length;j++){
         $scope.hotelid[$scope.hotels[j].id]= $scope.hotels[j];
       }
-      console.log("body.value",x.value);
+      
       console.log("$scope.hotelid",$scope.hotelid);
       console.log("$scope.hotels=====",$scope.hotels);
       // this callback will be called asynchronously

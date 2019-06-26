@@ -131,9 +131,9 @@
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData  | limitTo:limit ">
                                 <div ng-repeat="room in hotel.rooms">
                                     <div>
-                                        <article class="box" ng-if="[[room.room_type]]==1 && [[room.breakfast]]=='false' && [[room.balcony]]=='false'">
+                                        <article class="box" ng-if="[[room.room_type]]==1 && [[room.breakfast]]=='true' && [[room.balcony]]=='false'">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="[[hotel.images[0].image_url]]" alt="Travel Beans">
+                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="myModal" role="dialog">
                                                     <div class="modal-dialog">
@@ -208,11 +208,11 @@
                                                             </div>
                                                         </div>
                                                             <div class="amenities">
-                                                                <i class="fa fa-wifi" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
-                                                                <i class="fa fa-car" ng-if="hotel.amenities.parking" aria-hidden="true"></i>
-                                                                <i class="fa fa-heart" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
-                                                                <i class="fa fa-dumbbell" ng-if="hotel.amenities.gym" aria-hidden="true"></i>
-                                                                <i class="fa fa-swimming-pool" ng-if="hotel.amenities.outdoor_swimming_pool" aria-hidden="true"></i>
+                                                                <i class="soap-icon-wifi" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
+                                                                <i class="soap-icon-car" ng-if="hotel.amenities.parking" aria-hidden="true"></i>
+                                                                <i class="soap-icon-couples" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
+                                                                <i class="soap-icon-fitnessfacility" ng-if="hotel.amenities.gym" aria-hidden="true"></i>
+                                                                <i class="soap-icon-swimming" ng-if="hotel.amenities.outdoor_swimming_pool" aria-hidden="true"></i>
                                                             </div>
                                                     </div>
 
@@ -244,45 +244,18 @@
                                                 
                                                 <div >
                                                     <div >
-                                                        <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center>
+                                                        <!-- <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center> -->
                                                         <a class="button btn-small green" ng-click="showDetail(room.id)">View Detail</a>
-                                                        <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                            
+                                                        <!-- <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                             -->
                                                     </div>
-                                                    <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 " style="float:left">
-                                                            <span class="price" style="text-align: left"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
+                                                    <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
+                                                            <span class="price"  ng-if="[[deal.business_deal]]" style="text-align: left"><a href="[[deal.hotel_url]]"><small>[[deal.website.website]]</small>₹[[deal.price]]</a></span>
                                                     </div>    
                                                 </div>
                                                
                                             </div>
 
-                                                <div id="[[hotel.id]]" class="collapse" style="transition:2s">
-                                                    
-                                                        
-
-                                                    <table class="table table-hover" style="border-top: 0px solid #ddd">
-                                                        
-                                                        <tbody ng-repeat="rm in hotel.rooms">
-                                                        <tr ng-repeat="deal in rm.deals | limitTo:lim ">
-                                                            <td><img src="[[deal.website.logo_image]]"></td>
-                                                            <!-- <td ng-if="[[rm.room_type]]==1">Premium</td>
-                                                            <td ng-if="[[rm.room_type]]==2">Executive</td>
-                                                            <td ng-if="[[rm.room_type]]==3">Sweet</td>
-                                                            <td ng-if="[[rm.room_type]]==4">Super_Deluxe</td> -->
-                                                            <td>[[rm.other_room_type]]</td>
-                                                            <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Detail</a></td>
-                                                            <td class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></td>
-                                                        </tr>
-                                                        
-                                                        <!-- <tr>
-                                                            <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
-                                                        </tr> -->
-                                                        </tbody>
-                                                    
-                                                    </table>
-
-                                                    
-                                                    
-                                                    </div>
+          
                                             </article>
                                     </div>    
                                 </div>
