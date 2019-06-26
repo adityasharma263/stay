@@ -106,16 +106,28 @@
                                                     <input id="star1" type="radio" name="star" value="1" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                 </label>
                                                 <br>
+                                                <label>1<i class="fa fa-star" aria-hidden="true"></i>
+                                                    <input id="star2" type="radio" name="star" value="2" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                </label>
+                                                <br>
                                                 <label>3<i class="fa fa-star" aria-hidden="true"></i>
-                                                    <input id="star2" type="radio" name="star" value="3" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                    <input id="star3" type="radio" name="star" value="3" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                </label>
+                                                <br>
+                                                <label>1<i class="fa fa-star" aria-hidden="true"></i>
+                                                    <input id="star4" type="radio" name="star" value="4" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                 </label>
                                                 <br>
                                                 <label>5<i class="fa fa-star" aria-hidden="true"></i>
-                                                    <input id="star3" type="radio" name="star" value="5" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                    <input id="star5" type="radio" name="star" value="5" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                </label>
+                                                <br>
+                                                <label>1<i class="fa fa-star" aria-hidden="true"></i>
+                                                    <input id="star6" type="radio" name="star" value="6" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                 </label>
                                                 <br>
                                                 <label>7<i class="fa fa-star" aria-hidden="true"></i>
-                                                    <input id="star4" type="radio" name="star" value="7" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                    <input id="star7" type="radio" name="star" value="7" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                 </label>
                                             </div>
                                         </div>
@@ -207,13 +219,7 @@
                                                             
                                                             </div>
                                                         </div>
-                                                            <div class="amenities">
-                                                                <i class="soap-icon-wifi" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
-                                                                <i class="soap-icon-car" ng-if="hotel.amenities.parking" aria-hidden="true"></i>
-                                                                <i class="soap-icon-couples" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
-                                                                <i class="soap-icon-fitnessfacility" ng-if="hotel.amenities.gym" aria-hidden="true"></i>
-                                                                <i class="soap-icon-swimming" ng-if="hotel.amenities.outdoor_swimming_pool" aria-hidden="true"></i>
-                                                            </div>
+                                                            
                                                     </div>
 
                                                         <div>
@@ -245,11 +251,20 @@
                                                 <div >
                                                     <div >
                                                         <!-- <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center> -->
-                                                        <a class="button btn-small green" ng-click="showDetail(room.id)">View Detail</a>
+                                                        <div class="amenities" style="float:left">
+                                                            <i class="soap-icon-wifi circle" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
+                                                            <i class="soap-icon-breakfast circle" ng-if="room.breakfast" aria-hidden="true"></i>
+                                                            <i class="soap-icon-couples circle" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
+                                                            <i class="soap-icon-restaurant circle" ng-if="hotel.amenities.restaurant" aria-hidden="true"></i>
+                                                            <i class="soap-icon-fitnessfacility circle" ng-if="hotel.amenities.gym" aria-hidden="true"></i>
+                                                            <i class="soap-icon-swimming circle" ng-if="hotel.amenities.indoor_swimming_pool" aria-hidden="true"></i>
+                                                            <i class="soap-icon-swimming circle" ng-if="hotel.amenities.outdoor_swimming_pool" aria-hidden="true"></i>
+                                                        </div>
                                                         <!-- <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                             -->
                                                     </div>
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                                            <span class="price"  ng-if="[[deal.business_deal]]" style="text-align: left"><a href="[[deal.hotel_url]]"><small>[[deal.website.website]]</small>₹[[deal.price]]</a></span>
+                                                            <span class="price"  ng-if="[[deal.business_deal]]" style="text-align: left"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
+                                                            <a class="button btn-small green" style="padding: 0px 10px" ng-click="showDetail(room.id)">View Detail</a>
                                                     </div>    
                                                 </div>
                                                

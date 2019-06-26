@@ -139,6 +139,12 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.max= 200000;
   var api_url = 'http://134.209.150.124';
   // $scope.max_price= 0;
+  console.log(document.location.search);
+  var str = document.location.search;
+        var keys = str.split("?");
+        var values = keys[1].split("&");
+        // var fil = values[1].split("=");
+  console.log(keys,values);      
 
    // Get the modal
   //  var mymodal= ;
@@ -544,6 +550,7 @@ $scope.showDetail=function(roomid){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
     $scope.hotelData=[];
     $scope.deals=[];
+    window.location.href = '/hotel/list' + document.location.search + '&price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
@@ -635,7 +642,7 @@ $scope.showDetail=function(roomid){
     console.log("$$scope.hotel.rating",$scope.hotel.rating);
     $scope.hotelData=[];
     $scope.deals=[];
-
+    window.location.href = '/hotel/list' + document.location.search + '&rating=' + $scope.hotel.rating
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
@@ -662,6 +669,7 @@ $scope.showDetail=function(roomid){
     console.log("$$scope.hotel.star",$scope.hotel.star);
     $scope.hotelData=[];
     $scope.deals=[];
+    window.location.href = '/hotel/list' + document.location.search + '&star=' + $scope.hotel.star
 
     $http({
       method: 'GET',
