@@ -554,18 +554,18 @@ $scope.showDetail=function(roomid){
   
   $scope.getHotelPrice = function(){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
-    var bool = false;
-    $scope.hotelData=[];
-    $scope.deals=[];
-    for(var k=0;k<fil.length;k++){
-      if(fil[k][0] == 'price_start'){
-          bool=true;
-          break;
-      }
-    }
-    if(!bool){
-        window.location.href = '/business/hotel/list' + document.location.search + '&price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
-    }
+    // var bool = false;
+    // $scope.hotelData=[];
+    // $scope.deals=[];
+    // for(var k=0;k<fil.length;k++){
+    //   if(fil[k][0] == 'price_start'){
+    //       bool=true;
+    //       break;
+    //   }
+    // }
+    // if(!bool){
+    //     window.location.href = '/business/hotel/list' + document.location.search + '&price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
+    // }
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
@@ -658,15 +658,15 @@ $scope.showDetail=function(roomid){
     var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
-    for(var k=0;k<fil.length;k++){
-      if(fil[k][0] == 'rating'){
-          bool=true;
-          break;
-      }
-    }
-    if(!bool){
-         window.location.href = '/business/hotel/list' + document.location.search + '&rating=' + $scope.hotel.rating
-    } 
+    // for(var k=0;k<fil.length;k++){
+    //   if(fil[k][0] == 'rating'){
+    //       bool=true;
+    //       break;
+    //   }
+    // }
+    // if(!bool){
+    //      window.location.href = '/business/hotel/list' + document.location.search + '&rating=' + $scope.hotel.rating
+    // } 
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
@@ -694,18 +694,18 @@ $scope.showDetail=function(roomid){
     var bool = false;
     $scope.hotelData=[];
     $scope.deals=[];
-    for(var k=0;k<fil.length;k++){
-          if(fil[k][0] == 'star'){
-              bool=true;
-              break;
-          }
-    }
-    if(!bool){
-        window.location.href = '/business/hotel/list' + document.location.search + '&star=' + $scope.hotel.star
-    }  
-    else{
+    // for(var k=0;k<fil.length;k++){
+    //       if(fil[k][0] == 'star'){
+    //           bool=true;
+    //           break;
+    //       }
+    // }
+    // if(!bool){
+    //     window.location.href = '/business/hotel/list' + document.location.search + '&star=' + $scope.hotel.star
+    // }  
+    // else{
       
-    }
+    // }
 
     $http({
       method: 'GET',
