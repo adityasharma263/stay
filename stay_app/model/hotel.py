@@ -24,6 +24,7 @@ class HotelCollection(Base):
     def __repr__(self):
         return '<collection %r>' % self.collection
 
+
 class Hotel(Base):
     __tablename__ = 'hotel'
 
@@ -224,6 +225,24 @@ class Deal(Base):
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<room_id %r>' % self.room_id
+
+
+class Booking(Base):
+    __tablename__ = 'booking'
+
+    booking_no = db.Column(db.String, nullable=True)
+    guest_name = db.Column(db.String, nullable=True)
+    contact_no = db.Column(db.String, nullable=True)
+    email = db.Column(db.String(120), nullable=True)
+    vendor_id = db.Column(db.Integer, nullable=False)
+    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
+    deal = db.relationship('Deal', foreign_keys=deal_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

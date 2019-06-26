@@ -10,6 +10,7 @@ from stay_app.model.hotel import Website
 from stay_app.model.hotel import Room
 from stay_app.model.hotel import HotelCollection
 from stay_app.model.hotel import CollectionProduct
+from stay_app.model.hotel import Booking
 from stay_app import ma
 
 
@@ -94,3 +95,10 @@ class HotelCollectionSchema(ma.ModelSchema):
     class Meta:
         model = HotelCollection
         exclude = ('updated_at', 'created_at', 'hotel')
+
+
+class BookingSchema(ma.ModelSchema):
+    deal = ma.Nested(DealSchema, many=False)
+    class Meta:
+        model = Booking
+        exclude = ('updated_at', 'created_at')

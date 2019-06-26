@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct
+from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct, Booking
 from stay_app import app, db
 # from sqlalchemy import or_
 from sqlalchemy import func
 from flask import jsonify, request
-from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema
+from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema
 import datetime
 from itertools import cycle
 # import simplejson as json
@@ -37,6 +37,8 @@ def hotel_api():
         args.pop('price_end', None)
         page = request.args.get('page', 1)
         per_page = request.args.get('per_page', 10)
+        args.pop('page', None)
+        args.pop('per_page', None)
         check_in = request.args.get('check_in')
         check_out = request.args.get('check_out')
         args.pop('check_in', None)
@@ -531,9 +533,9 @@ def deal_api():
         args.pop('price_end', None)
         hotel_id = request.args.get('hotel_id', None)
         args.pop('hotel_id', None)
-        page = request.args.get('page', None)
+        page = request.args.get('page', 1)
+        per_page = request.args.get('per_page', 10)
         args.pop('page', None)
-        per_page = request.args.get('per_page', None)
         args.pop('per_page', None)
         # if check_in and check_out:
         #     no_of_days = int(check_out) - int(check_in)
@@ -576,7 +578,7 @@ def deal_api():
             deals = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).offset((page - 1) * per_page).limit(per_page).all()
         else:
-            deals = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+            deals = Deal.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = DealSchema(many=True).dump(deals)
         # for deal in result.data:
         #     # if deal["room"]:
@@ -621,3 +623,39 @@ def hotel_search():
     for hotel_name in hotel_names:
         names.append(hotel_name.name.lower())
     return jsonify({'result': {'cities': list(set(cities)), "names": list(set(names))}, 'message': "Success", 'error': False})
+
+
+
+@app.route('/api/v1/booking', methods=['GET', 'POST'])
+def booking_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        page = request.args.get('page', 1)
+        per_page = request.args.get('per_page', 10)
+        args.pop('page', None)
+        args.pop('per_page', None)
+        data = Booking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = BookingSchema(many=True).dump(data)
+        return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = Booking(**request.json)
+        post.save()
+        result = BookingSchema().dump(post)
+        return jsonify({'result': {'booking': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/booking/<int:id>', methods=['PUT', 'DELETE'])
+def booking_id(id):
+    if request.method == 'PUT':
+        put = Booking.query.filter_by(id=id).update(request.json)
+        if put:
+            Booking.update_db()
+            s = Booking.query.filter_by(id=id).first()
+            result = BookingSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        bookings = Booking.query.filter_by(id=id).first()
+        if not bookings:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Booking.delete_db(bookings)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
