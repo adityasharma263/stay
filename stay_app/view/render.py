@@ -60,24 +60,63 @@ def Business_hotel_detail(hotel_id):
 def Business_admin():
     return render_template('hotel/b2b_hotels/admin_hotel.html')
 
+    
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_about():
+    return render_template('hotel/footer_pages/about.html')
+
+
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_contact_us():
+    return render_template('hotel/footer_pages/contact-us.html')
+
+
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_customer_care():
+    return render_template('hotel/footer_pages/customer-care.html')
+
+
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_jobs():
+    return render_template('hotel/footer_pages/job-and-internship-application-form.html')
+
+
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_legal():
+    return render_template('hotel/footer_pages/legal.html')
+
+
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_partner_care():
+    return render_template('hotel/footer_pages/partner-care.html')
+
+
+@app.route('/business/admin/hotel', methods=['GET'])
+def Business_press_release():
+    return render_template('hotel/footer_pages/press-release.html')
+
 
 
 
 @app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
 def collection1():
-    return render_template('hotel/collections/bed-and-breakfast.html')   
+    return render_template('hotel/collections/bed-and-breakfast.html')  
+     
 
 @app.route('/hotel/collection/boatstays-travel-beans', methods=['GET'])
 def collection2():
     return render_template('hotel/collections/boatstays.html')   
 
+
 @app.route('/hotel/collection/boutique-hotels-travel-beans', methods=['GET'])
 def collection3():
     return render_template('hotel/collections/boutique-hotels.html')  
 
+
 @app.route('/hotel/collection/budget-hotels-travel-beans', methods=['GET'])
 def collection4():
-    return render_template('hotel/collections/budget-hotels.html')                
+    return render_template('hotel/collections/budget-hotels.html')             
+
 
 @app.route('/hotel/collection/campsite-travel-beans', methods=['GET'])
 def collection5():
