@@ -148,7 +148,6 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.lim= 5;
   $scope.myVar= false;
   $scope.result = false;
-  $scope.hresult = false;
   $scope.roomPrice={};
   $scope.roomobj={};
   $scope.hotelobj={};
@@ -457,39 +456,6 @@ $scope.getHotelsData();
     else{
       $scope.myVar = false;
     }
-  }
-  
-  $scope.getHotelPrice = function(){
-    console.log("$scope.hotel.end_price",$scope.hotel.end_price);
-    $http({
-      method: 'GET',
-      url: api_url + '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
-    }).then(function successCallback(response) {
-        $scope.hotelData = response.data.result.hotel;
-        console.log("$scope.deals",$scope.deals);
-      //   if($scope.deals.length==0){
-      //     $scope.result = true;
- 
-      //  }
-      //  else{
-      //    $scope.result = false;
-      //  }
-      //   for(var j=0; j<$scope.deals.length; j++){
-      //     $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
-      //     $scope.deals[j].roomdata=$scope.roomobj;
-      //     $scope.hotelobj=$scope.cityid[$scope.deals[j].roomdata.hotel];
-      //     $scope.deals[j].roomdata.hoteldata=$scope.hotelobj;
-
-      //   }
-      //   console.log("deals array",$scope.deals);
-      //   // this callback will be called asynchronously
-
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
-    
   }
 
   $scope.checkErr = function(){

@@ -18,7 +18,11 @@
                         <div class="col-sm-4 col-md-3">
                             <div class="toggle-container filters-container">
                                 <div class="panel style1 arrow-right">
-                                        <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {}">Clear filter</button> 
+                                        <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {  rating : null ,
+                                            star :  null,
+                                            price_start : null,
+                                            price_end : null,
+                                            page: 1}">Clear filter</button> 
                                 </div> 
                                 <!-- <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
@@ -286,25 +290,10 @@
                                         <article class="box" ng-if="result">
                                             
                                             <h3>No Result found</h3>
-                                            
-
-                                            
-
                                         </article>
                                     
                                 </div>
 
-                                <div class="hotel-list listing-style3 hotel">
-                                    <article class="box" ng-if="hresult">
-                                        
-                                        <h3>No Result found</h3>
-                                        
-
-                                        
-
-                                    </article>
-                                
-                            </div>
 
                             <a href="" class="uppercase full-width button btn-large" ng-click='loadMoreHotelsData()'>load more listing</a>
                         </div>
