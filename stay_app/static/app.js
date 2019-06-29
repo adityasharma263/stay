@@ -51,6 +51,19 @@ angular.module('comparetravel', ['angular.filter'])
       }).join('&');
   }
 
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel/collection' 
+  }).then(function successCallback(response) {
+      // hotelData = response.data.result;
+      $scope.collections = response.data.result.collection;
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+
   $scope.getHotel = function() {
     // console.log("$location.path",$location.path);
     console.log("status",searchKey);
@@ -124,7 +137,13 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.room = {};
   $scope.cityid = {};
   $scope.id = [];
-  $scope.hotel = {};
+  $scope.hotel = {
+    rating : null ,
+    star :  null,
+    price_start : null,
+    price_end : null,
+    page: 1
+  };
   $scope.limit= 10;
   $scope.lim= 5;
   $scope.myVar= false;
@@ -138,17 +157,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.min= 0;
   $scope.max= 200000;
   var api_url = 'http://134.209.150.124';
-  var fil = [];
-  // $scope.max_price= 0;
-  console.log(document.location.search);
-  var str = document.location.search;
-        var keys = str.split("?");
-        var values = keys[1].split("&");
-        for(var f=0;f<values.length;f++){
-          fil.push(values[f].split("="));
-        }
 
-        console.log(fil);
         
         
 
@@ -384,37 +393,11 @@ console.log("map",map);
 // }
 
 //+++++++++++
-  // loadMore function
-  var page = 1;
-  $scope.loadMore = function() {
-    $scope.limit =   $scope.limit + 10;
-    page=page + 1;
 
-    $http({
-      method: 'GET',
-      url: api_url + '/api/v1/hotel' + document.location.search + '&page=' + page
-    }).then(function successCallback(response) {
-        var str = document.location.search;
-        var key = str.split("?");
-        var key1 = key[1].split("=");
-        $scope.newhotels = response.data.result.hotel;
-        console.log("$scope.newhotels",$scope.newhotels);
-              for(var j=0;j<$scope.newhotels.length;j++){
-                $scope.hotelData.push($scope.newhotels[j]);
-              }
-              console.log("new",$scope.hotelData);
-       
-       
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
 
-  }
-
-  $scope.loadmoredeals = function() {
-    $scope.lim =   $scope.lim + 5;
-  }
+$scope.loadmoredeals = function() {
+  $scope.lim =   $scope.lim + 5;
+}
 
 
 //for detail page
@@ -422,6 +405,49 @@ $scope.showDetail=function(roomid){
   window.open('/hotel/'+roomid,'_self');
   
 }
+
+$scope.hotelData = [];
+
+
+
+$scope.getHotelsData = function(cb){
+
+  if(!cb) $scope.hotel.page = 1;
+
+  let searchURL = api_url + '/api/v1/hotel'+document.location.search
+
+  Object.keys($scope.hotel).forEach(function(param){
+    console.log($scope.hotel[param]);
+    if($scope.hotel[param] && param !== 'end_price')
+    searchURL += `&${param}=${$scope.hotel[param]}`;
+  });
+
+  $http({
+    method: 'GET',
+    url: searchURL
+  }).then(function(res){
+
+    if(cb){
+      cb(res);
+    }else{
+      $scope.hotelData = res.data.result.hotel;
+    }
+  })
+}
+
+$scope.loadMoreHotelsData = function(){
+  $scope.hotel.page =  $scope.hotel.page + 1;
+
+  $scope.getHotelsData(function(res){
+    $scope.hotelData = $scope.hotelData.concat(res.data.result.hotel);
+  });
+
+
+}
+
+
+
+$scope.getHotelsData();
 
 //for more deals tab  
   $scope.show = function() {
@@ -433,139 +459,8 @@ $scope.showDetail=function(roomid){
     }
   }
   
-  $http({
-    method: 'GET',
-    url: api_url + '/api/v1/hotel'+document.location.search
-  }).then(function successCallback(response) {
-      var str = document.location.search;
-      var key = str.split("?");
-      var key1 = key[1].split("=");
-      console.log("key1",key1);
-      $scope.hotelData = response.data.result.hotel;
-      if($scope.hotelData.length==0){
-        $scope.hresult = true;
-
-     }
-     else{
-       $scope.hresult = false;
-     }
-      console.log("$scope.hotelData",$scope.hotelData);
-      if(key1[0]=="name"){
-          $scope.city = $scope.hotelData[0].city;
-          $http({
-            method: 'GET',
-            url: '/api/v1/hotel?city=' + $scope.city
-          }).then(function successCallback(response) {
-        
-              $scope.newhotels = response.data.result.hotel;
-              console.log("$scope.newhotels",$scope.newhotels);
-              for(var j=0;j<$scope.newhotels.length;j++){
-                $scope.hotelData.push($scope.newhotels[j]);
-              }
-              console.log("new",$scope.hotelData);
-            }, function errorCallback(response) {
-              // called asynchronously if an error occurs
-              // or server returns response with an error status.
-          })
-          
-        }
-      for(var j=0;j<$scope.hotelData.length;j++){
-        $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
-      }
-      console.log("$scope.cityid",$scope.cityid);
-      // loadRoom();
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-  })
-
-// var loadRoom=function(){
-//   $http({
-//     method: 'GET',
-//     url: '/api/v1/room'
-//   }).then(function successCallback(response) {
-
-//       $scope.roomdata = response.data.result.rooms;
-//       console.log("roomdata",$scope.roomdata);
-//       for(var j=0;j<$scope.roomdata.length;j++){
-//         $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
-//       }
-//       loadDeals();
-
-//     }, function errorCallback(response) {
-//       // called asynchronously if an error occurs
-//       // or server returns response with an error status.
-//   })
-// }
-  
-// loadDeals=function(){
-//   $http({
-//     method: 'GET',
-//     url: '/api/v1/deal'
-//   }).then(function successCallback(response) {
-
-//       $scope.dealdata = response.data.result.deal;
-//       console.log(" $scope.dealdata", $scope.dealdata);
-//       $scope.min = Math.min.apply(Math,$scope.dealdata.map(function(item){return item.price;}));
-//       console.log("$scope.min",$scope.min);
-//       $scope.max= Math.max.apply(Math,$scope.dealdata.map(function(item){return item.price;}));
-//       console.log("$scope.max",$scope.max);
-//       loadPrice();
-//       }, function errorCallback(response) {
-//       // called asynchronously if an error occurs
-//       // or server returns response with an error status.
-//   })
-// }
-//  var loadPrice=function(){
-//   $scope.hotelData=[];
-//   $scope.deals=[];
-//   $http({
-//     method: 'GET',
-//     url: '/api/v1/deal?price_start=' + $scope.min + '&price_end=' + $scope.max
-//   }).then(function successCallback(response) {
-//       $scope.deals = response.data.result.deal;
-//       console.log("$scope.deals",$scope.deals);
-//       if($scope.deals.length==0){
-//         $scope.result = true;
-
-//      }
-//      else{
-//        $scope.result = false;
-//      }
-//       for(var j=0; j<$scope.deals.length; j++){
-//         $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
-//         $scope.deals[j].roomdata=$scope.roomobj;
-//         $scope.hotelobj=$scope.cityid[$scope.deals[j].roomdata.hotel];
-//         $scope.deals[j].roomdata.hoteldata=$scope.hotelobj;
-
-//       }
-//       console.log("deals array",$scope.deals);
-//       // this callback will be called asynchronously
-
-//       // when the response is available
-//     }, function errorCallback(response) {
-//       // called asynchronously if an error occurs
-//       // or server returns response with an error status.
-//   })
-//  }
-
-  
- 
-  
   $scope.getHotelPrice = function(){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
-    // var bool = false;
-    // $scope.hotelData=[];
-    // $scope.deals=[];
-    // for(var k=0;k<fil.length;k++){
-    //   if(fil[k][0] == 'price_start'){
-    //       bool=true;
-    //       break;
-    //   }
-    // }
-    // if(!bool){
-    //     window.location.href = '/business/hotel/list' + document.location.search + '&price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
-    // }
     $http({
       method: 'GET',
       url: api_url + '/api/v1/hotel?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
@@ -651,82 +546,6 @@ $scope.showDetail=function(roomid){
         // or server returns response with an error status.
     })
     
-  }
-
-  $scope.getHotelRating = function(){
-    console.log("$$scope.hotel.rating",$scope.hotel.rating);
-    var bool = false;
-    $scope.hotelData=[];
-    $scope.deals=[];
-    // for(var k=0;k<fil.length;k++){
-    //   if(fil[k][0] == 'rating'){
-    //       bool=true;
-    //       break;
-    //   }
-    // }
-    // if(!bool){
-    //      window.location.href = '/business/hotel/list' + document.location.search + '&rating=' + $scope.hotel.rating
-    // } 
-    $http({
-      method: 'GET',
-      url: api_url + '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
-    }).then(function successCallback(response) {
-        $scope.hotelData = response.data.result.hotel;
-        if($scope.hotelData.length==0){
-          $scope.hresult = true;
-  
-       }
-       else{
-         $scope.hresult = false;
-       }
-        console.log("$scope.hotelData",$scope.hotelData);
-        // this callback will be called asynchronously
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
-
-  }
-
-  $scope.getHotelStar = function(){
-    console.log("$$scope.hotel.star",$scope.hotel.star);
-    var bool = false;
-    $scope.hotelData=[];
-    $scope.deals=[];
-    // for(var k=0;k<fil.length;k++){
-    //       if(fil[k][0] == 'star'){
-    //           bool=true;
-    //           break;
-    //       }
-    // }
-    // if(!bool){
-    //     window.location.href = '/business/hotel/list' + document.location.search + '&star=' + $scope.hotel.star
-    // }  
-    // else{
-      
-    // }
-
-    $http({
-      method: 'GET',
-      url: api_url + '/api/v1/hotel' + document.location.search + '&star=' + $scope.hotel.star
-    }).then(function successCallback(response) {
-        $scope.hotelData = response.data.result.hotel;
-        if($scope.hotelData.length==0){
-          $scope.hresult = true;
-  
-       }
-       else{
-         $scope.hresult = false;
-       }
-        console.log("$scope.hotelData",$scope.hotelData);
-        // this callback will be called asynchronously
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
-
   }
 
 
@@ -973,6 +792,18 @@ $scope.showDetail=function(roomid){
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel/collection' 
+  }).then(function successCallback(response) {
+      // hotelData = response.data.result;
+      $scope.collections = response.data.result.collection;
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
   var sendPostHotel = function(url, data) {
     $scope.hotel.city = $scope.hotel.city.toLowerCase();
     $scope.hotel.name = $scope.hotel.name.toLowerCase();
@@ -1116,10 +947,10 @@ $scope.createHotel = function() {
   $scope.hotelDetail=false;
   $scope.roomDetail=true;
 
-  $scope.collectionProdcut.push($scope.product);
+  // $scope.collectionProdcut.push($scope.product);
 
   $scope.hotelImg.push($scope.images);
-  $scope.hotel.collection.products=$scope.collectionProdcut;
+  // $scope.hotel.collection.products=$scope.collectionProdcut;
   $scope.hotel.images=$scope.hotelImg;
   console.log("$scope.hotel",$scope.hotel);
 
