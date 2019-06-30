@@ -5,18 +5,18 @@
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <h2>The Travel Square</h2>
                     <ul class="discover triangle hover row">
-                        <li class="col-xs-6"><a href="footer_pages/about.html">About Company</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/job-and-internship-application-form.html">Jobs & Carreers</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/about.html">Corporate Offices</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/legal.html">Legal Information</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/press-release.html">Press Release</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/legal.html">T & C</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/customer-care.html">Customer Care</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/legal.html">Privacy Policies</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/partner-Care.html">Partner Help</a></li>
-                        <li class="col-xs-6"><a href="http://www.thetravelsquare.in/faq.html">FAQ's</a></li>
-                        <li class="col-xs-6"><a href="http://www.thetravelsquare.in/site-Map.html">Site Map</a></li>
-                        <li class="col-xs-6"><a href="footer_pages/customer-care.html">Contact Us</a></li>
+                        <li  onclick=about() class="col-xs-6"><a href="#">About Company</a></li>
+                        <li onclick=jobs() class="col-xs-6"><a href="#">Jobs & Carreers</a></li>
+                        <li onclick=about() class="col-xs-6"><a href="#">Corporate Offices</a></li>
+                        <li onclick=legal() class="col-xs-6"><a href="#">Legal Information</a></li>
+                        <li onclick=pressRelease() class="col-xs-6"><a href="#">Press Release</a></li>
+                        <li onclick=legal() class="col-xs-6"><a href="#">T & C</a></li>
+                        <li onclick=customerCare() class="col-xs-6"><a href="">Customer Care</a></li>
+                        <li onclick=legal() class="col-xs-6"><a href="/footer_pages/legal.html">Privacy Policies</a></li>
+                        <li onclick=partnerCare() class="col-xs-6"><a href="/footer_pages/partner-Care.html">Partner Help</a></li>
+                        <!-- <li class="col-xs-6"><a href="/footer_pages/faq.html">FAQ's</a></li>
+                        <li class="col-xs-6"><a href="/footer_pages/site-map.html">Site Map</a></li> -->
+                        <li onclick=contactUs() class="col-xs-6"><a href="">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -66,28 +66,27 @@
         </div>
     </div>
 </footer>
+<script>
+function about(){
+    window.open("/about");
+}
+function jobs(){
+    window.open("/jobs");
+}
+function contactUs(){
+    window.open("/contact-us");
+}
+function legal(){
+    window.open("/legal");
+}
+function pressRelease(){
+    window.open("/press-release");
+}
+function customeCare(){
+    window.open("/customer-care");
+}
+function partnerCare(){
+    window.open("/partner-care");
+}
 
-</div>
-
-
-
-<!-- Javascript -->
-<script type="text/javascript" src="./About Travel Beans_files/jquery-1.11.1.min.js.download"></script>
-<script type="text/javascript" src="./About Travel Beans_files/jquery.noconflict.js.download"></script>
-<script type="text/javascript" src="./About Travel Beans_files/modernizr.2.7.1.min.js.download"></script>
-<script type="text/javascript" src="./About Travel Beans_files/jquery-migrate-1.2.1.min.js.download"></script>
-<script type="text/javascript" src="./About Travel Beans_files/jquery.placeholder.js.download"></script>
-<script type="text/javascript" src="./About Travel Beans_files/jquery-ui.1.10.4.min.js.download"></script>
-
-<!-- Twitter Bootstrap -->
-<script type="text/javascript" src="./About Travel Beans_files/bootstrap.js.download"></script>
-
-<!-- parallax -->
-<script type="text/javascript" src="./About Travel Beans_files/jquery.stellar.min.js.download"></script>
-
-<!-- waypoint -->
-<script type="text/javascript" src="./About Travel Beans_files/waypoints.min.js.download"></script>
-
-<!-- load page Javascript -->
-<script type="text/javascript" src="./About Travel Beans_files/theme-scripts.js.download"></script>
-<script type="text/javascript" src="./About Travel Beans_files/scripts.js.download"></script>
+</script>

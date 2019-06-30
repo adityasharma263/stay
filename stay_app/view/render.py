@@ -15,6 +15,19 @@ def home():
 def page_not_found():
     return render_template("404.html"), 400
 
+# @app.route('/payment', methods=['GET','POST'])
+# def payment():
+#     if request.method == 'GET':
+#         return render_template('hotel/form.html')
+#     elif request.method == 'POST':
+#         post_data = request.form.to_dict()
+#         # res = requests.post('http://127.0.0.1:5000/api/v1/team', json=post_data)
+#         print(post_data, "response")
+#         # post_data = res.json()
+#         return render_template('hotel/form.html', response=post_data)
+
+
+
 #======================== HOTEL ============================
 
 
@@ -61,37 +74,37 @@ def Business_admin():
     return render_template('hotel/b2b_hotels/admin_hotel.html')
 
     
-@app.route('/business/admin/hotel', methods=['GET'])
+@app.route('/about', methods=['GET'])
 def Business_about():
     return render_template('hotel/footer_pages/about.html')
 
 
-@app.route('/business/admin/hotel', methods=['GET'])
+@app.route('/contact-us', methods=['GET'])
 def Business_contact_us():
     return render_template('hotel/footer_pages/contact-us.html')
 
 
-@app.route('/business/admin/hotel', methods=['GET'])
+@app.route('/customer-care', methods=['GET'])
 def Business_customer_care():
     return render_template('hotel/footer_pages/customer-care.html')
 
 
-@app.route('/business/admin/hotel', methods=['GET'])
+@app.route('/jobs', methods=['GET'])
 def Business_jobs():
     return render_template('hotel/footer_pages/job-and-internship-application-form.html')
 
 
-@app.route('/business/admin/hotel', methods=['GET'])
+@app.route('/legal', methods=['GET'])
 def Business_legal():
     return render_template('hotel/footer_pages/legal.html')
 
 
-@app.route('/business/admin/hotel', methods=['GET'])
+@app.route('/partner-care', methods=['GET'])
 def Business_partner_care():
     return render_template('hotel/footer_pages/partner-care.html')
 
 
-@app.route('/business/admin/hotel', methods=['GET'])
+@app.route('/press-release', methods=['GET'])
 def Business_press_release():
     return render_template('hotel/footer_pages/press-release.html')
 
