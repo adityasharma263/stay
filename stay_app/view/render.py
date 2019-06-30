@@ -15,6 +15,19 @@ def home():
 def page_not_found():
     return render_template("404.html"), 400
 
+# @app.route('/payment', methods=['GET','POST'])
+# def payment():
+#     if request.method == 'GET':
+#         return render_template('hotel/form.html')
+#     elif request.method == 'POST':
+#         post_data = request.form.to_dict()
+#         # res = requests.post('http://127.0.0.1:5000/api/v1/team', json=post_data)
+#         print(post_data, "response")
+#         # post_data = res.json()
+#         return render_template('hotel/form.html', response=post_data)
+
+
+
 #======================== HOTEL ============================
 
 
