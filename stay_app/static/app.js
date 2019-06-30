@@ -1029,6 +1029,7 @@ var getrooms=function(){
   $scope.roomData={};
   var search =location.pathname;
   var id = search.split("/");
+  console.log(id);
   $http({
     method: 'GET',
     url: api_url +'/api/v1/room?id='+id[2]
@@ -1036,8 +1037,10 @@ var getrooms=function(){
       for(var i=0; i<response.data.result.rooms.length; i++){
         $scope.roomData= response.data.result.rooms[i];
       }
-      
+      console.log($scope.roomData);
+      console.log($scope.hotels);
       $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
+      console.log($scope.hotelobj);
       getSimilarHotels($scope.hotelobj.city);
       $scope.roomData.hotelData=$scope.hotelobj;
       for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
@@ -1053,6 +1056,7 @@ var getrooms=function(){
   });
 }
 var getSimilarHotels=function(city){
+  console.log(city);
   $http({
     method: 'GET',
     url: api_url + '/api/v1/hotel?city='+city,
