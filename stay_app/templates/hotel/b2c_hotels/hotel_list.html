@@ -18,7 +18,11 @@
                         <div class="col-sm-4 col-md-3">
                             <div class="toggle-container filters-container">
                                 <div class="panel style1 arrow-right">
-                                        <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {}">Clear filter</button> 
+                                        <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {  rating : null ,
+                                            star :  null,
+                                            price_start : null,
+                                            price_end : null,
+                                            page: 1}">Clear filter</button> 
                                 </div> 
                                 <!-- <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
@@ -56,13 +60,13 @@
                                             <div class="form-group">
                                                 <div >
                                                         <label>Max Price:</label>
-                                                        <input type="range" min="[[min]]" max="[[max]]" value="[[max]]" ng-model="hotel.end_price" >
-                                                        <p>Value: <span>[[hotel.end_price]]</span></p>
+                                                        <input type="range" min="[[min]]" max="[[max]]" value="[[max]]" ng-model="hotel.price_end" >
+                                                        <p>Value: <span>[[hotel.price_end]]</span></p>
                                              
                                                 </div>    
                                             </div>
                                             <br>
-                                            <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelPrice()">search again</button>
+                                            <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelsData()">search again</button>
                                         </div>
                                     </div>
                                 </div>
@@ -74,23 +78,23 @@
                                     <div id="rating-filter" class="panel-collapse collapse filters-container">
                                         <div class="panel-content">
                                             <div class="form-group">
-                                                <input id="rating1" type="radio" name="rating" value="9" ng-click="getHotelRating()" ng-model="hotel.rating"/>
+                                                <input id="rating1" type="radio" name="rating" value="9" ng-click="getHotelsData()" ng-model="hotel.rating"/>
                                                 <label class="label success">9+</label>
                                                 <br>
-                                                <input id="rating2" type="radio" name="rating" value="8" ng-click="getHotelRating()" ng-model="hotel.rating"/>
+                                                <input id="rating2" type="radio" name="rating" value="8" ng-click="getHotelsData()" ng-model="hotel.rating"/>
                                                 <label class="label info">8+</label>
                                                 <br>
-                                                <input id="rating3" type="radio" name="rating" value="7" ng-click="getHotelRating()" ng-model="hotel.rating"/>
+                                                <input id="rating3" type="radio" name="rating" value="7" ng-click="getHotelsData()" ng-model="hotel.rating"/>
                                                 <label class="label warning">7+</label>
                                                 <br>
-                                                <input id="rating4" type="radio" name="rating" value="5" ng-click="getHotelRating()" ng-model="hotel.rating"/>
+                                                <input id="rating4" type="radio" name="rating" value="5" ng-click="getHotelsData()" ng-model="hotel.rating"/>
                                                 <label class="label danger">5+</label>
                                                 <br>
-                                                <input id="rating5" type="radio" name="rating" value="0" ng-click="getHotelRating()" ng-model="hotel.rating"/>
+                                                <input id="rating5" type="radio" name="rating" value="0" ng-click="getHotelsData()" ng-model="hotel.rating"/>
                                                 <label class="label other">0+</label>
                                             </div>
                                             <br>
-                                            <!-- <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelRating()">search again</button> -->
+                                            <!-- <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelsData()">search again</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -103,19 +107,19 @@
                                         <div class="panel-content">
                                             <div class="form-group">
                                                 <label>1<i class="fa fa-star" aria-hidden="true"></i>
-                                                    <input id="star1" type="radio" name="star" value="1" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                    <input id="star1" type="radio" name="star" value="1" ng-click="getHotelsData()" ng-model="hotel.star"/>
                                                 </label>
                                                 <br>
                                                 <label>3<i class="fa fa-star" aria-hidden="true"></i>
-                                                    <input id="star2" type="radio" name="star" value="3" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                    <input id="star2" type="radio" name="star" value="3" ng-click="getHotelsData()" ng-model="hotel.star"/>
                                                 </label>
                                                 <br>
                                                 <label>5<i class="fa fa-star" aria-hidden="true"></i>
-                                                    <input id="star3" type="radio" name="star" value="5" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                    <input id="star3" type="radio" name="star" value="5" ng-click="getHotelsData()" ng-model="hotel.star"/>
                                                 </label>
                                                 <br>
                                                 <label>7<i class="fa fa-star" aria-hidden="true"></i>
-                                                    <input id="star4" type="radio" name="star" value="7" ng-click="getHotelStar()" ng-model="hotel.star"/>
+                                                    <input id="star4" type="radio" name="star" value="7" ng-click="getHotelsData()" ng-model="hotel.star"/>
                                                 </label>
                                             </div>
                                         </div>
@@ -128,12 +132,12 @@
                                 <h4 class="sort-by-title block-sm">Search results by:</h4>
                                 <p><input class="input-text full-width" type="text"  placeholder="search by keyword"></p>
                             </div>
-                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData  | limitTo:limit ">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
                                 <div ng-repeat="room in hotel.rooms">
                                     <div>
                                         <article class="box" ng-if="[[room.room_type]]==1 && [[room.breakfast]]=='true' && [[room.balcony]]=='false'">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="[[hotel.images[0].image_url]]" alt="Travel Beans">
+                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Beans">
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="myModal" role="dialog">
                                                     <div class="modal-dialog">
@@ -306,19 +310,11 @@
                                     
                                 </div>
 
-                                <div class="hotel-list listing-style3 hotel">
-                                    <article class="box" ng-if="hresult">
-                                        
-                                        <h3>No Result found</h3>
-                                        
-
-                                        
-
-                                    </article>
+                        
                                 
                             </div>
 
-                            <a href="" class="uppercase full-width button btn-large" ng-click='loadMore()'>load more listing</a>
+                            <a href="" class="uppercase full-width button btn-large" ng-click='loadMoreHotelsData()'>load more listing</a>
                         </div>
                     </div>
                 </div>

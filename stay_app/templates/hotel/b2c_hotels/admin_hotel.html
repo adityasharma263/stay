@@ -1307,6 +1307,8 @@
                             </div>
                         </div>
                     </form>
+
+
                     <form class="form-horizontal" ng-submit="createHotel()">
                         <div ng-show="hotelDetail">
                             <br>
@@ -1545,7 +1547,17 @@
                                 </div>
                             </label>
                             </div>
-                            <h2>Hotel collection :</h2>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="cname">Collection name:  </label>
+                                <div class="col-sm-10">        
+                                    <select class="form-control" ng-model="hotel.collection_id">
+                                        <option ng-repeat="obj in collections" value="[[obj.id]]">[[obj.collection_name]]</option>
+                                    </select>  
+                                </div>
+                            </div>
+
+                            <!-- <h2>Hotel collection :</h2>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" >Collection Name : </label>
                                 <div class="col-sm-10">     
@@ -1605,7 +1617,7 @@
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn btn-primary" ng-click=addProduct()>Add more product</button>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <div class="form-group">        
                             <div class="col-sm-offset-8 col-sm-8">
