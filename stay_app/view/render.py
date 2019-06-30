@@ -44,11 +44,9 @@ def hotel_list():
 
 @app.route('/hotel/<hotel_id>', methods=['GET'])
 def hotel_detail(hotel_id):
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    args = request.args
-    args['id'] = hotel_id
-    hotel_data = requests.get(url=hotel_api_url, params=args).json()
-    return render_template('hotel/b2c_hotels/hotel_detail.html', hotel_data=hotel_data)
+    hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
+    hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+    return render_template('hotel/b2c_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"][0])
 
 
 @app.route('/admin/hotel', methods=['GET'])
