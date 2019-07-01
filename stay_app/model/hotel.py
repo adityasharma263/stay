@@ -75,6 +75,7 @@ class Room(Base):
 
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
     status = db.Column(db.Boolean, default=False, nullable=True)
+    lowest_price_room = db.Column(db.Boolean, default=False, nullable=True)
     room_type = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     other_room_type = db.Column(db.String, nullable=True)
@@ -100,6 +101,7 @@ class Amenity(Base):
 
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True, nullable=False)
     conference_room = db.Column(db.Boolean, default=False, nullable=True)
+    airport_transfers = db.Column(db.Boolean, default=False, nullable=True)
     parking = db.Column(db.Boolean, default=False, nullable=True)
     couple_friendly = db.Column(db.Boolean, default=False, nullable=True)
     express_check_in_out = db.Column(db.Boolean, default=False, nullable=True)
@@ -168,6 +170,7 @@ class Facility(Base):
 
     bed_type = db.Column(db.Integer, nullable=True)
     no_of_bed = db.Column(db.Integer, nullable=True)
+    jacuzzi = db.Column(db.Integer, nullable=True)
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
     wardrobes_closet = db.Column(db.Boolean, default=False, nullable=True)
