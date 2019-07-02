@@ -13,6 +13,7 @@ from itertools import cycle
 import decimal
 import flask.json
 
+
 class MyJSONEncoder(flask.json.JSONEncoder):
 
     def default(self, obj):
@@ -20,6 +21,7 @@ class MyJSONEncoder(flask.json.JSONEncoder):
             # Convert decimal instances to strings.
             return str(obj)
         return super(MyJSONEncoder, self).default(obj)
+
 app.json_encoder = MyJSONEncoder
 
 
@@ -340,6 +342,7 @@ def room_api():
         #             "website_id": deal.get("website_id", None)
         #         }
         #         Deal(**deal_obj).save()
+
         return jsonify({'result': {'room': room_result}, 'message': "Success", 'error': False})
 
 
