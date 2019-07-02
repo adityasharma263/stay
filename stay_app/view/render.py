@@ -46,10 +46,10 @@ def hotel_list():
 def hotel_detail(hotel_id):
     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
-    if len(hotel_data["result"]["hotel"]) > 0 :
-        print(hotel_data["result"]["hotel"], "33333333333333333333333333333")
+    if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"][0]
-
+    else:
+        hotel_data = {}
     return render_template('hotel/b2c_hotels/hotel_detail.html', hotel_data=hotel_data)
 
 
