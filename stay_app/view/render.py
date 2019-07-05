@@ -57,7 +57,9 @@ def hotel_detail(hotel_id):
 def admin():
     return render_template('hotel/b2c_hotels/admin_hotel.html')
 
+
 #================= B2B hotels ==========================
+
 
 @app.route('/business/hotel', methods=['GET'])
 def Business_hotel():
@@ -72,7 +74,13 @@ def Business_hotel_list():
 
 @app.route('/business/hotel/<hotel_id>', methods=['GET'])
 def Business_hotel_detail(hotel_id):
-    return render_template('hotel/b2b_hotels/hotel_detail.html')
+    hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
+    hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+    if len(hotel_data["result"]["hotel"]) > 0:
+        hotel_data = hotel_data["result"]["hotel"][0]
+    else:
+        hotel_data = {}
+    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
