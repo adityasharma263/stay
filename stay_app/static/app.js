@@ -155,7 +155,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.imagesData={};
   $scope.min= 0;
   $scope.max= 200000;
-  var api_url = '139.59.51.174';
+  var api_url = 'http://139.59.51.174';
 
         
         
@@ -539,7 +539,7 @@ $scope.getHotelsData();
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
-  var api_url = '139.59.51.174/';
+  var api_url = 'http://139.59.51.174/';
 
   $scope.showCreate=function(){
     $scope.hotelDetail=true;
@@ -938,7 +938,7 @@ $scope.createHotel = function() {
   $scope.similarhotels=[];
   $scope.limit=10;
   $scope.deallimit=1;
-  var api_url = '139.59.51.174';
+  var api_url = 'http://139.59.51.174';
 
   // window.onresize = function(){ location.reload(); }
   $scope.openHome=function(){
