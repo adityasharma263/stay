@@ -13,6 +13,7 @@ from itertools import cycle
 import decimal
 import flask.json
 
+
 class MyJSONEncoder(flask.json.JSONEncoder):
 
     def default(self, obj):
@@ -20,6 +21,7 @@ class MyJSONEncoder(flask.json.JSONEncoder):
             # Convert decimal instances to strings.
             return str(obj)
         return super(MyJSONEncoder, self).default(obj)
+
 app.json_encoder = MyJSONEncoder
 
 
@@ -29,6 +31,8 @@ def hotel_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
+        lowest_price_room = request.args.get('lowest_price_room')
+        args.pop('lowest_price_room', None)
         city = request.args.get('city')
         args.pop('city', None)
         price_start = request.args.get('price_start', None)
@@ -78,6 +82,8 @@ def hotel_api():
         #     for room_obj in room_list:
         #         weekend_hotel_list.append(room_obj.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(weekend_hotel_list)).all()
+        deals_list = []
+        room_list = []
         q = db.session.query(Hotel).outerjoin(Hotel.amenities)
         q_room = db.session.query(Room)
         q_deal = db.session.query(Deal)
@@ -92,16 +98,21 @@ def hotel_api():
                 q_deal = q.filter(getattr(Deal, key) == args[key])
         if city:
             q = q.filter(func.lower(Hotel.city) == func.lower(city))
-        if price_start and price_end:
-            q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if rating:
             q = q.filter(Hotel.rating >= rating)
+        if price_start and price_end:
+            q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         for hotel in hotels:
             rooms = q_room.filter(Room.hotel_id == hotel.id).all()
             for room in rooms:
+                room_list.append(room.id)
                 deals = q_deal.filter(Deal.room_id == room.id).all()
                 room.deals = deals
+            deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.price.asc()).first()
+            if deal:
+                room = q_room.filter(Room.id == deal.room_id).first()
+                room.lowest_price_room = True
             hotel.rooms = rooms
         # room_result = RoomSchema(many=True).dump(rooms)
         # result = HotelSchema(many=True).dump(hotels)
@@ -236,6 +247,7 @@ def collection_product_api():
         return jsonify({'result': {'products': result.data}, 'message': "Success", 'error': False})
 
 
+
 @app.route('/api/v1/hotel/collection/product/<int:id>', methods=['PUT', 'DELETE'])
 def collection_product_id(id):
     if request.method == 'PUT':
@@ -253,6 +265,7 @@ def collection_product_id(id):
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
+
 @app.route('/api/v1/room', methods=['GET', 'POST'])
 def room_api():
     if request.method == 'GET':
@@ -261,6 +274,8 @@ def room_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
+        lowest_price_room = request.args.get('lowest_price_room')
+        args.pop('lowest_price_room', None)
         rooms = Room.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = RoomSchema(many=True).dump(rooms)
         return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
@@ -274,8 +289,14 @@ def room_api():
         room.pop('facilities', None)
         room_post = Room(**room)
         room_post.save()
-        for deal in deals:
+        for index, deal in enumerate(deals):
             deal["room_id"] = room_post.id
+            if index == 0:
+                min_price_deal = deal['price']
+                best_room = deal["room_id"]
+            if deal['price'] < min_price_deal:
+                min_price_deal = deal['price']
+                best_room = deal["room_id"]
             deal_post = Deal(**deal)
             room_post.deals.append(deal_post)
             deal_post.save()
@@ -396,7 +417,6 @@ def amenity_id(id):
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Amenity.delete_db(amenities)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
-
 
 
 @app.route('/api/v1/image', methods=['GET', 'POST'])
@@ -565,7 +585,6 @@ def deal_api():
         #         elif day == 6:
         #             weekend = True
         #     args['weekend'] = weekend
-
         # args.pop('check_in', None)
         # args.pop('check_out', None)
         hotel_room_id = []
