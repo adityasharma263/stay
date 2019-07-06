@@ -8,7 +8,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
 .controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
-  var api_url = 'http://134.209.150.124';
+  var api_url = 'http://http://139.59.51.174';
 
   $scope.hotelid = {};// hotel object on the basis of id
   $scope.hotel = {};
@@ -155,7 +155,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.imagesData={};
   $scope.min= 0;
   $scope.max= 200000;
-  var api_url = 'http://134.209.150.124';
+  var api_url = 'http://139.59.51.174';
 
         
         
@@ -400,8 +400,9 @@ $scope.loadmoredeals = function() {
 
 
 //for detail page
-$scope.showDetail=function(roomid){
-  window.open('/hotel/'+roomid,'_self');
+$scope.showDetail=function(hotel_id){
+  window.open('/hotel/'+hotel_id,'_self');
+  console.log(hotel_id);
   
 }
 
@@ -537,7 +538,7 @@ $scope.getHotelsData();
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
-  var api_url = 'http://134.209.150.124';
+  var api_url = 'http://139.59.51.174/';
 
   $scope.showCreate=function(){
     $scope.hotelDetail=true;
@@ -936,7 +937,7 @@ $scope.createHotel = function() {
   $scope.similarhotels=[];
   $scope.limit=10;
   $scope.deallimit=1;
-  var api_url = 'http://134.209.150.124';
+  var api_url = 'http://139.59.51.174';
 
   // window.onresize = function(){ location.reload(); }
   $scope.openHome=function(){
@@ -1041,13 +1042,13 @@ var getrooms=function(){
       console.log($scope.hotels);
       $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
       console.log($scope.hotelobj);
-      getSimilarHotels($scope.hotelobj.city);
+      // getSimilarHotels($scope.hotelobj.city);
       $scope.roomData.hotelData=$scope.hotelobj;
-      for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
-        for(var k=0; k<$scope.roomData.hotelData.rooms[j].deals.length; k++){
-          $scope.roomData.hotelData.rooms[j].deals[k].dealsRoom=$scope.roomData.hotelData.rooms[j]
-        }
-      }
+      // for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
+      //   for(var k=0; k<$scope.roomData.hotelData.rooms[j].deals.length; k++){
+      //     $scope.roomData.hotelData.rooms[j].deals[k].dealsRoom=$scope.roomData.hotelData.rooms[j]
+      //   }
+      // }
       
 
     }, function errorCallback(response) {
