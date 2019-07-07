@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69fc71ab-68c3-4ca2-88af-884e839fb46d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/view/hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/view/hotel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/view/render.py" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/view/render.py" afterDir="false" />
-    </list>
+    <list default="true" id="69fc71ab-68c3-4ca2-88af-884e839fb46d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +55,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3795">
-              <caret line="253" column="44" lean-forward="true" selection-start-line="253" selection-start-column="44" selection-end-line="253" selection-end-column="44" />
+            <state relative-caret-position="1155">
+              <caret line="77" column="21" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="21" />
               <folding>
                 <element signature="e#24#47#0" expanded="true" />
               </folding>
@@ -193,7 +189,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="33" />
     <option name="width" value="1320" />
     <option name="height" value="735" />
@@ -308,10 +304,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="28" width="1366" height="740" extended-state="6" />
+    <frame x="0" y="28" width="1366" height="740" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24050634" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24050634" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -321,7 +317,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.4996277" visible="true" weight="0.31484503" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4996277" visible="true" weight="0.23817292" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5003723" side_tool="true" weight="0.34094617" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32952693" />
@@ -516,13 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/schema/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" selection-start-column="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stay_app/schema/hotel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -573,10 +562,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/stay_app/schema/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3795">
-          <caret line="253" column="44" lean-forward="true" selection-start-line="253" selection-start-column="44" selection-end-line="253" selection-end-column="44" />
+        <state relative-caret-position="1155">
+          <caret line="77" column="21" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="21" />
           <folding>
             <element signature="e#24#47#0" expanded="true" />
           </folding>
