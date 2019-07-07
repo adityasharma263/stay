@@ -933,6 +933,7 @@ $scope.createHotel = function() {
 
 .controller('hotelController',["$scope", "$http", function($scope, $http, $filter) {
   $scope.roomData={};
+  $scope.hotel = {};
   $scope.hotels={};
   $scope.roomobj={};
   $scope.similarhotels=[];
@@ -1011,67 +1012,40 @@ $scope.createHotel = function() {
     window.open('/hotel/'+roomid);
     
   }
+  var path = document.location.pathname;
+  var key1 = path.split("/");
+  var id = key1[2];
+  console.log(id);
   $http({
     method: 'GET',
-    url: api_url + '/api/v1/hotel'
+    url: api_url + '/api/v1/hotel?id=' + id
   }).then(function successCallback(response) {
-      $scope.hotelsData = response.data.result.hotel;
-      for(var j=0;j<$scope.hotelsData.length;j++){
-        
-        $scope.hotels[$scope.hotelsData[j].id]= $scope.hotelsData[j];
-      }
-      getrooms();
-
+      $scope.hotel = response.data.result.hotel;
+      console.log($scope.hotel);
+      getSimilarHotels();
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
 
-var getrooms=function(){
-  $scope.roomData={};
-  var search =location.pathname;
-  var id = search.split("/");
-  console.log(id);
-  $http({
-    method: 'GET',
-    url: api_url +'/api/v1/room?id='+id[2]
-  }).then(function successCallback(response) {
-      for(var i=0; i<response.data.result.rooms.length; i++){
-        $scope.roomData= response.data.result.rooms[i];
-      }
-      console.log($scope.roomData);
-      console.log($scope.hotels);
-      $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
-      console.log($scope.hotelobj);
-      // getSimilarHotels($scope.hotelobj.city);
-      $scope.roomData.hotelData=$scope.hotelobj;
-      // for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
-      //   for(var k=0; k<$scope.roomData.hotelData.rooms[j].deals.length; k++){
-      //     $scope.roomData.hotelData.rooms[j].deals[k].dealsRoom=$scope.roomData.hotelData.rooms[j]
-      //   }
-      // }
-      
 
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-  });
-}
-var getSimilarHotels=function(city){
-  console.log(city);
+var getSimilarHotels=function(){
+  console.log("$scope.hotel.city",$scope.hotel[0].city);
   $http({
     method: 'GET',
-    url: api_url + '/api/v1/hotel?city='+city,
+    url: api_url + '/api/v1/hotel?city='+ $scope.hotel[0].city
   }).then(function successCallback(response) {
+    console.log("response city hotels",response.data.result.hotel);
 
       for(var i=0; i<response.data.result.hotel.length; i++){
-        if(response.data.result.hotel[i].id==$scope.roomData.hotel){
+        if(response.data.result.hotel[i].id==$scope.hotel[0].id){
           response.data.result.hotel.splice(1, i); //to remove current showing hotel data
         }
         else{
           $scope.similarhotels.push(response.data.result.hotel[i]) 
         }
       }
+      console.log("similar",$scope.similarhotels);
      
      
 
