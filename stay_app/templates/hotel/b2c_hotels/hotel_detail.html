@@ -273,7 +273,7 @@
                                         <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
                                             <div ng-repeat="room in {{hotel_data.rooms}} | limitTo:deallimit">
-                                                <article class="card col-md-12" ng-repeat="deal in room.deals " >
+                                                <article class="col-md-12" ng-repeat="deal in room.deals " >
                                                     <figure class="col-md-4">
                                                         <a href="[[deal.hotel_url]]" target="_blank" title=""><img style="width:67%" src="[[deal.website.logo_image]]" alt=""></a>
                                                     </figure>
@@ -282,13 +282,13 @@
                                                                 <div class="col-md-3">
                                                                     <p>[[room.other_room_type]]</p>
                                                                 </div>
-                                                                <div class="col-md-2"><a href="[[deal.hotel_url]]" class="button btn-small  text-center">BOOK NOW</a></div>
+                                                                <!-- <div class="col-md-2"><a href="[[deal.hotel_url]]" class="button btn-small  text-center">BOOK NOW</a></div> -->
                                                                 <div class="col-md-1"></div>
-                                                                <div class="col-md-2"><a ng-click="showDetail(deal.room)" class="button btn-small  text-center">View Detail</a></div>
+                                                                <!-- <div class="col-md-2"><a ng-click="showDetail(deal.room)" class="button btn-small  text-center">View Detail</a></div> -->
                                                                 <!-- <div class="col-md-1"></div> -->
                                                                 <!-- <div class="col-md-1" > -->
-                                                                    <div class="price">
-                                                                        <small>PER/NIGHT</small>₹ [[deal.price]]
+                                                                    <div class="price" style="text-align: center">
+                                                                        <a  href="[[deal.hotel_url]]"> <small>PER/NIGHT</small>₹ [[deal.price]]</a>
                                                                     </div>
                                                                 <!-- </div> -->
                                                             </div>
@@ -881,7 +881,7 @@
                         <div class="sidebar col-md-3">
                             <article class="detailed-logo">
                                 <figure>
-                                    <img  src="{{hotel_data.images[0].image_url}}" alt="">
+                                    <img  src="http://{{hotel_data.images[0].image_url}}" alt="">
                                 </figure>
                                 <div class="details">
                                     <h2 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">{{hotel_data.city}}</span></small></h2>
@@ -923,9 +923,9 @@
                                 <h4>Similar Listings</h4>
                                 <div class="image-box style14">
                                     <article ng-repeat="data in similarhotels | limitTo:3" class="box" style="cursor: pointer;">
-                                        <div ng-click="showDetail(data.rooms[0].id)">
+                                        <div ng-click="showDetail(data.id)">
                                             <figure>
-                                                <a href=""><img src="[[data.images[0].image_url]]" alt=""></a>
+                                                <a href=""><img src="http://[[data.images[0].image_url]]" alt=""></a>
                                             </figure>
                                             <div class="details">
                                                 <h5 class="box-title " style="text-transform: capitalize"><a >[[data.name]]</a></h5>
