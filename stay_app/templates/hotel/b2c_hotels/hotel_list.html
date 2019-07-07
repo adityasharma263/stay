@@ -137,7 +137,7 @@
                                     <div>
                                         <article class="box" ng-if="[[room.basic_room]]">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Beans">
+                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:180px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Beans">
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="myModal" role="dialog">
                                                     <div class="modal-dialog">
@@ -188,7 +188,7 @@
                                                         <h4 class="box-title">[[hotel.name]]<small>
                                                             
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                                                        <span id="latitude" style="cursor:pointer" ng-click="openMap(hotel)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.address]],[[hotel.city]]</span></small></h4>
+                                                        <span id="latitude" style="cursor:pointer" ng-click="openMap(hotel)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.city]]</span></small></h4>
                                                             
                                                         <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
@@ -252,8 +252,8 @@
                                                         <a class="button btn-small green" ng-click="showDetail(hotel.id)">View Detail</a>
                                                         <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                            
                                                     </div>
-                                                    <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 " style="float:left">
-                                                            <span class="price" style="text-align: left"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
+                                                    <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:2 " style="float:left">
+                                                            <span class="price" style="text-align: center"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
                                                     </div>    
                                                 </div>
                                                
