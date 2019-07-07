@@ -1038,7 +1038,7 @@ var getSimilarHotels=function(){
     console.log("response city hotels",response.data.result.hotel);
 
       for(var i=0; i<response.data.result.hotel.length; i++){
-        if(response.data.result.hotel[i].id==$scope.hotel.id){
+        if(response.data.result.hotel[i].id==$scope.hotel[0].id){
           response.data.result.hotel.splice(1, i); //to remove current showing hotel data
         }
         else{
