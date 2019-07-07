@@ -577,7 +577,7 @@ $scope.getHotelsData();
     $scope.hotelCollection=data.collection;
     $scope.hotelImages=data.images;
     $scope.hotelRooms=data.rooms;
-    $scope.hotelProducts=data.collection.products;
+    // $scope.hotelProducts=data.collection.products;
     $scope.showRoomDetail=true;
     $scope.showHotelDetail=false;
     // $scope.Rooms=data;
