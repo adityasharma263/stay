@@ -297,7 +297,7 @@
                                                 </article>
                                             </div>
                                            
-                                            <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE ROOMS</a>
+                                            <!-- <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE DEALS</a> -->
                                         </div>
                                         
                                     </div>
@@ -382,9 +382,9 @@
                                         </form>
                                         <h2>Available Rooms</h2>
                                         <div class="room-list listing-style3 hotel">
-                                            <article class="box" ng-repeat="room in roomData.hotelData.rooms | limitTo:limit">
+                                            <article class="box" ng-repeat="room in {{hotel_data.rooms}} | limitTo:limit">
                                                 <figure class="col-sm-4 col-md-3">
-                                                    <a  href="" title=""><img width="230" height="161" src="[[room.image_url]]" alt=""></a>
+                                                    <a  href="" title=""><img width="230" height="161" src="http://[[room.image_url]]" alt=""></a>
                                                 </figure>
                                                 <div class="details col-xs-12 col-sm-8 col-md-9">
                                                     <div>
@@ -419,7 +419,7 @@
                                                     </div>
                                                 </div>
                                             </article>
-                                            <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreRooms()">LOAD MORE ROOMS</a>
+                                            <!-- <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreRooms()">LOAD MORE ROOMS</a> -->
                                         </div>
                                         
                                     </div>
