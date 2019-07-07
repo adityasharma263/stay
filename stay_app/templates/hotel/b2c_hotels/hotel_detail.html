@@ -111,7 +111,7 @@
                                 <ul class="tabs">
                                     <li class="active"><a data-toggle="tab" href="#photos-tab" aria-expanded="true">photos</a></li>
                                     <li class=""><a data-toggle="tab" href="#map-tab" aria-expanded="false">map</a></li>
-                                    <li class=""><a data-toggle="tab" href="#steet-view-tab" aria-expanded="false">street view</a></li>
+                                    <!-- <li class=""><a data-toggle="tab" href="#steet-view-tab" aria-expanded="false">street view</a></li> -->
                                     
                                     <li class="pull-right"><a class="button btn-small yellow-bg white-color" href="[[deal.hotel_url]]">Book Now</a></li>
                                     
@@ -125,7 +125,7 @@
                                             
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides slider" style="width: 4000%; transition-duration: 0.6s;">
-                                                <li class="mySlides" ng-repeat="image in roomData.hotelData.images"  style=" float: left; display: block;" ><img class="img" src="[[image.image_url]]" alt="" draggable="false"></li>
+                                                <li class="mySlides" ng-repeat="image in roomData.hotelData.images"  style=" float: left; display: block;" ><img class="img" src="{{hotel_data.images[0].image_url}}" alt="" draggable="false"></li>
                                             </ul>
                                         </div>
                                             <!-- <ol class="flex-control-nav flex-control-paging">
@@ -210,10 +210,10 @@
                             
                             <div id="hotel-features" class="tab-container">
                                 <ul class="tabs">
-                                    <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">Description</a></li>
+                                    <li class="active" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">Description</a></li>
                                     <!-- <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
-                                    <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Availability</a></li>
-                                    <li class="active" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
+                                    <!-- <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Availability</a></li> -->
+                                    <li class="" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
                                     <li class="" ><a  data-ng-href="#hotel-moredeals" data-toggle="tab" aria-expanded="false">More Deals</a></li>
                                     <li ><a  href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
                                     <li ><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
@@ -223,30 +223,30 @@
                                 </ul>
                                
                                 <div class="tab-content">
-                                    <div class="tab-pane fade" id="hotel-description">
+                                    <div class="tab-pane fade active in" id="hotel-description">
                                         <div class="intro table-wrapper full-width hidden-table-sms">
                                             <div class="col-sm-5 col-lg-4 features table-cell">
                                                 <div class="rating table-cell col-sm-4">
-                                                    <span class="hotelrating score ">[[roomData.hotelData.rating]]/10</span>
-                                                    <div ng-if="[[roomData.hotelData.star]]==1">
+                                                    <span class="hotelrating score ">{{hotel_data.rating}}/10</span>
+                                                    <div ng-if="{{hotel_data.star}}==1">
                                                         <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==2">
+                                                    <div ng-if="{{hotel_data.star}}==2">
                                                         <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==3">
+                                                    <div ng-if="{{hotel_data.star}}==3">
                                                         <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==4">
+                                                    <div ng-if="{{hotel_data.star}}==4">
                                                         <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==5">
+                                                    <div ng-if="{{hotel_data.star}}==5">
                                                         <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==6">
+                                                    <div ng-if="{{hotel_data.star}}==6">
                                                         <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==7">
+                                                    <div ng-if="{{hotel_data.star}}==7">
                                                         <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                                     </div>
                                                     <a href="" class="goto-writereview-pane button green btn-small full-width" style="margin-top:2px;">WRITE A REVIEW</a>
@@ -256,23 +256,23 @@
                                                 <div class="testimonial style1">
                                                     <div class="col-sm-5 col-lg-4 features table-cell">
                                                         <ul>
-                                                            <li><label>hotel type:</label>[[roomData.hotelData.star]] star</li>
-                                                            <li><label>City:</label>[[roomData.hotelData.city]]</li>
-                                                            <li><label>Address:</label>[[roomData.hotelData.address]]</li>
+                                                            <li><label>hotel type:</label>{{hotel_data.star}} star</li>
+                                                            <li><label>City:</label>{{hotel_data.city}}</li>
+                                                            <li><label>Address:</label>{{hotel_data.address}}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="long-description">
-                                            <h2>About [[roomData.hotelData.name]]</h2>
-                                           <p>[[roomData.hotelData.desc]]</p>
+                                            <h2>About {{hotel_data.name}}</h2>
+                                           <p>{{hotel_data.desc}}</p>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="hotel-moredeals">
                                         <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
-                                            <div ng-repeat="room in roomData.hotelData.rooms | limitTo:deallimit">
+                                            <div ng-repeat="room in {{hotel_data.rooms}} | limitTo:deallimit">
                                                 <article class="card col-md-12" ng-repeat="deal in room.deals " >
                                                     <figure class="col-md-4">
                                                         <a href="[[deal.hotel_url]]" target="_blank" title=""><img style="width:67%" src="[[deal.website.logo_image]]" alt=""></a>
@@ -303,9 +303,9 @@
                                     </div>
                                     <div id="hotel-Booking" class="tab-pane fade">
                                         <h1>Call Hotel</h1>
-                                        <a href="tel:[[roomData.hotelData.phone]]">
+                                        <a href="tel:{{hotel_data.phone}}">
                                             <address class="contact-details">
-                                                <span class="contact-phone"><i class="soap-icon-phone"></i> [[roomData.hotelData.phone]]</span>
+                                                <span class="contact-phone"><i class="soap-icon-phone"></i> {{hotel_data.phone}}</span>
                                             </address>
                                         </a>
                                     </div>
@@ -423,39 +423,39 @@
                                         </div>
                                         
                                     </div>
-                                    <div class="tab-pane fade active in" id="hotel-amenities">
-                                        <h2>Room Ammenities</h2>
+                                    <div class="tab-pane fade" id="hotel-amenities">
+                                        <!-- <h2>Room Ammenities</h2>
                                         
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wifi">
                                                 <div class="icon-box style1"><i class="flaticon-wifi"></i>Wifi Accesible</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.tv">
                                                 <div class="icon-box style1"><i class="flaticon-television"></i>Television</div>
-                                            </li>
+                                            </li> -->
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Central heating</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.electric_kettle">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.electric_kettle">
                                                 <div class="icon-box style1"><i class="flaticon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.ac">
                                                 <div class="icon-box style1"><i class="flaticon-fan"></i>Air Conditioning</div>
-                                            </li>
+                                            </li> -->
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.electric_kettle">
                                                 <div class="icon-box style1"><i class="soap-icon-fitnessfacility"></i>Bathroom with bathtub</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_with_shower">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_with_shower">
                                                 <div class="icon-box style1"><i class="flaticon-hot-tub"></i>Bathroom with shower</div>
-                                            </li>
+                                            </li> -->
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-winebar"></i>Mini Bar</div>
                                             </li> -->
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-smoking"></i>Cosmetic mirror</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.desk">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.desk">
                                                 <div class="icon-box style1"><i class="flaticon-furniture-and-household"></i>Desk</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.hairdryer">
@@ -463,11 +463,11 @@
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_safe">
                                                 <div class="icon-box style1"><i class="flaticon-vault"></i>Room safe</div>
-                                            </li>
+                                            </li> -->
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.food_serve_at_room">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.food_serve_at_room">
                                                 <div class="icon-box style1"><i class="flaticon-meal"></i>Food Serve at Room</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_cosmetics">
@@ -496,11 +496,11 @@
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="flaticon-toiletries"></i>Free Toiletrees</div>
-                                            </li>
+                                            </li> -->
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Wake-Up Service </div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.morning_newspaper">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.morning_newspaper">
                                                 <div class="icon-box style1"><i class="flaticon-folded-newspaper"></i>Morning Newspaper </div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_towels">
@@ -510,12 +510,12 @@
                                                 <div class="icon-box style1"><i class="flaticon-popcorn-box"></i>Free Evening Snacks </div>
                                             </li>
                                             
-                                        </ul>
+                                        </ul> -->
                                         <br>
                                         
                                         <h2>Hotel Amenities</h2>
                                         <ul class="amenities clearfix style2">
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.twenty_four_hr_room_service}}">
                                                 <div class="icon-box style2">
                                                     <i class="soap-icon-24-hrroomservice circle" >
                                                         <div style="width: 60%;margin: auto;" class="main-icon" data-type="svg">
@@ -538,82 +538,78 @@
                                                     </i>
                                                     24/7 Room Service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_reception">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.twenty_four_hr_reception}}">
                                                 <div class="icon-box style2"><i class="soap-icon-waiting-room circle" ></i>24/7 reception</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
-                                                <div class="icon-box style2"><i class="soap-icon-television circle"></i>Business Center</div>
-                                            </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.parking">
+                                           
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.parking}}">
                                                 <div class="icon-box style2"><i class="soap-icon-parking circle"></i>Car Park</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.conference_rooms">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.conference_rooms}}">
                                                 <div class="icon-box style2"><i class="soap-icon-conference circle"></i>Conference Rooms</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.express_check_in_out">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.express_check_in_out}}">
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Express check-in / out</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.bar">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.bar}}">
                                                 <div class="icon-box style2"><i class="soap-icon-winebar circle"></i>Hotel bar</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.lift">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.lift}}">
                                                 <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Elevator in Building</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.laundry_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.laundry_service}}">
                                                 <div class="icon-box style2"><i class="soap-icon-laundry circle"></i>Laundry service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.indoor_swimming_pool">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.indoor_swimming_pool}}">
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Indoor swimming pool</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.outdoor_swimming_pool">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.outdoor_swimming_pool}}">
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Outdoor swimming pool</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.porter_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.porter_service}}">
                                                 <div class="icon-box style2"><i class="soap-icon-porter circle"></i>Porter service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.restaurant">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.restaurant}}">
                                                 <div class="icon-box style2"><i class="soap-icon-breakfast circle"></i>Restaurant</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.Room_cleaning_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.Room_cleaning_service}}">
                                                 <div class="icon-box style2"><i class="flaticon-wifi"></i>Room Cleaning Service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.terrace">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.terrace}}">
                                                 <div class="icon-box style2"><i class="soap-icon-terrace circle"></i>Terrace</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.pool">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.pool}}">
                                                 <div class="icon-box style2"><i class="soap-icon-beach circle"></i>Towels at the pool / beach</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.spa">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.spa}}">
                                                 <div class="icon-box style2"><i class="soap-icon-spa circle"></i>Wellness centre/Spa</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.wifi_in_lobby">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.wifi_in_lobby}}">
                                                 <div class="icon-box style2"><i class="soap-icon-wifi circle"></i>WiFi in lobby</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.child_baby_cot">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.child_baby_cot}}">
                                                 <div class="icon-box style2"><i class="soap-icon-cot circle"></i>Child/Baby cot</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.wheelchair_accessible">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.wheelchair_accessible}}">
                                                 <div class="icon-box style2"><i class="soap-icon-handicapaccessiable circle"></i>Wheelchair Accessible</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.doorman">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.doorman}}">
                                                 <div class="icon-box style2"><i class="soap-icon-doorman circle"></i>Doorman</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.gym">
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.amenities.gym">
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Gym</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.hairdresser">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.hairdresser}}">
                                                 <div class="icon-box style2"><i class="soap-icon-hairdresser circle"></i>Hairdresser</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
-                                                <div class="icon-box style2"><i class="soap-icon-star circle"></i>Banquets</div>
-                                            </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.non_smoking_smoking_rooms">
+                                           
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.non_smoking_smoking_rooms}}">
                                                 <div class="icon-box style2"><i class="soap-icon-smoking circle"></i>Non-Smoking / Smoking Rooms</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.pet_allowance">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.pet_allowance}}">
                                                 <div class="icon-box style2"><i class="soap-icon-pets circle"></i>Pets Allowence</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.banquets">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.banquets}}">
                                                 <div class="icon-box style2"><i class="soap-icon-banquets circle"></i>Banquets</div>
                                             </li>
                                         </ul>
@@ -622,25 +618,25 @@
                                         <div class="intro table-wrapper full-width hidden-table-sms">
                                             <div class="rating table-cell col-sm-4">
                                                 <span class="score">[[roomData.hotelData.rating]]/10</span>
-                                                <div ng-if="[[roomData.hotelData.star]]==1">
+                                                <div ng-if="{{hotel_data.rating}}==1">
                                                     <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==2">
+                                                <div ng-if="{{hotel_data.rating}}==2">
                                                     <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==3">
+                                                <div ng-if="{{hotel_data.rating}}==3">
                                                     <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==4">
+                                                <div ng-if="{{hotel_data.rating}}==4">
                                                     <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==5">
+                                                <div ng-if="{{hotel_data.rating}}==5">
                                                     <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==6">
+                                                <div ng-if="{{hotel_data.rating}}==6">
                                                     <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==7">
+                                                <div ng-if="{{hotel_data.rating}}==7">
                                                     <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                                 </div>
                                                 <!-- <div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div> -->
@@ -837,75 +833,47 @@
                         </div>
                         <div class="sidebar col-md-3">
                             <article class="detailed-logo">
-                                <figure>
-                                    <img  src="[[roomData.hotelData.images[0].image_url]]" alt="">
-                                </figure>
+                                <!-- <figure>
+                                    <img  src="{{hotel_data.images[0].image_url}}" alt="">
+                                </figure> -->
                                 <div class="details">
-                                    <h2 class="box-title">[[roomData.hotelData.name]]<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">[[roomData.hotelData.city]]</span></small></h2>
+                                    <!-- <h2 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">{{hotel_data.city}}</span></small></h2> -->
                                     <span class="price clearfix">
-                                        <small class="pull-left">Mni. avg/night</small>
-                                        <span class="pull-right">₹ [[(roomData.deals | orderBy:'price')[0].price]]</span>
+                                        <small class="pull-left">Min. avg/night</small>
+                                        <span class="pull-right">₹ {{hotel_data.rooms[0].deals[0].price}}</span>
                                     </span>
                                     <div class="feedback clearfix">
-                                        <div ng-if="[[roomData.hotelData.star]]==1">
+                                        <div ng-if="{{hotel_data.star}}==1">
                                             <span ng-repeat="i in [1]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==2">
+                                        <div ng-if="{{hotel_data.star}}==2">
                                             <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==3">
+                                        <div ng-if="{{hotel_data.star}}==3">
                                             <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==4">
+                                        <div ng-if="{{hotel_data.star}}==4">
                                             <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==5">
+                                        <div ng-if="{{hotel_data.star}}==5">
                                             <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==6">
+                                        <div ng-if="{{hotel_data.star}}==6">
                                             <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==7">
+                                        <div ng-if="{{hotel_data.star}}==7">
                                             <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                         </div>
                                         <!-- <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="1 stars"><span class="five-stars" style="width: 80%;"></span></div> -->
-                                        <!-- <span class="review pull-right">270 reviews</span> -->
+                                        
                                     </div>
                                     <p class="description">[[ roomData.hotelData.desc | limitTo: 200 ]][[roomData.hotelData.desc.length > 200 ? '...' : '']]</p>
                                     <a href="[[deal.hotel_url]]" class="button yellow full-width uppercase btn-small">Book Now</a>
                                 </div>
                             </article>
                             
-                            <div class="travelo-box">
-                                <h4>Similar Listings</h4>
-                                <div class="image-box style14">
-                                    <article ng-repeat="data in similarhotels | limitTo:3" class="box" style="cursor: pointer;">
-                                        <div ng-click="showDetail(data.rooms[0].id)">
-                                            <figure>
-                                                <a href=""><img src="[[data.images[0].image_url]]" alt=""></a>
-                                            </figure>
-                                            <div class="details">
-                                                <h5 class="box-title " style="text-transform: capitalize"><a >[[data.name]]</a></h5>
-                                                <label class="price-wrapper">
-                                                    <span class="price-per-unit">₹ [[(data.rooms[0].deals | orderBy:'price')[0].price]]</span>avg/night
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
                             
-                            <div class="travelo-box contact-box">
-                                <h4>Need Travel Square Help?</h4>
-                                <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
-                                <address class="contact-details">
-                                    <a href="tel:[[roomData.hotelData.phone]]">
-                                        <span class="contact-phone"><i class="soap-icon-phone"></i> [[roomData.hotelData.phone]]</span>
-                                    </a>
-                                    <br>
-                                    <a class="contact-email" href="">help@travelsquare.com</a>
-                                </address>
-                            </div>
+                           
                             
                         </div>
                     </div>
