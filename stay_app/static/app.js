@@ -19,6 +19,12 @@ angular.module('comparetravel', ['angular.filter'])
   
  // $location.search=
 
+ $scope.showDetail=function(roomid){
+   console.log(roomid);
+  window.open('/hotel/'+roomid);
+  
+}
+
  
    $scope.result = function(data,status){
     $scope.hotel.search = data;

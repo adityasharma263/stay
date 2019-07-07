@@ -108,14 +108,14 @@
                                 <li ng-repeat="hotel in hotels" style="width: 270px; float: left; display: block;">
                                     <article class="box" style="min-height: 220px;">
                                         <figure>
-                                            <a href="#" class=""><img style="height:150px"  alt="" src="http://[[hotel.images[0].image_url]]"></a>
+                                            <a href="#" ng-click="showDetail(hotel.id)" class=""><img style="height:150px"  alt="" src="http://[[hotel.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
                                             <!-- <span class="price">
                                                 <small>avg/night</small>
                                                 ₹[[hotel.deals[0].price]]
                                             </span> -->
-                                            <h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
+                                            <a ng-click="showDetail(hotel.id)"><h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4></a>
                                             <!-- <div class="feedback">
                                                 <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
                                                 <span class="review">270 reviews</span>
