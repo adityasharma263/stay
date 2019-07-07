@@ -300,11 +300,10 @@ def room_api():
             deal_post = Deal(**deal)
             room_post.deals.append(deal_post)
             deal_post.save()
-        for facility in facilities:
-            facility["room_id"] = room_post.id
-            facility_post = Facility(**facility)
-            room_post.facilities.append(facility_post)
-            facility_post.save()
+        facilities["room_id"] = room_post.id
+        facility_post = Facility(**facilities)
+        room_post.facilities = facility_post
+        facility_post.save()
         member["room_id"] = room_post.id
         member_post = Member(**member)
         room_post.member = member_post
