@@ -249,7 +249,7 @@
                                                 <div >
                                                     <div >
                                                         <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center>
-                                                        <a class="button btn-small green" ng-click="showDetail(room.id)">View Detail</a>
+                                                        <a class="button btn-small green" ng-click="showDetail(hotel.id)">View Detail</a>
                                                         <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                            
                                                     </div>
                                                     <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 " style="float:left">
