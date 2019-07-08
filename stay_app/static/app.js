@@ -406,6 +406,13 @@ $scope.showDetail=function(hotel_id){
   
 }
 
+//for business detail page
+$scope.showBusinessDetail=function(hotel_id){
+  window.open('/business/hotel/'+hotel_id,'_self');
+  console.log(hotel_id);
+  
+}
+
 $scope.hotelData = [];
 
 
