@@ -19,6 +19,12 @@ angular.module('comparetravel', ['angular.filter'])
   
  // $location.search=
 
+ $scope.showDetail=function(roomid){
+   console.log(roomid);
+  window.open('/hotel/'+roomid);
+  
+}
+
  
    $scope.result = function(data,status){
     $scope.hotel.search = data;
@@ -423,10 +429,12 @@ $scope.getHotelsData = function(cb){
 
   let searchURL = api_url + '/api/v1/hotel'+document.location.search
   console.log("searchurl",searchURL);
+  searchURL = decodeURIComponent(searchURL);
+  console.log("searchurl",searchURL);
 
   Object.keys($scope.hotel).forEach(function(param){
     console.log($scope.hotel[param]);
-    if($scope.hotel[param] && param !== 'end_price')
+    if($scope.hotel[param])
     searchURL += `&${param}=${$scope.hotel[param]}`;
   });
 
@@ -439,6 +447,7 @@ $scope.getHotelsData = function(cb){
       cb(res);
     }else{
       $scope.hotelData = res.data.result.hotel;
+      console.log("$scope.hotelData",$scope.hotelData);
     }
   })
 }
@@ -584,7 +593,7 @@ $scope.getHotelsData();
     $scope.hotelCollection=data.collection;
     $scope.hotelImages=data.images;
     $scope.hotelRooms=data.rooms;
-    $scope.hotelProducts=data.collection.products;
+    // $scope.hotelProducts=data.collection.products;
     $scope.showRoomDetail=true;
     $scope.showHotelDetail=false;
     // $scope.Rooms=data;
@@ -940,6 +949,7 @@ $scope.createHotel = function() {
 
 .controller('hotelController',["$scope", "$http", function($scope, $http, $filter) {
   $scope.roomData={};
+  $scope.hotel = {};
   $scope.hotels={};
   $scope.roomobj={};
   $scope.similarhotels=[];
@@ -1018,67 +1028,40 @@ $scope.createHotel = function() {
     window.open('/hotel/'+roomid);
     
   }
+  var path = document.location.pathname;
+  var key1 = path.split("/");
+  var id = key1[2];
+  console.log(id);
   $http({
     method: 'GET',
-    url: api_url + '/api/v1/hotel'
+    url: api_url + '/api/v1/hotel?id=' + id
   }).then(function successCallback(response) {
-      $scope.hotelsData = response.data.result.hotel;
-      for(var j=0;j<$scope.hotelsData.length;j++){
-        
-        $scope.hotels[$scope.hotelsData[j].id]= $scope.hotelsData[j];
-      }
-      getrooms();
-
+      $scope.hotel = response.data.result.hotel;
+      console.log($scope.hotel);
+      getSimilarHotels();
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
 
-var getrooms=function(){
-  $scope.roomData={};
-  var search =location.pathname;
-  var id = search.split("/");
-  console.log(id);
-  $http({
-    method: 'GET',
-    url: api_url +'/api/v1/room?id='+id[2]
-  }).then(function successCallback(response) {
-      for(var i=0; i<response.data.result.rooms.length; i++){
-        $scope.roomData= response.data.result.rooms[i];
-      }
-      console.log($scope.roomData);
-      console.log($scope.hotels);
-      $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
-      console.log($scope.hotelobj);
-      // getSimilarHotels($scope.hotelobj.city);
-      $scope.roomData.hotelData=$scope.hotelobj;
-      // for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
-      //   for(var k=0; k<$scope.roomData.hotelData.rooms[j].deals.length; k++){
-      //     $scope.roomData.hotelData.rooms[j].deals[k].dealsRoom=$scope.roomData.hotelData.rooms[j]
-      //   }
-      // }
-      
 
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-  });
-}
-var getSimilarHotels=function(city){
-  console.log(city);
+var getSimilarHotels=function(){
+  console.log("$scope.hotel.city",$scope.hotel[0].city);
   $http({
     method: 'GET',
-    url: api_url + '/api/v1/hotel?city='+city,
+    url: api_url + '/api/v1/hotel?city='+ $scope.hotel[0].city
   }).then(function successCallback(response) {
+    console.log("response city hotels",response.data.result.hotel);
 
       for(var i=0; i<response.data.result.hotel.length; i++){
-        if(response.data.result.hotel[i].id==$scope.roomData.hotel){
+        if(response.data.result.hotel[i].id==$scope.hotel[0].id){
           response.data.result.hotel.splice(1, i); //to remove current showing hotel data
         }
         else{
           $scope.similarhotels.push(response.data.result.hotel[i]) 
         }
       }
+      console.log("similar",$scope.similarhotels);
      
      
 
@@ -1092,164 +1075,164 @@ var getSimilarHotels=function(city){
 
 
 /************************ slider jquery section  ************************************** */
-// var i=1;
-// // var j=1;
-// if(window.screen.availWidth >=440){
-//   console.log(window.screen.availWidth);
-//   $( ".flex-next" ).click(function() {
-//     if($scope.roomData.hotelData.images.length>10){
-//      var totalSlides=($scope.roomData.hotelData.images.length)/10;
-//     }
-//     else{
-//      var totalSlides=1;
-//     }
-//     var onSlideImage = (slideIndex+1)%10
-//     // var lastSlides=totalSlides.toString().split(".")[1]+1;
-//     // if(onSlideImage==1){
-//     //   if ((totalSlides-1)>i){
-//     //     var transform=-800*i;
-//     //     document.body.style.setProperty('--txx',transform+'px');
-//     //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-//     //     $scope.currentDiv((i*10)+1);
+var i=1;
+// var j=1;
+if(window.screen.availWidth >=440){
+  console.log(window.screen.availWidth);
+  $( ".flex-next" ).click(function() {
+    if($scope.hotel[0].images.length>10){
+     var totalSlides=($scope.hotel[0].images.length)/10;
+    }
+    else{
+     var totalSlides=1;
+    }
+    var onSlideImage = (slideIndex+1)%10
+    // var lastSlides=totalSlides.toString().split(".")[1]+1;
+    // if(onSlideImage==1){
+    //   if ((totalSlides-1)>i){
+    //     var transform=-800*i;
+    //     document.body.style.setProperty('--txx',transform+'px');
+    //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+    //     $scope.currentDiv((i*10)+1);
 
-//     //     i++;
-//     //     return i;
-//     //   } 
-//     //   else if(((lastSlides)>j)&&((totalSlides-1)<i)){
-//     //     console.log("2nd if");
-//     //     var transform=-(80*j+(800*(i-1)));
-//     //     console.log("transform",transform);
-//     //     document.body.style.setProperty('--txx',transform+'px');
-//     //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-//     //     $scope.currentDiv((i*10)+1);
+    //     i++;
+    //     return i;
+    //   } 
+    //   else if(((lastSlides)>j)&&((totalSlides-1)<i)){
+    //     console.log("2nd if");
+    //     var transform=-(80*j+(800*(i-1)));
+    //     console.log("transform",transform);
+    //     document.body.style.setProperty('--txx',transform+'px');
+    //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+    //     $scope.currentDiv((i*10)+1);
   
-//     //     j++;
-//     //     return j;
+    //     j++;
+    //     return j;
   
-//     //   }
+    //   }
      
-//     // }
-//     // else if(lastSlides < j) {
-//     //   console.log("3 rd if");
-//     //   $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-//     //   $scope.currentDiv(1);
-//     //   j=1;
-//     //   i=1;
-//     //   return i;
-//     //   return j;
-//     // }
-//     // else{
-//     //   slideIndex++;
-//     //   $scope.currentDiv(slideIndex);
-//     //   return slideIndex;
-//     // }
-//     if(onSlideImage==1){
-//       if (totalSlides>i){
-//         var transform=-800*i;
-//         document.body.style.setProperty('--txx',transform+'px');
-//         $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-//         $scope.currentDiv((i*10)+1);
+    // }
+    // else if(lastSlides < j) {
+    //   console.log("3 rd if");
+    //   $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    //   $scope.currentDiv(1);
+    //   j=1;
+    //   i=1;
+    //   return i;
+    //   return j;
+    // }
+    // else{
+    //   slideIndex++;
+    //   $scope.currentDiv(slideIndex);
+    //   return slideIndex;
+    // }
+    if(onSlideImage==1){
+      if (totalSlides>i){
+        var transform=-800*i;
+        document.body.style.setProperty('--txx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+        $scope.currentDiv((i*10)+1);
 
-//         i++;
-//         return i;
-//       } 
-//     }
-//     else if(totalSlides< i) {
-//       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-//       $scope.currentDiv(1);
-//       i=1;
-//       return i;
-//     }
-//     else{
-//       slideIndex++;
-//       $scope.currentDiv(slideIndex);
-//       return slideIndex;
-//     }
+        i++;
+        return i;
+      } 
+    }
+    else if(totalSlides< i) {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      $scope.currentDiv(1);
+      i=1;
+      return i;
+    }
+    else{
+      slideIndex++;
+      $scope.currentDiv(slideIndex);
+      return slideIndex;
+    }
     
-//   });
+  });
   
-//   $( ".flex-prev" ).click(function() {
-//     var backSlideImage = (slideIndex)%10
-//     if (backSlideImage==1){
-//       if(1<i){
-//         i--;
-//         var transform =-800*(i-1);
-//         document.body.style.setProperty('--txx',transform+'px');
-//         $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-//         $scope.currentDiv(i*10);
-//         return i;
-//       }
+  $( ".flex-prev" ).click(function() {
+    var backSlideImage = (slideIndex)%10
+    if (backSlideImage==1){
+      if(1<i){
+        i--;
+        var transform =-800*(i-1);
+        document.body.style.setProperty('--txx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+        $scope.currentDiv(i*10);
+        return i;
+      }
      
-//     }else{
-//       if(slideIndex>1){
-//         slideIndex--;
-//         $scope.currentDiv(slideIndex);
-//         return slideIndex;
-//       }
-//     }
-//   });
+    }else{
+      if(slideIndex>1){
+        slideIndex--;
+        $scope.currentDiv(slideIndex);
+        return slideIndex;
+      }
+    }
+  });
 
-// }
+}
 
-// if(window.screen.availWidth <=440){
+if(window.screen.availWidth <=440){
 
-//   $( ".flex-next" ).click(function() {
-//     console.log(window.screen.availWidth);
-//     if($scope.roomData.hotelData.images.length>3){
-//       var totalSlides=($scope.roomData.hotelData.images.length)/3;
-//      }
-//      else{
-//       var totalSlides=1;
-//      }
-//     var onSlideImage = (slideIndex+1)%3
+  $( ".flex-next" ).click(function() {
+    console.log(window.screen.availWidth);
+    if($scope.hotel[0].images.length>3){
+      var totalSlides=($scope.hotel[0].images.length)/3;
+     }
+     else{
+      var totalSlides=1;
+     }
+    var onSlideImage = (slideIndex+1)%3
 
-//     if(onSlideImage==1){
-//       if (totalSlides>i){
-//         var transform=-240*i;
-//         document.body.style.setProperty('--stx',transform+'px');
-//         $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
-//         $scope.currentDiv((i*3)+1);
+    if(onSlideImage==1){
+      if (totalSlides>i){
+        var transform=-240*i;
+        document.body.style.setProperty('--stx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
+        $scope.currentDiv((i*3)+1);
 
-//         i++;
-//         return i;
-//       } 
-//     }
-//     else if(totalSlides< i) {
-//       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-//       $scope.currentDiv(1);
-//       i=1;
-//       return i;
-//     }
-//     else{
-//       slideIndex++;
-//       $scope.currentDiv(slideIndex);
-//       return slideIndex;
-//     }
-//   });
+        i++;
+        return i;
+      } 
+    }
+    else if(totalSlides< i) {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      $scope.currentDiv(1);
+      i=1;
+      return i;
+    }
+    else{
+      slideIndex++;
+      $scope.currentDiv(slideIndex);
+      return slideIndex;
+    }
+  });
   
-//   $( ".flex-prev" ).click(function() {
+  $( ".flex-prev" ).click(function() {
 
-//     var backSlideImage = (slideIndex)%3
-//     if (backSlideImage==1){
-//       if(1<i){
-//         i--;
-//         var transform =-240*(i-1);
-//         document.body.style.setProperty('--stx',transform+'px');
-//         $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
-//         $scope.currentDiv(i*3);
-//         return i;
-//       }
+    var backSlideImage = (slideIndex)%3
+    if (backSlideImage==1){
+      if(1<i){
+        i--;
+        var transform =-240*(i-1);
+        document.body.style.setProperty('--stx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
+        $scope.currentDiv(i*3);
+        return i;
+      }
      
-//     }else{
-//       if(slideIndex>1){
-//         slideIndex--;
-//         $scope.currentDiv(slideIndex);
-//         return slideIndex;
-//       }
-//     }
-//   });
+    }else{
+      if(slideIndex>1){
+        slideIndex--;
+        $scope.currentDiv(slideIndex);
+        return slideIndex;
+      }
+    }
+  });
 
-// }
+}
 /************************************************************************************************/
 
 
