@@ -3,7 +3,7 @@
             <div class="page-title-container">
                 <div class="container">
                     <div class="page-title pull-left">
-                        <h2 class="entry-title" style="text-transform: capitalize;">[[roomData.hotelData.name]]</h2>
+                        <h2 class="entry-title" style="text-transform: capitalize;">{{hotel_data.name}}</h2>
                     </div>
                     <ul style="cursor:pointer" class="breadcrumbs pull-right">
                         <li><a ng-click="openHome()">HOME</a></li>
@@ -16,89 +16,89 @@
                 
                     <!-- Modal content-->
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h2 class="modal-title">Share Detail</h2>
-                    </div>
-                    <div class="modal-body">
-                            <div id="share-buttons">
-                                <!-- Buffer -->
-                                <a href="https://bufferapp.com/add?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
-                                </a>
-                                
-                                <!-- Digg -->
-                                <a href="http://www.digg.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/diggit.png" alt="Digg" />
-                                </a>
-                                
-                                <!-- Email -->
-                                <a href="mailto:?Subject=travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://travel-beans.ap-south-1.elasticbeanstalk.com/">
-                                    <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
-                                </a>
-                                
-                                <!-- Facebook -->
-                                <a href="http://www.facebook.com/sharer.php?u=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
-                                </a>
-                                
-                                <!-- Google+ -->
-                                <a href="https://plus.google.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
-                                </a>
-                                
-                                <!-- LinkedIn -->
-                                <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
-                                </a>
-                                
-                                <!-- Pinterest -->
-                                <!-- <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
-                                    <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
-                                </a> -->
-                                
-                                <!-- Print -->
-                                <a href="javascript:;" onclick="window.print()">
-                                    <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
-                                </a>
-                                
-                                <!-- Reddit -->
-                                <a href="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;title=travel-beans.ap-south-1.elasticbeanstalk" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
-                                </a>
-                                
-                                <!-- StumbleUpon-->
-                                <a href="http://www.stumbleupon.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/stumbleupon.png" alt="StumbleUpon" />
-                                </a>
-                                
-                                <!-- Tumblr-->
-                                <a href="http://www.tumblr.com/share/link?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
-                                </a>
-                                    
-                                <!-- Twitter -->
-                                <a href="https://twitter.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;text=travel-beans%20ap-south-1%20elasticbeanstalk.com&amp;hashtags=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
-                                    <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
-                                </a>
-                                <br>
-                                <div></div>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text" value="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" id="myInput">
-                                </div>
-                                    <!-- <div class="tooltip"> -->
-                                <button class="btn btn-default" onclick="copyUrl()">
-                                    <span data-toggle="tooltip" title="Copy to clipboard!" id="myTooltip">
-                                        Copy text
-
-                                    </span>
-                                </button>
-                                <!-- </div> -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h2 class="modal-title">Share Detail</h2>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                        <div class="modal-body">
+                                <div id="share-buttons">
+                                    <!-- Buffer -->
+                                    <a href="https://bufferapp.com/add?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
+                                    </a>
+                                    
+                                    <!-- Digg -->
+                                    <a href="http://www.digg.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/diggit.png" alt="Digg" />
+                                    </a>
+                                    
+                                    <!-- Email -->
+                                    <a href="mailto:?Subject=travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://travel-beans.ap-south-1.elasticbeanstalk.com/">
+                                        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+                                    </a>
+                                    
+                                    <!-- Facebook -->
+                                    <a href="http://www.facebook.com/sharer.php?u=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                                    </a>
+                                    
+                                    <!-- Google+ -->
+                                    <a href="https://plus.google.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                                    </a>
+                                    
+                                    <!-- LinkedIn -->
+                                    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+                                    </a>
+                                    
+                                    <!-- Pinterest -->
+                                    <!-- <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
+                                        <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
+                                    </a> -->
+                                    
+                                    <!-- Print -->
+                                    <a href="javascript:;" onclick="window.print()">
+                                        <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
+                                    </a>
+                                    
+                                    <!-- Reddit -->
+                                    <a href="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+                                    </a>
+                                    
+                                    <!-- StumbleUpon-->
+                                    <a href="http://www.stumbleupon.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/stumbleupon.png" alt="StumbleUpon" />
+                                    </a>
+                                    
+                                    <!-- Tumblr-->
+                                    <a href="http://www.tumblr.com/share/link?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
+                                    </a>
+                                        
+                                    <!-- Twitter -->
+                                    <a href="https://twitter.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;text=travel-beans%20ap-south-1%20elasticbeanstalk.com&amp;hashtags=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                                    </a>
+                                    <br>
+                                    <div></div>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" value="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" id="myInput">
+                                    </div>
+                                        <!-- <div class="tooltip"> -->
+                                    <button class="btn btn-default" onclick="copyUrl()">
+                                        <span data-toggle="tooltip" title="Copy to clipboard!" id="myTooltip">
+                                            Copy text
+
+                                        </span>
+                                    </button>
+                                    <!-- </div> -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                     
                 </div>
@@ -111,8 +111,10 @@
                                 <ul class="tabs">
                                     <li class="active"><a data-toggle="tab" href="#photos-tab" aria-expanded="true">photos</a></li>
                                     <li class=""><a data-toggle="tab" href="#map-tab" aria-expanded="false">map</a></li>
+                                    <!-- <li class=""><a data-toggle="tab" href="#steet-view-tab" aria-expanded="false">street view</a></li> -->
                                     
                                     <li class="pull-right"><a class="button btn-small yellow-bg white-color" href="[[deal.hotel_url]]">Book Now</a></li>
+                                    
                                     
                                     <li class="pull-right"><a class="button btn-small green-bg white-color" data-toggle="modal" data-target="#shareDetail" >Share Details</a></li>
                                 </ul>
@@ -122,7 +124,7 @@
                                             
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides slider" style="width: 4000%; transition-duration: 0.6s;">
-                                                <li class="mySlides" ng-repeat="image in roomData.hotelData.images"  style=" float: left; display: block;" ><img class="img" src="[[image.image_url]]" alt="" draggable="false"></li>
+                                                <li class="mySlides" ng-repeat="image in {{hotel_data.images}}"  style=" float: left; display: block;" ><img class="img" src="http://[[image.image_url]]" alt="" draggable="false"></li>
                                             </ul>
                                         </div>
                                             <!-- <ol class="flex-control-nav flex-control-paging">
@@ -137,9 +139,14 @@
                                         <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
                                             
                                         <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 3000%; ">
-                                                <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images"  style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img  class="img" src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                                <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in {{hotel_data.images}}"  style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img  class="img" src="http://[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
                                             </ul>
                                         </div>
+
+
+                                        
+
+
                                         <!-- <ol class="flex-control-nav flex-control-paging">
                                             <li><a class="flex-active">1</a></li>
                                             <li><a class="">2</a></li>
@@ -178,7 +185,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <div class="calendar"><table><thead><tr><td>sunday</td><td>monday</td><td>tuesday</td><td>wednesday</td><td>thursday</td><td>friday</td><td>saturday</td></tr></thead><tbody><tr><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class=" date-passed"><span>1</span></td><td class=" date-passed"><span>2</span></td></tr><tr><td class=" date-passed"><span>3</span></td><td class=" date-passed"><span>4</span></td><td class=" date-passed"><span>5</span></td><td class=" date-passed"><span>6</span></td><td class=" date-passed"><span>7</span></td><td class=" date-passed"><span>8</span></td><td class=" date-passed"><span>9</span></td></tr><tr><td class=" date-passed"><span>10</span></td><td class=" date-passed"><span>11</span></td><td class=" date-passed"><span>12</span></td><td class=" date-passed"><span>13</span></td><td class=" date-passed"><span>14</span></td><td class=" date-passed"><span>15</span></td><td class=" today available"><a href="#">16<span class="price-text">$170</span></a></td></tr><tr><td class=" unavailable"><span>17</span></td><td class=" unavailable"><span>18</span></td><td class=" unavailable"><span>19</span></td><td class=" unavailable"><span>20</span></td><td class=" unavailable"><span>21</span></td><td class=" unavailable"><span>22</span></td><td class=" unavailable"><span>23</span></td></tr><tr><td class=" unavailable"><span>24</span></td><td class=" unavailable"><span>25</span></td><td class=" unavailable"><span>26</span></td><td class=" unavailable"><span>27</span></td><td class=" unavailable"><span>28</span></td><td class=" unavailable"><span>29</span></td><td class=" unavailable"><span>30</span></td></tr><tr></tr></tbody></table></div>
+                                                <div class="calendar"><table><thead><tr><td>sunday</td><td>monday</td><td>tuesday</td><td>wednesday</td><td>thursday</td><td>friday</td><td>saturday</td></tr></thead><tbody><tr><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class=" date-passed"><span>1</span></td><td class=" date-passed"><span>2</span></td></tr><tr><td class=" date-passed"><span>3</span></td><td class=" date-passed"><span>4</span></td><td class=" date-passed"><span>5</span></td><td class=" date-passed"><span>6</span></td><td class=" date-passed"><span>7</span></td><td class=" date-passed"><span>8</span></td><td class=" date-passed"><span>9</span></td></tr><tr><td class=" date-passed"><span>10</span></td><td class=" date-passed"><span>11</span></td><td class=" date-passed"><span>12</span></td><td class=" date-passed"><span>13</span></td><td class=" date-passed"><span>14</span></td><td class=" date-passed"><span>15</span></td><td class=" today available"><a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#">16<span class="price-text">$170</span></a></td></tr><tr><td class=" unavailable"><span>17</span></td><td class=" unavailable"><span>18</span></td><td class=" unavailable"><span>19</span></td><td class=" unavailable"><span>20</span></td><td class=" unavailable"><span>21</span></td><td class=" unavailable"><span>22</span></td><td class=" unavailable"><span>23</span></td></tr><tr><td class=" unavailable"><span>24</span></td><td class=" unavailable"><span>25</span></td><td class=" unavailable"><span>26</span></td><td class=" unavailable"><span>27</span></td><td class=" unavailable"><span>28</span></td><td class=" unavailable"><span>29</span></td><td class=" unavailable"><span>30</span></td></tr><tr></tr></tbody></table></div>
                                                 <div class="calendar-legend">
                                                     <label class="available">available</label>
                                                     <label class="unavailable">unavailable</label>
@@ -201,44 +208,51 @@
                             </div>
                             
                             <div id="hotel-features" class="tab-container">
-                                    <ul class="tabs">
-                                        <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">Description</a></li>
-                                        <!-- <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
-                                        <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">More Rooms</a></li>
-                                        <li class="active" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
-                                       
-                                        <li ><a  href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
-                                        <li ><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
-                                        <li ><a href="#hotel-Booking" data-toggle="tab">Contact Hotel</a></li>
+                                <ul class="tabs">
+                                    <li class="active" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">Description</a></li>
+                                    <!-- <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
+                                    <!-- <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Availability</a></li> -->
+                                    <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">More Rooms</a></li>
+                                    <li class="" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
+                                    <!-- <li class="" ><a  data-ng-href="#hotel-moredeals" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
+                                    <li ><a  href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
+                                    <li ><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
+                                    <li ><a href="#hotel-Booking" data-toggle="tab">Contact Hotel</a></li>
 
 
-                                    </ul>
+                                </ul>
                                
                                 <div class="tab-content">
-                                    <div class="tab-pane fade" id="hotel-description">
+                                    <div class="tab-pane fade active in" id="hotel-description">
                                         <div class="intro table-wrapper full-width hidden-table-sms">
                                             <div class="col-sm-5 col-lg-4 features table-cell">
                                                 <div class="rating table-cell col-sm-4">
-                                                    <span class="hotelrating score ">[[roomData.hotelData.rating]]/10</span>
-                                                    <div ng-if="[[roomData.hotelData.star]]==1">
+                                                    <span class="hotelrating score ">
+                                                        {% if hotel_data.rating %}
+                                                            {{hotel_data.rating}}/10
+                                                        {% else %}    
+                                                                0/10
+                                                        {% endif %}
+                                                    </span>
+                                                    <div ng-if="{{hotel_data.star}}==1">
                                                         <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==2">
+                                                    <div ng-if="{{hotel_data.star}}==2">
                                                         <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==3">
+                                                    <div ng-if="{{hotel_data.star}}==3">
                                                         <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==4">
+                                                    <div ng-if="{{hotel_data.star}}==4">
                                                         <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==5">
+                                                    <div ng-if="{{hotel_data.star}}==5">
                                                         <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==6">
+                                                    <div ng-if="{{hotel_data.star}}==6">
                                                         <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
                                                     </div>
-                                                    <div ng-if="[[roomData.hotelData.star]]==7">
+                                                    <div ng-if="{{hotel_data.star}}==7">
                                                         <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                                     </div>
                                                     <a href="" class="goto-writereview-pane button green btn-small full-width" style="margin-top:2px;">WRITE A REVIEW</a>
@@ -248,56 +262,57 @@
                                                 <div class="testimonial style1">
                                                     <div class="col-sm-5 col-lg-4 features table-cell">
                                                         <ul>
-                                                            <li><label>hotel type:</label>[[roomData.hotelData.star]] star</li>
-                                                            <li><label>City:</label>[[roomData.hotelData.city]]</li>
-                                                            <li><label>Address:</label>[[roomData.hotelData.address]]</li>
+                                                            <li><label class="col-sm-1 ">hotel type:</label><span class="col-sm-8">{{hotel_data.star}} star</span></li>
+                                                            <li><label class="col-sm-1 ">City:</label><span class="col-sm-8">{{hotel_data.city}}</span></li>
+                                                            <li ><label class="col-sm-1 " >Address:</label>
+                                                                <span class="col-sm-8"> {{hotel_data.address}}</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="long-description">
-                                            <h2>About [[roomData.hotelData.name]]</h2>
-                                           <p>[[roomData.hotelData.desc]]</p>
+                                            <h2>About {{hotel_data.name}}</h2>
+                                           <p>{{hotel_data.desc}}</p>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="hotel-moredeals">
-                                        <h2>Available Rooms</h2>
+                                    <!-- <div class="tab-pane fade" id="hotel-moredeals">
+                                        <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
-                                            <div ng-repeat="room in roomData.hotelData.rooms | limitTo:deallimit">
-                                                <article class="card col-md-12" ng-repeat="deal in room.deals " >
+                                            <div ng-repeat="room in {{hotel_data.rooms}} | limitTo:deallimit">
+                                                <article class="col-md-12" ng-repeat="deal in room.deals " >
                                                     <figure class="col-md-4">
-                                                        <a href="[[deal.hotel_url]]" target="_blank" title=""><img style="width:67%" src="[[deal.website.logo_image]]" alt=""></a>
+                                                        <a href="[[deal.hotel_url]]" target="_blank" title=""><img style="width:67%" src="[[deal.website.logo_image]]" alt="[[deal.website.website]]"></a>
                                                     </figure>
                                                     <div class="col-md-8">
                                                             <div class="row">
                                                                 <div class="col-md-3">
                                                                     <p>[[room.other_room_type]]</p>
                                                                 </div>
-                                                                <div class="col-md-2"><a href="[[deal.hotel_url]]" class="button btn-small  text-center">BOOK NOW</a></div>
-                                                                <div class="col-md-1"></div>
-                                                                <div class="col-md-2"><a ng-click="showBusinessDetail(deal.room)" class="button btn-small  text-center">View Detail</a></div>
+                                                                <!-- <div class="col-md-2"><a href="[[deal.hotel_url]]" class="button btn-small  text-center">BOOK NOW</a></div> -->
+                                                                <!-- <div class="col-md-1"></div> -->
+                                                                <!-- <div class="col-md-2"><a ng-click="showDetail(deal.room)" class="button btn-small  text-center">View Detail</a></div> -->
                                                                 <!-- <div class="col-md-1"></div> -->
                                                                 <!-- <div class="col-md-1" > -->
-                                                                    <div class="price">
-                                                                        <small>PER/NIGHT</small>₹ [[deal.price]]
-                                                                    </div>
+                                                                    <!-- <div class="price" style="text-align: center"> -->
+                                                                        <!-- <a  href="[[deal.hotel_url]]"> <small>PER/NIGHT</small>₹ [[deal.price]]</a>
+                                                                    </div> -->
                                                                 <!-- </div> -->
-                                                            </div>
+                                                            <!-- </div> -->
                                                         <!-- </div> -->
-                                                    </div>
+                                                    <!-- </div>
                                                 </article>
-                                            </div>
+                                            </div> -->
                                            
-                                            <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE ROOMS</a>
-                                        </div>
+                                            <!-- <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE DEALS</a> -->
+                                        <!-- </div>
                                         
-                                    </div>
+                                    </div> --> 
                                     <div id="hotel-Booking" class="tab-pane fade">
                                         <h1>Call Hotel</h1>
-                                        <a href="tel:[[roomData.hotelData.phone]]">
+                                        <a href="tel:{{hotel_data.phone}}">
                                             <address class="contact-details">
-                                                <span class="contact-phone"><i class="soap-icon-phone"></i> [[roomData.hotelData.phone]]</span>
+                                                <span class="contact-phone"><i class="soap-icon-phone"></i> {{hotel_data.phone}}</span>
                                             </address>
                                         </a>
                                     </div>
@@ -374,9 +389,9 @@
                                         </form>
                                         <h2>Available Rooms</h2>
                                         <div class="room-list listing-style3 hotel">
-                                            <article class="box" ng-repeat="room in roomData.hotelData.rooms | limitTo:limit">
+                                            <article class="box" ng-repeat="room in {{hotel_data.rooms}} | limitTo:limit">
                                                 <figure class="col-sm-4 col-md-3">
-                                                    <a  href="" title=""><img width="230" height="161" src="[[room.image_url]]" alt=""></a>
+                                                    <a  href="" title=""><img width="230" height="161" src="http://[[room.image_url]]" alt="[[room.other_room_type]]"></a>
                                                 </figure>
                                                 <div class="details col-xs-12 col-sm-8 col-md-9">
                                                     <div>
@@ -411,95 +426,95 @@
                                                     </div>
                                                 </div>
                                             </article>
-                                            <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreRooms()">LOAD MORE ROOMS</a>
+                                            <!-- <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreRooms()">LOAD MORE ROOMS</a> -->
                                         </div>
                                         
                                     </div>
-                                    <div class="tab-pane fade active in" id="hotel-amenities">
-                                        <h2>Room Ammenities</h2>
+                                    <div class="tab-pane fade" id="hotel-amenities">
+                                        <h2>Room Facilities</h2>
                                         
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
-                                                <div class="icon-box style1"><i class="flaticon-wifi"></i>Wifi Accesible</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wifi">
+                                                <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.tv">
-                                                <div class="icon-box style1"><i class="flaticon-television"></i>Television</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.tv">
+                                                <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Central heating</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.electric_kettle">
-                                                <div class="icon-box style1"><i class="flaticon-coffee"></i>Coffee / Tea Electric Kettle </div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.electric_kettle">
+                                                <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.ac">
-                                                <div class="icon-box style1"><i class="flaticon-fan"></i>Air Conditioning</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.ac">
+                                                <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.electric_kettle">
-                                                <div class="icon-box style1"><i class="soap-icon-fitnessfacility"></i>Bathroom with bathtub</div>
-                                            </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_with_shower">
-                                                <div class="icon-box style1"><i class="flaticon-hot-tub"></i>Bathroom with shower</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.jacuzzi">
+                                                <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with bathtub</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_with_shower">
+                                                <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
+                                            </li>
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-winebar"></i>Mini Bar</div>
-                                            </li> -->
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
+                                            </li>
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-smoking"></i>Cosmetic mirror</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.desk">
-                                                <div class="icon-box style1"><i class="flaticon-furniture-and-household"></i>Desk</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.desk">
+                                                <div class="icon-box style1"><i class="soap-icon-furniture-and-household"></i>Desk</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.hairdryer">
-                                                <div class="icon-box style1"><i class="flaticon-hairdryer-silhouette-side-view"></i>Hairdryer</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.hairdryer">
+                                                <div class="icon-box style1"><i class="soap-icon-hairdryer-silhouette-side-view"></i>Hairdryer</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_safe">
-                                                <div class="icon-box style1"><i class="flaticon-vault"></i>Room safe</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.room_safe">
+                                                <div class="icon-box style1"><i class="soap-icon-vault"></i>Room safe</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
-                                            </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.food_serve_at_room">
-                                                <div class="icon-box style1"><i class="flaticon-meal"></i>Food Serve at Room</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_cosmetics">
-                                                <div class="icon-box style1"><i class="flaticon-barista"></i>Bathroom Cosmetics</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.food_serve_at_room">
+                                                <div class="icon-box style1"><i class="soap-icon-food"></i>Food Serve at Room</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_nightie">
-                                                <div class="icon-box style1"><i class="flaticon-nightie"></i>Bathroom Nightie</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_cosmetics">
+                                                <div class="icon-box style1"><i class="soap-icon-barista"></i>Bathroom Cosmetics</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.ironing_facility">
-                                                <div class="icon-box style1"><i class="flaticon-electric-iron"></i>Ironing Facility</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_nightie">
+                                                <div class="icon-box style1"><i class="soap-icon-nightie"></i>Bathroom Nightie</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.weighing_machine">
-                                                <div class="icon-box style1"><i class="flaticon-scales"></i>Weighing Machine</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.ironing_facility">
+                                                <div class="icon-box style1"><i class="soap-icon-electric-iron"></i>Ironing Facility</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wardrobes_closet">
-                                                <div class="icon-box style1"><i class="flaticon-closet"></i>Wardrobes / Closet</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.weighing_machine">
+                                                <div class="icon-box style1"><i class="soap-icon-scales"></i>Weighing Machine</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.view">
-                                                <div class="icon-box style1"><i class="flaticon-eye"></i>View </div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wardrobes_closet">
+                                                <div class="icon-box style1"><i class="soap-icon-closet"></i>Wardrobes / Closet</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_seating_area">
-                                                <div class="icon-box style1"><i class="flaticon-living-room"></i>Room Seating Area</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.view">
+                                                <div class="icon-box style1"><i class="soap-icon-eye"></i>View </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_slipper">
-                                                <div class="icon-box style1"><i class="flaticon-flip-flops"></i>Room Slipper</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.room_seating_area">
+                                                <div class="icon-box style1"><i class="soap-icon-living-room"></i>Room Seating Area</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
-                                                <div class="icon-box style1"><i class="flaticon-toiletries"></i>Free Toiletrees</div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.room_slipper">
+                                                <div class="icon-box style1"><i class="soap-icon-flip-flops"></i>Room Slipper</div>
                                             </li>
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
+                                                <div class="icon-box style1"><i class="soap-icon-toiletries"></i>Free Toiletrees</div>
+                                            </li>
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Wake-Up Service </div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.morning_newspaper">
-                                                <div class="icon-box style1"><i class="flaticon-folded-newspaper"></i>Morning Newspaper </div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.morning_newspaper">
+                                                <div class="icon-box style1"><i class="soap-icon-folded-newspaper"></i>Morning Newspaper </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_towels">
-                                                <div class="icon-box style1"><i class="flaticon-towel"></i>Bathroom Towels </div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_towels">
+                                                <div class="icon-box style1"><i class="soap-icon-towel"></i>Bathroom Towels </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_evening_snacks">
-                                                <div class="icon-box style1"><i class="flaticon-popcorn-box"></i>Free Evening Snacks </div>
+                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.free_evening_snacks">
+                                                <div class="icon-box style1"><i class="soap-icon-popcorn-box"></i>Free Evening Snacks </div>
                                             </li>
                                             
                                         </ul>
@@ -507,7 +522,7 @@
                                         
                                         <h2>Hotel Amenities</h2>
                                         <ul class="amenities clearfix style2">
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.twenty_four_hr_room_service}}">
                                                 <div class="icon-box style2">
                                                     <i class="soap-icon-24-hrroomservice circle" >
                                                         <div style="width: 60%;margin: auto;" class="main-icon" data-type="svg">
@@ -530,109 +545,158 @@
                                                     </i>
                                                     24/7 Room Service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_reception">
-                                                <div class="icon-box style2"><i class="soap-icon-waiting-room circle" ></i>24/7 reception</div>
-                                            </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
-                                                <div class="icon-box style2"><i class="soap-icon-television circle"></i>Business Center</div>
-                                            </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.parking">
+                                            {% if hotel_data.amenities.twenty_four_hr_reception %}
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box style2"><i class="soap-icon-waiting-room circle" ></i>24/7 reception</div>
+                                                </li>
+                                            {% endif %}
+                                           
+                                            {% if hotel_data.amenities.parking %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-parking circle"></i>Car Park</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.conference_rooms">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.conference_rooms %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-conference circle"></i>Conference Rooms</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.express_check_in_out">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.express_check_in_out %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Express check-in / out</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.bar">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.bar %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-winebar circle"></i>Hotel bar</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.lift">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.lift %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Elevator in Building</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.laundry_service">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.laundry_service %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-laundry circle"></i>Laundry service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.indoor_swimming_pool">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.indoor_swimming_pool %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Indoor swimming pool</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.outdoor_swimming_pool">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.outdoor_swimming_pool %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Outdoor swimming pool</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.porter_service">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.porter_service %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-porter circle"></i>Porter service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.restaurant">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.restaurant %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-breakfast circle"></i>Restaurant</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.Room_cleaning_service">
-                                                <div class="icon-box style2"><i class="flaticon-wifi"></i>Room Cleaning Service</div>
+                                            {% endif %}
+                                            {% if hotel_data.amenities.Room_cleaning_service %}
+                                            <li class="col-md-4 col-sm-6" >
+                                                <div class="icon-box style2"><i class="soap-icon-wifi"></i>Room Cleaning Service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.terrace">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.terrace %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-terrace circle"></i>Terrace</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.pool">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.pool %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-beach circle"></i>Towels at the pool / beach</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.spa">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.spa %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-spa circle"></i>Wellness centre/Spa</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.wifi_in_lobby">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.wifi_in_lobby %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-wifi circle"></i>WiFi in lobby</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.child_baby_cot">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.child_baby_cot %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-cot circle"></i>Child/Baby cot</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.wheelchair_accessible">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.wheelchair_accessible %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-handicapaccessiable circle"></i>Wheelchair Accessible</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.doorman">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.doorman %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-doorman circle"></i>Doorman</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.gym">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.gym %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Gym</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.hairdresser">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.hairdresser %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-hairdresser circle"></i>Hairdresser</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
-                                                <div class="icon-box style2"><i class="soap-icon-star circle"></i>Banquets</div>
-                                            </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.non_smoking_smoking_rooms">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.non_smoking_smoking_rooms %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-smoking circle"></i>Non-Smoking / Smoking Rooms</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.pet_allowance">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.pet_allowance %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-pets circle"></i>Pets Allowence</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.banquets">
+                                            {% endif %}
+                                            {% if hotel_data.amenities.banquets %}
+                                            <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-banquets circle"></i>Banquets</div>
                                             </li>
+                                            {% endif %}
                                         </ul>
                                     </div>
                                     <div class="tab-pane fade" id="hotel-reviews">
                                         <div class="intro table-wrapper full-width hidden-table-sms">
                                             <div class="rating table-cell col-sm-4">
-                                                <span class="score">[[roomData.hotelData.rating]]/10</span>
-                                                <div ng-if="[[roomData.hotelData.star]]==1">
+                                                <span class="score">
+                                                        {% if hotel_data.rating %}
+                                                            {{hotel_data.rating}}/10
+                                                        {% else %}    
+                                                                0/10
+                                                        {% endif %}
+                                                </span>
+                                                <div ng-if="{{hotel_data.star}}==1">
                                                     <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==2">
+                                                <div ng-if="{{hotel_data.star}}==2">
                                                     <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==3">
+                                                <div ng-if="{{hotel_data.star}}==3">
                                                     <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==4">
+                                                <div ng-if="{{hotel_data.star}}==4">
                                                     <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==5">
+                                                <div ng-if="{{hotel_data.star}}==5">
                                                     <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==6">
+                                                <div ng-if="{{hotel_data.star}}==6">
                                                     <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <div ng-if="[[roomData.hotelData.star]]==7">
+                                                <div ng-if="{{hotel_data.star}}==7">
                                                     <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                                 </div>
                                                 <!-- <div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div> -->
@@ -657,7 +721,7 @@
                                             <h2>Guest Reviews</h2>
                                             <!-- <div class="guest-review table-wrapper">
                                                 <div class="col-xs-3 col-md-2 author table-cell">
-                                                    <a href="#"><img src="./Detailed View_files/jessica.png" alt="" width="270" height="263"></a>
+                                                    <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#"><img src="./Detailed View_files/jessica.png" alt="" width="270" height="263"></a>
                                                     <p class="name">Jessica Brown</p>
                                                     <p class="date">NOV, 12, 2013</p>
                                                 </div>
@@ -676,7 +740,7 @@
                                             </div> -->
                                             <!-- <div class="guest-review table-wrapper">
                                                 <div class="col-xs-3 col-md-2 author table-cell">
-                                                    <a href="#"><img src="./Detailed View_files/david.png" alt="" width="270" height="263"></a>
+                                                    <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#"><img src="./Detailed View_files/david.png" alt="" width="270" height="263"></a>
                                                     <p class="name">David Jhon</p>
                                                     <p class="date">NOV, 12, 2013</p>
                                                 </div>
@@ -695,7 +759,7 @@
                                             </div> -->
                                             <!-- <div class="guest-review table-wrapper">
                                                 <div class="col-xs-3 col-md-2 author table-cell">
-                                                    <a href="#"><img src="./Detailed View_files/kyle.png" alt="" width="270" height="263"></a>
+                                                    <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#"><img src="./Detailed View_files/kyle.png" alt="" width="270" height="263"></a>
                                                     <p class="name">Kyle Martin</p>
                                                     <p class="date">NOV, 12, 2013</p>
                                                 </div>
@@ -713,7 +777,7 @@
                                                 </div>
                                             </div> -->
                                         </div>
-                                        <!-- <a href="#" class="button full-width btn-large">LOAD MORE REVIEWS</a> -->
+                                        <!-- <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" class="button full-width btn-large">LOAD MORE REVIEWS</a> -->
                                     </div>
                                     <div class="tab-pane fade" id="hotel-faqs">
                                         <h2>Frquently Asked Questions</h2>
@@ -751,14 +815,14 @@
                                                     </div>
                                                     <div class="detailed-rating">
                                                         <ul class="clearfix">
-                                                            <li class="col-md-6"><div class="each-rating"><label>service</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="3" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 60%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 60%;"></a></div></div></li>
-                                                            <li class="col-md-6"><div class="each-rating"><label>Value</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
-                                                            <li class="col-md-6"><div class="each-rating"><label>Sleep Quality</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
-                                                            <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
-                                                            <li class="col-md-6"><div class="each-rating"><label>location</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
-                                                            <li class="col-md-6"><div class="each-rating"><label>rooms</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
-                                                            <li class="col-md-6"><div class="each-rating"><label>swimming pool</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
-                                                            <li class="col-md-6"><div class="each-rating"><label>fitness facility</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>service</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="3" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 60%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 60%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>Value</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 80%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>Sleep Quality</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 80%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 80%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>location</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 80%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>rooms</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 80%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>swimming pool</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 80%;"></a></div></div></li>
+                                                            <li class="col-md-6"><div class="each-rating"><label>fitness facility</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" style="left: 80%;"></a></div></div></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -828,43 +892,43 @@
                             </div>
                         </div>
                         <div class="sidebar col-md-3">
-                            <article class="detailed-logo">
+                            <article class="detailed-logo" ng-repeat="data in similarhotels | limitTo:1">
                                 <figure>
-                                    <img  src="[[roomData.hotelData.images[0].image_url]]" alt="">
+                                    <img  src="http://[[data.images[0].image_url]]" alt="[[data.name]]">
                                 </figure>
                                 <div class="details">
-                                    <h2 class="box-title">[[roomData.hotelData.name]]<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">[[roomData.hotelData.city]]</span></small></h2>
+                                    <h2 class="box-title">[[data.name]]<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">[[data.city]]</span></small></h2>
                                     <span class="price clearfix">
-                                        <small class="pull-left">Mni. avg/night</small>
-                                        <span class="pull-right">₹ [[(roomData.deals | orderBy:'price')[0].price]]</span>
+                                        <small class="pull-left">Min. avg/night</small>
+                                        <span class="pull-right">₹ [[data.rooms[0].deals[0].price]]</span>
                                     </span>
                                     <div class="feedback clearfix">
-                                        <div ng-if="[[roomData.hotelData.star]]==1">
+                                        <div ng-if="[[data.star]]==1">
                                             <span ng-repeat="i in [1]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==2">
+                                        <div ng-if="[[data.star]]==2">
                                             <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==3">
+                                        <div ng-if="[[data.star]]==3">
                                             <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==4">
+                                        <div ng-if="[[data.star]]==4">
                                             <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==5">
+                                        <div ng-if="[[data.star]]==5">
                                             <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==6">
+                                        <div ng-if="[[data.star]]==6">
                                             <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
                                         </div>
-                                        <div ng-if="[[roomData.hotelData.star]]==7">
+                                        <div ng-if="[[data.star]]==7">
                                             <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                         </div>
                                         <!-- <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="1 stars"><span class="five-stars" style="width: 80%;"></span></div> -->
-                                        <!-- <span class="review pull-right">270 reviews</span> -->
+                                        
                                     </div>
-                                    <p class="description">[[ roomData.hotelData.desc | limitTo: 200 ]][[roomData.hotelData.desc.length > 200 ? '...' : '']]</p>
-                                    <a href="[[deal.hotel_url]]" class="button yellow full-width uppercase btn-small">Book Now</a>
+                                    <p class="description">[[ data.desc | limitTo: 200 ]][[data.desc.length > 200 ? '...' : '']]</p>
+                                    <!-- <a href="[[deal.hotel_url]]" class="button yellow full-width uppercase btn-small">Book Now</a> -->
                                 </div>
                             </article>
                             
@@ -872,9 +936,9 @@
                                 <h4>Similar Listings</h4>
                                 <div class="image-box style14">
                                     <article ng-repeat="data in similarhotels | limitTo:3" class="box" style="cursor: pointer;">
-                                        <div ng-click="showDetail(data.rooms[0].id)">
+                                        <div ng-click="showDetail(data.id)">
                                             <figure>
-                                                <a href=""><img src="[[data.images[0].image_url]]" alt=""></a>
+                                                <a href=""><img src="http://[[data.images[0].image_url]]" alt="[[data.name]]"></a>
                                             </figure>
                                             <div class="details">
                                                 <h5 class="box-title " style="text-transform: capitalize"><a >[[data.name]]</a></h5>
@@ -888,16 +952,17 @@
                             </div>
                             
                             <div class="travelo-box contact-box">
-                                <h4>Need Travel Beans Help?</h4>
+                                <h4>Need Travel Square Help?</h4>
                                 <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
                                 <address class="contact-details">
-                                    <a href="tel:[[roomData.hotelData.phone]]">
-                                        <span class="contact-phone"><i class="soap-icon-phone"></i> [[roomData.hotelData.phone]]</span>
+                                    <a href="tel:{{hotel_data.phone}}">
+                                        <span class="contact-phone"><i class="soap-icon-phone"></i> 7428558566</span>
                                     </a>
                                     <br>
-                                    <a class="contact-email" href="">help@travelbeans.com</a>
+                                    <a class="contact-email" href="">help@travelsquare.com</a>
                                 </address>
                             </div>
+                           
                             
                         </div>
                     </div>
