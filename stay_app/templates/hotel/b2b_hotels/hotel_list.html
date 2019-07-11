@@ -24,11 +24,11 @@
                                             price_end : null,
                                             page: 1}">Clear filter</button> 
                                 </div> 
-                                <!-- <div class="panel style1 arrow-right">
+                                <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#modify-search-panel" class="collapsed" aria-expanded="false">Modify Search</a>
                                         </h4>
-                                        <div id="modify-search-panel" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                        <div id="modify-search-panel" class="panel-collapse" aria-expanded="false" style="height: 200px;">
                                             <div class="panel-content">
                                                 <form>
                                                     <div class="form-group">
@@ -45,12 +45,40 @@
                                                 </form>
                                             </div>
                                         </div>
+                                </div>
+
+
+                                <!-- <div class="panel style1 arrow-right">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#modify-search-panel" class="collapsed" aria-expanded="false">Modify Search</a>
+                                    </h4>
+                                    <div id="modify-search-panel" class="panel-collapse" aria-expanded="false" style="height: 300px;">
+                                        <div class="panel-content">
+                                            <form method="post">
+                                                <div class="form-group">
+                                                    <label>destination</label>
+                                                    <input type="text" class="input-text full-width" placeholder="" value="Paris">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>check in</label>
+                                                    <div class="datepicker-wrap">
+                                                        <input type="date" name="date_from" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1562094281457"><img class="ui-datepicker-trigger" src="./Travelo - Travel, Tour Booking HTML5 Template_files/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>check out</label>
+                                                    <div class="datepicker-wrap">
+                                                        <input type="date" name="date_to" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1562094281458"><img class="ui-datepicker-trigger" src="./Travelo - Travel, Tour Booking HTML5 Template_files/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <button class="btn-medium icon-check uppercase full-width">search again</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div> -->
 
                                 <div class="panel style1 arrow-right">
-
-                                        
-
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>
                                     </h4>
@@ -141,15 +169,15 @@
                         </div>
                         <div class="col-sm-8 col-md-9">     
                             <div class="sort-by-section clearfix">
-                                <h4 class="sort-by-title block-sm">Search results by:</h4>
-                                <p><input class="input-text full-width" type="text"  placeholder="search by keyword"></p>
+                                <h4 class="sort-by-title block-sm"></h4>
+                                <p><input class="input-text full-width" type="text"  placeholder="SEARCH BY KEYWORD"></p>
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
                                 <div ng-repeat="room in hotel.rooms">
                                     <div>
                                         <article class="box" ng-if="[[room.basic_room]]">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
+                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="overflow: hidden; height:150px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="myModal" role="dialog">
                                                     <div class="modal-dialog">
@@ -197,9 +225,7 @@
                                             <div class="details col-sm-7 col-md-8">
                                                 <div>
                                                     <div>
-                                                        <h4 class="box-title">[[hotel.name]]
-
-                                                            
+                                                        <h4 class="box-title">[[hotel.name]] 
                                                             <small>
                                                             
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> 
@@ -270,8 +296,8 @@
                                                         <!-- <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                             -->
                                                     </div>
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                                            <span class="price"  ng-if="[[deal.business_deal]]" style="text-align: left"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
-                                                            <a class="button btn-small green" style="padding: 0px 10px" ng-click="showDetail(room.id)">View Detail</a>
+                                                            <span class="price"  ng-if="[[deal.business_deal]]" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
+                                                            <a class="button btn-small green" style="padding: 0px 10px" ng-click="showBusinessDetail(hotel.id)">View Detail</a>
                                                     </div>    
                                                 </div>
                                                
@@ -303,6 +329,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
             {% include '/hotel/components/footer.html' %}
 

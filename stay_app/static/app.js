@@ -140,6 +140,8 @@ angular.module('comparetravel', ['angular.filter'])
 
 .controller('staylistController',["$scope", "$http", function($scope, $http) {
 
+
+
   $scope.room = {};
   $scope.cityid = {};
   $scope.id = [];
@@ -163,6 +165,12 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.max= 200000;
   var api_url = 'http://139.59.51.174';
 
+
+  $scope.showBusinessDetail=function(hotel_id){
+    window.open('/business/hotel/'+hotel_id,'_self');
+    console.log(hotel_id);
+    
+  }
         
         
 
@@ -412,6 +420,13 @@ $scope.showDetail=function(hotel_id){
   
 }
 
+//for business detail page
+// $scope.showBusinessDetail=function(hotel_id){
+//   window.open('/business/hotel/'+hotel_id,'_self');
+//   console.log(hotel_id);
+  
+// }
+
 $scope.hotelData = [];
 
 
@@ -548,7 +563,7 @@ $scope.getHotelsData();
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
-  var api_url = 'http://139.59.51.174/';
+  var api_url = 'http://139.59.51.174';
 
   $scope.showCreate=function(){
     $scope.hotelDetail=true;
