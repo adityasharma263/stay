@@ -422,9 +422,7 @@ $scope.getHotelsData = function(cb){
 
   let searchURL = api_url + '/api/v1/hotel'+document.location.search
   console.log("searchurl",searchURL);
-  searchURL = decodeURIComponent(searchURL);
-  console.log("searchurl",searchURL);
-
+  
   Object.keys($scope.hotel).forEach(function(param){
     console.log($scope.hotel[param]);
     if($scope.hotel[param])
