@@ -35,6 +35,8 @@ def hotel_api():
         args.pop('lowest_price_room', None)
         city = request.args.get('city')
         args.pop('city', None)
+        name = request.args.get('name')
+        args.pop('name', None)
         price_start = request.args.get('price_start', None)
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
@@ -98,6 +100,8 @@ def hotel_api():
                 q_deal = q.filter(getattr(Deal, key) == args[key])
         if city:
             q = q.filter(func.lower(Hotel.city) == func.lower(city))
+        if name:
+            q = q.filter(func.lower(Hotel.name) == func.lower(name))
         if rating:
             q = q.filter(Hotel.rating >= rating)
         if price_start and price_end:
