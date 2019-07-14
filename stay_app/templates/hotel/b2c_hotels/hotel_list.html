@@ -135,7 +135,7 @@
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
                                 <div ng-repeat="room in hotel.rooms">
                                     <div>
-                                        <article class="box" ng-if="[[room.lowest_price_room]]">
+                                        <article class="box" ng-if="room.lowest_price_room">
                                             <figure class="col-sm-5 col-md-4">
                                                 <img data-toggle="modal" data-target="#[[hotel.id]]" ng-click="openGallery(hotel)" style="height:160px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
                                                 <!-- Modal -->
@@ -258,7 +258,7 @@
                                                     <div >
                                                         <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center>
                                                         <a class="button btn-small green" ng-click="showDetail(hotel.id)">View Detail</a>
-                                                        <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                            
+                                                        <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]m">More Deals</a>                                            
                                                     </div>
                                                     <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:2 " style="float:left">
                                                             <span class="price" style="text-align: center"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
@@ -267,7 +267,7 @@
                                                
                                             </div>
 
-                                                <div id="[[hotel.id]]" class="collapse" style="transition: 2s">
+                                                <div id="[[hotel.id]]m" class="collapse" style="transition: 2s">
                                                     
                                                         
 
