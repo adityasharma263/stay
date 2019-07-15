@@ -591,6 +591,10 @@ if(window.screen.availWidth <=440){
 // }
 
 //+++++++++++
+var str = document.location.search;
+var key = str.split("?");
+var key1 = key[1].split("=");
+console.log("key1",key1[0]);
 
 
 $scope.loadmoredeals = function() {
@@ -615,6 +619,7 @@ $scope.getHotelsData = function(cb){
 
   let searchURL = api_url + '/api/v1/hotel'+document.location.search
   console.log("searchurl",searchURL);
+ 
   
   Object.keys($scope.hotel).forEach(function(param){
     console.log($scope.hotel[param]);
@@ -649,6 +654,9 @@ $scope.loadMoreHotelsData = function(){
 
 
 $scope.getHotelsData();
+// if(key1[0]=='name'){
+//   document.location.search = '?city=' + $scope.hotelData[0].city;
+// }
 
 //for more deals tab  
   $scope.show = function() {
