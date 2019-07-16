@@ -1021,7 +1021,10 @@ $scope.createHotel = function() {
   }
   var path = document.location.pathname;
   var key1 = path.split("/");
-  var id = key1[2];
+  if(key1[2] == 'hotel')
+      var id = key1[3];
+  else
+      var id = key1[2];    
   console.log(id);
   $http({
     method: 'GET',
