@@ -140,8 +140,6 @@ angular.module('comparetravel', ['angular.filter'])
 
 .controller('staylistController',["$scope", "$http", function($scope, $http) {
 
-
-
   $scope.room = {};
   $scope.cityid = {};
   $scope.id = [];
@@ -165,12 +163,6 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.max= 200000;
   var api_url = 'http://139.59.51.174';
 
-
-  $scope.showBusinessDetail=function(hotel_id){
-    window.open('/business/hotel/'+hotel_id,'_self');
-    console.log(hotel_id);
-    
-  }
         
         
 
@@ -223,66 +215,31 @@ console.log("map",map);
 
 //slide images
 
-var showDivs=function(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-
-  // var tx = document.getElementsByClassName("slider");
-  
-  var dots = document.getElementsByClassName("demo");
-
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  
-  for (i = 0; i < dots.length; i++) {
-    dots[i].style.opacity = 0.5;
-    dots[i].getElementsByClassName("img")[0].style.opacity = 0.5;
-    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-    dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
-
-
-  }
-  dots[slideIndex-1].getElementsByClassName("img")[0].style.opacity = 1;
-  dots[slideIndex-1].style.opacity = 1;
-  
-  if(window.screen.availWidth >=440){
-
-    var transform=-870*(slideIndex-1);
-  }
-  if(window.screen.availWidth <=440){
-    var transform=-370*(slideIndex-1);
-  
-  }
-  document.body.style.setProperty('--tx',transform+'px');
-  $(".slider").css("transform","translate3d(var(--tx), 0px, 0px)");
-  dots[slideIndex-1].className += "w3-opacity-off";
-}
-
-  // var showDivs=function(n) {
-  //   var i;
-  //   var x = document.getElementsByClassName("mySlides");
+  var showDivs=function(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
     
-  //   var dots = document.getElementsByClassName("demo");
+    var dots = document.getElementsByClassName("demo");
 
-  //   if (n > x.length) {slideIndex = 1}
-  //   if (n < 1) {slideIndex = x.length}
-  //   for (i = 0; i < x.length; i++) {
-  //       x[i].style.display = "none";
-  //   }
-  //   for (i = 0; i < dots.length; i++) {
-  //     dots[i].style.opacity = 0.5;
-  //     dots[i].getElementsByClassName("img")[0].style.opacity = 0.5;
-  //     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-  //     dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].style.opacity = 0.5;
+      dots[i].getElementsByClassName("img")[0].style.opacity = 0.5;
+      dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+      dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
 
 
-  //   }
-  //   dots[slideIndex-1].getElementsByClassName("img")[0].style.opacity = 1;
-  //   dots[slideIndex-1].style.opacity = 1;
+    }
+    dots[slideIndex-1].getElementsByClassName("img")[0].style.opacity = 1;
+    dots[slideIndex-1].style.opacity = 1;
     
-  //   x[slideIndex-1].style.display = "block";
-  //   dots[slideIndex-1].className += "w3-opacity-off";
-  // }
+    x[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += "w3-opacity-off";
+  }
   var slideIndex = 1;
   
   var plusDivs=function(n) {
@@ -294,315 +251,153 @@ var showDivs=function(n) {
   }
 
   //++++++++++++++++++++++++++++
-  var i=1;
-// var j=1;
+  var i=0;
 if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
-    if($scope.imagesData.images.length>10){
-     var totalSlides=($scope.imagesData.images.length)/10;
-    }
-    else{
-     var totalSlides=1;
-    }
-    var onSlideImage = (slideIndex+1)%10
-    // var lastSlides=totalSlides.toString().split(".")[1]+1;
-    // if(onSlideImage==1){
-    //   if ((totalSlides-1)>i){
-    //     var transform=-800*i;
-    //     document.body.style.setProperty('--txx',transform+'px');
-    //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-    //     $scope.currentDiv((i*10)+1);
-
-    //     i++;
-    //     return i;
-    //   } 
-    //   else if(((lastSlides)>j)&&((totalSlides-1)<i)){
-    //     console.log("2nd if");
-    //     var transform=-(80*j+(800*(i-1)));
-    //     console.log("transform",transform);
-    //     document.body.style.setProperty('--txx',transform+'px');
-    //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-    //     $scope.currentDiv((i*10)+1);
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
   
-    //     j++;
-    //     return j;
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i++;
+      return i;
+    } 
   
-    //   }
-     
-    // }
-    // else if(lastSlides < j) {
-    //   console.log("3 rd if");
-    //   $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-    //   $scope.currentDiv(1);
-    //   j=1;
-    //   i=1;
-    //   return i;
-    //   return j;
-    // }
-    // else{
-    //   slideIndex++;
-    //   $scope.currentDiv(slideIndex);
-    //   return slideIndex;
-    // }
-    if(onSlideImage==1){
-      if (totalSlides>i){
-        var transform=-800*i;
-        document.body.style.setProperty('--txx',transform+'px');
-        $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-        $scope.currentDiv((i*10)+1);
-
-        i++;
-        return i;
-      } 
-    }
-    else if(totalSlides< i) {
+    if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-      $scope.currentDiv(1);
-      i=1;
+      i=0;
       return i;
     }
-    else{
-      slideIndex++;
-      $scope.currentDiv(slideIndex);
-      return slideIndex;
-    }
-    
   });
   
   $( ".flex-prev" ).click(function() {
-    var backSlideImage = (slideIndex)%10
-    if (backSlideImage==1){
-      if(1<i){
-        i--;
-        var transform =-800*(i-1);
-        document.body.style.setProperty('--txx',transform+'px');
-        $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
-        $scope.currentDiv(i*10);
-        return i;
-      }
-     
-    }else{
-      if(slideIndex>1){
-        slideIndex--;
-        $scope.currentDiv(slideIndex);
-        return slideIndex;
-      }
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
     }
   });
-
 }
-
 if(window.screen.availWidth <=440){
+  console.log(window.screen.availWidth);
 
   $( ".flex-next" ).click(function() {
-    console.log(window.screen.availWidth);
-    if($scope.imagesData.images.length>3){
-      var totalSlides=($scope.imagesData.images.length)/3;
-     }
-     else{
-      var totalSlides=1;
-     }
-    var onSlideImage = (slideIndex+1)%3
-
-    if(onSlideImage==1){
-      if (totalSlides>i){
-        var transform=-240*i;
-        document.body.style.setProperty('--stx',transform+'px');
-        $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
-        $scope.currentDiv((i*3)+1);
-
-        i++;
-        return i;
-      } 
-    }
-    else if(totalSlides< i) {
-      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-      $scope.currentDiv(1);
-      i=1;
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
+  
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i++;
       return i;
-    }
-    else{
-      slideIndex++;
-      $scope.currentDiv(slideIndex);
-      return slideIndex;
+    } 
+  
+    if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==2)){
+  
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==3)){
+  
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==4)){
+  
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==5)){
+  
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==6)){
+  
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==7)){
+  
+      $(".demo").css("transform","translate3d(-2000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      i=0;
+      return i;
     }
   });
   
   $( ".flex-prev" ).click(function() {
-
-    var backSlideImage = (slideIndex)%3
-    if (backSlideImage==1){
-      if(1<i){
-        i--;
-        var transform =-240*(i-1);
-        document.body.style.setProperty('--stx',transform+'px');
-        $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
-        $scope.currentDiv(i*3);
-        return i;
-      }
-     
-    }else{
-      if(slideIndex>1){
-        slideIndex--;
-        $scope.currentDiv(slideIndex);
-        return slideIndex;
-      }
+  
+    if ($( ".demo" ).css( "transform","translate3d(-2000px, 0px, 0px)") && (i==7)){
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)") && (i==6)){
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)") && (i==5)){
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)") && (i==4)){
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)") && (i==3)){
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
     }
   });
-
 }
-//   var i=0;
-// if(window.screen.availWidth >=440){
-//   console.log(window.screen.availWidth);
-//   $( ".flex-next" ).click(function() {
-//     if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
-  
-//       $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-  
-//     if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==1)){
-  
-//       $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     else {
-//       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-//       i=0;
-//       return i;
-//     }
-//   });
-  
-//   $( ".flex-prev" ).click(function() {
-  
-//     if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
-//       $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-  
-//     if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
-//       $(".demo").css("transform","translate3d(0px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-//     else {
-//       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-//     }
-//   });
-// }
-// if(window.screen.availWidth <=440){
-//   console.log(window.screen.availWidth);
-
-//   $( ".flex-next" ).click(function() {
-//     if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
-  
-//       $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-  
-//     if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==1)){
-  
-//       $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==2)){
-  
-//       $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     if (($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==3)){
-  
-//       $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     if (($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==4)){
-  
-//       $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     if (($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==5)){
-  
-//       $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     if (($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==6)){
-  
-//       $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     if (($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==7)){
-  
-//       $(".demo").css("transform","translate3d(-2000px, 0px, 0px)");
-//       i++;
-//       return i;
-//     } 
-//     else {
-//       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-//       i=0;
-//       return i;
-//     }
-//   });
-  
-//   $( ".flex-prev" ).click(function() {
-  
-//     if ($( ".demo" ).css( "transform","translate3d(-2000px, 0px, 0px)") && (i==7)){
-//       $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-  
-//     if ($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)") && (i==6)){
-//       $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-//     if ($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)") && (i==5)){
-//       $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-//     if ($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)") && (i==4)){
-//       $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-//     if ($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)") && (i==3)){
-//       $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-//     if ($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)") && (i==2)){
-//       $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-//     if ($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)") && (i==1)){
-//       $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
-//       i--;
-//       return i;
-//     } 
-//     else {
-//       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-//     }
-//   });
-// }
 
 //+++++++++++
-var str = document.location.search;
-var key = str.split("?");
-var key1 = key[1].split("=");
-console.log("key1",key1[0]);
 
 
 $scope.loadmoredeals = function() {
@@ -617,13 +412,6 @@ $scope.showDetail=function(hotel_id){
   
 }
 
-//for business detail page
-// $scope.showBusinessDetail=function(hotel_id){
-//   window.open('/business/hotel/'+hotel_id,'_self');
-//   console.log(hotel_id);
-  
-// }
-
 $scope.hotelData = [];
 
 
@@ -634,7 +422,6 @@ $scope.getHotelsData = function(cb){
 
   let searchURL = api_url + '/api/v1/hotel'+document.location.search
   console.log("searchurl",searchURL);
- 
   
   Object.keys($scope.hotel).forEach(function(param){
     console.log($scope.hotel[param]);
@@ -669,9 +456,6 @@ $scope.loadMoreHotelsData = function(){
 
 
 $scope.getHotelsData();
-// if(key1[0]=='name'){
-//   document.location.search = '?city=' + $scope.hotelData[0].city;
-// }
 
 //for more deals tab  
   $scope.show = function() {
@@ -762,7 +546,7 @@ $scope.getHotelsData();
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
-  var api_url = 'http://139.59.51.174';
+  var api_url = 'http://139.59.51.174/';
 
   $scope.showCreate=function(){
     $scope.hotelDetail=true;
@@ -1445,8 +1229,3 @@ if(window.screen.availWidth <=440){
 
 
 }])
-
-
- 
-
-
