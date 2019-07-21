@@ -42,7 +42,7 @@
                                     <div class="row">
                                         <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)" onmouseout="clearCoor()">
                                             
-                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
+                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" ng-keypress="($event.which === 40)?foo(hotel.search)" placeholder="Where Do You Wanna Visit ? .... ">
                                         
                                         </div>
                                         
@@ -104,14 +104,14 @@
                                 <li ng-repeat="hotel in hotels" style="width: 270px; float: left; display: block;">
                                     <article class="box">
                                         <figure>
-                                            <a href="#" class=""><img style="height:150px"  alt="" src="[[hotel.images[0].image_url]]"></a>
+                                            <a href="#" class=""><img style="height:150px"  alt="" src="http://[[hotel.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
                                             <!-- <span class="price">
                                                 <small>avg/night</small>
                                                 ₹[[hotel.deals[0].price]]
                                             </span> -->
-                                            <h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
+                                            <a ng-click="showBusinessDetail(hotel.id)"></a><h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
                                             <!-- <div class="feedback">
                                                 <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
                                                 <span class="review">270 reviews</span>
