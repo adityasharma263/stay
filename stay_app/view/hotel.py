@@ -102,6 +102,7 @@ def hotel_api():
             q = q.filter(Hotel.city.ilike('%' + city + '%'))
             # q = q.filter(func.lower(Hotel.city) == func.lower(city))
         if name:
+            q = q.filter(Hotel.name.ilike('%' + name + '%'))
             q = q.filter(func.lower(Hotel.name) == func.lower(name))
         if rating:
             q = q.filter(Hotel.rating >= rating)
