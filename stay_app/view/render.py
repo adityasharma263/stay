@@ -7,13 +7,16 @@ import requests
 import datetime
 import json
 
+
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 
+
 @app.errorhandler(400)
 def page_not_found():
     return render_template("404.html"), 400
+
 
 # @app.route('/payment', methods=['GET','POST'])
 # def payment():
@@ -121,8 +124,6 @@ def Business_partner_care():
 @app.route('/press-release', methods=['GET'])
 def Business_press_release():
     return render_template('hotel/footer_pages/press-release.html')
-
-
 
 
 @app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
