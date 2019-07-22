@@ -1190,6 +1190,7 @@ $scope.createHotel = function() {
   $scope.imagesData={};
   $scope.similarhotels=[];
   $scope.limit=10;
+  $scope.roomPrice={};
   $scope.deallimit=1;
   var api_url = 'http://139.59.51.174';
 

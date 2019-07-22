@@ -81,6 +81,10 @@ def Business_hotel_detail(hotel_id):
         hotel_data = hotel_data["result"]["hotel"][0]
     else:
         hotel_data = {}
+    for room in hotel_data['rooms']:
+        for deal in room["deals"]:
+            if deal['business_deal'] == True:
+                print(deal, "dfgdfgdf")
     return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
 
 @app.route('/business/hotel/booking/<room_id>', methods=['GET'])

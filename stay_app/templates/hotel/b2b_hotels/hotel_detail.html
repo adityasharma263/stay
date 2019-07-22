@@ -306,6 +306,8 @@
                                         </form>
                                         <h2>Available Rooms</h2>
                                         <div class="room-list listing-style3 hotel">
+                                             <!-- <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
+                                                            <span class="price"  ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span></div> -->
                                             <article class="box" ng-repeat="room in {{hotel_data.rooms}} | limitTo:limit">
                                                 <figure class="col-sm-4 col-md-3">
                                                     <a  href="" title=""><img width="230" height="161" src="http://[[room.image_url]]" alt="[[room.other_room_type]]"></a>
@@ -315,7 +317,7 @@
                                                         <div>
                                                             <div class="box-title">
                                                                 <h4 class="title" >[[room.other_room_type]]</h4>
-                                                              
+                                                                
 
                                                                 <dl class="description">
                                                                     <dt>Max Guests:</dt>
@@ -324,8 +326,10 @@
                                                             </div>
                                                            
                                                         </div>
-                                                        <div class="price-section">
-                                                            <span class="price" ><small> Mini. PER/NIGHT</small>₹ [[(room.deals | orderBy:'price')[0].price]]</span>
+                                                        <div class="price-section" ng-repeat="deal in [[room.deals]]">
+                                                            <div ng-if="[[deal.business_deal]]=='False'">
+                                                                <span class="price" ><small> Mini. PER/NIGHT</small>₹ [[deal.price]]</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div>
@@ -852,6 +856,9 @@
                             
                             </div>
                         </div>
+
+                        <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
+                                <span class="price"  ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span></div>
                         <div class="sidebar col-md-3">
                                 <div class="hotel-list">
                                         <div class="row image-box hotel listing-style1">
@@ -911,7 +918,7 @@
                                             <div class="details">
                                                 <h5 class="box-title " style="text-transform: capitalize"><a >[[data.name]]</a></h5>
                                                 <label class="price-wrapper">
-                                                    <span class="price-per-unit">₹ [[(data.rooms[0].deals | orderBy:'price')[0].price]]</span>avg/night
+                                                    <span class="price-per-unit">₹ [[(data.rooms[0].deals)[0].price]]</span>avg/night
                                                 </label>
                                             </div>
                                         </div>

@@ -3,15 +3,7 @@
 
     
 
-    <div class="loader hidden">
-            <img src="/images/loader.gif" alt="loading" />
-        </div>
-        <script type="text/javascript">
-	
-		window.addEventListener("load", function(){
-		const loader = document.querySelector(".loader");
-        loader.className += " hidden";
-});	
+    
 	</script>
             <div class="search-box-wrapper">
                
@@ -55,7 +47,7 @@
                                     <div class="row">
                                         <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)">
                                             
-                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" ng-keypress="($event.which === 40)?foo(hotel.search)" placeholder="Where Do You Wanna Visit ? .... ">
+                                            <input type="text" class="input-text full-width" style="border-radius: 5px;" ng-keyup="[search() , show()]" ng-model="hotel.search" ng-keypress="($event.which === 40)?foo(hotel.search)" placeholder="Where Do You Wanna Visit ? .... ">
                                         
                                         </div>
                                         
@@ -79,19 +71,28 @@
                                     width: 96%;
                                     padding: 0;
                                     position: absolute;">
+                                <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+                               
+                                        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+                               
+                                        crossorigin="anonymous">
+                               
+                                </script>
+                                
+                                <script src="dist/arrow-table.js"></script>
+                                
 
-                                    
-                                    
+                                <table id="example" class="table table-hover" class="input-text full-width" style="background-color:#f9f9f9; overflow: hidden; border-radius: 5px; box-shadow: 0 16px 16px 16px rgba(0, 0, 0, 0.8);">
 
-                                <table class="table table-hover loader hidden " style="background-color:#f9f9f9; border-radius: 2px; overflow: hidden; transition-delay: 6s;">
-
-                                        <tbody>
-                                          <tr ng-repeat="city in cities | limitTo:3 | uppercase">
-                                            <td ng-click="result([[city]],'city')">[[city]]</td>
+                                        <tbody class="input-text full-width"" >
+                                          <tr ng-repeat="city in cities | limitTo:2" >
+                                            <td style="border: 0" id="start" ng-click="result([[city]],'city')">
+                                                <i class="soap-icon-departure" style="color: #01b7f2; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
 
                                           </tr>
-                                          <tr ng-repeat="name in names | limitTo:3">
-                                            <td ng-click="result([[name]],'name')">[[name]]</td>
+                                          <tr ng-repeat="name in names | limitTo:2">
+                                            <td style="border: 0" ng-click="result([[name]],'name')">
+                                                <i class="soap-icon-address" style="color:#01b7f2; font-size: 16px;"></i> &nbsp [[name]]</td>
 
                                           </tr>
                                           <tr ng-if="resp">
