@@ -1,5 +1,47 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}staylistController{% endblock %} {% block
     content%}
+
+    <style media="screen">
+            .loader{
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                }
+            .loader > img{
+                width: 100px;
+                }
+        
+            .loader.hidden{
+                animation: fadeOut 50s;
+                animation-fill-mode: forwards;
+                }
+            @keyframes fadeOut {
+                100%{
+                   opacity: 0;
+                   visibility: hidden;
+                               
+                    }		
+                }
+        </style>
+
+    <div class="loader hidden">
+            <img src="/images/loader.gif" alt="loading" />
+        </div>
+        <script type="text/javascript">
+	
+		window.addEventListener("load", function(){
+		const loader = document.querySelector(".loader");
+        loader.className += " hidden";
+});	
+    </script>
+    
         <div class="page-title-container">
             <div class="container">
                 <div class="page-title pull-left">
@@ -267,7 +309,7 @@
                                                         <!-- <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                             -->
                                                     </div>
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                                            <span class="price"  ng-if="[[deal.business_deal]]" aria-hidden="false" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
+                                                            <span class="price"  ng-if="deal.business_deal == true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
                                                             <a class="button btn-small green" style="padding: 0px 10px" ng-click="bookingPage(room.id)" >Book Now</a>
                                                     </div>    
                                                 </div>

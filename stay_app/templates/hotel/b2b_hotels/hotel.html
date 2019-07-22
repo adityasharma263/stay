@@ -1,5 +1,18 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}stayController{% endblock %} {% block
     content%}
+
+    
+
+    <div class="loader hidden">
+            <img src="/images/loader.gif" alt="loading" />
+        </div>
+        <script type="text/javascript">
+	
+		window.addEventListener("load", function(){
+		const loader = document.querySelector(".loader");
+        loader.className += " hidden";
+});	
+	</script>
             <div class="search-box-wrapper">
                
 
@@ -40,7 +53,7 @@
                             <div class="search-box" style="margin-bottom:0px;">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)" onmouseout="clearCoor()">
+                                        <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)">
                                             
                                             <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" ng-keypress="($event.which === 40)?foo(hotel.search)" placeholder="Where Do You Wanna Visit ? .... ">
                                         
@@ -54,19 +67,26 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="row col-md-8" id="demo" style="margin-left:10px; top:-19px; z-index:999"  onmouseover="myFunction(event)" onmouseout="clearCoor()">
+                            
+                            <div class="row col-md-8" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)" onmouseout="clearCoor()">
                                 <div class="col-sm-12" style="position: relative; z-index: 99;"> 
                                     <div style="max-height:100px; text-align: left;
                                     margin: 0;
+                                    border-radius: 8px;
                                     box-sizing: border-box;
                                     z-index: 99;
+                                    font-size: 12px;
                                     width: 96%;
                                     padding: 0;
                                     position: absolute;">
-                                <table class="table table-hover " style="background-color:white">
+
+                                    
+                                    
+
+                                <table class="table table-hover loader hidden " style="background-color:#f9f9f9; border-radius: 2px; overflow: hidden; transition-delay: 6s;">
 
                                         <tbody>
-                                          <tr ng-repeat="city in cities | limitTo:3">
+                                          <tr ng-repeat="city in cities | limitTo:3 | uppercase">
                                             <td ng-click="result([[city]],'city')">[[city]]</td>
 
                                           </tr>

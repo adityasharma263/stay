@@ -1,5 +1,18 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}hotelController{% endblock %} {% block
     content%}
+
+
+    <div class="loader hidden">
+            <img src="/images/loader.gif" alt="loading" />
+        </div>
+        <script type="text/javascript">
+	
+		window.addEventListener("load", function(){
+		const loader = document.querySelector(".loader");
+        loader.className += " hidden";
+});	
+    </script>
+    
             <div class="page-title-container">
                 <div class="container">
                     <div class="page-title pull-left">
@@ -207,14 +220,14 @@
                                     </div>
                                     <div id="hotel-Booking" class="tab-pane fade">
                                         <h3>Call Hotel</h3>
-                                        <a href="tel:{{hotel_data.phone}}">
+                                        <a>
                                             <address class="contact-details">
                                                 <span class="contact-phone"><i class="soap-icon-phone"></i> +91 {{hotel_data.phone}}</span>
                                             </address>
                                         </a>
                                         <hr>
                                         <h3>Hotel Address</h3>
-                                        <a href="tel:{{hotel_data.address}}">
+                                        <a>
                                             <address class="contact-details">
                                                 <span class="contact-phone"><i class="soap-icon-address"></i> {{hotel_data.address}}</span>
                                             </address>
@@ -339,87 +352,131 @@
                                         
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.wifi" aria-hidden="true">
+                                                {% if hotel_data.rooms[0].facilities.wifi %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.tv" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.tv %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
+                                            {% endif %}
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Central heating</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.electric_kettle" aria-hidden="true">
+                                            {% if hotel_data.rooms[0].facilities.electric_kettle %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.ac" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.ac %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.jacuzzi" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.jacuzzi %}    
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with bathtub</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.bathroom_with_shower" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_with_shower %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
                                             </li>
+                                            {% endif %}
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-winebar"></i>Mini Bar</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-smoking"></i>Cosmetic mirror</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.desk" aria-hidden="true">
+                                            {% if hotel_data.rooms[0].facilities.desk %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-minus"></i>Desk</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.hairdryer" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.hairdryer %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-horn"></i>Hairdryer</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.room_safe" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.room_safe %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-securevault"></i>Room safe</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.telephone" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.telephone %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.food_serve_at_room" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.food_serve_at_room %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-food"></i>Food Serve at Room</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.bathroom_cosmetics" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_cosmetics %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-check-1"></i>Bathroom Cosmetics</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.bathroom_nightie" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_nightie %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-features"></i>Bathroom Nightie</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.ironing_facility" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.ironing_facility %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-flexible"></i>Ironing Facility</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.weighing_machine" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.weighing_machine %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-clock"></i>Weighing Machine</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.wardrobes_closet" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.wardrobes_closet %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-trunk-2"></i>Wardrobes / Closet</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.view">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.view %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-beach"></i>View </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.room_seating_area" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.room_seating_area %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-passenger"></i>Room Seating Area</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.room_slipper" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.room_slipper %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-ski"></i>Room Slipper</div>
                                             </li>
+                                            {% endif %}
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-toiletries"></i>Free Toiletrees</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Wake-Up Service </div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.morning_newspaper" aria-hidden="true">
+                                            {% if hotel_data.rooms[0].facilities.morning_newspaper %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-magazine-1"></i>Morning Newspaper </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.bathroom_towels" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_towels %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-shopping-2"></i>Bathroom Towels </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-if="hotel_data.rooms[0].facilities.free_evening_snacks" aria-hidden="true">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.free_evening_snacks %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
+                                            {% endif %}
                                             
                                         </ul>
                                         <br>
@@ -801,18 +858,14 @@
                                             <div class="col-sm-6 col-md-12">
                                                 <article class="box">
                                                     <figure>
-                                                        <a href="" ng-repeat="image in roomData.hotelData.images" class="hover-effect popup-gallery"><img width="270" height="161" alt="" src="hotel_data.rooms[0].hotel.image"></a>
+                                                        <a href="" ng-repeat="image in {{hotel_data.images}} | limitTo : 1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
                                                     </figure>
                                                     <div class="details">
                                                         <span class="price">
                                                             <small></small>
                                                             ₹[[deal.price]]
                                                         </span>
-                                                        <h4 class="box-title">{{hotel_data.name}}<small>{{hotel_data.city}}</small></h4>
-                                                        <!-- <div class="feedback">
-                                                            <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
-                                                            <span class="review">270 reviews</span>
-                                                        </div> -->
+                                                        <h4 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
                                                         <!-- <p class="description">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p> -->
                                                         <div class="action">
                                                             <a class="button btn-small" href="">Add To Cart</a>
