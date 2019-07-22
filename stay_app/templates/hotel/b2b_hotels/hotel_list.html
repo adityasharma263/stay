@@ -1,5 +1,47 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}staylistController{% endblock %} {% block
     content%}
+
+    <style media="screen">
+            .loader{
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                }
+            .loader > img{
+                width: 100px;
+                }
+        
+            .loader.hidden{
+                animation: fadeOut 50s;
+                animation-fill-mode: forwards;
+                }
+            @keyframes fadeOut {
+                100%{
+                   opacity: 0;
+                   visibility: hidden;
+                               
+                    }		
+                }
+        </style>
+
+    <div class="loader hidden">
+            <img src="/images/loader.gif" alt="loading" />
+        </div>
+        <script type="text/javascript">
+	
+		window.addEventListener("load", function(){
+		const loader = document.querySelector(".loader");
+        loader.className += " hidden";
+});	
+    </script>
+    
         <div class="page-title-container">
             <div class="container">
                 <div class="page-title pull-left">
@@ -177,44 +219,14 @@
                                     <div>
                                         <article class="box" ng-if="[[room.basic_room]]">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="overflow: hidden; height:150px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
+                                                <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:160px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="myModal" role="dialog">
+                                                <div class="modal fade" id="[[hotel.id]]" role="dialog">
                                                     <div class="modal-dialog">
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
                                                         
 
-                                                            <div id="photos-tab" class="tab-pane fade active in">
-                                                                <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
-                                                                    
-                                                                <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                                                                    <ul class="slides slider" style="width: 4000%; transition-duration: 0.6s;">
-                                                                        <!-- ngRepeat: image in roomData.hotelData.images --><li class="mySlides ng-scope" ng-repeat="image in roomData.hotelData.images" style=" float: left; display: block;"><img class="img" src="https://imgio.trivago.com/partnerimages/28/65/286549466_l.jpeg" alt="" draggable="false"></li><!-- end ngRepeat: image in roomData.hotelData.images --><li class="mySlides ng-scope" ng-repeat="image in roomData.hotelData.images" style=" float: left; display: block;"><img class="img" src="https://imgio.trivago.com/uploadimages/26/26/26261124_l.jpeg" alt="" draggable="false"></li><!-- end ngRepeat: image in roomData.hotelData.images --><li class="mySlides ng-scope" ng-repeat="image in roomData.hotelData.images" style=" float: left; display: block;"><img class="img" src="https://imgio.trivago.com/partnerimages/28/65/286549450_l.jpeg" alt="" draggable="false"></li><!-- end ngRepeat: image in roomData.hotelData.images -->
-                                                                    </ul>
-                                                                </div>
-                                                                    <!-- <ol class="flex-control-nav flex-control-paging">
-                                                                        <li><a class="">1</a></li>
-                                                                        <li><a class="">2</a></li>
-                                                                        <li><a class="flex-active">3</a></li>
-                                                                    </ol><ul class="flex-direction-nav">
-                                                                        <li><a class="flex-prev" href="#">Previous</a></li>
-                                                                        <li><a class="flex-next" href="#">Next</a></li>
-                                                                    </ul> -->
-                                                                </div>
-                                                                <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
-                                                                    
-                                                                <div class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 3000%; ">
-                                                                        <!-- ngRepeat: image in roomData.hotelData.images --><li class="demo w3-opacity w3-hover-opacity-off  ng-scope" ng-click="currentDiv($index+1)" ng-repeat="image in roomData.hotelData.images" style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img class="img" src="https://imgio.trivago.com/partnerimages/28/65/286549466_l.jpeg" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li><!-- end ngRepeat: image in roomData.hotelData.images --><li class="demo w3-opacity w3-hover-opacity-off  ng-scope" ng-click="currentDiv($index+1)" ng-repeat="image in roomData.hotelData.images" style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img class="img" src="https://imgio.trivago.com/uploadimages/26/26/26261124_l.jpeg" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li><!-- end ngRepeat: image in roomData.hotelData.images --><li class="demo w3-opacity w3-hover-opacity-off  ng-scope" ng-click="currentDiv($index+1)" ng-repeat="image in roomData.hotelData.images" style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img class="img" src="https://imgio.trivago.com/partnerimages/28/65/286549450_l.jpeg" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li><!-- end ngRepeat: image in roomData.hotelData.images -->
-                                                                    </ul>
-                                                                </div>
-                                                                
-                                                                <ul class="flex-direction-nav">
-                                                                    <li><a class="flex-prev">Previous</a></li>
-                                                                    <li><a class="flex-next">Next</a></li>
-                                                                </ul>
-                                                                </div>
-                                                            </div>
 
                                                         </div>
                                                     
@@ -225,11 +237,11 @@
                                             <div class="details col-sm-7 col-md-8">
                                                 <div>
                                                     <div>
-                                                        <h4 class="box-title">[[hotel.name]] 
+                                                        <h4 ng-click="showBusinessDetail(hotel.id)" style="cursor: pointer;" class="box-title">[[hotel.name]]  
                                                             <small>
                                                             
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                                                        <span id="latitude" style="cursor:pointer" ng-click="openMap(hotel)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.city]]</span></small></h4>
+                                                        <span id="latitude" style="cursor:pointer" ng-click="showBusinessDetail(hotel.id)"  data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.city]]</span></small></h4>
                                                             
                                                         <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
@@ -282,13 +294,14 @@
                                                 </div>
                                                 
                                                 <div >
+                                                    <span class="amenities" ng-repeat="room in rooms.room_type">[[room.room_type]]</span>
                                                     <div >
                                                         <!-- <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center> -->
                                                         <div class="amenities" style="float:left">
                                                             <i class="soap-icon-wifi circle" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
                                                             <i class="soap-icon-breakfast circle" ng-if="room.breakfast" aria-hidden="true"></i>
                                                             <i class="soap-icon-couples circle" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
-                                                            <i class="soap-icon-restaurant circle" ng-if="hotel.amenities.restaurant" aria-hidden="true"></i>
+                                                            <!-- <i class="soap-icon-restaurant circle" ng-if="hotel.amenities.restaurant" aria-hidden="true"></i> -->
                                                             <i class="soap-icon-fitnessfacility circle" ng-if="hotel.amenities.gym" aria-hidden="true"></i>
                                                             <i class="soap-icon-swimming circle" ng-if="hotel.amenities.indoor_swimming_pool" aria-hidden="true"></i>
                                                             <i class="soap-icon-swimming circle" ng-if="hotel.amenities.outdoor_swimming_pool" aria-hidden="true"></i>
@@ -296,8 +309,8 @@
                                                         <!-- <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                             -->
                                                     </div>
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                                            <span class="price"  ng-if="[[deal.business_deal]]" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
-                                                            <a class="button btn-small green" style="padding: 0px 10px" ng-click="showBusinessDetail(hotel.id)">View Detail</a>
+                                                            <span class="price"  ng-if="deal.business_deal == true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
+                                                            <a class="button btn-small green" style="padding: 0px 10px" ng-click="bookingPage(room.id)" >Book Now</a>
                                                     </div>    
                                                 </div>
                                                
@@ -404,6 +417,8 @@
             // });
         // });
     </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+
 
 </body>
 </html>

@@ -1,5 +1,18 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}hotelController{% endblock %} {% block
     content%}
+
+
+    <div class="loader hidden">
+            <img src="/images/loader.gif" alt="loading" />
+        </div>
+        <script type="text/javascript">
+	
+		window.addEventListener("load", function(){
+		const loader = document.querySelector(".loader");
+        loader.className += " hidden";
+});	
+    </script>
+    
             <div class="page-title-container">
                 <div class="container">
                     <div class="page-title pull-left">
@@ -107,125 +120,20 @@
                 <div class="container" jstcache="0">
                     <div class="row" jstcache="0">
                         <div id="main" class="col-md-9" jstcache="0">
-                            <div class="tab-container style1" id="hotel-main-content" jstcache="0">
-                                <ul class="tabs">
-                                    <li class="active"><a data-toggle="tab" href="#photos-tab" aria-expanded="true">photos</a></li>
-                                    <li class=""><a data-toggle="tab" href="#map-tab" aria-expanded="false">map</a></li>
-                                    <!-- <li class=""><a data-toggle="tab" href="#steet-view-tab" aria-expanded="false">street view</a></li> -->
-                                    
-                                    <li class="pull-right"><a class="button btn-small yellow-bg white-color" href="[[deal.hotel_url]]">Book Now</a></li>
-                                    
-                                    <!-- <li class="pull-right"><a class="button btn-small green-bg white-color" data-toggle="modal" data-target="#shareDetail" >Share Details</a></li> -->
-                                </ul>
-                                <div class="tab-content" jstcache="0">
-                                    <div id="photos-tab" class="tab-pane fade active in">
-                                        <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
-                                            
-                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                                            <ul class="slides slider" style="width: 4000%; transition-duration: 0.6s;">
-                                                <li class="mySlides" ng-repeat="image in {{hotel_data.images}}"  style=" float: left; display: block;" ><img class="img" src="http://[[image.image_url]]" alt="" draggable="false"></li>
-                                            </ul>
-                                        </div>
-                                            <!-- <ol class="flex-control-nav flex-control-paging">
-                                                <li><a class="">1</a></li>
-                                                <li><a class="">2</a></li>
-                                                <li><a class="flex-active">3</a></li>
-                                            </ol><ul class="flex-direction-nav">
-                                                <li><a class="flex-prev" href="#">Previous</a></li>
-                                                <li><a class="flex-next" href="#">Next</a></li>
-                                            </ul> -->
-                                        </div>
-                                        <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
-                                            
-                                        <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 3000%; ">
-                                                <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in {{hotel_data.images}}"  style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img  class="img" src="http://[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
-                                            </ul>
-                                        </div>
-
-
-                                        
-
-
-                                        <!-- <ol class="flex-control-nav flex-control-paging">
-                                            <li><a class="flex-active">1</a></li>
-                                            <li><a class="">2</a></li>
-                                        </ol> -->
-                                        <ul class="flex-direction-nav">
-                                            <li><a class="flex-prev" >Previous</a></li>
-                                            <li><a class="flex-next"  >Next</a></li>
-                                        </ul>
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                    <div id="map-tab" class="tab-pane fade" style="height: 522px; position: relative; overflow: hidden;">
-                                            <div id="map" class="gm-style" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
-                                            </div>
-                                    </div>
-                                    
-                                    <div id="steet-view-tab" class="tab-pane fade" style="height: 500px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;" jstcache="0">
-                                        
-                                        <div class="gm-style" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;" jstcache="0"><div tabindex="-1" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; background-color: rgb(229, 227, 223);" jstcache="0"><div style="z-index: 1; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; touch-action: none;" jstcache="0"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div><div class="gmnoprint" style="position: absolute; left: 0px; top: 0px; z-index: 2; font-family: Roboto, Arial, sans-serif;"><svg version="1.1" width="0px" height="0px" viewBox="0 0 0 0" style="position: absolute; left: 0px; top: 0px; pointer-events: none;"></svg></div><div jstcache="0" style="width: 100%; height: 100%;"><div jstcache="5" aria-label="Street View" tabindex="0" jsaction="click: scene.viewport;dblclick: scene.viewport;mousedown: scene.viewport;mousemove: scene.viewport;mouseup: scene.viewport;mouseover: scene.viewport;mouseout: scene.viewport;touchstart: scene.viewport;touchmove: scene.viewport;touchend: scene.viewport;pointerdown: scene.viewport;pointermove: scene.viewport;pointerup: scene.viewport;pointercancel: scene.viewport;MSPointerDown: scene.viewport;MSPointerMove: scene.viewport;MSPointerUp: scene.viewport;MSPointerCancel: scene.viewport;contextmenu: scene.viewport;keydown: scene.viewport;keyup: scene.viewport;wheel: scene.viewport;mousewheel: scene.viewport;DOMMouseScroll: scene.viewport;" class="widget-scene" style="cursor: auto;"> <canvas width="1" height="1" id="" class="widget-scene-canvas" style="width: 0px; height: 0px;"></canvas> <div id="" class="widget-scene-imagery-render" style="width: 0px; height: 0px; display: none;"></div> <div class="widget-scene-effects noprint"></div> </div></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps/@48.8565771,2.3522607,0a,73.7y,34h,100t/data=!3m4!1e1!3m2!1sAF1QipNiu3bZQ4wsqb_rJZTT2jwkfwg0-E70itFtVgl9!2e10?source=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img alt="" src="./Detailed View_files/google_white5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 0px; height: 0px; position: absolute; left: 5px; top: 5px;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">© Robert Koprowski</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000;"><img alt="" src="./Detailed View_files/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><img alt="" src="./Detailed View_files/transparent.png" draggable="false" style="width: 37px; height: 37px; user-select: none; border: 0px; padding: 0px; margin: 0px; position: absolute; right: 0px; top: 0px; z-index: 10001; cursor: pointer;"></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px; width: 12px;"><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="text-decoration: none; cursor: pointer;">Map Data</a><span style="display: none;">© Robert Koprowski</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">© Robert Koprowski</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(255, 255, 255);">Terms of Use</a></div></div><button draggable="false" title="Toggle fullscreen view" aria-label="Toggle fullscreen view" type="button" style="background: none rgb(34, 34, 34); border: 0px; margin: 10px 20px; padding: 0px; position: absolute; cursor: pointer; user-select: none; width: 25px; height: 25px; overflow: hidden; top: 0px; right: 0px;"><img alt="" src="./Detailed View_files/sv9.png" draggable="false" class="gm-fullscreen-control" style="position: absolute; left: 0px; top: -86px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></button><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="0" controlheight="0" style="margin: 10px; user-select: none; position: absolute; display: none; bottom: 0px; right: 0px;"><div class="gmnoprint" style="display: none; position: absolute;"><div draggable="false" style="user-select: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(34, 34, 34);"><button draggable="false" title="Zoom in" aria-label="Zoom in" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none;"><div style="overflow: hidden; position: absolute;"><img alt="" src="./Detailed View_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(26, 26, 26);"></div><button draggable="false" title="Zoom out" aria-label="Zoom out" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none;"><div style="overflow: hidden; position: absolute;"><img alt="" src="./Detailed View_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button></div></div><div draggable="false" controlwidth="25px" style="user-select: none; font-family: Roboto, Arial, sans-serif; font-size: 11px; width: 25px; text-align: center; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; cursor: pointer; display: none; position: absolute;"></div></div><div dir="ltr" jstcache="0" style="z-index: 24601; position: absolute; display: none; left: 0px; top: 0px;"><div jstcache="37" class="gm-iv-container gm-iv-small-container" jsan="t-_EPk2VOG1I0,7.gm-iv-container,7.gm-iv-small-container"> <div jsaction="closeControl.click" class="gm-iv-close"> <div class="gm-iv-back"> <div jstcache="34" class="gm-iv-back-icon-background gm-iv-back-icon" jsan="7.gm-iv-back-icon-background,7.gm-iv-back-icon"> </div> </div> </div> </div></div><div dir="ltr" style="position: absolute; left: 0px; top: 0px;" jstcache="0"><div jstcache="65" class="gm-iv-address" jsan="t-bDow0pNywiw,7.gm-iv-address"> <div class="gm-iv-address-description"> <div jstcache="39" class="" style="display: none;"></div> <div jstcache="40" class="" style="display: none;"></div> <div jstcache="41" class="gm-iv-profile-url" style=""> <a target="_blank" jstcache="42" href="http://maps.google.com/maps/contrib/107556897951100465158/photos"> <div jstcache="43" class="gm-iv-profile-link" jsan="7.gm-iv-profile-link">                                                               </div> </a> </div> </div> <div jstcache="44" class="gm-iv-address-link"> <a target="_blank" jstcache="45" href="https://www.google.com/maps/@48.8565771,2.3522607,0a,73.7y,34h,100t/data=!3m4!1e1!3m2!1sAF1QipNiu3bZQ4wsqb_rJZTT2jwkfwg0-E70itFtVgl9!2e10?source=apiv3"> View on Google Maps </a> </div> <div jstcache="46" class="gm-iv-address-custom" style="display:none"> <p>Custom Imagery</p> </div> <div jstcache="47" class="gm-iv-vertical-separator" style=""></div> <div jstcache="48" class="gm-iv-marker" style=""> <a target="_blank" jstcache="49" href="https://www.google.com/maps/@48.85657705898899,2.3522607312700075,13z?hl=en-US&amp;gl=US"> <div class="gm-iv-marker-icon gm-iv-marker-icon-background"></div> </a> </div> <div jstcache="50" class="gm-iv-timeline" style="display:none"> <div class="gm-iv-horizontal-separator"></div> <div jstcache="51" jsaction="timeline.show" class="gm-iv-timeline-wrapper" style="display:none"> <div jstcache="52" class="gm-iv-timeline-icon-wrapper" style="display:none"> <div class="gm-iv-timeline-icon gm-iv-timeline-icon-background"></div> </div> <div jstcache="53" class="gm-iv-timeline-description" style="display:none"> <div jstcache="54" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> <div class="gm-iv-timeline-description-separator">-</div> <div jstcache="55" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> </div> </div> <div jstcache="56" class="gm-iv-timeline-description" style="display:none"> <div jstcache="57" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> <div class="gm-iv-timeline-description-separator">-</div> <div jstcache="58" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> </div> </div> </div><div style="position: absolute; left: 0px; margin-top: -29px; width: 351px; height: 248px; display: none;"></div></div><div style="position: absolute; background-color: rgb(34, 34, 34); border-radius: 2px; width: 28px; height: 28px; margin-right: 10px; overflow: hidden; z-index: 1; display: none; bottom: 0px; right: 0px;"><img alt="" src="./Detailed View_files/sv9.png" draggable="false" style="position: absolute; left: -103px; top: -84px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div draggable="false" style="color: white; font-family: Roboto, Arial, sans-serif; background-color: black; padding: 4px; border: 2px solid white; user-select: none; display: none; position: absolute; left: 0px; top: 0px;">This image is no longer available</div><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report problems with Street View imagery to Google" style="text-decoration: none; color: rgb(255, 255, 255);" href="https://www.google.com/cbk?cb_client=apiv3&amp;output=report&amp;image_key=!1e10!2sAF1QipNiu3bZQ4wsqb_rJZTT2jwkfwg0-E70itFtVgl9&amp;cbp=1,34,,0,-10&amp;hl=en-US">Report a problem</a></div></div></div><div class="gm-style" jstcache="0" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;"><div tabindex="-1" jstcache="0" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; background-color: rgb(229, 227, 223);"><div jstcache="0" style="z-index: 1; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; touch-action: none;"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div><div jstcache="0" style="width: 870px; height: 500px;"><div jstcache="5" aria-label="Street View" tabindex="0" jsaction="click: scene.viewport;dblclick: scene.viewport;mousedown: scene.viewport;mousemove: scene.viewport;mouseup: scene.viewport;mouseover: scene.viewport;mouseout: scene.viewport;touchstart: scene.viewport;touchmove: scene.viewport;touchend: scene.viewport;pointerdown: scene.viewport;pointermove: scene.viewport;pointerup: scene.viewport;pointercancel: scene.viewport;MSPointerDown: scene.viewport;MSPointerMove: scene.viewport;MSPointerUp: scene.viewport;MSPointerCancel: scene.viewport;contextmenu: scene.viewport;keydown: scene.viewport;keyup: scene.viewport;wheel: scene.viewport;mousewheel: scene.viewport;DOMMouseScroll: scene.viewport;" class="widget-scene" style="cursor: auto;"> <canvas width="870" height="500" id="" class="widget-scene-canvas" style="width: 870px; height: 500px;"></canvas> <div id="" class="widget-scene-imagery-render" style="width: 0px; height: 0px; display: none;"></div> <div class="widget-scene-effects noprint"></div> </div></div><div class="gmnoprint" style="position: absolute; left: 0px; top: 0px; z-index: 2; font-family: Roboto, Arial, sans-serif;"><svg version="1.1" width="870px" height="500px" viewBox="0 0 870 500" style="position: absolute; left: 0px; top: 0px; pointer-events: none;"></svg></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps/@48.856614,2.3522222,0a,73.7y,34h,100t/data=!3m4!1e1!3m2!1sAF1QipP5oEspEfMSH0_IFikF-1qCllrIgB427YKzG606!2e10?source=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img alt="" src="./Detailed View_files/google_white5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 256px; height: 148px; position: absolute; left: 285px; top: 160px;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">© Virtual Shows &amp; Exhibitions</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000;"><img alt="" src="./Detailed View_files/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><img alt="" src="./Detailed View_files/transparent.png" draggable="false" style="width: 37px; height: 37px; user-select: none; border: 0px; padding: 0px; margin: 0px; position: absolute; right: 0px; top: 0px; z-index: 10001; cursor: pointer;"></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 160px; bottom: 0px; width: 144px;"><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="text-decoration: none; cursor: pointer; display: none;">Map Data</a><span>© Virtual Shows &amp; Exhibitions</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">© Virtual Shows &amp; Exhibitions</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; user-select: none; height: 14px; line-height: 14px; position: absolute; right: 89px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(255, 255, 255);">Terms of Use</a></div></div><button draggable="false" title="Toggle fullscreen view" aria-label="Toggle fullscreen view" type="button" style="background: none rgb(34, 34, 34); border: 0px; margin: 10px 20px; padding: 0px; position: absolute; cursor: pointer; user-select: none; width: 25px; height: 25px; overflow: hidden; top: 0px; right: 0px;"><img alt="" src="./Detailed View_files/sv9.png" draggable="false" class="gm-fullscreen-control" style="position: absolute; left: 0px; top: -86px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></button><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="28" controlheight="55" style="margin: 10px; user-select: none; position: absolute; bottom: 69px; right: 28px;"><div class="gmnoprint" controlwidth="28" controlheight="55" style="position: absolute; left: 0px; top: 0px;"><div draggable="false" style="user-select: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(34, 34, 34); width: 28px; height: 55px;"><button draggable="false" title="Zoom in" aria-label="Zoom in" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none; width: 28px; height: 27px; top: 0px; left: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img alt="" src="./Detailed View_files/tmapctrl.png" draggable="false" style="position: absolute; left: -60px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(26, 26, 26); top: 0px;"></div><button draggable="false" title="Zoom out" aria-label="Zoom out" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none; width: 28px; height: 27px; top: 0px; left: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img alt="" src="./Detailed View_files/tmapctrl.png" draggable="false" style="position: absolute; left: -60px; top: -15px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button></div></div><div draggable="false" controlwidth="25px" style="user-select: none; font-family: Roboto, Arial, sans-serif; font-size: 11px; width: 25px; text-align: center; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; cursor: pointer; display: none; position: absolute;"></div></div><div dir="ltr" jstcache="0" style="z-index: 24601; position: absolute; display: none; left: 0px; top: 0px;"><div jstcache="37" class="gm-iv-container gm-iv-small-container" jsan="t-_EPk2VOG1I0,7.gm-iv-container,7.gm-iv-small-container"> <div jsaction="closeControl.click" class="gm-iv-close"> <div class="gm-iv-back"> <div jstcache="34" class="gm-iv-back-icon-background gm-iv-back-icon" jsan="7.gm-iv-back-icon-background,7.gm-iv-back-icon"> </div> </div> </div> </div></div><div dir="ltr" style="position: absolute; left: 0px; top: 0px;" jstcache="0"><div jstcache="65" class="gm-iv-address" jsan="t-bDow0pNywiw,7.gm-iv-address"> <div class="gm-iv-address-description"> <div jstcache="39" class="" style="display: none;"></div> <div jstcache="40" class="" style="display: none;"></div> <div jstcache="41" class="gm-iv-profile-url" style=""> <a target="_blank" jstcache="42" href="http://maps.google.com/maps/contrib/117968437283177268289/photos"> <div jstcache="43" class="gm-iv-profile-link" jsan="7.gm-iv-profile-link">Virtual Shows &amp; Exhibitions</div> </a> </div> </div> <div jstcache="44" class="gm-iv-address-link"> <a target="_blank" jstcache="45" href="https://www.google.com/maps/@48.856614,2.3522222,0a,73.7y,34h,100t/data=!3m4!1e1!3m2!1sAF1QipP5oEspEfMSH0_IFikF-1qCllrIgB427YKzG606!2e10?source=apiv3"> View on Google Maps </a> </div> <div jstcache="46" class="gm-iv-address-custom" style="display:none"> <p>Custom Imagery</p> </div> <div jstcache="47" class="gm-iv-vertical-separator" style=""></div> <div jstcache="48" class="gm-iv-marker" style=""> <a target="_blank" jstcache="49" href="https://www.google.com/maps/@48.856614,2.3522222000000284,13z?hl=en-US&amp;gl=US"> <div class="gm-iv-marker-icon gm-iv-marker-icon-background"></div> </a> </div> <div jstcache="50" class="gm-iv-timeline" style="display:none"> <div class="gm-iv-horizontal-separator"></div> <div jstcache="51" jsaction="timeline.show" class="gm-iv-timeline-wrapper" style="display:none"> <div jstcache="52" class="gm-iv-timeline-icon-wrapper" style="display:none"> <div class="gm-iv-timeline-icon gm-iv-timeline-icon-background"></div> </div> <div jstcache="53" class="gm-iv-timeline-description" style="display:none"> <div jstcache="54" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> <div class="gm-iv-timeline-description-separator">-</div> <div jstcache="55" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> </div> </div> <div jstcache="56" class="gm-iv-timeline-description" style="display:none"> <div jstcache="57" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> <div class="gm-iv-timeline-description-separator">-</div> <div jstcache="58" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> </div> </div> </div><div style="position: absolute; left: 0px; margin-top: -29px; width: 351px; height: 248px; display: none;"></div></div><div style="position: absolute; background-color: rgb(34, 34, 34); border-radius: 2px; width: 28px; height: 28px; margin-right: 10px; overflow: hidden; z-index: 1; display: none; bottom: 89px; right: 0px;"><img alt="" src="./Detailed View_files/sv9.png" draggable="false" style="position: absolute; left: -103px; top: -84px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div draggable="false" style="color: white; font-family: Roboto, Arial, sans-serif; background-color: black; padding: 4px; border: 2px solid white; user-select: none; display: none; position: absolute; left: 435px; top: 250px;">This image is no longer available</div><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report problems with Street View imagery to Google" href="https://www.google.com/cbk?cb_client=apiv3&amp;output=report&amp;image_key=!1e10!2sAF1QipP5oEspEfMSH0_IFikF-1qCllrIgB427YKzG606&amp;cbp=1,34,,0,-10&amp;hl=en-US" style="text-decoration: none; color: rgb(255, 255, 255);">Report a problem</a></div></div></div><div class="gm-style" jstcache="0" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;"><div tabindex="-1" jstcache="0" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; background-color: rgb(229, 227, 223);"><div jstcache="0" style="z-index: 1; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; touch-action: none;"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div><div jstcache="0" style="width: 100px; height: 100px;"><div jstcache="5" aria-label="Street View" tabindex="0" jsaction="click: scene.viewport;dblclick: scene.viewport;mousedown: scene.viewport;mousemove: scene.viewport;mouseup: scene.viewport;mouseover: scene.viewport;mouseout: scene.viewport;touchstart: scene.viewport;touchmove: scene.viewport;touchend: scene.viewport;pointerdown: scene.viewport;pointermove: scene.viewport;pointerup: scene.viewport;pointercancel: scene.viewport;MSPointerDown: scene.viewport;MSPointerMove: scene.viewport;MSPointerUp: scene.viewport;MSPointerCancel: scene.viewport;contextmenu: scene.viewport;keydown: scene.viewport;keyup: scene.viewport;wheel: scene.viewport;mousewheel: scene.viewport;DOMMouseScroll: scene.viewport;" class="widget-scene" style="cursor: auto;"> <canvas width="1" height="1" id="" class="widget-scene-canvas" style="width: 0px; height: 0px;"></canvas> <div id="" class="widget-scene-imagery-render" style="width: 0px; height: 0px; display: none;"></div> <div class="widget-scene-effects noprint"></div> </div></div><div class="gmnoprint" style="position: absolute; left: 0px; top: 0px; z-index: 2; font-family: Roboto, Arial, sans-serif;"><svg version="1.1" width="0px" height="0px" viewBox="0 0 0 0" style="position: absolute; left: 0px; top: 0px; pointer-events: none;"></svg></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps/@48.856614,2.3522222,0a,73.7y,34h,100t/data=!3m4!1e1!3m2!1sAF1QipP5oEspEfMSH0_IFikF-1qCllrIgB427YKzG606!2e10?source=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img alt="" src="./Detailed View_files/google_white5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 0px; height: 0px; position: absolute; left: 5px; top: 5px;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">© Virtual Shows &amp; Exhibitions</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000;"><img alt="" src="./Detailed View_files/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><img alt="" src="./Detailed View_files/transparent.png" draggable="false" style="width: 37px; height: 37px; user-select: none; border: 0px; padding: 0px; margin: 0px; position: absolute; right: 0px; top: 0px; z-index: 10001; cursor: pointer;"></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px; width: 12px;"><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="text-decoration: none; cursor: pointer;">Map Data</a><span style="display: none;">© Virtual Shows &amp; Exhibitions</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">© Virtual Shows &amp; Exhibitions</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(255, 255, 255);">Terms of Use</a></div></div><button draggable="false" title="Toggle fullscreen view" aria-label="Toggle fullscreen view" type="button" style="background: none rgb(34, 34, 34); border: 0px; margin: 10px 20px; padding: 0px; position: absolute; cursor: pointer; user-select: none; width: 25px; height: 25px; overflow: hidden; top: 0px; right: 0px;"><img alt="" src="./Detailed View_files/sv9.png" draggable="false" class="gm-fullscreen-control" style="position: absolute; left: 0px; top: -86px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></button><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="0" controlheight="0" style="margin: 10px; user-select: none; position: absolute; display: none; bottom: 0px; right: 0px;"><div class="gmnoprint" style="display: none; position: absolute;"><div draggable="false" style="user-select: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(34, 34, 34);"><button draggable="false" title="Zoom in" aria-label="Zoom in" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none;"><div style="overflow: hidden; position: absolute;"><img alt="" src="./Detailed View_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(26, 26, 26);"></div><button draggable="false" title="Zoom out" aria-label="Zoom out" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none;"><div style="overflow: hidden; position: absolute;"><img alt="" src="./Detailed View_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button></div></div><div draggable="false" controlwidth="25px" style="user-select: none; font-family: Roboto, Arial, sans-serif; font-size: 11px; width: 25px; text-align: center; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; cursor: pointer; display: none; position: absolute;"></div></div><div dir="ltr" jstcache="0" style="z-index: 24601; position: absolute; display: none; left: 0px; top: 0px;"><div jstcache="37" class="gm-iv-container gm-iv-small-container" jsan="t-_EPk2VOG1I0,7.gm-iv-container,7.gm-iv-small-container"> <div jsaction="closeControl.click" class="gm-iv-close"> <div class="gm-iv-back"> <div jstcache="34" class="gm-iv-back-icon-background gm-iv-back-icon" jsan="7.gm-iv-back-icon-background,7.gm-iv-back-icon"> </div> </div> </div> </div></div><div dir="ltr" style="position: absolute; left: 0px; top: 0px;" jstcache="0"><div jstcache="65" class="gm-iv-address" jsan="t-bDow0pNywiw,7.gm-iv-address"> <div class="gm-iv-address-description"> <div jstcache="39" class="" style="display: none;"></div> <div jstcache="40" class="" style="display: none;"></div> <div jstcache="41" class="gm-iv-profile-url" style=""> <a target="_blank" jstcache="42" href="http://maps.google.com/maps/contrib/117968437283177268289/photos"> <div jstcache="43" class="gm-iv-profile-link" jsan="7.gm-iv-profile-link">Virtual Shows &amp; Exhibitions</div> </a> </div> </div> <div jstcache="44" class="gm-iv-address-link"> <a target="_blank" jstcache="45" href="https://www.google.com/maps/@48.856614,2.3522222,0a,73.7y,34h,100t/data=!3m4!1e1!3m2!1sAF1QipP5oEspEfMSH0_IFikF-1qCllrIgB427YKzG606!2e10?source=apiv3"> View on Google Maps </a> </div> <div jstcache="46" class="gm-iv-address-custom" style="display:none"> <p>Custom Imagery</p> </div> <div jstcache="47" class="gm-iv-vertical-separator" style=""></div> <div jstcache="48" class="gm-iv-marker" style=""> <a target="_blank" jstcache="49" href="https://www.google.com/maps/@48.856614,2.3522222000000284,13z?hl=en-US&amp;gl=US"> <div class="gm-iv-marker-icon gm-iv-marker-icon-background"></div> </a> </div> <div jstcache="50" class="gm-iv-timeline" style="display:none"> <div class="gm-iv-horizontal-separator"></div> <div jstcache="51" jsaction="timeline.show" class="gm-iv-timeline-wrapper" style="display:none"> <div jstcache="52" class="gm-iv-timeline-icon-wrapper" style="display:none"> <div class="gm-iv-timeline-icon gm-iv-timeline-icon-background"></div> </div> <div jstcache="53" class="gm-iv-timeline-description" style="display:none"> <div jstcache="54" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> <div class="gm-iv-timeline-description-separator">-</div> <div jstcache="55" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> </div> </div> <div jstcache="56" class="gm-iv-timeline-description" style="display:none"> <div jstcache="57" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> <div class="gm-iv-timeline-description-separator">-</div> <div jstcache="58" class="gm-iv-timeline-description-details" jsan="7.gm-iv-timeline-description-details"></div> </div> </div> </div><div style="position: absolute; left: 0px; margin-top: -29px; width: 351px; height: 248px; display: none;"></div></div><div style="position: absolute; background-color: rgb(34, 34, 34); border-radius: 2px; width: 28px; height: 28px; margin-right: 10px; overflow: hidden; z-index: 1; display: none; bottom: 0px; right: 0px;"><img alt="" src="./Detailed View_files/sv9.png" draggable="false" style="position: absolute; left: -103px; top: -84px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div draggable="false" style="color: white; font-family: Roboto, Arial, sans-serif; background-color: black; padding: 4px; border: 2px solid white; user-select: none; display: none; position: absolute; left: 0px; top: 0px;">This image is no longer available</div><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(0, 0, 0); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(255, 255, 255); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report problems with Street View imagery to Google" href="https://www.google.com/cbk?cb_client=apiv3&amp;output=report&amp;image_key=!1e10!2sAF1QipP5oEspEfMSH0_IFikF-1qCllrIgB427YKzG606&amp;cbp=1,34,,0,-10&amp;hl=en-US" style="text-decoration: none; color: rgb(255, 255, 255);">Report a problem</a></div></div></div></div>
-                                    
-                                    <div id="calendar-tab" class="tab-pane fade">
-                                        <label>SELECT MONTH</label>
-                                        <div class="col-sm-6 col-md-4 no-float no-padding">
-                                            <div class="selector">
-                                                <select class="full-width" id="select-month">
-                                                    <option value="2014-6">June 2014</option>
-                                                    <option value="2014-7">July 2014</option>
-                                                    <option value="2014-8">August 2014</option>
-                                                    <option value="2014-9">September 2014</option>
-                                                    <option value="2014-10">October 2014</option>
-                                                    <option value="2014-11">November 2014</option>
-                                                    <option value="2014-12">December 2014</option>
-                                                </select><span class="custom-select full-width">June 2014</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <div class="calendar"><table><thead><tr><td>sunday</td><td>monday</td><td>tuesday</td><td>wednesday</td><td>thursday</td><td>friday</td><td>saturday</td></tr></thead><tbody><tr><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class="prev-month"></td><td class=" date-passed"><span>1</span></td><td class=" date-passed"><span>2</span></td></tr><tr><td class=" date-passed"><span>3</span></td><td class=" date-passed"><span>4</span></td><td class=" date-passed"><span>5</span></td><td class=" date-passed"><span>6</span></td><td class=" date-passed"><span>7</span></td><td class=" date-passed"><span>8</span></td><td class=" date-passed"><span>9</span></td></tr><tr><td class=" date-passed"><span>10</span></td><td class=" date-passed"><span>11</span></td><td class=" date-passed"><span>12</span></td><td class=" date-passed"><span>13</span></td><td class=" date-passed"><span>14</span></td><td class=" date-passed"><span>15</span></td><td class=" today available"><a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#">16<span class="price-text">$170</span></a></td></tr><tr><td class=" unavailable"><span>17</span></td><td class=" unavailable"><span>18</span></td><td class=" unavailable"><span>19</span></td><td class=" unavailable"><span>20</span></td><td class=" unavailable"><span>21</span></td><td class=" unavailable"><span>22</span></td><td class=" unavailable"><span>23</span></td></tr><tr><td class=" unavailable"><span>24</span></td><td class=" unavailable"><span>25</span></td><td class=" unavailable"><span>26</span></td><td class=" unavailable"><span>27</span></td><td class=" unavailable"><span>28</span></td><td class=" unavailable"><span>29</span></td><td class=" unavailable"><span>30</span></td></tr><tr></tr></tbody></table></div>
-                                                <div class="calendar-legend">
-                                                    <label class="available">available</label>
-                                                    <label class="unavailable">unavailable</label>
-                                                    <label class="past">past</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <p class="description">
-                                                    The calendar is updated every five minutes and is only an approximation of availability.
-    <br><br>
-    Some hosts set custom pricing for certain days on their calendar, like weekends or holidays. The rates listed are per day and do not include any cleaning fee or rates for extra people the host may have for this listing. Please refer to the listing's Description tab for more details.
-    <br><br>
-    We suggest that you contact the host to confirm availability and rates before submitting a reservation request.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
+                            
                             
                             <div id="hotel-features" class="tab-container">
                                 <ul class="tabs">
-                                    <li class="active" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">Description</a></li>
-                                    <!-- <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
-
-                                    <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Rooms</a></li>
-                                    <li class="active" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
-                                    <!-- <li class="" ><a  data-ng-href="#hotel-moredeals" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
-
-                                    <!-- <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Availability</a></li> -->
-
-                                    <li ><a  href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
-                                    <li ><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
+                                    <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">Description</a></li>
+                                    <li class="active" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Rooms</a></li>
+                                    <li class="" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
                                     <li ><a href="#hotel-Booking" data-toggle="tab">Contact Hotel</a></li>
 
 
                                 </ul>
                                
                                 <div class="tab-content">
-                                    <div class="tab-pane fade active in" id="hotel-description">
+                                    <div class="tab-pane fade " id="hotel-description">
                                         <div class="intro table-wrapper full-width hidden-table-sms">
                                             <div class="col-sm-5 col-lg-4 features table-cell">
                                                 <div class="rating table-cell col-sm-4">
@@ -311,14 +219,21 @@
                                         
                                     </div>
                                     <div id="hotel-Booking" class="tab-pane fade">
-                                        <h1>Call Hotel</h1>
-                                        <a href="tel:{{hotel_data.phone}}">
+                                        <h3>Call Hotel</h3>
+                                        <a>
                                             <address class="contact-details">
                                                 <span class="contact-phone"><i class="soap-icon-phone"></i> +91 {{hotel_data.phone}}</span>
                                             </address>
                                         </a>
+                                        <hr>
+                                        <h3>Hotel Address</h3>
+                                        <a>
+                                            <address class="contact-details">
+                                                <span class="contact-phone"><i class="soap-icon-address"></i> {{hotel_data.address}}</span>
+                                            </address>
+                                        </a>
                                     </div>
-                                    <div class="tab-pane fade" id="hotel-availability">
+                                    <div class="tab-pane fade active in" id="hotel-availability">
                                         <form>
                                             <div class="update-search clearfix">
                                                 <div class="col-md-5">
@@ -437,87 +352,131 @@
                                         
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wifi">
+                                                {% if hotel_data.rooms[0].facilities.wifi %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.tv">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.tv %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
+                                            {% endif %}
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Central heating</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.electric_kettle">
+                                            {% if hotel_data.rooms[0].facilities.electric_kettle %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.ac">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.ac %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.jacuzzi">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.jacuzzi %}    
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with bathtub</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_with_shower">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_with_shower %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
                                             </li>
+                                            {% endif %}
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-winebar"></i>Mini Bar</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-smoking"></i>Cosmetic mirror</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.desk">
+                                            {% if hotel_data.rooms[0].facilities.desk %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-minus"></i>Desk</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.hairdryer">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.hairdryer %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-horn"></i>Hairdryer</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.room_safe">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.room_safe %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-securevault"></i>Room safe</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.telephone %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.food_serve_at_room">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.food_serve_at_room %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-food"></i>Food Serve at Room</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_cosmetics">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_cosmetics %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-check-1"></i>Bathroom Cosmetics</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_nightie">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_nightie %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-features"></i>Bathroom Nightie</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.ironing_facility">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.ironing_facility %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-flexible"></i>Ironing Facility</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.weighing_machine">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.weighing_machine %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-clock"></i>Weighing Machine</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wardrobes_closet">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.wardrobes_closet %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-trunk-2"></i>Wardrobes / Closet</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.view">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.view %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-beach"></i>View </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.room_seating_area">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.room_seating_area %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-passenger"></i>Room Seating Area</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.room_slipper">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.room_slipper %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-ski"></i>Room Slipper</div>
                                             </li>
+                                            {% endif %}
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-toiletries"></i>Free Toiletrees</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Wake-Up Service </div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.morning_newspaper">
+                                            {% if hotel_data.rooms[0].facilities.morning_newspaper %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-magazine-1"></i>Morning Newspaper </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.bathroom_towels">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.bathroom_towels %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-shopping-2"></i>Bathroom Towels </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.free_evening_snacks">
+                                            {% endif %}
+                                            {% if hotel_data.rooms[0].facilities.free_evening_snacks %}
+                                            <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
+                                            {% endif %}
                                             
                                         </ul>
                                         <br>
@@ -894,45 +853,52 @@
                             </div>
                         </div>
                         <div class="sidebar col-md-3">
-                            <article class="detailed-logo" ng-repeat="data in similarhotels | limitTo:1">
-                                <figure>
-                                    <img  src="http://[[data.images[0].image_url]]" alt="[[data.name]]">
-                                </figure>
+                                <div class="hotel-list">
+                                        <div class="row image-box hotel listing-style1">
+                                            <div class="col-sm-6 col-md-12">
+                                                <article class="box">
+                                                    <figure>
+                                                        <a href="" ng-repeat="image in {{hotel_data.images}} | limitTo : 1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
+                                                    </figure>
+                                                    <div class="details">
+                                                        <span class="price">
+                                                            <small></small>
+                                                            ₹[[deal.price]]
+                                                        </span>
+                                                        <h4 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
+                                                        <!-- <p class="description">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p> -->
+                                                        <div class="action">
+                                                            <a class="button btn-small" href="">Add To Cart</a>
+                                                            <a class="button btn-small yellow popup-map" href="" ng-click="bookingPage(hotel.id)" data-box="48.856614, 2.352222">Book Now</a>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            </div>
+                                            </div>
+
+
+
+
+                            <!-- <article class="detailed-logo">
+                                    <h2 class="entry-title" style="text-transform: capitalize;">{{hotel_data.name}}</h2>
                                 <div class="details">
-                                    <h2 class="box-title">[[data.name]]<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">[[data.city]]</span></small></h2>
-                                    <span class="price clearfix">
-                                        <small class="pull-left">Min. avg/night</small>
-                                        <span class="pull-right">₹ [[data.rooms[0].deals[0].price]]</span>
-                                    </span>
+                                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides image-box hotel listing-style1" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-300px, 0px, 0px);">
+                                                <li ng-repeat="image in roomData.hotelData.images" style="width: 270px; float: left; display: block;">
+                                                    <article class="box">
+                                                        <figure>
+                                                            <a href="#" class=""><img style="height:150px"  alt="" src="http://[[data.images[0].image_url]]"></a>
+                                                        </figure>
+                                                    </article>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     <div class="feedback clearfix">
-                                        <div ng-if="[[data.star]]==1">
-                                            <span ng-repeat="i in [1]"><img src="/images/star.png"></span>
-                                        </div>
-                                        <div ng-if="[[data.star]]==2">
-                                            <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
-                                        </div>
-                                        <div ng-if="[[data.star]]==3">
-                                            <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
-                                        </div>
-                                        <div ng-if="[[data.star]]==4">
-                                            <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
-                                        </div>
-                                        <div ng-if="[[data.star]]==5">
-                                            <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
-                                        </div>
-                                        <div ng-if="[[data.star]]==6">
-                                            <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
-                                        </div>
-                                        <div ng-if="[[data.star]]==7">
-                                            <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
-                                        </div>
-                                        <!-- <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="1 stars"><span class="five-stars" style="width: 80%;"></span></div> -->
-                                        
+                                            <a class="button btn-small green" style="padding: 0px 10px" ng-click="bookingPage(hotel.id)" >Book Now</a>
                                     </div>
-                                    <p class="description">[[ data.desc | limitTo: 200 ]][[data.desc.length > 200 ? '...' : '']]</p>
-                                    <!-- <a href="[[deal.hotel_url]]" class="button yellow full-width uppercase btn-small">Book Now</a> -->
                                 </div>
-                            </article>
+                            </article> -->
                             
                             <div class="travelo-box">
                                 <h4>Similar Listings</h4>
@@ -940,7 +906,7 @@
                                     <article ng-repeat="data in similarhotels | limitTo:3" class="box" style="cursor: pointer;">
                                         <div ng-click="showDetail(data.id)">
                                             <figure>
-                                                <a href=""><img src="http://[[data.images[0].image_url]]" alt="[[data.name]]"></a>
+                                                <a href=""><img src="http://[[data.images[0].image_url]]" style="width: 65px; height: 50px;" alt="[[data.name]]"></a>
                                             </figure>
                                             <div class="details">
                                                 <h5 class="box-title " style="text-transform: capitalize"><a >[[data.name]]</a></h5>
@@ -952,6 +918,28 @@
                                     </article>
                                 </div>
                             </div>
+
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
+                                    <div ng-repeat="room in hotel.rooms">
+                                        <div>
+                                            <article class="box" ng-if="[[room.basic_room]]">
+                                                <figure class="col-sm-5 col-md-4">
+                                                    <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:160px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="[[hotel.id]]" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                            
+    
+    
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </figure>
+                                                </article></div></div>
+                            
                             
                             <div class="travelo-box contact-box">
                                 <h4>Need Travel Square Help?</h4>
