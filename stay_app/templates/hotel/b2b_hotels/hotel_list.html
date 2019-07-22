@@ -268,7 +268,7 @@
                                                         <!-- <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                             -->
                                                     </div>
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                                            <span class="price"  ng-if="deal.business_deal == true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
+                                                            <span class="price"  ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
                                                             <a class="button btn-small green" style="padding: 0px 10px" ng-click="bookingPage(room.id)" >Book Now</a>
                                                     </div>    
                                                 </div>
