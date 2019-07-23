@@ -110,6 +110,7 @@ def hotel_api():
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         for hotel in hotels:
+            print(hotel, "hhhhhhhhhhhhhhhhhhhhhhhhh")
             rooms = q_room.filter(Room.hotel_id == hotel.id).all()
             for room in rooms:
                 room_list.append(room.id)
