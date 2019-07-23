@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from stay_app import db
 from stay_app.model.base import Base
+
 # import enum
 #
 # class HotelCategory(enum.Enum):
@@ -76,6 +77,7 @@ class Room(Base):
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
     status = db.Column(db.Boolean, default=False, nullable=True)
     lowest_price_room = db.Column(db.Boolean, default=False, nullable=True)
+    # b2b_lowest_price_room = db.Column(db.Boolean, default=False, nullable=True)
     room_type = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     other_room_type = db.Column(db.String, nullable=True)
