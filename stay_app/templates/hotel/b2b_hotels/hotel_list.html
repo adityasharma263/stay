@@ -256,7 +256,7 @@
                                                 </div>
                                                 
                                                 <div >
-                                                    <span ng-repeat="room in rooms.room_type" >[[room.room_type]]</span>
+                                                    <span class="amenities" ng-repeat="room in rooms.room_type" >[[room.room_type]]</span>
                                                     <div >
                                                         <div>
                                                         <!-- <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center> -->
@@ -274,7 +274,7 @@
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
 
                                                             <span class="price" ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;">₹[[deal.price]]</a></span>
-                                                            <a class="button btn-small green" ng-if="deal.business_deal == true" style="padding: 0px 10px" ng-click="bookingPage(room.id)" >Book Now</a>
+                                                            <span ><a class="button btn-small green" ng-if="deal.business_deal == true" style="padding: 0px 10px" ng-click="bookingPage(room.id)" >Book Now</a></span>
                                                     </div>    
                                                 </div>
                                                
@@ -282,7 +282,6 @@
 
           
                                             </article>
-                                            
                                     </div>    
                                 </div>
                                 

@@ -326,11 +326,13 @@
                                                             </div>
                                                            
                                                         </div>
-                                                        <div class="price-section" ng-repeat="deal in [[room.deals]]">
-                                                            <div ng-if="[[deal.business_deal]]=='False'">
-                                                                <span class="price" ><small> Mini. PER/NIGHT</small>₹ [[deal.price]]</span>
+
+
+                                                         <div class="price-section" ng-repeat="deal in room.deals">
+                                                            <div>
+                                                                <span class="price"><small> Mini. PER/NIGHT</small>₹ [[deal.price]]</span>
                                                             </div>
-                                                        </div>
+                                                        </div> 
                                                     </div>
                                                     <div>
                                                          <div class="amenities">
@@ -857,8 +859,8 @@
                             </div>
                         </div>
 
-                        <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                <span class="price"  ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span></div>
+                        <div class="amenities" style="float:left">
+                                <span class="price" ></span></div>
                         <div class="sidebar col-md-3">
                                 <div class="hotel-list">
                                         <div class="row image-box hotel listing-style1">
@@ -867,8 +869,8 @@
                                                     <figure>
                                                         <a href="" ng-repeat="image in {{hotel_data.images}} | limitTo : 1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
                                                     </figure>
-                                                    <div class="details">
-                                                        <span class="price">
+                                                    <div class="details" ng-repeat="deal in [[room.deals]]">
+                                                        <span class="price" ng-if="[[deal.business_deal]]">
                                                             <small></small>
                                                             ₹[[deal.price]]
                                                         </span>
