@@ -117,13 +117,13 @@ def hotel_api():
                 deals = q_deal.filter(Deal.room_id == room.id).all()
                 room.deals = deals
             deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.price.asc()).first()
-            # business_deal = q_deal.filter(Deal.room_id.in_(room_list), Deal.business_deal == True).order_by(Deal.price.asc()).first()
+            business_deal = q_deal.filter(Deal.room_id.in_(room_list), Deal.business_deal == True).order_by(Deal.price.asc()).first()
             if deal:
                 room = q_room.filter(Room.id == deal.room_id).first()
                 room.lowest_price_room = True
-            # if business_deal:
-            #     room = q_room.filter(Room.id == business_deal.room_id).first()
-            #     room.b2b_lowest_price_room = True
+            if business_deal:
+                room = q_room.filter(Room.id == business_deal.room_id).first()
+                room.b2b_lowest_price_room = True
             hotel.rooms = rooms
         # room_result = RoomSchema(many=True).dump(rooms)
         # result = HotelSchema(many=True).dump(hotels)
