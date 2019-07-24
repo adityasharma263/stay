@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html ng-app="comparetravel" ng-controller="hotelCart" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]-->
+<head>
+    <!-- Page Title -->
+
+    <title> The Travel Square </title>
+       
+    <!-- Meta Tags -->
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="The Travel Square">
+    <meta name="description" content="">
+    <meta name="distribution" content="global">
+    <meta name="country" content="india">
+    <meta name="copyright" content="The Travel Square">
+    <meta name="revisit-after" content="1 hour">
+    <meta name="designer" content="The Travel Square">
+    <meta name="language" content="english">
+    <meta name="robots" content="index, follow">
+    <meta name="rating" content="general">
+    <meta name="publisher" content="The Travel Square">
+
+    <meta property="og:title" content="The Travel Square">
+    <meta property="og:description" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta property="og:image" content="">
+  
+    <meta name="twitter:card" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+  
+    <meta name="keywords" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta name="format-detection" content="7428558566">
+    
+    
+    <link rel="shortcut icon" href="" type="image/x-icon">
+
+   
+    
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link href="/css/css.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link href="stylesheet" href="/font/flaticon.css">
+    
+    <!-- Current Page Styles -->
+    <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="/css/settings.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/styles.css" media="screen">
+
+    <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="/css/updates.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/css/responsive.css">
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script type="text/javascript" src="/js/cartApp.js"></script>
+    <script type="text/javascript" src="/js/checkout.js"></script>
+    
+  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script> -->
+
+    
+   <script>
+    function clearCoor() {
+        document.getElementById("demo").style.display = "none";
+    }
+    function myFunction(e) {
+        document.getElementById("demo").style.display="block"
+    }
+   </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>  
+    <script type="text/javascript" charset="UTF-8" src="/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="/js/stats.js"></script></head>
+
+    <body ng-controller="shoppingCart" >
+
+    <div>
+    <div id="page-wrapper">
+        <header id="header" class="navbar-static-top">
+            <div class="topnav hidden-xs">
+                <div class="container">
+                    <ul class="quick-menu pull-left">
+                        
+						<li class="ribbon currency">
+                            <a href="" title="">INR</a>
+                            <ul class="menu mini left">
+                            </ul>
+                        </li>
+                        <li class="ribbon">
+                            <a href="">English</a>
+                            <ul class="menu mini">
+                            </ul>
+                        </li>
+						<li class="ribbon">
+                            <a href="">India</a>
+                            <ul class="menu mini">
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="quick-menu pull-right">
+                        <li><a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
+						<i class="soap-icon-shopping"></i> SIGN UP</a></li>
+                        <li><a href="#" class="soap-popupbox">LOGIN</a></li>
+						<li><a href="">Business CAPITAL</a></li>
+                        <li><a href="#" class="soap-popupbox">Customer Care</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="main-header">
+                
+               
+                <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+        
+                </a>
+
+
+                <div class="container">
+                   
+                    <h1 class="logo navbar-brand">
+                        <a href="index.html" title="The Travel Square">
+                            <img src="" alt="The Travel Square">
+                        </a>
+                    </h1>
+                    
+                    
+                    <nav id="main-menu" role="navigation">
+                        <ul class="menu">
+                            <li class="menu-item-has-children">
+                                <a href="/home">Home</a>
+                            </li>
+                            <li class="menu-item-has-children active">
+                                <a href="/hotel">Hotels</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/flight">Flights</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/restaurant">Restaurants</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/cab">Cars</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/cruise">Cruises</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/tour">Tour</a>
+                            </li>
+                           
+                        </ul>
+                    </nav>
+                </div>
+                
+                <nav id="mobile-menu-01" class="mobile-menu collapse" aria-expanded="false" style="height: 0px;">
+                    <ul id="mobile-primary-menu" class="menu">
+                        <li class="menu-item-has-children">
+                            <a href="/home">Home</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
+                        </li>
+                        <li class="menu-item-has-children active">
+                            <a href="/hotel">Hotels</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-1"></button>
+                           
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/flight">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
+                            
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/restaurant">Restaurants</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/cab">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
+                            
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/cruise">Cruises</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-4"></button>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/tour">Tour</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-5"></button>
+                    
+                        </li>
+                        
+                    </ul>
+                    
+                </nav>
+            </div>
+               
+
+        </header>
+        <section id="content" class="container">
+            <div id="main" class="col-md-9">
+                    <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
+                            <div ng-repeat="room in hotel.rooms">
+                                <div  >
+                                    <article class="box" ng-if="room.b2b_lowest_price_room">
+                                        <figure class="col-sm-5 col-md-4">
+                                            <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:187px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="[[hotel.id]]" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                            
+                                        <div class="details col-sm-3 col-md-6">
+                                                <div>
+                                                    <h4 ng-click="showBusinessDetail(hotel.id)" style="cursor: pointer;" class="box-title">[[hotel.name]]  
+                                                        <small>
+                                                        
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i> 
+                                                    <span id="latitude" style="cursor:pointer" ng-click="showBusinessDetail(hotel.id)"  data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.city]]</span></small></h4>
+                                                    <!-- <p class="amenities" style="overflow: hidden;">[[room.other_room_type]]</p> -->
+                                                        
+                                                    <div class="modal fade" id="mapModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                             <!-- Modal content-->
+                                                            <div class="modal-content">                                                          
+                                                                <div class="modal-body">
+                                                                    <i class="fa fa-map-marker"></i>
+                                                                    <span id="longitude" data-latitude = "[[mapData.latitude]]"  data-longitude ='[[mapData.longitude]]'>[[mapData.city]]</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                            <p style="overflow: hidden; float: left;">[[room.other_room_type]]</p>
+                                            <span ng-repeat="room in rooms.room_type" >[[room.other_room_type]]</span>
+                                            <div>
+                                                <div >
+                                                    <div class="amenities row" ng-repeat = "deal in room.deals" style="float:left">
+                                                        <input class="btn btn-success" type="button" ng-click="" value="Checkout" />
+                                                        <input class="btn btn-danger" type="button" ng-click="" value="Remove" />
+                                                    </div>  
+                                                    </div>  
+                                                    <div class="amenities" ng-repeat = "deal in room.deals" style="float:right; top: 10px">
+                                                            <span class="price" ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;">₹[[deal.price]]</a></span>
+                                                            
+                                                    </div> 
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>    
+                            </div>
+                        </div>   
+                    </div>
+
+                    
+
+            <!-- <div class="sidebar col-md-3">
+                    <input class="btn btn-success" type="button" ng-click="" value="Checkout" />
+                    <input class="btn btn-danger" type="button" ng-click="" value="Remove" />
+            </div> -->
+
+            <div id="main container" class="col-sm-6 col-md-9">
+                    <div class="travelo-box booking-section">
+            <form class="booking-form" method="post">
+                <div class="person-information">
+                    <h2>Book Your Hotel Here</h2>
+                    <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                               <label for="firstName">First Name</label>
+                               <input type="text" required class="input-text full-width" ng-model="firstName"  placeholder="Enter Your First Name">
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                   <label for="LastName">Last Name</label>
+                                   <input type="text" required class="input-text full-width" ng-model="lastName" placeholder="Enter Your Last Name">
+                                </div>
+                           </div>
+                 <div class="form-group row">
+                 <div class="col-sm-6 col-md-5">
+                    <label for="email">Email Address</label>
+                    <input type="text" required class="input-text full-width" ng-model="emailAddress"  placeholder="Enter Your Email Address">
+                 </div>
+                 <div class="col-sm-6 col-md-5">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" required class="input-text full-width" ng-model="phoneNumber"  placeholder="Enter Your Phone Number">
+                     </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-sm-6 col-md-10">
+                            <label for="address">Address</label>
+                                <input type="textarea" required class="input-text full-width" ng-model="address"  placeholder="Enter Your Full Address">
+                       </div>
+                      </div>
+  	        </div>
+            
+          
+            
+            <button type="submit" class="button btn-medium sky-blue1 uppercase" ng-click="submitBooking()">Book Now</button>
+            </div>
+
+
+
+
+
+                                <hr>
+                                
+                            </form>
+                        </div>
+
+            
+        </section>
+
+
+        <footer id="footer" class="style5">
+            <div class="footer-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <h2>The Travel Square</h2>
+                            <ul class="discover triangle hover row">
+                                <li  onclick=about() class="col-xs-6"><a href="#">About Company</a></li>
+                                <li onclick=jobs() class="col-xs-6"><a href="#">Jobs & Carreers</a></li>
+                                <li onclick=about() class="col-xs-6"><a href="#">Corporate Offices</a></li>
+                                <li onclick=legal() class="col-xs-6"><a href="#">Legal Information</a></li>
+                                <li onclick=pressRelease() class="col-xs-6"><a href="#">Press Release</a></li>
+                                <li onclick=legal() class="col-xs-6"><a href="#">T & C</a></li>
+                                <li onclick=customerCare() class="col-xs-6"><a href="">Customer Care</a></li>
+                                <li onclick=legal() class="col-xs-6"><a href="/footer_pages/legal.html">Privacy Policies</a></li>
+                                <li onclick=partnerCare() class="col-xs-6"><a href="/footer_pages/partner-Care.html">Partner Help</a></li>
+                                <!-- <li class="col-xs-6"><a href="/footer_pages/faq.html">FAQ's</a></li>
+                                <li class="col-xs-6"><a href="/footer_pages/site-map.html">Site Map</a></li> -->
+                                <li onclick=contactUs() class="col-xs-6"><a href="">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <h2>Our Products</h2>
+                            <ul class="discover triangle hover row">
+                                <li class="col-xs-"><a href="http://www.thetravelsquare.in/pro">Travel Square Business</a></li>
+                                <li class="col-xs-"><a href="http://www.signatureclubmembership.com/">Signature Club</a></li>
+                                <li class="col-xs-"><a href="http://www.cruisader.com/">Cruisader</a></li>
+                                <li class="col-xs-"><a href="http://www.cruisingindia.in/">Cruising India</a></li>
+                                <li class="col-xs-"><a href="http://www.happenings.ind.in/">Happenings</a></li>
+                                <li class="col-xs-"><a href="http://www.shoppist.in/">Shoppist</a></li>
+                                
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <img src="/images/The-Travel-Square-Logo.png">
+                            <br>
+                            
+                            <br>
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <h2>About Us</h2>
+                            <p>The Travel Square is a Network of 10000+ Travel Suppliers , DMC & Hotel Chains Inspiring the World to Travel In Style With Luxury at Affordabe Pricing . </p>
+                            <br>
+                            <ul class="social-icons clearfix">
+                                <li class="twitter"><a title="Join Us on Twitter" href="https://twitter.com/travelsquare_" data-toggle="tooltip"  Target="_blank" data-original-title="twitter"><i class="soap-icon-twitter"></i></a></li>
+                                <li class="facebook"><a title="Join Us on Facebook" href="https://www.facebook.com/thetravelsquare/" Target="_blank" data-toggle="tooltip" data-original-title="facebook"><i class="soap-icon-facebook"></i></a></li>
+                                <li class="linkedin"><a title="Join Us on Linked In" href="https://www.linkedin.com/company/thetravelsquare" Target="_blank" data-toggle="tooltip" data-original-title="linkedin"><i class="soap-icon-linkedin"></i></a></li>
+                                <li class="vimeo"><a title="Join Us on Instagram" href="https://www.instagram.com/The_Travel_Square/" data-toggle="tooltip" Target="_blank" data-original-title="vimeo"><i class="soap-icon-instagram"></i></a></li>
+                                <li class="dribble"><a title="Join Us on Youtube" href="https://www.youtube.com/channel/UChlFqPqGQXw06M8ZUn4NsrQ" Target="_blank" data-toggle="tooltip" data-original-title="dribble"><i class="soap-icon-youtube"></i></a></li>
+        
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom gray-area">
+                <div class="container">
+                    
+                    <div class="pull-right">
+                        <a id="back-to-top" href="" class="animated bounce" data-animation-type="bounce" style="animation-duration: 1s; visibility: visible;"><i class="soap-icon-longarrow-up circle"></i></a>
+                    </div>
+                    <div class="copyright pull-right">
+                        <p>© 2019 The Travel Square</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+        function about(){
+            window.open("/about");
+        }
+        function jobs(){
+            window.open("/jobs");
+        }
+        function contactUs(){
+            window.open("/contact-us");
+        }
+        function legal(){
+            window.open("/legal");
+        }
+        function pressRelease(){
+            window.open("/press-release");
+        }
+        function customeCare(){
+            window.open("/customer-care");
+        }
+        function partnerCare(){
+            window.open("/partner-care");
+        }
+        
+        </script>
+        

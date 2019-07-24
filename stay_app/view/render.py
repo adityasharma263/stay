@@ -75,6 +75,10 @@ def Business_hotel():
 def Business_hotel_list():
     return render_template('hotel/b2b_hotels/hotel_list.html')
 
+@app.route('/business/hotel/cart', methods=['GET'])
+def hotel_cart():
+    return render_template('/hotel/b2b_hotels/cart.html')
+
 
 @app.route('/business/hotel/<hotel_id>', methods=['GET'])
 def Business_hotel_detail(hotel_id):
