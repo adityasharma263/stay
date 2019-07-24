@@ -691,7 +691,7 @@ $scope.getHotelsData = function(cb){
 }
 
 $scope.loadMoreHotelsData = function(){
-  $scope.hotel.page =  $scope.hotel.page + 1;
+  $scope.hotel.page =  $scope.hotel.page + 2;
 
   $scope.getHotelsData(function(res){
     $scope.hotelData = $scope.hotelData.concat(res.data.result.hotel);

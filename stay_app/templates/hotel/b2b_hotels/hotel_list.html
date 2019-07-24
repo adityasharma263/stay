@@ -181,7 +181,7 @@
                                     <div  >
                                         <article class="box" ng-if="room.b2b_lowest_price_room">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:187px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
+                                                <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:160px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="[[hotel.id]]" role="dialog">
                                                     <div class="modal-dialog">
@@ -195,6 +195,7 @@
                                                     </div>
                                                 </div>
                                             </figure>
+                                            
                                                 
                                             <div class="details col-sm-7 col-md-8">
                                                 <div>
@@ -208,22 +209,7 @@
                                                             
                                                         <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
-                                                            
-                                                                <!-- Modal content-->
-                                                                <div class="modal-content">                                                          
-                                                                    <div class="modal-body">
-                                                                            <i class="fa fa-map-marker"></i>
-                                                                            <span id="longitude" data-latitude = "[[mapData.latitude]]"  data-longitude ='[[mapData.longitude]]'>[[mapData.city]]</span>
-                                                                            
-                                                                            <div id="map" style="height:354px">
-                                                                                
-                                                                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg-3eaCM5LOJXDjY6cMBASoAnREc4-R58&callback=myMap"></script> 
-                                                
-                                                                            </div>
-        
-                                                                        <p>Some text in the modal.</p>
-                                                                    </div>
-                                                            </div>
+                                                                
                                                             
                                                             </div>
                                                         </div>
@@ -258,7 +244,7 @@
                                                         </div>
 
                                                 </div>
-                                                    <p style="overflow: hidden; float: left;">[[room.other_room_type]]</p>
+                                                    <!-- <p style="overflow: hidden; float: left;">[[room.other_room_type]]</p> -->
                                                 
                                                 
                                                 <span ng-repeat="room in rooms.room_type" >[[room.other_room_type]]</span>
@@ -268,6 +254,8 @@
                                                         <div>
                                                         <!-- <span class="price"><a href="[[room.deals[0].hotel_url | orderBy : 'price']]"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</a></span><center> -->
                                                         <div class="amenities" style="float:left">
+                                                                <p style="overflow: hidden; float: left;">[[room.other_room_type]]</p>
+                                                                <div>
                                                             <i class="soap-icon-wifi circle" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
                                                             <i class="soap-icon-breakfast circle" ng-if="room.breakfast" aria-hidden="true"></i>
                                                             <i class="soap-icon-couples circle" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
@@ -275,14 +263,17 @@
                                                             <i class="soap-icon-fitnessfacility circle" ng-if="hotel.amenities.gym" aria-hidden="true"></i>
                                                             <i class="soap-icon-swimming circle" ng-if="hotel.amenities.indoor_swimming_pool" aria-hidden="true"></i>
                                                             <i class="soap-icon-swimming circle" ng-if="hotel.amenities.outdoor_swimming_pool" aria-hidden="true"></i>
+                                                            </div>
                                                         </div>
                                                         <!-- <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                             -->
                                                     </div>
                                                     
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
                                                             <span class="price" ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;">₹[[deal.price]]</a></span>
-                                                            <a class="button btn-small green" ng-if="deal.business_deal == true" style="padding: 0px 10px" href="/business/hotel/{{deal.id}}" >Add To Cart</a></span>
-                                                    </div>    
+                                                            <a class="button btn-small green" ng-if="deal.business_deal == true" style="padding: 0px 10px" href="/business/hotel/cart/[[deal.id]]" >Add To Cart</a></span>
+                                                    </div>   
+                                              
+                                                  
                                                 </div>
                                                
                                             </div>
@@ -317,9 +308,6 @@
             {% include '/hotel/components/footer.html' %}
 
         </section>
-        </div>
-    </div>
-
 
     <!-- Javascript -->
     <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>

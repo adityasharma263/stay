@@ -63,9 +63,6 @@
     
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="/css/responsive.css">
-    <script type="text/javascript" src="/js/cart.js"></script>
-    <script type="text/javascript" src="/js/cartApp.js"></script>
-    <script type="text/javascript" src="/js/checkout.js"></script>
     
   
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -204,14 +201,16 @@
         </header>
         <section id="content" class="container">
             <div id="main" class="col-md-9">
-                    <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
-                            <div ng-repeat="room in hotel.rooms">
+
+                {% for hotel in deal_data %}
+                    <div class="hotel-list listing-style3 hotel">
+                            <div>
                                 <div  >
-                                    <article class="box" ng-if="room.b2b_lowest_price_room">
+                                    <article class="box">
                                         <figure class="col-sm-5 col-md-4">
-                                            <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:187px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
+                                            <img data-toggle="modal" style="height:187px; cursor: pointer" src="http://{{hotel.images[0].image_url}}" alt="Travel Square">
                                             <!-- Modal -->
-                                            <div class="modal fade" id="[[hotel.id]]" role="dialog">
+                                            <div class="modal fade" id="" role="dialog">
                                                 <div class="modal-dialog">
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
@@ -222,12 +221,11 @@
                                             
                                         <div class="details col-sm-3 col-md-6">
                                                 <div>
-                                                    <h4 ng-click="showBusinessDetail(hotel.id)" style="cursor: pointer;" class="box-title">[[hotel.name]]  
+                                                    <h4 ng-click="showBusinessDetail(hotel.id)" style="cursor: pointer;" class="box-title">  {{hotel.name}}
                                                         <small>
                                                         
                                                     <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                                                    <span id="latitude" style="cursor:pointer" ng-click="showBusinessDetail(hotel.id)"  data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.city]]</span></small></h4>
-                                                    <!-- <p class="amenities" style="overflow: hidden;">[[room.other_room_type]]</p> -->
+                                                    <span id="latitude" style="cursor:pointer" ng-click="showBusinessDetail(hotel.id)"  data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>{{hotel.city}}</span></small></h4>
                                                         
                                                     <div class="modal fade" id="mapModal" role="dialog">
                                                         <div class="modal-dialog">
@@ -235,31 +233,108 @@
                                                             <div class="modal-content">                                                          
                                                                 <div class="modal-body">
                                                                     <i class="fa fa-map-marker"></i>
-                                                                    <span id="longitude" data-latitude = "[[mapData.latitude]]"  data-longitude ='[[mapData.longitude]]'>[[mapData.city]]</span>
+                                                                    <span id="longitude" data-latitude = "[[mapData.latitude]]"  data-longitude ='[[mapData.longitude]]'></span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>   
                                                 </div>
-                                            <p style="overflow: hidden; float: left;">[[room.other_room_type]]</p>
-                                            <span ng-repeat="room in rooms.room_type" >[[room.other_room_type]]</span>
+                                                {% for room in hotel.rooms %}
+                                            <p style="overflow: hidden; float: left;">{{room.other_room_type}}</p>
+                                            
                                             <div>
                                                 <div >
-                                                    <div class="amenities row" ng-repeat = "deal in room.deals" style="float:left">
-                                                        <input class="btn btn-success" type="button" ng-click="" value="Checkout" />
-                                                        <input class="btn btn-danger" type="button" ng-click="" value="Remove" />
+                                                    <style>
+                                                        
+                                                            .plus-minus-input {
+                                                            -webkit-align-items: center;
+                                                                -ms-flex-align: center;
+                                                                    align-items: center;
+                                                            }
+
+                                                           
+
+                                                            .plus-minus-input .input-group-field::-webkit-inner-spin-button,
+                                                            .plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+                                                            -webkit-appearance: none;
+                                                                    appearance: none;
+                                                            }
+
+                                                            .plus-minus-input .input-group-button .circle {
+                                                            border-radius: 65%;
+                                                            padding: 0.25em 0.8em;
+                                                            }
+
+    
+                                                    </style>
+
+                                                    <script>
+                                                            jQuery(document).ready(function(){
+                                                            // This button will increment the value
+                                                            $('[data-quantity="plus"]').click(function(e){
+                                                                // Stop acting like a button
+                                                                e.preventDefault();
+                                                                // Get the field name
+                                                                fieldName = $(this).attr('data-field');
+                                                                // Get its current value
+                                                                var currentVal = parseInt($('input[name='+fieldName+']').val());
+                                                                // If is not undefined
+                                                                if (!isNaN(currentVal)) {
+                                                                    // Increment
+                                                                    $('input[name='+fieldName+']').val(currentVal + 1);
+                                                                } else {
+                                                                    // Otherwise put a 0 there
+                                                                    $('input[name='+fieldName+']').val(0);
+                                                                }
+                                                                });
+                                                                // This button will decrement the value till 0
+                                                                $('[data-quantity="minus"]').click(function(e) {
+                                                                // Stop acting like a button
+                                                                e.preventDefault();
+                                                                // Get the field name
+                                                                fieldName = $(this).attr('data-field');
+                                                                // Get its current value
+                                                                var currentVal = parseInt($('input[name='+fieldName+']').val());
+                                                                // If it isn't undefined or its greater than 0
+                                                                if (!isNaN(currentVal) && currentVal > 0) {
+                                                                    // Decrement one
+                                                                    $('input[name='+fieldName+']').val(currentVal - 1);
+                                                                } else {
+                                                                    // Otherwise put a 0 there
+                                                                    $('input[name='+fieldName+']').val(0);
+                                                                }
+                                                            });
+                                                        });
+
+
+                                                    </script>
+                                                    
+                                                <div class="input-group plus-minus-input" style="display: inline;">
+                                                        <div class="input-group-button">
+                                                        <button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity">-</button>
+                                                        </div>
+                                                        <input class="input-group-field" type="number" name="quantity" value="0">
+                                                        <div class="input-group-button">
+                                                        <button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity">+</button>
+                                                        </div>
+                                                    </div>
+      
+       
                                                     </div>  
-                                                    </div>  
-                                                    <div class="amenities" ng-repeat = "deal in room.deals" style="float:right; top: 10px">
-                                                            <span class="price" ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;">₹[[deal.price]]</a></span>
+                                                    <div class="amenities"style="float:right; top: 10px">
+                                                        {% for deal in room.deals %}
+                                                            <span class="price" ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;">₹{{deal.price}}</a></span>
+                                                            {% endfor %}
                                                             
                                                     </div> 
                                             </div>
+                                            {% endfor %}
                                         </div>
                                     </article>
                                 </div>    
                             </div>
-                        </div>   
+                        </div> 
+                        {% endfor %}  
                     </div>
 
                     
