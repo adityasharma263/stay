@@ -30,8 +30,8 @@ def page_not_found():
 #         return render_template('hotel/form.html', response=post_data)
 
 
-
 #======================== HOTEL ============================
+
 
 
 @app.route('/hotel', methods=['GET'])
@@ -70,7 +70,6 @@ def Business_hotel():
     return render_template('hotel/b2b_hotels/hotel.html')
 
 
-
 @app.route('/business/hotel/list', methods=['GET'])
 def Business_hotel_list():
     return render_template('hotel/b2b_hotels/hotel_list.html')
@@ -90,15 +89,17 @@ def Business_hotel_detail(hotel_id):
                 print(deal, "dfgdfgdf")
     return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
 
-@app.route('/business/hotel/booking/<room_id>', methods=['GET'])
-def Business_hotel_booking(room_id):
-    # hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
-    # hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
-    # if len(hotel_data["result"]["hotel"]) > 0:
-    #     hotel_data = hotel_data["result"]["hotel"][0]
-    # else:
-    #     hotel_data = {}
-    return render_template('hotel/b2b_hotels/booking.html', room_id=room_id)
+
+@app.route('/business/hotel/booking/<deals>', methods=['GET'])
+def Business_hotel_booking(deals):
+    for deal_id in deals:
+        hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
+        hotel_data = requests.get(url=hotel_api_url, params={"id": deal_id}).json()
+        if len(hotel_data["result"]["hotel"]) > 0:
+            hotel_data = hotel_data["result"]["hotel"]
+        else:
+            hotel_data = []
+    return render_template('hotel/b2b_hotels/booking.html', deal_data=hotel_data)
 
     
 
