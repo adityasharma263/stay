@@ -99,7 +99,8 @@ def hotel_api():
             elif key in Deal.__dict__:
                 q_deal = q.filter(getattr(Deal, key) == args[key])
         if city:
-            q = q.filter(func.lower(Hotel.city) == func.lower(city))
+            q = q.filter(Hotel.city.ilike('%' + city + '%'))
+            # q = q.filter(func.lower(Hotel.city) == func.lower(city))
         if name:
             q = q.filter(func.lower(Hotel.name) == func.lower(name))
         if rating:
