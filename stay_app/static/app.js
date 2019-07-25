@@ -1,4 +1,4 @@
-angular.module('comparetravel', ['angular.filter'])
+angular.module('comparetravel', ['angular.filter', 'ngCookies'])
 .config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
@@ -6,22 +6,16 @@ angular.module('comparetravel', ['angular.filter'])
 }])
 
 
-.controller('bookingController',["$scope", "$http", function($scope, $http){
-
-  $scope.firstName = {};
-  $scope.lastName = {};
-  $scope.phoneNumber = {};
-  $scope.address = {};
-  $scope.emailAddress = {};
-
-  $scope.submitBooking=function(){
-    console.log("Booking");
-   window.open('business/hotel/booking','_self');
+app.controller('cookiesController',['$scope','$cookies',function($scope,$cookies){
+  $scope.hotel
+  $cookies.putObject('hotel',hotel);
    
- }
- 
+  //access object value
+  console.log($cookies.getObject('hotel'));
+  
 
-}])
+}]);
+
 
 .controller('hotelCart',["$scope", "$http", function($scope,$http){
   $scope.firstName = {};
@@ -30,6 +24,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.phoneNumber = {};
   $scope.address = {};
   $scope.emailAddress = {};
+  var cookieWObject = $cookies.getObject('cookieName');
 
   
 }])
@@ -691,7 +686,7 @@ $scope.getHotelsData = function(cb){
 }
 
 $scope.loadMoreHotelsData = function(){
-  $scope.hotel.page =  $scope.hotel.page + 2;
+  $scope.hotel.page =  $scope.hotel.page + 1;
 
   $scope.getHotelsData(function(res){
     $scope.hotelData = $scope.hotelData.concat(res.data.result.hotel);

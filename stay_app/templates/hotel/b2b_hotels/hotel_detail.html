@@ -308,30 +308,34 @@
                                         <div class="room-list listing-style3 hotel">
                                              <!-- <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
                                                             <span class="price"  ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span></div> -->
-                                            <article class="box" ng-repeat="room in {{hotel_data.rooms}} | limitTo:limit">
+                                            <article class="box">
+                                                {% for room in hotel_data.rooms %}
+                                                
                                                 <figure class="col-sm-4 col-md-3">
-                                                    <a  href="" title=""><img width="230" height="161" src="http://[[room.image_url]]" alt="[[room.other_room_type]]"></a>
+                                                    <a  href="" title=""><img width="230" height="161" src="http://{{room.image_url}}" alt="{{room.other_room_type}}"></a>
                                                 </figure>
                                                 <div class="details col-xs-12 col-sm-8 col-md-9">
                                                     <div>
                                                         <div>
                                                             <div class="box-title">
-                                                                <h4 class="title" >[[room.other_room_type]]</h4>
+                                                                <h4 class="title" >{{room.other_room_type}}</h4>
                                                                 
 
                                                                 <dl class="description">
                                                                     <dt>Max Guests:</dt>
-                                                                    <dd>[[room.member.total_members]]</dd>
+                                                                    <dd>{{room.member.total_members}}</dd>
                                                                 </dl>
                                                             </div>
                                                            
                                                         </div>
 
 
-                                                         <div class="price-section" ng-repeat="deal in room.deals">
-                                                            <div ng-if="[[deal.business_deal]]">
-                                                                <span class="price"><small> Mini. PER/NIGHT</small>₹ [[deal.price]]</span>
-                                                            </div>
+                                                         <div class="price-section">
+                                                            {% for deal in room.deals %}
+                                                            {% if deal.business_deal %}
+                                                                <span class="price"><small> Mini. PER/NIGHT</small>₹ {{deal.price}}</span>
+                                                            {% endif%}    
+                                                            {% endfor %}
                                                         </div> 
                                                     </div>
                                                     <div>
@@ -348,6 +352,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {% endfor %}
                                             </article>
                                             <!-- <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreRooms()">LOAD MORE ROOMS</a> -->
                                         </div>
