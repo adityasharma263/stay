@@ -199,22 +199,18 @@
                                                                 <div class="col-md-3">
                                                                     <p>[[room.other_room_type]]</p>
                                                                 </div>
-                                                                <!-- <div class="col-md-2"><a href="[[deal.hotel_url]]" class="button btn-small  text-center">BOOK NOW</a></div> -->
                                                                 <div class="col-md-1"></div>
-                                                                <!-- <div class="col-md-2"><a ng-click="showDetail(deal.room)" class="button btn-small  text-center">View Detail</a></div> -->
-                                                                <!-- <div class="col-md-1"></div> -->
-                                                                <!-- <div class="col-md-1" > -->
+                                                              
                                                                     <div class="price" style="text-align: center">
                                                                         <a  href="[[deal.hotel_url]]"> <small>PER/NIGHT</small>₹ [[deal.price]]</a>
                                                                     </div>
-                                                                <!-- </div> -->
+                                                               
                                                             </div>
-                                                        <!-- </div> -->
+                                                      
                                                     </div>
                                                 </article>
                                             </div>
                                            
-                                            <!-- <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE DEALS</a> -->
                                         </div>
                                         
                                     </div>
@@ -306,8 +302,6 @@
                                         </form>
                                         <h2>Available Rooms</h2>
                                         <div class="room-list listing-style3 hotel">
-                                             <!-- <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                                            <span class="price"  ng-if="deal.business_deal == true" aria-hidden="true" style="text-align: center;"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span></div> -->
                                             <article class="box">
                                                 {% for room in hotel_data.rooms %}
                                                 
@@ -346,7 +340,6 @@
                                                             <i class="soap-icon-aircon circle"  ng-show="room.facilities.ac"></i>
                                                             <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i>
                                                         </div>
-                                                        <!-- <p>Nunc cursus libero purus ac congue ar lorem cursus ut sed vitae pulvinar massa idend porta nequetiam elerisque mi id, consectetur adipi deese cing elit maus fringilla bibe endum.</p> -->
                                                         <div class="action-section">
                                                             <a href="" title="" class="button btn-small full-width text-center">BOOK NOW</a>
                                                         </div>
@@ -354,7 +347,6 @@
                                                 </div>
                                                 {% endfor %}
                                             </article>
-                                            <!-- <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreRooms()">LOAD MORE ROOMS</a> -->
                                         </div>
                                         
                                     </div>
@@ -373,9 +365,7 @@
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
                                             {% endif %}
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.">
-                                                <div class="icon-box style1"><i class="soap-icon-television"></i>Central heating</div>
-                                            </li> -->
+                                           
                                             {% if hotel_data.rooms[0].facilities.electric_kettle %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
@@ -396,12 +386,7 @@
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
                                             </li>
                                             {% endif %}
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="hotel_data.rooms[0].facilities.wifi">
-                                                <div class="icon-box style1"><i class="soap-icon-winebar"></i>Mini Bar</div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
-                                                <div class="icon-box style1"><i class="soap-icon-smoking"></i>Cosmetic mirror</div>
-                                            </li> -->
+                                          
                                             {% if hotel_data.rooms[0].facilities.desk %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-minus"></i>Desk</div>
@@ -467,12 +452,7 @@
                                                 <div class="icon-box style1"><i class="soap-icon-ski"></i>Room Slipper</div>
                                             </li>
                                             {% endif %}
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
-                                                <div class="icon-box style1"><i class="soap-icon-toiletries"></i>Free Toiletrees</div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
-                                                <div class="icon-box style1"><i class="soap-icon-pets"></i>Wake-Up Service </div>
-                                            </li> -->
+                                            
                                             {% if hotel_data.rooms[0].facilities.morning_newspaper %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-magazine-1"></i>Morning Newspaper </div>
@@ -671,85 +651,17 @@
                                                 <div ng-if="{{hotel_data.star}}==7">
                                                     <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                                 </div>
-                                                <!-- <div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div> -->
                                                 <a href="" class="goto-writereview-pane button green btn-small full-width">WRITE A REVIEW</a>
                                             </div>
                                             <div class="table-cell col-sm-8">
                                                 <div class="detailed-rating">
-                                                    <!-- <ul class="clearfix">
-                                                        <li class="col-md-6"><div class="each-rating"><label>service</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                        <li class="col-md-6"><div class="each-rating"><label>Value</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                        <li class="col-md-6"><div class="each-rating"><label>Sleep Quality</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                        <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                        <li class="col-md-6"><div class="each-rating"><label>location</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                        <li class="col-md-6"><div class="each-rating"><label>rooms</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                        <li class="col-md-6"><div class="each-rating"><label>swimming pool</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                        <li class="col-md-6"><div class="each-rating"><label>fitness facility</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
-                                                    </ul> -->
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="guest-reviews">
                                             <h2>Guest Reviews</h2>
-                                            <!-- <div class="guest-review table-wrapper">
-                                                <div class="col-xs-3 col-md-2 author table-cell">
-                                                    <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#"><img src="./Detailed View_files/jessica.png" alt="" width="270" height="263"></a>
-                                                    <p class="name">Jessica Brown</p>
-                                                    <p class="date">NOV, 12, 2013</p>
-                                                </div>
-                                                <div class="col-xs-9 col-md-10 table-cell comment-container">
-                                                    <div class="comment-header clearfix">
-                                                        <h4 class="comment-title">We had great experience while our stay and Hilton Hotels!</h4>
-                                                        <div class="review-score">
-                                                            <div class="five-stars-container"><div class="five-stars" style="width: 80%;"></div></div>
-                                                            <span class="score">4.0/5.0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                            <!-- <div class="guest-review table-wrapper">
-                                                <div class="col-xs-3 col-md-2 author table-cell">
-                                                    <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#"><img src="./Detailed View_files/david.png" alt="" width="270" height="263"></a>
-                                                    <p class="name">David Jhon</p>
-                                                    <p class="date">NOV, 12, 2013</p>
-                                                </div>
-                                                <div class="col-xs-9 col-md-10 table-cell comment-container">
-                                                    <div class="comment-header clearfix">
-                                                        <h4 class="comment-title">I love the speediness of their services.</h4>
-                                                        <div class="review-score">
-                                                            <div class="five-stars-container"><div class="five-stars" style="width: 64%;"></div></div>
-                                                            <span class="score">3.2/5.0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                            <!-- <div class="guest-review table-wrapper">
-                                                <div class="col-xs-3 col-md-2 author table-cell">
-                                                    <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#"><img src="./Detailed View_files/kyle.png" alt="" width="270" height="263"></a>
-                                                    <p class="name">Kyle Martin</p>
-                                                    <p class="date">NOV, 12, 2013</p>
-                                                </div>
-                                                <div class="col-xs-9 col-md-10 table-cell comment-container">
-                                                    <div class="comment-header clearfix">
-                                                        <h4 class="comment-title">When you look outside from the windows its breath taking.</h4>
-                                                        <div class="review-score">
-                                                            <div class="five-stars-container"><div class="five-stars" style="width: 76%;"></div></div>
-                                                            <span class="score">3.8/5.0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+                                            
                                         </div>
-                                        <!-- <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" class="button full-width btn-large">LOAD MORE REVIEWS</a> -->
                                     </div>
                                     <div class="tab-pane fade" id="hotel-faqs">
                                         <h2>Frquently Asked Questions</h2>
@@ -863,7 +775,7 @@
                             
                             </div>
                         </div>
-
+                        
                         <div class="amenities" style="float:left">
                                 <span class="price" ></span></div>
                         <div class="sidebar col-md-3">

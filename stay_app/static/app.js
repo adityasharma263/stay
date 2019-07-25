@@ -1,33 +1,22 @@
-angular.module('comparetravel', ['angular.filter', 'ngCookies'])
+angular.module('comparetravel', ['angular.filter','ngCookies'])
 .config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
   // $locationProvider.html5Mode(true);
 }])
 
-
-app.controller('cookiesController',['$scope','$cookies',function($scope,$cookies){
-  $scope.hotel
-  $cookies.putObject('hotel',hotel);
-   
-  //access object value
-  console.log($cookies.getObject('hotel'));
-  
-
-}]);
-
-
-.controller('hotelCart',["$scope", "$http", function($scope,$http){
-  $scope.firstName = {};
-  $scope.lastName = {};
-  $scope.phoneNumber = {};
-  $scope.phoneNumber = {};
-  $scope.address = {};
-  $scope.emailAddress = {};
-  var cookieWObject = $cookies.getObject('cookieName');
-
-  
+.controller('hotelCart',["$scope", "$window", "$cookieStore", "$http", function($scope, $window, $cookieStore, $http,) {
+  $scope.SetCookies = function ($cookieStore) {
+    $cookieStore.put("username", $scope.username);
+};
+$scope.GetCookies = function ($cookieStore) {
+    $window.alert($cookieStore.get('username'));
+};
+$scope.ClearCookies = function ($cookieStore) {
+    $cookieStore.remove('username');
+};
 }])
+
 
 
 .controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
@@ -161,7 +150,7 @@ app.controller('cookiesController',['$scope','$cookies',function($scope,$cookies
 //  }
 }])
 
-.controller('staylistController',["$scope", "$http", function($scope, $http,) {
+.controller('staylistController',["$scope", "$window", "$cookies", "$http", function($scope, $window, $cookies, $http,) {
 
 
 
@@ -200,6 +189,19 @@ app.controller('cookiesController',['$scope','$cookies',function($scope,$cookies
     console.log(hotel_id);
     
   }
+
+    $scope.setCookies = function () {
+    console.log("debugg");
+      $cookies.put("username", $scope.username);
+  };
+  $scope.getCookies = function () {
+    console.log("debugg");
+      $window.alert($cookies.get('username'));
+  };
+  $scope.clearCookies = function () {
+      $cookies.remove('username');
+  };
+  
 
         
 
@@ -1493,8 +1495,3 @@ if(window.screen.availWidth <=440){
 
 
 }])
-
-
- 
-
-
