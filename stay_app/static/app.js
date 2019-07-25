@@ -23,6 +23,17 @@ angular.module('comparetravel', ['angular.filter'])
 
 }])
 
+.controller('hotelCart',["$scope", "$http", function($scope,$http){
+  $scope.firstName = {};
+  $scope.lastName = {};
+  $scope.phoneNumber = {};
+  $scope.phoneNumber = {};
+  $scope.address = {};
+  $scope.emailAddress = {};
+
+  
+}])
+
 
 .controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
   var api_url = 'http://139.59.51.174';
@@ -680,7 +691,7 @@ $scope.getHotelsData = function(cb){
 }
 
 $scope.loadMoreHotelsData = function(){
-  $scope.hotel.page =  $scope.hotel.page + 1;
+  $scope.hotel.page =  $scope.hotel.page + 2;
 
   $scope.getHotelsData(function(res){
     $scope.hotelData = $scope.hotelData.concat(res.data.result.hotel);
