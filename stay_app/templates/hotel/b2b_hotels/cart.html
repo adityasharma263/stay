@@ -344,55 +344,44 @@
                     <input class="btn btn-danger" type="button" ng-click="" value="Remove" />
             </div> -->
 
-            <div id="main container" class="col-sm-6 col-md-9">
-                    <div class="travelo-box booking-section">
-            <form class="booking-form" method="post">
-                <div class="person-information">
-                    <h2>Book Your Hotel Here</h2>
-                    <div class="form-group row">
-                            <div class="col-sm-6 col-md-5">
-                               <label for="firstName">First Name</label>
-                               <input type="text" required class="input-text full-width" ng-model="firstName"  placeholder="Enter Your First Name">
-                            </div>
-                            <div class="col-sm-6 col-md-5">
-                                   <label for="LastName">Last Name</label>
-                                   <input type="text" required class="input-text full-width" ng-model="lastName" placeholder="Enter Your Last Name">
+                    <div id="main container" class="col-sm-6 col-md-9">
+                        <div class="travelo-box booking-section">
+                            <form class="booking-form" method="post">
+                                <div class="person-information">
+                                    <h2>Book Your Hotel Here</h2>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 col-md-5">
+                                                <label for="firstName">First Name</label>
+                                                <input type="text" required class="input-text full-width" ng-model="firstName"  placeholder="Enter Your First Name">
+                                            </div>
+                                            <div class="col-sm-6 col-md-5">
+                                                <label for="LastName">Last Name</label>
+                                                <input type="text" required class="input-text full-width" ng-model="lastName" placeholder="Enter Your Last Name">
+                                            </div>
+                                        </div>
+                                <div class="form-group row">
+                                     <div class="col-sm-6 col-md-5">
+                                    <label for="email">Email Address</label>
+                                    <input type="text" required class="input-text full-width" ng-model="emailAddress"  placeholder="Enter Your Email Address">
                                 </div>
-                           </div>
-                 <div class="form-group row">
-                 <div class="col-sm-6 col-md-5">
-                    <label for="email">Email Address</label>
-                    <input type="text" required class="input-text full-width" ng-model="emailAddress"  placeholder="Enter Your Email Address">
-                 </div>
-                 <div class="col-sm-6 col-md-5">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" required class="input-text full-width" ng-model="phoneNumber"  placeholder="Enter Your Phone Number">
-                     </div>
-                </div>
-                <div class="form-group row">
-                        <div class="col-sm-6 col-md-10">
-                            <label for="address">Address</label>
-                                <input type="textarea" required class="input-text full-width" ng-model="address"  placeholder="Enter Your Full Address">
-                       </div>
-                      </div>
-  	        </div>
-            
-          
-            
-            <button type="submit" class="button btn-medium sky-blue1 uppercase" ng-click="submitBooking()">Book Now</button>
-            </div>
-
-
-
-
-
-                                <hr>
-                                
-                            </form>
-                        </div>
-
-            
-        </section>
+                                <div class="col-sm-6 col-md-5">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="text" required class="input-text full-width" ng-model="phoneNumber"  placeholder="Enter Your Phone Number">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                        <div class="col-sm-6 col-md-10">
+                                            <label for="address">Address</label>
+                                                <input type="textarea" required class="input-text full-width" ng-model="address"  placeholder="Enter Your Full Address">
+                                             </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="button btn-medium sky-blue1 uppercase" ng-click="submitBooking()">Book Now</button>
+                                    </div>
+                                    <hr>
+                                </form>
+                            </div>
+                        </section>
 
 
         <footer id="footer" class="style5">
