@@ -71,7 +71,15 @@ def Business_hotel():
 
 @app.route('/business/hotel/list', methods=['GET'])
 def Business_hotel_list():
-    return render_template('hotel/b2b_hotels/hotel_list.html')
+    args = request.args.to_dict()
+    hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
+    hotel_data = requests.get(url=hotel_api_url, params=args).json()
+    if len(hotel_data["result"]["hotel"]) > 0:
+        hotel_data = hotel_data["result"]["hotel"]
+    else:
+        hotel_data = []
+    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data)
+
 
 
 @app.route('/business/hotel/<hotel_id>', methods=['GET'])
