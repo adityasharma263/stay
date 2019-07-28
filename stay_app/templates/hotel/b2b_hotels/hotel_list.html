@@ -32,13 +32,15 @@
                                         <div id="modify-search-panel" class="panel-collapse" aria-expanded="false" style="height: 200px;">
                                             <div class="panel-content">
                                                 <form>
-                                                    <div class="form-group">
+                                                    <div class="datepicker-wrap input-text">
                                                         <label>check in</label>
-                                                            <input type="date" ng-model="hotel.check_in" placeholder="mm/dd/yy">                                                  
+                                                            <input type="text" class="input-text full-width" ng-model="hotel.check_in" placeholder="mm/dd/yy"> 
+                                                            <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title="">                                                 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="datepicker-wrap form-group">
                                                         <label>check out</label>
-                                                            <input type="date" ng-model="hotel.check_out" ng-change="checkErr()" placeholder="mm/dd/yy">
+                                                            <input type="text" class="input-text full-width" ng-model="hotel.check_out" ng-change="checkErr()" placeholder="mm/dd/yy">
+                                                            <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
                                                     </div>
                                                     <span style="color:red">[[errMessage]]</span>
                                                     <br>

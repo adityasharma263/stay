@@ -8,9 +8,9 @@ import datetime
 import json
 
 
-@app.route('/', methods=['GET'])
+@app.route('/business', methods=['GET'])
 def home():
-    return render_template('index.html')
+    return render_template('/hotel/b2b_hotels/b2b_hotel_home.html')
 
 
 @app.errorhandler(400)

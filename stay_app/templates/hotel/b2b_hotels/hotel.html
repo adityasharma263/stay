@@ -42,23 +42,32 @@
                                 <h1 class="title">#TB Hotels</h1>
                                 <h3 class="sub-title"><font color="white">We Have More Than Just Hotels Explore More Unique Places !</font></h3>
                             </div>
+
                             <div class="search-box" style="margin-bottom:0px;">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)">
-                                            
+                                        <div class="col-sm-4 col-md-5 form-group" onmouseover="myFunction(event)">
                                             <input type="text" class="input-text full-width" style="border-radius: 5px;" ng-keyup="[search() , show()]" ng-model="hotel.search" ng-keypress="($event.which === 40)?foo(hotel.search)" placeholder="Where Do You Wanna Visit ? .... ">
-                                        
+                                        </div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 form-group">
+                                            <div class="datepicker-wrap">
+                                                <input type="text" name="date_from" class="input-text full-width" placeholder="Departure" id="dp1564264492204"><img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title="">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-5 col-md-2 form-group">
+                                            <div class="datepicker-wrap">
+                                                <input type="text" name="date_to" class="input-text full-width" placeholder="Arrival" id="dp1564264492205"><img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title="">
+                                            </div>
                                         </div>
                                         
                                             
-                                            <div class="col-sm-4 form-group">
-                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>
-                                            </div>
-                                        
+                                            <div class="col-sm-3 form-group">
+                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
+
                             
                             <div class="row col-md-8" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)" onmouseout="clearCoor()">
                                 <div class="col-sm-12" style="position: relative; z-index: 99;"> 
