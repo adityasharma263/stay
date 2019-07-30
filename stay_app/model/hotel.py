@@ -153,6 +153,7 @@ class Image(Base):
 
 
 class Member(Base):
+
     __tablename__ = 'member'
 
     no_of_adults = db.Column(db.Integer, nullable=True)
@@ -168,6 +169,7 @@ class Member(Base):
 
 
 class Facility(Base):
+
     __tablename__ = 'facility'
 
     bed_type = db.Column(db.Integer, nullable=True)
@@ -207,6 +209,7 @@ class Facility(Base):
 
 
 class Website(Base):
+
     __tablename__ = 'website'
 
     website = db.Column(db.String)
@@ -221,6 +224,7 @@ class Website(Base):
 
 
 class Deal(Base):
+
     __tablename__ = 'deal'
 
     price = db.Column(db.Integer, nullable=True)
@@ -230,6 +234,7 @@ class Deal(Base):
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)
+    price_calendar = db.relationship('PriceCalendar', backref='deal')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -238,7 +243,25 @@ class Deal(Base):
         return '<room_id %r>' % self.room_id
 
 
+class PriceCalendar(Base):
+
+    __tablename__ = 'price_calendar'
+
+    price = db.Column(db.Integer, nullable=True)
+    date = db.Column(db.DateTime, nullable=True)
+    available = db.Column(db.Boolean, default=False, nullable=True)
+    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<deal_id %r>' % self.deal_id
+
+
 class Booking(Base):
+
     __tablename__ = 'booking'
 
     booking_no = db.Column(db.String, nullable=True)

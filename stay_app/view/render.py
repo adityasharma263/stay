@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 __author__ = 'aditya'
 
+
 from stay_app import app
 from flask import render_template, request, make_response, jsonify, abort, redirect
 import requests
@@ -65,7 +66,9 @@ def admin():
 
 @app.route('/business/hotel', methods=['GET'])
 def Business_hotel():
-    API_URL = app.config['API_URL']
+    session = requests.Session()
+    response = session.get('http://thetravelsquare.in')
+    print(response.cookies.get_dict())
     return render_template('hotel/b2b_hotels/hotel.html')
 
 
@@ -79,7 +82,6 @@ def Business_hotel_list():
     else:
         hotel_data = []
     return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data)
-
 
 
 @app.route('/business/hotel/<hotel_id>', methods=['GET'])
