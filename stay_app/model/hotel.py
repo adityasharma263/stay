@@ -158,6 +158,8 @@ class Member(Base):
 
     no_of_adults = db.Column(db.Integer, nullable=True)
     children = db.Column(db.Integer, nullable=True)
+    age_of_child_1 = db.Column(db.Integer, nullable=True)
+    age_of_child_2 = db.Column(db.Integer, nullable=True)
     total_members = db.Column(db.Integer, nullable=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True, nullable=False)
 

@@ -88,6 +88,9 @@ def hotel_api():
                 deals = q_deal.filter(Deal.room_id == room.id).all()
                 for deal in deals:
                     prices = q_price.filter(PriceCalendar.deal_id == deal.id).all()
+                    total_price = 0
+                    for price in prices:
+                        total_price = price.price + total_price
                     deal.price_calendar = prices
                 room.deals = deals
             deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.price.asc()).first()
