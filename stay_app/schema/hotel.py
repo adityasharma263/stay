@@ -3,7 +3,6 @@ from stay_app.model.hotel import Hotel
 from stay_app.model.hotel import Image
 from stay_app.model.hotel import Facility
 from stay_app.model.hotel import Member
-from stay_app.schema.base import safe_execute
 from stay_app.model.hotel import Amenity
 from stay_app.model.hotel import Deal
 from stay_app.model.hotel import Website
@@ -11,7 +10,9 @@ from stay_app.model.hotel import Room
 from stay_app.model.hotel import HotelCollection
 from stay_app.model.hotel import CollectionProduct
 from stay_app.model.hotel import Booking
+from stay_app.model.hotel import PriceCalendar
 from stay_app import ma
+from stay_app.schema.base import safe_execute
 
 
 class WebsiteSchema(ma.ModelSchema):
@@ -21,8 +22,16 @@ class WebsiteSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at', 'hotel')
 
 
+class PriceCalendarSchema(ma.ModelSchema):
+
+    class Meta:
+        model = PriceCalendar
+        exclude = ('updated_at', 'created_at')
+
+
 class DealSchema(ma.ModelSchema):
     website = ma.Nested(WebsiteSchema, many=False)
+    price_calendar = ma.Nested(PriceCalendarSchema, many=True)
 
     class Meta:
         model = Deal
@@ -81,7 +90,6 @@ class HotelSchema(ma.ModelSchema):
     amenities = ma.Nested(AmenitySchema, many=False)
     images = ma.Nested(ImageSchema, many=True)
     rooms = ma.Nested(RoomSchema, many=True)
-
 
     class Meta:
         model = Hotel
