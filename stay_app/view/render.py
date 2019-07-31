@@ -14,11 +14,12 @@ import datetime
 import json
 
 
-@app.route('/', methods=['GET'])
+@app.route('/business', methods=['GET'])
 def home():
     resp = make_response(render_template('index.html'))
     resp.set_cookie('somecookiename', 'I am cookie')
     return resp
+
 
 
 @app.errorhandler(400)
@@ -87,6 +88,31 @@ def Business_hotel():
     hotel_data = requests.get(url=php_url, params={"mobile": mobile}).json()
     print(hotel_data)
     return render_template('hotel/b2b_hotels/hotel.html')
+
+@app.route('/business/flights', methods=['GET'])
+def Business_flights():
+    API_URL = app.config['API_URL']
+    return render_template('hotel/b2b_hotels/flights.html')
+
+@app.route('/business/cabs', methods=['GET'])
+def Business_cabs():
+    API_URL = app.config['API_URL']
+    return render_template('hotel/b2b_hotels/cabs.html')
+
+@app.route('/business/tour', methods=['GET'])
+def Business_tour():
+    API_URL = app.config['API_URL']
+    return render_template('hotel/b2b_hotels/tour.html')
+
+@app.route('/business/visa', methods=['GET'])
+def Business_visa():
+    API_URL = app.config['API_URL']
+    return render_template('hotel/b2b_hotels/visa.html')
+
+@app.route('/business/restaurant', methods=['GET'])
+def Business_restaurant():
+    API_URL = app.config['API_URL']
+    return render_template('hotel/b2b_hotels/restaurant.html')
 
 
 @app.route('/business/hotel/list', methods=['GET'])
