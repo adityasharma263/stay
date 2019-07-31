@@ -7,7 +7,6 @@ from flask import render_template, request, make_response, jsonify, abort, redir
 import requests
 from Crypto.Cipher import AES
 import base64
-# from stay_app.view.missing_b64 import b64decode
 import binascii
 
 import datetime
