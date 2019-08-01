@@ -102,6 +102,7 @@ def hotel_api():
                 room = q_room.filter(Room.id == business_deal.room_id).first()
                 room.b2b_lowest_price_room = True
             hotel.rooms = rooms
+        print(hotels, "ssffs")
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -576,12 +577,8 @@ def deal_api():
                 .filter(Deal.price >= price_start, Deal.price <= price_end).offset((page - 1) * per_page).limit(per_page).all()
         else:
             deals = Deal.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+
         result = DealSchema(many=True).dump(deals)
-        # for deal in result.data:
-        #     # if deal["room"]:
-        #     #     deal["hotel_id"] = Room.query.filter(Room.id == deal["room"]).first().hotel_id
-        #     if no_of_days >= 1 and deal['price']:
-        #         deal['price'] = int(deal["price"]) * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
@@ -622,7 +619,6 @@ def hotel_search():
     return jsonify({'result': {'cities': list(set(cities)), "names": list(set(names))}, 'message': "Success", 'error': False})
 
 
-
 @app.route('/api/v1/booking', methods=['GET', 'POST'])
 def booking_api():
     if request.method == 'GET':
@@ -631,8 +627,10 @@ def booking_api():
         per_page = request.args.get('per_page', 10)
         args.pop('page', None)
         args.pop('per_page', None)
-        data = Booking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = BookingSchema(many=True).dump(data)
+        bookings = Booking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        # for booking in bookings:
+
+        result = BookingSchema(many=True).dump(bookings)
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
     else:
         post = Booking(**request.json)
