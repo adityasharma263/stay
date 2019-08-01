@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, \
-    CollectionProduct, Booking, PriceCalendar
+    CollectionProduct, Booking, PriceCalendar, BookingDeal
 from stay_app import app, db
 # from sqlalchemy import or_
 from sqlalchemy import func
@@ -628,14 +628,21 @@ def booking_api():
         args.pop('page', None)
         args.pop('per_page', None)
         bookings = Booking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        # for booking in bookings:
 
         result = BookingSchema(many=True).dump(bookings)
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
     else:
-        post = Booking(**request.json)
-        post.save()
-        result = BookingSchema().dump(post)
+        booking = request.json
+        deals = booking.get("deals", None)
+        booking.pop('deals', None)
+        booking_post = Hotel(**booking)
+        booking_post.save()
+        for deal in deals:
+            deal["booking_id"] = booking_post.id
+            deal_post = BookingDeal(**deal)
+            booking_post.deals.append(deal_post)
+            deal_post.save()
+        result = BookingSchema().dump(booking_post)
         return jsonify({'result': {'booking': result.data}, 'message': "Success", 'error': False})
 
 
