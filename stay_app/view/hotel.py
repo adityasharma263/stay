@@ -639,6 +639,7 @@ def booking_api():
         booking_post.save()
         for deal in deals:
             deal["booking_id"] = booking_post.id
+            print(deal)
             deal_post = BookingDeal(**deal)
             booking_post.deals.append(deal_post)
             deal_post.save()
