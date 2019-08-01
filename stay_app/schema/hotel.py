@@ -23,6 +23,10 @@ class WebsiteSchema(ma.ModelSchema):
 
 
 class PriceCalendarSchema(ma.ModelSchema):
+    # date = ma.Method('date_in_epoch')
+    #
+    # def date_epoch(self, obj):
+    #     return safe_execute(None, ValueError, obj.date)
 
     class Meta:
         model = PriceCalendar
@@ -72,14 +76,7 @@ class RoomSchema(ma.ModelSchema):
     deals = ma.Nested(DealSchema, many=True)
     member = ma.Nested(MemberSchema, many=False)
     facilities = ma.Nested(FacilitySchema, many=False)
-    check_in = ma.Method('check_in_epoch')
-    check_out = ma.Method('check_out_epoch')
 
-    def check_in_epoch(self, obj):
-        return safe_execute(None, ValueError, obj.check_in)
-
-    def check_out_epoch(self, obj):
-        return safe_execute(None, ValueError, obj.check_out)
 
     class Meta:
         model = Room
@@ -105,8 +102,38 @@ class HotelCollectionSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at', 'hotel')
 
 
+class HotelDealSchema(ma.ModelSchema):
+    amenities = ma.Nested(AmenitySchema, many=False)
+    images = ma.Nested(ImageSchema, many=True)
+
+    class Meta:
+        model = Hotel
+        exclude = ('updated_at', 'created_at')
+
+
+class RoomDealSchema(ma.ModelSchema):
+    member = ma.Nested(MemberSchema, many=False)
+    facilities = ma.Nested(FacilitySchema, many=False)
+    hotel = ma.Nested(HotelDealSchema, many=False)
+
+    class Meta:
+        model = Room
+        exclude = ('updated_at', 'created_at')
+
+
+class BookingDealSchema(ma.ModelSchema):
+    website = ma.Nested(WebsiteSchema, many=False)
+    price_calendar = ma.Nested(PriceCalendarSchema, many=True)
+    room = ma.Nested(RoomDealSchema, many=False)
+
+    class Meta:
+        model = Deal
+        exclude = ('updated_at', 'created_at')
+
+
 class BookingSchema(ma.ModelSchema):
-    deal = ma.Nested(DealSchema, many=False)
+    deals = ma.Nested(BookingDealSchema, many=True)
+
     class Meta:
         model = Booking
         exclude = ('updated_at', 'created_at')
