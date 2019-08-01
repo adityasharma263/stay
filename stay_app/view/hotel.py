@@ -635,7 +635,7 @@ def booking_api():
         booking = request.json
         deals = booking.get("deals", None)
         booking.pop('deals', None)
-        booking_post = Hotel(**booking)
+        booking_post = Booking(**booking)
         booking_post.save()
         for deal in deals:
             deal["booking_id"] = booking_post.id
