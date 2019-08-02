@@ -1,16 +1,24 @@
 #-*- coding: utf-8 -*-
 __author__ = 'aditya'
 
+
 from stay_app import app
-from flask import render_template, request, make_response, jsonify, abort, redirect
+from flask import render_template, request, make_response, jsonify, abort, redirect, session
 import requests
+from Crypto.Cipher import AES
+import base64
+import binascii
+
 import datetime
 import json
 
 
 @app.route('/business', methods=['GET'])
 def home():
-    return render_template('/hotel/b2b_hotels/b2b_hotel_home.html')
+    resp = make_response(render_template('index.html'))
+    resp.set_cookie('somecookiename', 'I am cookie')
+    return resp
+
 
 
 @app.errorhandler(400)
@@ -65,7 +73,19 @@ def admin():
 
 @app.route('/business/hotel', methods=['GET'])
 def Business_hotel():
-    API_URL = app.config['API_URL']
+    # session = requests.Session()
+    # response = session.get('http://localhost:5000')
+    php_url = "http://bussiness.thetravelsquare.in/api/product/read_one.php"
+    AES.key_size = 128
+    iv = "DEFGHTABCIESPQXO"
+    key = "pqrstuvwxyz$abcdefghijAB12345678"
+    crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
+    decoded = binascii.unhexlify(str(request.cookies["hash"]))  # your ecrypted and encoded text goes here
+    decrypted = crypt_object.decrypt(decoded)
+    unpad = lambda s: s[:-ord(s[len(s) - 1:])]
+    mobile = unpad(decrypted).decode('utf-8')
+    hotel_data = requests.get(url=php_url, params={"mobile": mobile}).json()
+    print(hotel_data)
     return render_template('hotel/b2b_hotels/hotel.html')
 
 @app.route('/business/booking', methods=['GET'])
@@ -86,7 +106,6 @@ def Business_hotel_list():
     else:
         hotel_data = []
     return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data)
-
 
 
 @app.route('/business/hotel/<hotel_id>', methods=['GET'])
