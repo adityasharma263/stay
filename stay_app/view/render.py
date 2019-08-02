@@ -68,30 +68,12 @@ def Business_hotel():
     API_URL = app.config['API_URL']
     return render_template('hotel/b2b_hotels/hotel.html')
 
-@app.route('/business/flights', methods=['GET'])
-def Business_flights():
+@app.route('/business/booking', methods=['GET'])
+def Business_booking():
     API_URL = app.config['API_URL']
-    return render_template('hotel/b2b_hotels/flights.html')
+    return render_template('hotel/b2b_hotels/booking.html')
 
-@app.route('/business/cabs', methods=['GET'])
-def Business_cabs():
-    API_URL = app.config['API_URL']
-    return render_template('hotel/b2b_hotels/cabs.html')
 
-@app.route('/business/tour', methods=['GET'])
-def Business_tour():
-    API_URL = app.config['API_URL']
-    return render_template('hotel/b2b_hotels/tour.html')
-
-@app.route('/business/visa', methods=['GET'])
-def Business_visa():
-    API_URL = app.config['API_URL']
-    return render_template('hotel/b2b_hotels/visa.html')
-
-@app.route('/business/restaurant', methods=['GET'])
-def Business_restaurant():
-    API_URL = app.config['API_URL']
-    return render_template('hotel/b2b_hotels/restaurant.html')
 
 
 @app.route('/business/hotel/list', methods=['GET'])
@@ -118,18 +100,18 @@ def Business_hotel_detail(hotel_id):
     return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
 
 
-@app.route('/business/hotel/cart', methods=['GET'])
-def Business_hotel_booking():
-    args = request.args.to_dict()
-    print(args, "ddddddddddddddddddd")
-    # for deal_id in deals:
-    #     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
-    #     hotel_data = requests.get(url=hotel_api_url, params={"id": deal_id}).json()
-    #     if len(hotel_data["result"]["hotel"]) > 0:
-    #         hotel_data = hotel_data["result"]["hotel"]
-    #     else:
-    #         hotel_data = []
-    return render_template('hotel/b2b_hotels/booking.html', deal_data=args)
+# @app.route('/business/hotel/cart', methods=['GET'])
+# def Business_hotel_booking():
+#     args = request.args.to_dict()
+#     print(args, "ddddddddddddddddddd")
+#     # for deal_id in deals:
+#     #     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
+#     #     hotel_data = requests.get(url=hotel_api_url, params={"id": deal_id}).json()
+#     #     if len(hotel_data["result"]["hotel"]) > 0:
+#     #         hotel_data = hotel_data["result"]["hotel"]
+#     #     else:
+#     #         hotel_data = []
+#     return render_template('hotel/b2b_hotels/booking.html', deal_data=args)
 
 
 @app.route('/business/admin/hotel', methods=['GET'])

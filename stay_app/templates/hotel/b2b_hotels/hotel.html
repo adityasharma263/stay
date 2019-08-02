@@ -47,29 +47,27 @@
                                 <form>
                                     <div class="row">
                                         <div class="col-sm-4 col-md-5 form-group" onmouseover="myFunction(event)">
-                                            <input type="text" class="input-text full-width" style="border-radius: 5px;" ng-keyup="[search() , show()]" ng-model="hotel.search" ng-keypress="($event.which === 40)?foo(hotel.search)" placeholder="Where Do You Wanna Visit ? .... ">
+                                            <input type="text" class="input-text full-width" style="border-radius: 5px;" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
                                         </div>
                                         <div class="col-xs-6 col-sm-4 col-md-2 form-group">
                                             <div class="datepicker-wrap">
-                                                <input type="text" name="date_from" class="input-text full-width" placeholder="Departure" id="dp1564264492204"><img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title="">
+                                                <input type="date" name="date_from" class="input-text full-width" placeholder="Check-In" >
+                                                <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-5 col-md-2 form-group">
                                             <div class="datepicker-wrap">
-                                                <input type="text" name="date_to" class="input-text full-width" placeholder="Arrival" id="dp1564264492205"><img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title="">
+                                                <input type="date" name="date_to" class="input-text full-width" placeholder="Check-Out" >
+                                                <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
                                             </div>
-                                        </div>
-                                        
-                                            
+                                        </div> 
                                             <div class="col-sm-3 form-group">
                                                 <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>                                            </div>
-                                        </div>
-                                    </div>
+                                        </div> 
                                 </form>
                             </div>
 
-                            
-                            <div class="row col-md-8" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)" onmouseout="clearCoor()">
+                            <div class="row col-md-5" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)">
                                 <div class="col-sm-12" style="position: relative; z-index: 99;"> 
                                     <div style="max-height:100px; text-align: left;
                                     margin: 0;
@@ -83,20 +81,20 @@
                                
                                 
 
-                                <table id="search" class="table table-hover" class="input-text full-width" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 5px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
+                                <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
                                         <tbody id="search" class="input-text full-width"" >
-                                          <tr ng-repeat="city in cities | limitTo:2" >
-                                            <td style="border: 0" id="start" ng-click="result([[city]],'city')">
-                                                <i class="soap-icon-departure" style="color: #01b7f2; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
+                                          <tr class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
+                                            <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
+                                                <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
 
                                           </tr>
-                                          <tr ng-repeat="name in names | limitTo:2">
-                                            <td style="border: 0" ng-click="result([[name]],'name')">
-                                                <i class="soap-icon-address" style="color:#01b7f2; font-size: 16px;"></i> &nbsp [[name]]</td>
+                                          <tr class="ng-cloak" ng-repeat="name in names | limitTo:2">
+                                            <td class="ng-cloak" style="border: 0" ng-click="result([[name]],'name')">
+                                                <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[name]]</td>
 
                                           </tr>
-                                          <tr ng-if="resp">
+                                          <tr class="ng-cloak" ng-if="resp">
                                               <td>No result found</td>
                                           </tr>
                                         </tbody>
