@@ -27,6 +27,8 @@ $scope.ClearCookies = function ($cookieStore) {
   $scope.myVar = false;
   $scope.resp = false;
   var searchKey = 'city';
+  
+
 
   
  // $location.search=
@@ -87,13 +89,15 @@ $scope.ClearCookies = function ($cookieStore) {
     console.log("status",searchKey);
     $scope.location=document.location.href;
     console.log("$scope.location",$scope.location);
-    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search,'_self');
+    console.log("chckin",$scope.check_in);
+    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search, '_self');
     console.log("$scope.hotel.city",$scope.hotel.city)     
   } 
 
   $scope.search = function()  {
     $scope.hotel.search = $scope.hotel.search.toLowerCase();
     console.log("$scope.hotel",$scope.hotel);
+    console.log("chckin",$scope.check_in);
   $http({
     method: 'POST',
     url: api_url + '/hotel/search',
@@ -120,6 +124,8 @@ $scope.ClearCookies = function ($cookieStore) {
      if($scope.cities.length!=0 && $scope.names.length!=0){
       searchKey = 'city';
    }
+  
+
 
   })
 
