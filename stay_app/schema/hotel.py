@@ -23,10 +23,10 @@ class WebsiteSchema(ma.ModelSchema):
 
 
 class PriceCalendarSchema(ma.ModelSchema):
-    # date = ma.Method('date_in_epoch')
-    #
-    # def date_epoch(self, obj):
-    #     return safe_execute(None, ValueError, obj.date)
+    date = ma.Method('date_epoch')
+
+    def date_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.date)
 
     class Meta:
         model = PriceCalendar
@@ -125,6 +125,10 @@ class BookingDealSchema(ma.ModelSchema):
     website = ma.Nested(WebsiteSchema, many=False)
     price_calendar = ma.Nested(PriceCalendarSchema, many=True)
     room = ma.Nested(RoomDealSchema, many=False)
+    booking_date = ma.Method('booking_date_epoch')
+
+    def booking_date_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.booking_date)
 
     class Meta:
         model = Deal

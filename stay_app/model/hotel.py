@@ -264,7 +264,7 @@ class Booking(Base):
     __tablename__ = 'booking'
 
     booking_no = db.Column(db.String, nullable=True)
-    date = db.Column(db.DateTime, nullable=True)
+    booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
     guest_name = db.Column(db.String, nullable=True)
     contact_no = db.Column(db.String, nullable=True)
     email = db.Column(db.String(120), nullable=True)
