@@ -5,12 +5,19 @@
 
     <head>
         <link rel="stylesheet" href="/css/admin.css">
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+
+        <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        
+    
+       
         <title>Trip Key</title>
         
     </head>
@@ -957,7 +964,10 @@
                                 </label>
                                 <br>
                                 <label for="room_slipper">Room Slipper
-                                    <input type="checkbox" value="" ng-model="room.facilities.room_slipper"/>
+                                    <input type="checkbox" value="" ng-model="room.facilities.room_slipper"/]]" >
+                                    <div></div>
+                                </div>
+                            </div>>
                                 </label>
                                 <br>
                                 <label for="tv">TV
@@ -968,7 +978,10 @@
                                     <input type="checkbox" value="" ng-model="room.facilities.view"/>
                                 </label>
                                 <br>
-                                <label for="wardrobes_closet">Wardrobes Closet
+                                <label for="wardrobes_closet">Wardrobes Closet]]" >
+                                    <div></div>
+                                </div>
+                            </div>
                                     <input type="checkbox" value="" ng-model="room.facilities.wardrobes_closet"/>
                                 </label>
                                 <br>
@@ -1109,7 +1122,7 @@
                             <label class="control-label col-sm-2" for="image_url">images (Click On Image to Update or Delete): </label>
                             <div style="max-height: 100px; overflow-y: scroll;" class="col-sm-10">
                                 <div ng-repeat="img in hotelImages" class="col-sm-2">          
-                                    <img style="cursor: pointer;max-width:87px; margin: 5px" data-toggle="modal" data-target="#imgModal" ng-click="editImg(img,$index)" src="[[img.image_url]]" >
+                                    <img style="cursor: pointer;max-width:87px; margin: 5px" data-toggle="modal" data-target="#imgModal" ng-click="editImg(img,$index)" src="" >
                                     <div></div>
                                 </div>
                             </div>
@@ -1195,7 +1208,8 @@
                             </div>
                         </div>
                         <h3>Rooms Deatils</h3>
-                        <div class="form-group">
+                        <div class="form-group"><script type="text/javascript" src="/app.js"></script>
+
                             <label class="control-label col-sm-2"for="name">Search Room (for Update):</label>
                             <div class="col-sm-10">
                                 <input class="form-control" data-toggle="dropdown" ng-model="searchRoom" placeholder="enter search term here">
