@@ -776,24 +776,24 @@
                             </div>
                         </div>
                         
-                        <div class="amenities" style="float:left">
+                        <div ng-cloak class="amenities" style="float:left">
                                 <span class="price" ></span></div>
-                        <div class="sidebar col-md-3">
-                                <div class="hotel-list">
-                                        <div class="row image-box hotel listing-style1">
-                                            <div class="col-sm-6 col-md-12">
+                        <div ng-cloak class="sidebar col-md-3">
+                                <div ng-cloak class="hotel-list">
+                                        <div  ng-cloak class="row image-box hotel listing-style1">
+                                            <div ng-cloak class="col-sm-6 col-md-12">
                                                 <article class="box">
                                                     <figure>
-                                                        <a href="" ng-repeat="image in {{hotel_data.images}} | limitTo : 1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
+                                                        <a ng-cloak href="" ng-repeat="image in {{hotel_data.images}} | limitTo : 1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
                                                     </figure>
-                                                    <div class="details" ng-repeat="deal in [[room.deals]]">
-                                                        <span class="price" ng-if="[[deal.business_deal]]">
+                                                    <div ng-cloak class="details" ng-repeat="deal in [[room.deals]]">
+                                                        <span ng-cloak class="price" ng-if="[[deal.business_deal]]">
                                                             <small></small>
                                                             ₹[[deal.price]]
                                                         </span>
-                                                        <h4 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
+                                                        <h4 ng-cloak class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
                                                         <!-- <p class="description">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p> -->
-                                                        <div class="action">
+                                                        <div ng-cloak class="action">
                                                             <a class="button btn-small" href="">Add To Cart</a>
                                                             <a class="button btn-small yellow popup-map" href="" ng-click="bookingPage(hotel.id)" data-box="48.856614, 2.352222">Book Now</a>
                                                         </div>
