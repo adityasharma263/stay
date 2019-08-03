@@ -36,7 +36,7 @@ import json
 #======================== HOTEL ============================
 
 
-@app.route('/business/hotel', methods=['GET'])
+@app.route('/hotel', methods=['GET'])
 def hotel():
     return render_template('hotel/b2c_hotels/hotel.html')
 
@@ -75,7 +75,7 @@ def Business_booking():
 #================= B2B hotels ==========================
 
 
-@app.route('/hotel', methods=['GET'])
+@app.route('/business/hotel', methods=['GET'])
 def business_hotel():
     return render_template('hotel/b2b_hotels/hotel.html')
 
