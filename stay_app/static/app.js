@@ -89,8 +89,12 @@ $scope.ClearCookies = function ($cookieStore) {
     console.log("status",searchKey);
     $scope.location=document.location.href;
     console.log("$scope.location",$scope.location);
+<<<<<<< HEAD
     console.log("chckin",$scope.check_in);
     window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search, '_self');
+=======
+    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search +'&'+'ci'+ '='+ $scope.hotel.ci +'&'+'co'+'=' + $scope.hotel.co,'_self');
+>>>>>>> a6443be2f638ceca3cfb9dafe54410ac69358f7a
     console.log("$scope.hotel.city",$scope.hotel.city)     
   } 
 
