@@ -102,7 +102,6 @@ def hotel_api():
                 room = q_room.filter(Room.id == business_deal.room_id).first()
                 room.b2b_lowest_price_room = True
             hotel.rooms = rooms
-        print(hotels, "ssffs")
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:

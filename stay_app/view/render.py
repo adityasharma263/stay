@@ -8,7 +8,6 @@ import requests
 from Crypto.Cipher import AES
 import base64
 import binascii
-
 import datetime
 import json
 
@@ -137,10 +136,13 @@ def Business_hotel_detail(hotel_id):
     return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
 
 
-@app.route('/business/hotel/cart', methods=['GET'])
-def Business_hotel_booking():
-    args = request.args.to_dict()
-    print(args, "ddddddddddddddddddd")
+@app.route('/hotel/booking', methods=['GET', 'POST'])
+def hotel_booking():
+    # args = request.args.to_dict()
+    # resp = make_response(render_template('hotel/b2b_hotels/booking.html'))
+    # resp.set_cookie('somecookiename', 'I am cookie')
+    # return resp
+
     # for deal_id in deals:
     #     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
     #     hotel_data = requests.get(url=hotel_api_url, params={"id": deal_id}).json()
@@ -148,7 +150,7 @@ def Business_hotel_booking():
     #         hotel_data = hotel_data["result"]["hotel"]
     #     else:
     #         hotel_data = []
-    return render_template('hotel/b2b_hotels/booking.html', deal_data=args)
+    return render_template('hotel/b2b_hotels/booking.html')
 
 
 @app.route('/business/admin/hotel', methods=['GET'])
