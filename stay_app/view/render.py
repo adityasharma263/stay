@@ -36,7 +36,7 @@ import json
 #======================== HOTEL ============================
 
 
-@app.route('/hotel', methods=['GET'])
+@app.route('/business/hotel', methods=['GET'])
 def hotel():
     return render_template('hotel/b2c_hotels/hotel.html')
 
