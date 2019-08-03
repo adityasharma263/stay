@@ -13,17 +13,12 @@ import datetime
 import json
 
 
-@app.route('/business', methods=['GET'])
-def home():
-    resp = make_response(render_template('index.html'))
-    resp.set_cookie('somecookiename', 'I am cookie')
-    return resp
-
-
-
-@app.errorhandler(400)
-def page_not_found():
-    return render_template("404.html"), 400
+# @app.route('/business', methods=['GET'])
+# def home():
+#     resp = make_response(render_template('index.html'))
+#     resp.set_cookie('somecookiename', 'I am cookie')
+#     return resp
+#
 
 
 # @app.route('/payment', methods=['GET','POST'])
@@ -62,38 +57,23 @@ def hotel_detail(hotel_id):
         hotel_data = {}
     return render_template('hotel/b2c_hotels/hotel_detail.html', hotel_data=hotel_data)
 
+#================= Admin hotels ==========================
+
 
 @app.route('/admin/hotel', methods=['GET'])
 def admin():
-    return render_template('hotel/b2c_hotels/admin_hotel.html')
+    return render_template('admin/admin_hotel.html')
 
 
-#================= B2B hotels ==========================
+#================= Booking hotels ==========================
 
-
-@app.route('/business/hotel', methods=['GET'])
-def Business_hotel():
-    # session = requests.Session()
-    # response = session.get('http://localhost:5000')
-    # php_url = "http://bussiness.thetravelsquare.in/api/product/read_one.php"
-    # AES.key_size = 128
-    # iv = "DEFGHTABCIESPQXO"
-    # key = "pqrstuvwxyz$abcdefghijAB12345678"
-    # crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
-    # decoded = binascii.unhexlify(str(request.cookies["hash"]))  # your ecrypted and encoded text goes here
-    # decrypted = crypt_object.decrypt(decoded)
-    # unpad = lambda s: s[:-ord(s[len(s) - 1:])]
-    # mobile = unpad(decrypted).decode('utf-8')
-    # hotel_data = requests.get(url=php_url, params={"mobile": mobile}).json()
-    # print(hotel_data)
-    return render_template('hotel/b2b_hotels/hotel.html')
-
-@app.route('/business/booking', methods=['GET'])
+@app.route('/hotel/booking', methods=['GET'])
 def Business_booking():
     API_URL = app.config['API_URL']
     return render_template('hotel/b2b_hotels/booking.html')
 
 
+#================= B2B hotels ==========================
 
 
 @app.route('/business/hotel/list', methods=['GET'])
@@ -132,12 +112,14 @@ def Business_hotel_detail(hotel_id):
 #     #         hotel_data = []
 #     return render_template('hotel/b2b_hotels/booking.html', deal_data=args)
 
+#================= Add on Pages hotels ==========================
 
-@app.route('/business/admin/hotel', methods=['GET'])
-def Business_admin():
-    return render_template('hotel/b2b_hotels/admin_hotel.html')
 
-    
+@app.errorhandler(400)
+def page_not_found():
+    return render_template("404.html"), 400
+
+
 @app.route('/about', methods=['GET'])
 def Business_about():
     return render_template('hotel/footer_pages/about.html')
@@ -171,6 +153,11 @@ def Business_partner_care():
 @app.route('/press-release', methods=['GET'])
 def Business_press_release():
     return render_template('hotel/footer_pages/press-release.html')
+
+
+
+#================= collection hotels ==========================
+
 
 
 @app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
