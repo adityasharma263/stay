@@ -32,6 +32,7 @@ app.json_encoder = MyJSONEncoder
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
+        print(args)
         rating = request.args.get('rating')
         args.pop('rating', None)
         # lowest_price_room = request.args.get('lowest_price_room')
@@ -53,6 +54,7 @@ def hotel_api():
         args.pop('ci', None)
         args.pop('co', None)
         room_list = []
+        print(check_in,check_out)
         q = db.session.query(Hotel).outerjoin(Hotel.amenities)
         q_room = db.session.query(Room).outerjoin(Room.facilities)
         q_deal = db.session.query(Deal)
