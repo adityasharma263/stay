@@ -61,7 +61,7 @@ def hotel_detail(hotel_id):
 
 @app.route('/admin/hotel', methods=['GET'])
 def admin():
-    return render_template('admin/admin_hotel.html')
+    return render_template('hotel/admin/admin_hotel.html')
 
 
 #================= Booking hotels ==========================
