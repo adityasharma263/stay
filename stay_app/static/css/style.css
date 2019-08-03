@@ -1792,7 +1792,7 @@ button.light-brown,a.button.light-brown,input[type="button"].button.light-brown 
 }
 
 button.orange,a.button.orange,input[type="button"].button.orange {
-    background: #ff6000
+    background: #000000
 }
 
 button.dull-blue,a.button.dull-blue,input[type="button"].button.dull-blue {
@@ -1820,7 +1820,7 @@ button.dark-blue2,a.button.dark-blue2,input[type="button"].button.dark-blue2 {
 }
 
 button.dark-orange,a.button.dark-orange,input[type="button"].button.dark-orange {
-    background: #ff3e3e
+    background: #000000
 }
 
 button.purple,a.button.purple,input[type="button"].button.purple {
@@ -6737,11 +6737,11 @@ ul.check-circle li:before {
 }
 
 .style-changer .style-chagner-main .design-skins li.orange {
-    border-color: #ff6000
+    border-color: #000000
 }
 
 .style-changer .style-chagner-main .design-skins li.orange a {
-    background: #ff6000
+    background: #000000
 }
 
 .style-changer .style-chagner-main .design-skins li.light-orange {
@@ -6769,11 +6769,11 @@ ul.check-circle li:before {
 }
 
 .style-changer .style-chagner-main .design-skins li.dark-orange {
-    border-color: #ff3e3e
+    border-color: #000000
 }
 
 .style-changer .style-chagner-main .design-skins li.dark-orange a {
-    background: #ff3e3e
+    background: #000000
 }
 
 .style-changer .style-chagner-main .design-skins li.dark-blue {
@@ -12460,11 +12460,11 @@ button.ui-button::-moz-focus-inner {
 }
 
 #footer.style2 .travel-news .s-title {
-    color: #ff6000
+    color: #000000
 }
 
 #footer.style2 .travel-news .s-title a:hover {
-    color: #ff3e3e
+    color: #000000
 }
 
 #footer.style2 .social-icons li a {
@@ -12472,7 +12472,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 #footer.style2 .social-icons li:hover a {
-    background: #ff6000
+    background: #000000
 }
 
 #footer.style2 ul.triangle li:before {
@@ -12480,11 +12480,11 @@ button.ui-button::-moz-focus-inner {
 }
 
 #footer.style2 ul.triangle li:hover:before,#footer.style2 ul.triangle li:hover a,#footer.style2 ul.triangle li.active:before,#footer.style2 ul.triangle li.active a {
-    color: #ff6000
+    color: #000000
 }
 
 #footer.style2 .travel-news li .title,#footer.style2 .contact-details .contact-email,#footer.style2 .contact-details .contact-phone i {
-    color: #ff6000
+    color: #000000
 }
 
 #footer.style2 .footer-wrapper>.container:first-child {
@@ -12528,7 +12528,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 #footer.style2 #back-to-top i {
-    border-color: #ff6000
+    border-color: #000000
 }
 
 #footer.style3 {
@@ -12553,7 +12553,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 #footer.style3 ul.triangle li:hover:before,#footer.style3 ul.triangle li:hover a,#footer.style3 ul.triangle li.active:before,#footer.style3 ul.triangle li.active a {
-    color: #ff6000
+    color: #000000
 }
 
 #footer.style3 .social-icons li a {
@@ -12561,19 +12561,19 @@ button.ui-button::-moz-focus-inner {
 }
 
 #footer.style3 .social-icons li:hover a {
-    background: #ff6000
+    background: #000000
 }
 
 #footer.style3 .travel-news li .title,#footer.style3 .contact-details .contact-email,#footer.style3 .contact-details .contact-phone i {
-    color: #ff6000
+    color: #000000
 }
 
 #footer.style3 .travel-news .s-title {
-    color: #ff6000
+    color: #000000
 }
 
 #footer.style3 .travel-news .s-title a:hover {
-    color: #ff3e3e
+    color: #000000
 }
 
 #footer.style3 h2,#footer.style3 .contact-details .contact-phone {
@@ -12621,7 +12621,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 #footer.style3 #back-to-top i {
-    border-color: #ff6000;
+    border-color: #000000;
     color: #12a0c3
 }
 

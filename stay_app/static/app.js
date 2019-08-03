@@ -1,8 +1,20 @@
-angular.module('comparetravel', ['angular.filter'])
+angular.module('comparetravel', ['angular.filter','ngCookies'])
 .config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
   // $locationProvider.html5Mode(true);
+}])
+
+.controller('hotelCart',["$scope", "$window", "$cookieStore", "$http", function($scope, $window, $cookieStore, $http,) {
+  $scope.SetCookies = function ($cookieStore) {
+    $cookieStore.put("username", $scope.username);
+};
+$scope.GetCookies = function ($cookieStore) {
+    $window.alert($cookieStore.get('username'));
+};
+$scope.ClearCookies = function ($cookieStore) {
+    $cookieStore.remove('username');
+};
 }])
 
 
@@ -138,7 +150,9 @@ angular.module('comparetravel', ['angular.filter'])
 //  }
 }])
 
-.controller('staylistController',["$scope", "$http", function($scope, $http) {
+.controller('staylistController',["$scope", "$window", "$cookies", "$http", function($scope, $window, $cookies, $http,) {
+
+
 
   $scope.room = {};
   $scope.cityid = {};
@@ -163,7 +177,32 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.max= 200000;
   var api_url = 'http://139.59.51.174';
 
-        
+
+  $scope.showBusinessDetail=function(hotel_id){
+    window.open('/business/hotel/'+hotel_id,'_self');
+    console.log(hotel_id);
+    
+  }
+
+  $scope.bookingPage=function(room_id){
+    window.open('/business/hotel/booking/'+room_id,'_self');
+    console.log(hotel_id);
+    
+  }
+
+    $scope.setCookies = function () {
+    console.log("debugg");
+      $cookies.put("username", $scope.username);
+  };
+  $scope.getCookies = function () {
+    console.log("debugg");
+      $window.alert($cookies.get('username'));
+  };
+  $scope.clearCookies = function () {
+      $cookies.remove('username');
+  };
+  
+
         
 
    // Get the modal
@@ -609,6 +648,13 @@ $scope.showDetail=function(hotel_id){
   
 }
 
+//for business detail page
+// $scope.showBusinessDetail=function(hotel_id){
+//   window.open('/business/hotel/'+hotel_id,'_self');
+//   console.log(hotel_id);
+  
+// }
+
 $scope.hotelData = [];
 
 
@@ -747,7 +793,7 @@ $scope.getHotelsData();
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
-  var api_url = 'http://139.59.51.174/';
+  var api_url = 'http://139.59.51.174';
 
   $scope.showCreate=function(){
     $scope.hotelDetail=true;
@@ -1141,13 +1187,25 @@ $scope.createHotel = function() {
 
 .controller('hotelController',["$scope", "$http", function($scope, $http, $filter) {
   $scope.roomData={};
+  $scope.room = {};
+  $scope.id = [];
+  $scope.cityid = {};
   $scope.hotel = {};
   $scope.hotels={};
   $scope.roomobj={};
+  $scope.hotelobj={};
+  $scope.deals=[];
+  $scope.imagesData={};
   $scope.similarhotels=[];
   $scope.limit=10;
+  $scope.roomPrice={};
   $scope.deallimit=1;
   var api_url = 'http://139.59.51.174';
+
+  $scope.openGallery= function(data){
+    $scope.imagesData=data;
+    console.log("$scope.images",$scope.imagesData);
+  }
 
   // window.onresize = function(){ location.reload(); }
   $scope.openHome=function(){
@@ -1184,7 +1242,7 @@ $scope.createHotel = function() {
       var transform=-870*(slideIndex-1);
     }
     if(window.screen.availWidth <=440){
-      var transform=-370*(slideIndex-1);
+      var transform=-870*(slideIndex-1);
     
     }
     document.body.style.setProperty('--tx',transform+'px');
@@ -1202,7 +1260,11 @@ $scope.createHotel = function() {
     showDivs(slideIndex = n);
   }
 
-
+  $scope.bookingPage=function(room_id){
+    window.open('/business/hotel/booking/'+room_id,'_self');
+    console.log(hotel_id);
+    
+  }
   
  
 
@@ -1433,8 +1495,3 @@ if(window.screen.availWidth <=440){
 
 
 }])
-
-
- 
-
-

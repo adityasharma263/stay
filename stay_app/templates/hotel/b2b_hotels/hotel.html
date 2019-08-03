@@ -1,5 +1,10 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}stayController{% endblock %} {% block
     content%}
+
+    
+
+    
+	</script>
             <div class="search-box-wrapper">
                
 
@@ -37,44 +42,59 @@
                                 <h1 class="title">#TB Hotels</h1>
                                 <h3 class="sub-title"><font color="white">We Have More Than Just Hotels Explore More Unique Places !</font></h3>
                             </div>
+
                             <div class="search-box" style="margin-bottom:0px;">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)" onmouseout="clearCoor()">
-                                            
-                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
-                                        
+                                        <div class="col-sm-4 col-md-5 form-group" onmouseover="myFunction(event)">
+                                            <input type="text" class="input-text full-width" style="border-radius: 5px;" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
                                         </div>
-                                        
-                                            
-                                            <div class="col-sm-4 form-group">
-                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 form-group">
+                                            <div class="datepicker-wrap">
+                                                <input type="date" name="date_from" class="input-text full-width" placeholder="Check-In" >
+                                                <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
                                             </div>
-                                        
-                                    </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-5 col-md-2 form-group">
+                                            <div class="datepicker-wrap">
+                                                <input type="date" name="date_to" class="input-text full-width" placeholder="Check-Out" >
+                                                <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
+                                            </div>
+                                        </div> 
+                                            <div class="col-sm-3 form-group">
+                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>                                            </div>
+                                        </div> 
                                 </form>
                             </div>
-                            <div class="row col-md-8" id="demo" style="margin-left:10px; top:-19px; z-index:999"  onmouseover="myFunction(event)" onmouseout="clearCoor()">
+
+                            <div class="row col-md-5" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)">
                                 <div class="col-sm-12" style="position: relative; z-index: 99;"> 
                                     <div style="max-height:100px; text-align: left;
                                     margin: 0;
+                                    border-radius: 8px;
                                     box-sizing: border-box;
                                     z-index: 99;
+                                    font-size: 12px;
                                     width: 96%;
                                     padding: 0;
                                     position: absolute;">
-                                <table class="table table-hover " style="background-color:white">
+                               
+                                
 
-                                        <tbody>
-                                          <tr ng-repeat="city in cities | limitTo:3">
-                                            <td ng-click="result([[city]],'city')">[[city]]</td>
+                                <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
+
+                                        <tbody id="search" class="input-text full-width"" >
+                                          <tr class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
+                                            <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
+                                                <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
 
                                           </tr>
-                                          <tr ng-repeat="name in names | limitTo:3">
-                                            <td ng-click="result([[name]],'name')">[[name]]</td>
+                                          <tr class="ng-cloak" ng-repeat="name in names | limitTo:2">
+                                            <td class="ng-cloak" style="border: 0" ng-click="result([[name]],'name')">
+                                                <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[name]]</td>
 
                                           </tr>
-                                          <tr ng-if="resp">
+                                          <tr class="ng-cloak" ng-if="resp">
                                               <td>No result found</td>
                                           </tr>
                                         </tbody>
@@ -104,14 +124,14 @@
                                 <li ng-repeat="hotel in hotels" style="width: 270px; float: left; display: block;">
                                     <article class="box">
                                         <figure>
-                                            <a href="#" class=""><img style="height:150px"  alt="" src="[[hotel.images[0].image_url]]"></a>
+                                            <a href="#" class=""><img style="height:150px"  alt="" src="http://[[hotel.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
                                             <!-- <span class="price">
                                                 <small>avg/night</small>
                                                 ₹[[hotel.deals[0].price]]
                                             </span> -->
-                                            <h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
+                                            <a ng-click="showBusinessDetail(hotel.id)"></a><h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
                                             <!-- <div class="feedback">
                                                 <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
                                                 <span class="review">270 reviews</span>
