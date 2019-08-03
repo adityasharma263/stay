@@ -38,7 +38,6 @@ import json
 
 @app.route('/hotel', methods=['GET'])
 def hotel():
-    # API_URL = app.config['API_URL']
     return render_template('hotel/b2c_hotels/hotel.html')
 
 
@@ -76,8 +75,13 @@ def Business_booking():
 #================= B2B hotels ==========================
 
 
+@app.route('/hotel', methods=['GET'])
+def business_hotel():
+    return render_template('hotel/b2b_hotels/hotel.html')
+
+
 @app.route('/business/hotel/list', methods=['GET'])
-def Business_hotel_list():
+def business_hotel_list():
     args = request.args.to_dict()
     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params=args).json()
@@ -89,7 +93,7 @@ def Business_hotel_list():
 
 
 @app.route('/business/hotel/<hotel_id>', methods=['GET'])
-def Business_hotel_detail(hotel_id):
+def business_hotel_detail(hotel_id):
     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
     if len(hotel_data["result"]["hotel"]) > 0:
@@ -121,37 +125,37 @@ def page_not_found():
 
 
 @app.route('/about', methods=['GET'])
-def Business_about():
+def business_about():
     return render_template('hotel/footer_pages/about.html')
 
 
 @app.route('/contact-us', methods=['GET'])
-def Business_contact_us():
+def business_contact_us():
     return render_template('hotel/footer_pages/contact-us.html')
 
 
 @app.route('/customer-care', methods=['GET'])
-def Business_customer_care():
+def business_customer_care():
     return render_template('hotel/footer_pages/customer-care.html')
 
 
 @app.route('/jobs', methods=['GET'])
-def Business_jobs():
+def business_jobs():
     return render_template('hotel/footer_pages/job-and-internship-application-form.html')
 
 
 @app.route('/legal', methods=['GET'])
-def Business_legal():
+def business_legal():
     return render_template('hotel/footer_pages/legal.html')
 
 
 @app.route('/partner-care', methods=['GET'])
-def Business_partner_care():
+def business_partner_care():
     return render_template('hotel/footer_pages/partner-care.html')
 
 
 @app.route('/press-release', methods=['GET'])
-def Business_press_release():
+def business_press_release():
     return render_template('hotel/footer_pages/press-release.html')
 
 
