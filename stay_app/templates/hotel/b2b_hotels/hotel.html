@@ -90,12 +90,12 @@
                                 <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
                                         <tbody id="search" class="input-text full-width"" >
-                                          <tr class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
+                                          <tr ng-autocomplete class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
                                             <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
                                                 <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
 
                                           </tr>
-                                          <tr class="ng-cloak" ng-repeat="name in names | limitTo:2">
+                                          <tr ng-autocomplete class="ng-cloak" ng-repeat="name in names | limitTo:2">
                                             <td class="ng-cloak" style="border: 0" ng-click="result([[name]],'name')">
                                                 <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[name]]</td>
 

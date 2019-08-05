@@ -307,10 +307,6 @@
                                     <div >          
                                         <input  class="form-control" id="name"  type="number" ng-model="deal.price" required>
                                     </div>
-                                    <label for="business_deal">Business Deal :
-                                            <input id="business_deal" type="checkbox" value="" ng-model="deal.business_deal" ng-init="deal.business_deal=true"/>
-                                        </label>
-                                    </div>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
@@ -1000,12 +996,6 @@
                                     <label for="weekend">Weekend :
                                         <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
                                     </label>
-                                    <br>
-                                    <label for="business_deal">Business Deal:
-                                            <input id="business_deal" type="checkbox" value="" ng-model="deal.business_deal" ng-init="deal.business_deal=true"/>
-                                        </label>
-                                </div>
-                               
                                 </div>
                                 <br>
                                 <div class="form-group">
@@ -1054,7 +1044,7 @@
                                     <div ng-repeat="data in hotelsData  | filter : searchHotel" >
                                     [[data.name]] 
                                     <!-- <button class="btn" data-toggle="modal" data-target="#hotelModal" ng-click="editHotelData(data)">Edit Amenities</button> -->
-                                    <<button class="btn" ng-click="editHotel(data)">Edit Hotel</button>
+                                    <button class="btn" ng-click="editHotel(data)">Edit Hotel</button>
                                     <button class="btn" ng-click="deleteHotel(data)">Delete Hotel</button>
 
 
@@ -1321,7 +1311,7 @@
                         <div ng-show="hotelDetail">
                             <br>
                             <!-- <button class="btn btn-defalut" ng-click="hideShow()">create</button> -->
-                            <button class="btn btn-defaut" ng-click="showUpdate()">Update Hotel</button>
+                            <button class="btn btn-defalut" ng-click="showUpdate()">Update Hotel</button>
                             <h2>Hotels Details </h2>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Hotel Name: </label>
@@ -1844,12 +1834,6 @@
                                 <label for="weekend">Weekend :
                                     <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
                                 </label>
-                                    <br>
-                                <label for="business_deal">Business Deal :
-                                        <input id="business_deal" type="checkbox" value="" ng-model="deal.business_deal" ng-init="deal.business_deal=true"/>
-                                    </label>
-                            </div>
-                            
                             </div>
                             <br>
                             <div class="form-group">
