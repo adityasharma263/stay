@@ -35,17 +35,17 @@
                                                 <form>
                                                     <div class="datepicker-wrap input-text">
                                                         <label>check in</label>
-                                                            <input type="text" class="input-text full-width" ng-model="hotel.check_in" placeholder="mm/dd/yy"> 
+                                                            <input type="text" class="input-text full-width" ng-model="hotel.ci" placeholder="mm/dd/yy"> 
                                                             <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title="">                                                 
                                                     </div>
                                                     <div class="datepicker-wrap form-group">
                                                         <label>check out</label>
-                                                            <input type="text" class="input-text full-width" ng-model="hotel.check_out" ng-change="checkErr()" placeholder="mm/dd/yy">
+                                                            <input type="text" class="input-text full-width" ng-model="hotel.co"  placeholder="mm/dd/yy">
                                                             <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
                                                     </div>
-                                                    <span style="color:red">[[errMessage]]</span>
+                                                    <!-- <span style="color:red">[[errMessage]]</span> -->
                                                     <br>
-                                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelweek()">search again</button>
+                                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getHotels()">search again</button>
                                                 </form>
                                             </div>
                                         </div>
