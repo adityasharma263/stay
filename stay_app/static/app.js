@@ -1,21 +1,21 @@
-angular.module('comparetravel', ['angular.filter','ngCookies'])
+angular.module('comparetravel', ['angular.filter'])
 .config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
   // $locationProvider.html5Mode(true);
 }])
 
-.controller('hotelCart',["$scope", "$window", "$cookieStore", "$http", function($scope, $window, $cookieStore, $http,) {
-  $scope.SetCookies = function ($cookieStore) {
-    $cookieStore.put("username", $scope.username);
-};
-$scope.GetCookies = function ($cookieStore) {
-    $window.alert($cookieStore.get('username'));
-};
-$scope.ClearCookies = function ($cookieStore) {
-    $cookieStore.remove('username');
-};
-}])
+// .controller('hotelCart',["$scope", "$window", "$cookieStore", "$http", function($scope, $window, $cookieStore, $http,) {
+//   $scope.SetCookies = function ($cookieStore) {
+//     $cookieStore.put("username", $scope.username);
+// };
+// $scope.GetCookies = function ($cookieStore) {
+//     $window.alert($cookieStore.get('username'));
+// };
+// $scope.ClearCookies = function ($cookieStore) {
+//     $cookieStore.remove('username');
+// };
+// }])
 
 
 
@@ -150,7 +150,7 @@ $scope.ClearCookies = function ($cookieStore) {
 //  }
 }])
 
-.controller('staylistController',["$scope", "$window", "$cookies", "$http", function($scope, $window, $cookies, $http,) {
+.controller('staylistController',["$scope", "$window", "$http", function($scope, $window, $http,) {
 
 
 
@@ -190,17 +190,17 @@ $scope.ClearCookies = function ($cookieStore) {
     
   }
 
-    $scope.setCookies = function () {
-    console.log("debugg");
-      $cookies.put("username", $scope.username);
-  };
-  $scope.getCookies = function () {
-    console.log("debugg");
-      $window.alert($cookies.get('username'));
-  };
-  $scope.clearCookies = function () {
-      $cookies.remove('username');
-  };
+//     $scope.setCookies = function () {
+//     console.log("debugg");
+//       $cookies.put("username", $scope.username);
+//   };
+//   $scope.getCookies = function () {
+//     console.log("debugg");
+//       $window.alert($cookies.get('username'));
+//   };
+//   $scope.clearCookies = function () {
+//       $cookies.remove('username');
+//   };
   
 
         
