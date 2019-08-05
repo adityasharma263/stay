@@ -17,6 +17,21 @@ $scope.ClearCookies = function ($cookieStore) {
 };
 }])
 
+.controller('bookingController',["$scope", "$http", function($scope, $http){
+
+  $scope.firstName = {};
+  $scope.lastName = {};
+  $scope.phoneNumber = {};
+  $scope.address = {};
+  $scope.emailAddress = {};
+
+  $scope.submitBooking=function(){
+    console.log("Booking");
+   window.open('/hotel/booking/payment','_self');
+   
+ }
+}])
+
 
 
 .controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
@@ -1572,7 +1587,7 @@ if(window.screen.availWidth <=440){
      else{
       var totalSlides=1;
      }
-    var onSlideImage = (slideIndex+1)%3
+    var onSlideImage = (slideIndex+1)%3;
 
     if(onSlideImage==1){
       if (totalSlides>i){
@@ -1625,4 +1640,4 @@ if(window.screen.availWidth <=440){
 
 
 
-}])
+}]);

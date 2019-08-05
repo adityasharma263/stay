@@ -67,7 +67,8 @@ def admin():
 #================= Booking hotels ==========================
 
 @app.route('/hotel/booking', methods=['GET'])
-def booking():
+def Business_booking():
+    API_URL = app.config['API_URL']
     return render_template('hotel/booking/booking.html')
 
 
