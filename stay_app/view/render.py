@@ -90,15 +90,9 @@ def business_hotel_list():
     # }
     # print(payload, "payload")
     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
-<<<<<<< HEAD
     print(args,"render")
     hotel_data = requests.get(url=hotel_api_url, params=args).json()
     print(hotel_data,"response")
-=======
-    print(args, "render")
-    hotel_data = requests.get(url=hotel_api_url, params=args).json()
-    print(hotel_data, "rsponse")
->>>>>>> f0902f798b8a3aedb2c89848d1652733f4ed3b3d
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"]
     else:
