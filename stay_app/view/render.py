@@ -67,9 +67,8 @@ def admin():
 #================= Booking hotels ==========================
 
 @app.route('/hotel/booking', methods=['GET'])
-def Business_booking():
-    API_URL = app.config['API_URL']
-    return render_template('hotel/b2b_hotels/booking.html')
+def booking():
+    return render_template('hotel/booking/booking.html')
 
 
 #================= B2B hotels ==========================
@@ -83,10 +82,23 @@ def business_hotel():
 @app.route('/business/hotel/list', methods=['GET'])
 def business_hotel_list():
     args = request.args.to_dict()
+    # payload = {
+    #     "name": args.get("name"),
+    #     "city": args.get("city"),
+    #     "ci":   args.get("ci"),
+    #     "co":   args.get("co"),
+    # }
+    # print(payload, "payload")
     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
+<<<<<<< HEAD
     print(args,"render")
     hotel_data = requests.get(url=hotel_api_url, params=args).json()
     print(hotel_data,"response")
+=======
+    print(args, "render")
+    hotel_data = requests.get(url=hotel_api_url, params=args).json()
+    print(hotel_data, "rsponse")
+>>>>>>> f0902f798b8a3aedb2c89848d1652733f4ed3b3d
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"]
     else:
