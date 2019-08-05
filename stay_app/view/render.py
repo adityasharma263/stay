@@ -69,7 +69,7 @@ def admin():
 @app.route('/hotel/booking', methods=['GET'])
 def Business_booking():
     API_URL = app.config['API_URL']
-    return render_template('hotel/b2b_hotels/booking.html')
+    return render_template('hotel/booking/booking.html')
 
 
 #================= B2B hotels ==========================

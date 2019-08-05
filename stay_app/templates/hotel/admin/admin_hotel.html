@@ -1035,188 +1035,14 @@
                                 </div>
         
                             </div>
-                            <div class="form-group">        
+                            <!-- <div class="form-group">        
                                 <div class="col-sm-offset-8 col-sm-8">
                                     <button type="submit" class="btn btn-success" >Add room</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
-                <form class="form-horizontal" >
-                    <div ng-show="showHotelDetail" class="form-group" >
-                        <br>
-                        <button class="btn btn-defalut" ng-click="showCreate()">Create Hotel</button>
-                        <br>
-                        <label class="control-label col-sm-2"for="name">Search Hotel (for Update):</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" data-toggle="dropdown" ng-model="searchHotel" placeholder="enter search term here">
-                                <div  class="container col-sm-12" style="max-height: 500px;overflow-y: scroll;">
-                                    <div ng-repeat="data in hotelsData  | filter : searchHotel" >
-                                    [[data.name]] 
-                                    <!-- <button class="btn" data-toggle="modal" data-target="#hotelModal" ng-click="editHotelData(data)">Edit Amenities</button> -->
-                                    <button class="btn" ng-click="editHotel(data)">Edit Hotel</button>
-                                    <button class="btn" ng-click="deleteHotel(data)">Delete Hotel</button>
-
-
-                                    <hr>
-                                    </div>
-                                </div>
-                                <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelsData | filter:searchHotel).length == 0">No Results Found</span>
-
-    
-                        </div>
-                    </div>
-                    <div ng-show="showRoomDetail" class="form-group" >
-                        <br>
-                        <button class="btn btn-defalut" ng-click="showUpdate()">Go Back</button>
-                        <br>
-                        <h2>Update Hotels </h2>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="name">Hotel Name: </label>
-                            <div class="col-sm-10"> 
-                                <input  class="form-control" id="name" ng-model="hotels.name" type="text" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="city">City: </label>
-                            <div class="col-sm-10"> 
-                                <input  class="form-control" id="name" ng-model="hotels.city" type="text" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="address">Address: </label>
-                            <div class="col-sm-10">          
-                                <input  class="form-control"  ng-model="hotels.address"  type="textarea" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="address">Phone No.: </label>
-                            <div class="col-sm-10">          
-                                <input  class="form-control"  ng-model="hotels.phone" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2"  for="desc">Description: </label>
-                            <div class="col-sm-10">          
-                                <textarea  class="form-control" id="name" ng-model="hotels.desc" type="textarea" required></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="category ">Category: </label>
-                            <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="hotels.category" type="number" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="image_url">images (Click On Image to Update or Delete): </label>
-                            <div style="max-height: 100px; overflow-y: scroll;" class="col-sm-10">
-                                <div ng-repeat="img in hotelImages" class="col-sm-2">          
-                                    <img style="cursor: pointer;max-width:87px; margin: 5px" data-toggle="modal" data-target="#imgModal" ng-click="editImg(img,$index)" src="[[img.image_url]]" >
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">        
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" class="btn btn-defalut" data-toggle="modal" data-target="#addImagesModal" >Add Images</button>
-                            </div>
-                        </div>
-                       
-                        <h4>For Maps : </h4>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" >Longitude:  </label>
-                            <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="hotels.longitude" step="any" type="number" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2"  >Latitude:   </label>
-                            <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="hotels.latitude" type="number" step="any" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="rating">Rating: </label>
-                            <div class="radio col-sm-10">
-                                <input class="form-control" id="rating1" type="number" name="rating" step="any"  ng-model="hotels.rating"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="star">Star: </label>
-                            <div class="radio col-sm-10">
-                                <label>
-                                    <input  type="radio" name="star" value="1" ng-model="hotels.star" ng-checked="hotels.star==1?true:false"/>1
-                                </label>
-                                <label>
-                                    <input id="star2" type="radio" name="star" value="2" ng-model="hotels.star" ng-checked="hotels.star==2?true:false"/>2
-                                </label>
-                                <label>
-                                    <input id="star3" type="radio" name="star" value="3"  ng-model="hotels.star" ng-checked="hotels.star==3?true:false"/>3
-                                </label>
-                                <label>
-                                    <input id="star4" type="radio" name="star" value="4" ng-model="hotels.star" ng-checked="hotels.star==4?true:false"/>4
-                                </label>
-                                <label>
-                                    <input id="star5" type="radio" name="star" value="5" ng-model="hotels.star" ng-checked="hotels.star==5?true:false"/>5
-                                </label>
-                                <label>   
-                                    <input id="star6" type="radio" name="star" value="6" ng-model="hotels.star" ng-checked="hotels.star==6?true:false"/>6
-                                </label>
-                                <label>
-                                    <input id="star7" type="radio" name="star" value="7" ng-model="hotels.star" ng-checked="hotels.star==7?true:false"/>7
-                                </label>
-                             </div>
-                        </div>
-                        <div class="form-group">        
-                            <div class="col-sm-offset-6 col-sm-6">
-                                <button type="" class="btn btn-defalut"  data-toggle="modal" data-target="#collectionModal"   >Edit Collection</button>
-                                <button type="" class="btn btn-defalut"  data-toggle="modal" data-target="#amenitiesModal"  ng-click="editAmenities()" >Edit Amenities</button>
-                                <button  class="btn btn-defalut" data-toggle="modal" data-target="#addProductModal" >Add Product</button>
-                                <button  class="btn btn-defalut" ng-click="showAddRoom()">Add Room</button>
-                                <button type="submit" class="btn btn-success" ng-click="updateHotel()">Update Hotel</button>
-                            </div>
-                        </div>
-                        <h3>Product Deatils</h3>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2"for="name">Search Product (for Update):</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" data-toggle="dropdown" ng-model="searchProduct" placeholder="enter search term here">
-                                    <div  class="container col-sm-12" style="max-height: 200px;overflow-y: scroll;">
-                                        <div ng-repeat="data in hotelProducts | filter:searchProduct">
-                                            <span class="title">[[data.product_name]]</span>
-                                            
-                                            <button class="btn" data-toggle="modal" data-target="#productModal" ng-click="editProductData(data)">Edit </button>
-                                            <button class="btn" ng-click="deleteProduct(data)">Delete </button>
-                                            
-                                            <hr>
-                                        </div>
-
-                                    </div>
-                                    <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelProducts | filter:searchProduct).length == 0">No Results Found</span>
-                            </div>
-                        </div>
-                        <h3>Rooms Deatils</h3>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2"for="name">Search Room (for Update):</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" data-toggle="dropdown" ng-model="searchRoom" placeholder="enter search term here">
-                                    <div  class="container col-sm-12" style="max-height: 200px;overflow-y: scroll;">
-                                        <div ng-repeat="data in hotelRooms | filter:searchRoom">
-                                            <span class="title">[[data.other_room_type]]</span>
-                                            
-                                            <button class="btn" ng-click="editRoomsData(data)">Edit </button>
-                                            <button class="btn" ng-click="deleteRoom(data)">Delete </button>
-                                            
-                                            <hr>
-                                        </div>
-
-                                    </div>
-                                    <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelRooms | filter:searchRoom).length == 0">No Results Found</span>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
+                
                    
                     <form ng-show="updateRoomDetail" class="form-horizontal" >
                         <div  class="form-group" >
@@ -1317,11 +1143,189 @@
                             </div>
                         </div>
                     </form>
+
+                    <form class="form-horizontal" >
+                        <div ng-show="showHotelDetail" class="form-group" >
+                            <br>
+                            <button class="btn btn-defalut" ng-click="showCreate()">Create Hotel</button>
+                            <br>
+                            <label class="control-label col-sm-2"for="name">Search Hotel (for Update):</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" data-toggle="dropdown" ng-model="searchHotel" placeholder="enter search term here">
+                                    <div  class="container col-sm-12" style="max-height: 500px;overflow-y: scroll;">
+                                        <div ng-repeat="data in hotelsData  | filter : searchHotel" >
+                                        [[data.name]] 
+                                        <!-- <button class="btn" data-toggle="modal" data-target="#hotelModal" ng-click="editHotelData(data)">Edit Amenities</button> -->
+                                        
+                                        <button style="float: right" class="btn" ng-click="editHotel(data)">Edit Hotel</button> 
+                                        <button style="float: right" class="btn" ng-click="deleteHotel(data)">Delete Hotel</button>
+                                        
+                                        <hr>
+                                        </div>
+                                    </div>
+                                    <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelsData | filter:searchHotel).length == 0">No Results Found</span>
+    
+        
+                            </div>
+                        </div>
+                        <div ng-show="showRoomDetail" class="form-group" >
+                            <br>
+                            <button class="btn btn-defalut" ng-click="showUpdate()">Go Back</button>
+                            <br>
+                            <h2>Update Hotels </h2>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="name">Hotel Name: </label>
+                                <div class="col-sm-10"> 
+                                    <input  class="form-control" id="name" ng-model="hotels.name" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="city">City: </label>
+                                <div class="col-sm-10"> 
+                                    <input  class="form-control" id="name" ng-model="hotels.city" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="address">Address: </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control"  ng-model="hotels.address"  type="textarea" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="address">Phone No.: </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control"  ng-model="hotels.phone" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="desc">Description: </label>
+                                <div class="col-sm-10">          
+                                    <textarea  class="form-control" id="name" ng-model="hotels.desc" type="textarea" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="category ">Category: </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name"  ng-model="hotels.category" type="number" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="image_url">images (Click On Image to Update or Delete): </label>
+                                <div style="max-height: 100px; overflow-y: scroll;" class="col-sm-10">
+                                    <div ng-repeat="img in hotelImages" class="col-sm-2">          
+                                        <img style="cursor: pointer;max-width:87px; margin: 5px" data-toggle="modal" data-target="#imgModal" ng-click="editImg(img,$index)" src="[[img.image_url]]" >
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">        
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="button" class="btn btn-defalut" data-toggle="modal" data-target="#addImagesModal" >Add Images</button>
+                                </div>
+                            </div>
+                           
+                            <h4>For Maps : </h4>
+    
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" >Longitude:  </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name" ng-model="hotels.longitude" step="any" type="number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  >Latitude:   </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name" ng-model="hotels.latitude" type="number" step="any" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="rating">Rating: </label>
+                                <div class="radio col-sm-10">
+                                    <input class="form-control" id="rating1" type="number" name="rating" step="any"  ng-model="hotels.rating"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="star">Star: </label>
+                                <div class="radio col-sm-10">
+                                    <label>
+                                        <input  type="radio" name="star" value="1" ng-model="hotels.star" ng-checked="hotels.star==1?true:false"/>1
+                                    </label>
+                                    <label>
+                                        <input id="star2" type="radio" name="star" value="2" ng-model="hotels.star" ng-checked="hotels.star==2?true:false"/>2
+                                    </label>
+                                    <label>
+                                        <input id="star3" type="radio" name="star" value="3"  ng-model="hotels.star" ng-checked="hotels.star==3?true:false"/>3
+                                    </label>
+                                    <label>
+                                        <input id="star4" type="radio" name="star" value="4" ng-model="hotels.star" ng-checked="hotels.star==4?true:false"/>4
+                                    </label>
+                                    <label>
+                                        <input id="star5" type="radio" name="star" value="5" ng-model="hotels.star" ng-checked="hotels.star==5?true:false"/>5
+                                    </label>
+                                    <label>   
+                                        <input id="star6" type="radio" name="star" value="6" ng-model="hotels.star" ng-checked="hotels.star==6?true:false"/>6
+                                    </label>
+                                    <label>
+                                        <input id="star7" type="radio" name="star" value="7" ng-model="hotels.star" ng-checked="hotels.star==7?true:false"/>7
+                                    </label>
+                                 </div>
+                            </div>
+                            <div class="form-group">        
+                                <div class="col-sm-offset-6 col-sm-6">
+                                    <button type="" class="btn btn-defalut"  data-toggle="modal" data-target="#collectionModal"   >Edit Collection</button>
+                                    <button type="" class="btn btn-defalut"  data-toggle="modal" data-target="#amenitiesModal"  ng-click="editAmenities()" >Edit Amenities</button>
+                                    <button  class="btn btn-defalut" data-toggle="modal" data-target="#addProductModal" >Add Product</button>
+                                    <button  class="btn btn-defalut" ng-click="showAddRoom()">Add Room</button>
+                                    <button type="submit" class="btn btn-success" ng-click="updateHotel()">Update Hotel</button>
+                                </div>
+                            </div>
+                            <h3>Product Deatils</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"for="name">Search Product (for Update):</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" data-toggle="dropdown" ng-model="searchProduct" placeholder="enter search term here">
+                                        <div  class="container col-sm-12" style="max-height: 200px;overflow-y: scroll;">
+                                            <div ng-repeat="data in hotelProducts | filter:searchProduct">
+                                                <span class="title">[[data.product_name]]</span>
+                                                
+                                                <button class="btn" data-toggle="modal" data-target="#productModal" ng-click="editProductData(data)">Edit </button>
+                                                <button class="btn" ng-click="deleteProduct(data)">Delete </button>
+                                                
+                                                <hr>
+                                            </div>
+    
+                                        </div>
+                                        <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelProducts | filter:searchProduct).length == 0">No Results Found</span>
+                                </div>
+                            </div>
+                            <h3>Rooms Deatils</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"for="name">Search Room (for Update):</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" data-toggle="dropdown" ng-model="searchRoom" placeholder="enter search term here">
+                                        <div  class="container col-sm-12" style="max-height: 200px;overflow-y: scroll;">
+                                            <div ng-repeat="data in hotelRooms | filter:searchRoom">
+                                                <span class="title">[[data.other_room_type]]</span>
+                                                
+                                                <button class="btn" ng-click="editRoomsData(data)">Edit </button>
+                                                <button class="btn" ng-click="deleteRoom(data)">Delete </button>
+                                                
+                                                <hr>
+                                            </div>
+    
+                                        </div>
+                                        <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelRooms | filter:searchRoom).length == 0">No Results Found</span>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+
+
                     <form class="form-horizontal" ng-submit="createHotel()">
                         <div ng-show="hotelDetail">
                             <br>
                             <!-- <button class="btn btn-defalut" ng-click="hideShow()">create</button> -->
-                            <button class="btn btn-defalut" ng-click="showUpdate()">Update Hotel</button>
+                            <button class="btn btn-defaut" ng-click="showUpdate()">Update Hotel</button>
                             <h2>Hotels Details </h2>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Hotel Name: </label>
@@ -1617,12 +1621,12 @@
                                 </div>
                             </div>
                             
-                            <div class="form-group">        
+                            <!-- <div class="form-group">        
                             <div class="col-sm-offset-8 col-sm-8">
                                 <button type="submit" class="btn btn-success">Add Room</button>
         
                             </div>
-                            </div>
+                            </div> -->
 
                         </div>
                 </form>
@@ -1881,7 +1885,7 @@
                         </div>
                         <div class="form-group">        
                             <div class="col-sm-offset-8 col-sm-8">
-                                <button type="submit" class="btn btn-success" >Add Room</button>
+                                <!-- <button type="submit" class="btn btn-success" >Add Room</button> -->
                                 <button type="button" class="btn btn-success" onclick="window.location.reload()">Next hotel</button>
                         
                             </div>

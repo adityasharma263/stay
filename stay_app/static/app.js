@@ -17,6 +17,20 @@ $scope.ClearCookies = function ($cookieStore) {
 };
 }])
 
+.controller('bookingController',["$scope", "$http", function($scope, $http){
+
+  $scope.firstName = {};
+  $scope.lastName = {};
+  $scope.phoneNumber = {};
+  $scope.address = {};
+  $scope.emailAddress = {};
+
+  $scope.submitBooking=function(){
+    console.log("Booking");
+   window.open('/hotel/booking/payment','_self');
+   
+ }
+
 
 
 .controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
