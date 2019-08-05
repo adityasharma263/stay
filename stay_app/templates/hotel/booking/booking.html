@@ -1,6 +1,6 @@
-{% extends '/hotel/components/header.html' %}{% block controller%}bookingController{% endblock %} {% block
+{% extends '/hotel/components/header.html' %} {% block controller%}bookingController{% endblock %} {% block
     content%}
-
+   
 
     <section id="content">
             <div class="container">
@@ -8,31 +8,35 @@
         <div class="row">
                     <div id="main" class="col-sm-6 col-md-9">
                     <div class="travelo-box booking-section">
+<<<<<<< HEAD:stay_app/templates/hotel/b2b_hotels/booking.html
 
                         
 
 
             <form class="booking-form" method="post">
+=======
+            <form class="booking-form" action="/payment" method="post">
+>>>>>>> 725e2810ca2612270ddb3f98cfcb54d7f8b1758d:stay_app/templates/hotel/booking/booking.html
                 <div class="person-information">
                     <h2>Book Your Hotel Here</h2>
                     <div class="form-group row">
                             <div class="col-sm-6 col-md-5">
                                <label for="firstName">First Name</label>
-                               <input type="text" required class="input-text full-width" ng-model="firstName"  placeholder="Enter Your First Name">
+                               <input type="text" required class="input-text full-width" name="firstName" ng-model="firstname"  placeholder="Enter Your First Name">
                             </div>
                             <div class="col-sm-6 col-md-5">
                                    <label for="LastName">Last Name</label>
-                                   <input type="text" required class="input-text full-width" ng-model="lastName" placeholder="Enter Your Last Name">
+                                   <input type="text" required class="input-text full-width" ng-model="lastname" placeholder="Enter Your Last Name">
                                 </div>
                            </div>
                  <div class="form-group row">
                  <div class="col-sm-6 col-md-5">
                     <label for="email">Email Address</label>
-                    <input type="text" required class="input-text full-width" ng-model="emailAddress"  placeholder="Enter Your Email Address">
+                    <input type="text" required class="input-text full-width" name="email" ng-model="emailAddress"  placeholder="Enter Your Email Address">
                  </div>
                  <div class="col-sm-6 col-md-5">
                         <label for="phone">Phone Number</label>
-                        <input type="text" required class="input-text full-width" ng-model="phoneNumber"  placeholder="Enter Your Phone Number">
+                        <input type="text" required class="input-text full-width" name="phone" ng-model="phoneNumber"  placeholder="Enter Your Phone Number">
                      </div>
                 </div>
                 <div class="form-group row">
@@ -45,7 +49,7 @@
             
           
             
-            <button type="submit" class="button btn-medium sky-blue1 uppercase" ng-click="submitBooking()">Book Now</button>
+            <button type="submit" class="button btn-medium sky-blue1 uppercase" ng-click="submitBooking()">pay now</button>
             </div>
 
 
