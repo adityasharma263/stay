@@ -34,7 +34,7 @@ $scope.ClearCookies = function ($cookieStore) {
 
 
 
-.controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
+.controller('stayController',["$scope", "$http", "$filter", "$location" ,function($scope, $http, $filter, $location) {
   var api_url = 'http://139.59.51.174';
 
   $scope.hotelid = {};// hotel object on the basis of id
@@ -43,8 +43,12 @@ $scope.ClearCookies = function ($cookieStore) {
   $scope.resp = false;
   var searchKey = 'city';
   $scope.hotel.ci = new Date();
-  $scope.hotel.co = new Date();
+  $scope.hotel.co = new Date(); 
+  // $filter('$scope.hotel.ci')(new Date(),'yyyy-MM-dd HH:mm:ss Z');
+  // $filter('$scope.hotel.co')(new Date(),'yyyy-MM-dd HH:mm:ss Z');
   $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
+
+
   
 
 
