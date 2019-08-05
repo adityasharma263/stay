@@ -32,7 +32,7 @@ app.json_encoder = MyJSONEncoder
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        print(args)
+        print(args," api")
         rating = request.args.get('rating')
         args.pop('rating', None)
         # lowest_price_room = request.args.get('lowest_price_room')
