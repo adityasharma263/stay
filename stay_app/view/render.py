@@ -83,9 +83,17 @@ def business_hotel():
 @app.route('/business/hotel/list', methods=['GET'])
 def business_hotel_list():
     args = request.args.to_dict()
+    # payload = {
+    #     "name": args.get("name"),
+    #     "city": args.get("city"),
+    #     "ci":   args.get("ci"),
+    #     "co":   args.get("co"),
+    # }
+    # print(payload, "payload")
     hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
-    print(args,"vdvdfvfd")
+    print(args,"render")
     hotel_data = requests.get(url=hotel_api_url, params=args).json()
+    print(hotel_data,"response")
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"]
     else:

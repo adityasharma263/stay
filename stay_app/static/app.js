@@ -41,7 +41,11 @@ $scope.ClearCookies = function ($cookieStore) {
   $scope.myVar = false;
   $scope.resp = false;
   var searchKey = 'city';
+  $scope.hotel.ci = new Date();
+  $scope.hotel.co = new Date();
+  $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
   
+
 
 
   
@@ -72,6 +76,34 @@ $scope.ClearCookies = function ($cookieStore) {
       $scope.myVar = false;
     }
   }
+
+
+
+  // $scope.checkError = function(){
+  //   $scope.message = '';
+  //   $scope.curDate = new Date();
+
+  //   // var check_in = $scope.hotel.ci;
+  //   console.log("check in",ci);
+  //   // if($scope.cities == undefined && $scope.names.length==0){
+  //   //   $scope.message = 'Enter the City or Hotel';
+  //   //   return false;
+  //   // }
+  //   if($scope.hotel.ci == undefined){
+  //      $scope.hotel.ci = check_in;
+  //   }
+    
+  //   if(new Date($scope.hotel.ci) > new Date($scope.hotel.co)){
+  //     $scope.message = 'End Date should be greater than start date';
+  //     return false;
+  //   }
+  //   if(new Date($scope.hotel.ci) < $scope.curDate){
+  //      $scope.message = 'Start date should not be before today.';
+  //      return false;
+  //   }
+
+  // }
+
  
   var jsonToQueryString = function(json) {
     return '?' +
@@ -103,14 +135,20 @@ $scope.ClearCookies = function ($cookieStore) {
     console.log("status",searchKey);
     $scope.location=document.location.href;
     console.log("$scope.location",$scope.location);
-    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search +'&'+'ci'+ '='+Date.parse($scope.hotel.ci)/1000+'&'+'co'+'=' + Date.parse($scope.hotel.co)/1000,'_self');
+    $scope.hotel.ci = Date.parse($scope.hotel.ci)/1000;
+    $scope.hotel.co =  Date.parse($scope.hotel.co)/1000;
+    console.log($scope.hotel.ci,$scope.hotel.co);
+    if(searchKey == 0){
+      $scope.message = 'enter valid location '; 
+    }
+    
+    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search +'&'+'ci'+ '='+$scope.hotel.ci+'&'+'co'+'=' +  $scope.hotel.co ,'_self');
     console.log("$scope.hotel.city",$scope.hotel.city)     
   } 
 
   $scope.search = function()  {
     $scope.hotel.search = $scope.hotel.search.toLowerCase();
     console.log("$scope.hotel",$scope.hotel);
-    console.log("chckin",$scope.check_in);
   $http({
     method: 'POST',
     url: api_url + '/hotel/search',
@@ -121,13 +159,17 @@ $scope.ClearCookies = function ($cookieStore) {
       $scope.cities = response.data.result.cities;
       $scope.names = response.data.result.names;
       console.log("ye h",$scope.cities,response.data.result.names);
-      if($scope.cities.length==0 && $scope.names.length==0){
-         $scope.resp = true;
-
-      }
-      else{
-        $scope.resp = false;
-      }
+      // if($scope.cities.length==0 && $scope.names.length==0){
+      //      $scope.resp = true;
+      //     $scope.error = function(){
+            
+      //       $scope.message = 'dddsdsdss';
+          
+      //   }
+      // }
+      // else{
+      //   $scope.resp = false;
+      // }
       if($scope.cities.length==0 && $scope.names.length!=0){
          searchKey = 'name';
       }
@@ -1460,7 +1502,7 @@ if(window.screen.availWidth <=440){
      else{
       var totalSlides=1;
      }
-    var onSlideImage = (slideIndex+1)%3
+    var onSlideImage = (slideIndex+1)%3;
 
     if(onSlideImage==1){
       if (totalSlides>i){
