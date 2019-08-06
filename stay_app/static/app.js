@@ -1,4 +1,4 @@
-angular.module('comparetravel', ['angular.filter'])
+angular.module('comparetravel', ['angular.filter','ngCookies'])
 .config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
@@ -17,9 +17,24 @@ $scope.ClearCookies = function ($cookieStore) {
 };
 }])
 
+.controller('bookingController',["$scope", "$http", function($scope, $http){
+
+  $scope.firstName = {};
+  $scope.lastName = {};
+  $scope.phoneNumber = {};
+  $scope.address = {};
+  $scope.emailAddress = {};
+
+  $scope.submitBooking=function(){
+    console.log("Booking");
+   window.open('/hotel/booking/payment','_self');
+   
+ }
+}])
 
 
-.controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
+
+.controller('stayController',["$scope", "$http", "$filter", "$location" ,function($scope, $http, $filter, $location) {
   var api_url = 'http://139.59.51.174';
 
   $scope.hotelid = {};// hotel object on the basis of id
@@ -27,7 +42,15 @@ $scope.ClearCookies = function ($cookieStore) {
   $scope.myVar = false;
   $scope.resp = false;
   var searchKey = 'city';
+  $scope.hotel.ci = new Date();
+  $scope.hotel.co = new Date(); 
+  // $filter('$scope.hotel.ci')(new Date(),'yyyy-MM-dd HH:mm:ss Z');
+  // $filter('$scope.hotel.co')(new Date(),'yyyy-MM-dd HH:mm:ss Z');
+  $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
+
+
   
+
 
 
   
@@ -58,6 +81,34 @@ $scope.ClearCookies = function ($cookieStore) {
       $scope.myVar = false;
     }
   }
+
+
+
+  // $scope.checkError = function(){
+  //   $scope.message = '';
+  //   $scope.curDate = new Date();
+
+  //   // var check_in = $scope.hotel.ci;
+  //   console.log("check in",ci);
+  //   // if($scope.cities == undefined && $scope.names.length==0){
+  //   //   $scope.message = 'Enter the City or Hotel';
+  //   //   return false;
+  //   // }
+  //   if($scope.hotel.ci == undefined){
+  //      $scope.hotel.ci = check_in;
+  //   }
+    
+  //   if(new Date($scope.hotel.ci) > new Date($scope.hotel.co)){
+  //     $scope.message = 'End Date should be greater than start date';
+  //     return false;
+  //   }
+  //   if(new Date($scope.hotel.ci) < $scope.curDate){
+  //      $scope.message = 'Start date should not be before today.';
+  //      return false;
+  //   }
+
+  // }
+
  
   var jsonToQueryString = function(json) {
     return '?' +
@@ -89,14 +140,20 @@ $scope.ClearCookies = function ($cookieStore) {
     console.log("status",searchKey);
     $scope.location=document.location.href;
     console.log("$scope.location",$scope.location);
-    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search +'&'+'ci'+ '='+Date.parse($scope.hotel.ci)/1000+'&'+'co'+'=' +Date.parse($scope.hotel.co)/1000,'_self');
+    $scope.hotel.ci = Date.parse($scope.hotel.ci)/1000;
+    $scope.hotel.co =  Date.parse($scope.hotel.co)/1000;
+    console.log($scope.hotel.ci,$scope.hotel.co);
+    if(searchKey == 0){
+      $scope.message = 'enter valid location '; 
+    }
+    
+    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search +'&'+'ci'+ '='+$scope.hotel.ci+'&'+'co'+'=' +  $scope.hotel.co ,'_self');
     console.log("$scope.hotel.city",$scope.hotel.city)     
   } 
 
   $scope.search = function()  {
     $scope.hotel.search = $scope.hotel.search.toLowerCase();
     console.log("$scope.hotel",$scope.hotel);
-    console.log("chckin",$scope.check_in);
   $http({
     method: 'POST',
     url: api_url + '/hotel/search',
@@ -107,13 +164,17 @@ $scope.ClearCookies = function ($cookieStore) {
       $scope.cities = response.data.result.cities;
       $scope.names = response.data.result.names;
       console.log("ye h",$scope.cities,response.data.result.names);
-      if($scope.cities.length==0 && $scope.names.length==0){
-         $scope.resp = true;
-
-      }
-      else{
-        $scope.resp = false;
-      }
+      // if($scope.cities.length==0 && $scope.names.length==0){
+      //      $scope.resp = true;
+      //     $scope.error = function(){
+            
+      //       $scope.message = 'dddsdsdss';
+          
+      //   }
+      // }
+      // else{
+      //   $scope.resp = false;
+      // }
       if($scope.cities.length==0 && $scope.names.length!=0){
          searchKey = 'name';
       }
@@ -692,6 +753,7 @@ $scope.getHotelsData = function(cb){
   })
 }
 
+
 $scope.loadMoreHotelsData = function(){
   $scope.hotel.page =  $scope.hotel.page + 1;
 
@@ -740,43 +802,126 @@ $scope.getHotelsData();
 
   }
 
-  $scope.getHotelweek = function(){
+  // $scope.getHotelweek = function(){
    
-    $scope.hotel.check_in = Date.parse($scope.hotel.check_in)/1000;
-    $scope.hotel.check_out = Date.parse($scope.hotel.check_out)/1000;
-    console.log("$scope.hotel.check_in",$scope.hotel.check_in);
-    $http({
-      method: 'GET',
-      url: api_url + '/api/v1/deal?check_in=' + $scope.hotel.check_in + '&check_out=' + $scope.hotel.check_out
-    }).then(function successCallback(response) {
-        $scope.deals = response.data.result.deal;
-        if($scope.deals.length==0){
-          $scope.result = true;
+  //   $scope.hotel.ci = Date.parse($scope.hotel.ci)/1000;
+  //   $scope.hotel.co = Date.parse($scope.hotel.co)/1000;
+  //   console.log("$scope.hotel.check_in",$scope.hotel.ci);
+  //   $http({
+  //     method: 'GET',
+  //     url: api_url + '/api/v1/deal?ci=' + $scope.hotel.ci + '&co=' + $scope.hotel.co
+  //   }).then(function successCallback(response) {
+  //       $scope.deals = response.data.result.deal;
+  //       if($scope.deals.length==0){
+  //         $scope.result = true;
  
-       }
-       else{
-         $scope.result = false;
-       }
-        for(var j=0; j<$scope.deals.length; j++){
-          $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
-          $scope.deals[j].roomdata=$scope.roomobj;
-          $scope.hotelobj=$scope.cityid[$scope.deals[j].roomdata.hotel];
-          $scope.deals[j].roomdata.hoteldata=$scope.hotelobj;
+  //      }
+  //      else{
+  //        $scope.result = false;
+  //      }
+  //       for(var j=0; j<$scope.deals.length; j++){
+  //         $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
+  //         $scope.deals[j].roomdata=$scope.roomobj;
+  //         $scope.hotelobj=$scope.cityid[$scope.deals[j].roomdata.hotel];
+  //         $scope.deals[j].roomdata.hoteldata=$scope.hotelobj;
 
-        }
-        console.log("deals array",$scope.deals);
-        // this callback will be called asynchronously
+  //       }
+  //       console.log("deals array",$scope.deals);
+  //       // this callback will be called asynchronously
 
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
+  //       // when the response is available
+  //     }, function errorCallback(response) {
+  //       // called asynchronously if an error occurs
+  //       // or server returns response with an error status.
+  //   })
     
-  }
+  // }
+
+  
 
 
-}])  
+  $scope.getHotels = function() {
+    // console.log("$location.path",$location.path);
+    var pathname = window.location.pathname;
+    var appId = pathname.split('/')[6];
+    console.log("appId",pathname);
+    // console.log("status",searchKey);
+    $scope.location=document.location.href;
+    console.log("$scope.location",$scope.location);
+    $scope.hotel.ci = Date.parse($scope.hotel.ci)/1000;
+    $scope.hotel.co =  Date.parse($scope.hotel.co)/1000;
+    console.log($scope.hotel.ci,$scope.hotel.co);
+    // if(searchKey == 0){
+    //   $scope.message = 'enter valid location '; 
+    // }
+    
+    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search +'&'+'ci'+ '='+$scope.hotel.ci+'&'+'co'+'=' +  $scope.hotel.co ,'_self');
+    console.log("$scope.hotel.city",$scope.hotel.city)     
+  } 
+
+  // $scope.search = function()  {
+  //   $scope.hotel.search = $scope.hotel.search.toLowerCase();
+  //   console.log("$scope.hotel",$scope.hotel);
+  // $http({
+  //   method: 'POST',
+  //   url: api_url + '/hotel/search',
+  //   data: $scope.hotel
+
+  // }).then(function successCallback(response){
+  // console.log("response",response.data.result);
+  //     $scope.cities = response.data.result.cities;
+  //     $scope.names = response.data.result.names;
+  //     console.log("ye h",$scope.cities,response.data.result.names);
+  //     // if($scope.cities.length==0 && $scope.names.length==0){
+  //     //      $scope.resp = true;
+  //     //     $scope.error = function(){
+            
+  //     //       $scope.message = 'dddsdsdss';
+          
+  //     //   }
+  //     // }
+  //     // else{
+  //     //   $scope.resp = false;
+  //     // }
+  //     if($scope.cities.length==0 && $scope.names.length!=0){
+  //        searchKey = 'name';
+  //     }
+  //     if($scope.cities.length!=0 && $scope.names.length==0){
+  //       searchKey = 'city';
+  //    }
+  //    if($scope.cities.length!=0 && $scope.names.length!=0){
+  //     searchKey = 'city';
+  //  }
+  
+
+
+  // })
+
+
+
+
+    
+
+  $http({
+    method: 'GET',
+    url: api_url + '/api/v1/hotel' 
+  }).then(function successCallback(response) {
+      $scope.hotels = response.data.result.hotel;
+      for(var j=0;j<$scope.hotels.length;j++){
+        $scope.hotelid[$scope.hotels[j].id]= $scope.hotels[j];
+      }
+      
+      console.log("$scope.hotelid",$scope.hotelid);
+      console.log("$scope.hotels=====",$scope.hotels);
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+
+
+}])
 
 .controller('adminController',["$scope", "$http", function($scope, $http, $filter) {
   $scope.hotel = {}; // main hotel model
@@ -1446,7 +1591,7 @@ if(window.screen.availWidth <=440){
      else{
       var totalSlides=1;
      }
-    var onSlideImage = (slideIndex+1)%3
+    var onSlideImage = (slideIndex+1)%3;
 
     if(onSlideImage==1){
       if (totalSlides>i){
@@ -1499,4 +1644,4 @@ if(window.screen.availWidth <=440){
 
 
 
-}])
+}]);
