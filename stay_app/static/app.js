@@ -1407,7 +1407,7 @@ angular.module('comparetravel', ['angular.filter'])
         }
 
         $scope.bookingPage = function (room_id) {
-            window.open('/business/hotel/booking/' + room_id, '_self');
+            window.open('/hotel/booking/' + room_id, '_self');
             console.log(hotel_id);
 
         }
