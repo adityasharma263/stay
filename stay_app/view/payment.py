@@ -1,6 +1,7 @@
 import logging, traceback
 import hashlib
 import requests
+import urllib
 import json
 from stay_app import app
 from flask import render_template, request, make_response, jsonify, abort, redirect, session, url_for
@@ -11,12 +12,9 @@ from random import randint
 def payment():
     if request.method == 'POST':
         booking_details = request.form.to_dict()
-        print(booking_details, "ddvdfvfdvfdfdv")
         data = {}
         txnid = get_transaction_id()
         hash_ = generate_hash(txnid, booking_details)
-        # use constants file to store constant values.
-        # use test URL for testing
         data["amount"] = float(1)
         data["productinfo"] = "Message showing product details."
         data["key"] = str(app.config["KEY"])
@@ -26,18 +24,10 @@ def payment():
         data["email"] = booking_details["email"]
         data["phone"] = booking_details["phone"]
         data["service_provider"] = "payu_paisa"
-        data["furl"] = "http://localhost:5000/payment/fail"
-        data["surl"] = "http://localhost:5000/payment/success"
-        url = 'https://sandboxsecure.payu.in/_payment'
-        # data['action'] = url
-        print(data)
-        # return render_template("payment/form.html", data=data)
-
-        headers = {'Content-Type': 'application/json',
-                   'Authorization': 'Bearer H88dI2ioUTxaPKh1s2uOpVPSWevcs59HcFnb7bfdk0Y='}
-        response = requests.post(url, data=data)
-        print(response.status_code, response.text)
-        return response.text
+        data["furl"] = str(app.config["API_URL"]) + "payment/fail"
+        data["surl"] = str(app.config["API_URL"]) + "payment/success"
+        data['action'] = 'https://sandboxsecure.payu.in/_payment'
+        return render_template("payment/form.html", data=data)
 
 
 # @app.route('/payment/view', methods=['GET'])
