@@ -3,7 +3,7 @@ import hashlib
 import requests
 import json
 from stay_app import app
-from flask import render_template, request, make_response, jsonify, abort, redirect, session
+from flask import render_template, request, make_response, jsonify, abort, redirect, session, url_for
 from random import randint
 
 
@@ -28,11 +28,22 @@ def payment():
         data["service_provider"] = "payu_paisa"
         data["furl"] = "http://localhost:5000/payment/fail"
         data["surl"] = "http://localhost:5000/payment/success"
-        print(data)
         url = 'https://sandboxsecure.payu.in/_payment'
-        headers = {'Content-Type': 'application/json', 'Authorization': str(app.config["AUTH"])}
-        response = requests.post(url, data=data, headers=headers)
+        # data['action'] = url
+        print(data)
+        # return render_template("payment/form.html", data=data)
+
+        headers = {'Content-Type': 'application/json',
+                   'Authorization': 'Bearer H88dI2ioUTxaPKh1s2uOpVPSWevcs59HcFnb7bfdk0Y='}
+        response = requests.post(url, data=data)
+        print(response.status_code, response.text)
         return response.text
+
+
+# @app.route('/payment/view', methods=['GET'])
+# def payment_details():
+#     return render_template("payment/form.html",
+#                            keys=request.args.get('data'))
 
 
 # generate the hash
@@ -41,6 +52,7 @@ def generate_hash(txnid, booking_details):
         # get keys and SALT from dashboard once account is created.
         # hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10"
         hash_string = get_hash_string(txnid, booking_details)
+        print(hash_string, "hash string")
         generated_hash = hashlib.sha512(hash_string.encode('utf-8')).hexdigest().lower()
         return generated_hash
     except Exception as e:
@@ -51,9 +63,9 @@ def generate_hash(txnid, booking_details):
 
 # create hash string using all the fields
 def get_hash_string(txnid, booking_details):
-    hash_string = str(app.config["KEY"]) + "|" + txnid + "|" + str(
+    hash_string = str(app.config["KEY"])+"|"+txnid + "|" + str(
         float(1)) + "|" + "Message showing product details." + "|"
-    hash_string += str(booking_details["firstname"]) + "|" + str(booking_details["firstname"]) + "|"
+    hash_string += str(booking_details["firstname"]) + "|" + str(booking_details["email"]) + "|"
     hash_string += "||||||||||" + str(app.config["SALT"])
     return hash_string
 
