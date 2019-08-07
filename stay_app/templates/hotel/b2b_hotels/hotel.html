@@ -52,14 +52,14 @@
                                         </div>
                                         <div class="col-xs-6 col-sm-4 col-md-2 form-group">
                                             <div class="datepicker-wrap">         
-                                                <input type="text" autocomplete="off" name="date_from" class="input-text full-width" data-ng-model="hotel.ci"  placeholder="mm/dd/yy"  >                                              
+                                                <input type="text" name="date_from" class="input-text full-width"  ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >                                              
                                                 <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
                                                 <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-5 col-md-2 form-group">
                                             <div class="datepicker-wrap">
-                                                <input type="text" autocomplete="off" name="date_to" class="input-text full-width" data-ng-model="hotel.co"   placeholder="mm/dd/yy" >
+                                                <input type="text" name="date_to" class="input-text full-width" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
                                                 <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
                                                 <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
 
