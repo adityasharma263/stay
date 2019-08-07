@@ -52,14 +52,14 @@
                                         </div>
                                         <div class="col-xs-6 col-sm-4 col-md-2 form-group">
                                             <div class="datepicker-wrap">         
-                                                <input type="text" name="date_from" class="input-text full-width" data-ng-model="hotel.ci"  placeholder= "mm/dd/yy"  >                                              
+                                                <input type="text" name="date_from" class="input-text full-width"  ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >                                              
                                                 <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
                                                 <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-5 col-md-2 form-group">
                                             <div class="datepicker-wrap">
-                                                <input type="text" name="date_to" class="input-text full-width" data-ng-model="hotel.co"   placeholder="mm/dd/yy" >
+                                                <input type="text" name="date_to" class="input-text full-width" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
                                                 <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
                                                 <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
 
@@ -90,12 +90,12 @@
                                 <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
                                         <tbody id="search" class="input-text full-width"" >
-                                          <tr ng-repeat="city in cities | limitTo:2" >
+                                          <tr ng-autocomplete class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
                                             <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
                                                 <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
 
                                           </tr>
-                                          <tr class="ng-cloak" ng-repeat="name in names | limitTo:2">
+                                          <tr ng-autocomplete class="ng-cloak" ng-repeat="name in names | limitTo:2">
                                             <td class="ng-cloak" style="border: 0" ng-click="result([[name]],'name')">
                                                 <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[name]]</td>
 

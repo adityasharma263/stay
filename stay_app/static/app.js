@@ -1441,7 +1441,11 @@ if(window.screen.availWidth <=440){
      else{
       var totalSlides=1;
      }
+<<<<<<< HEAD
     var onSlideImage = (slideIndex+1)%3
+=======
+    var onSlideImage = (slideIndex+1)%3;
+>>>>>>> 514dee4bce743b75b4d86810d4e8d42281e148a7
 
     if(onSlideImage==1){
       if (totalSlides>i){
@@ -1494,4 +1498,8 @@ if(window.screen.availWidth <=440){
 
 
 
+<<<<<<< HEAD
 }])
+=======
+}]);
+>>>>>>> 514dee4bce743b75b4d86810d4e8d42281e148a7

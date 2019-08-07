@@ -5,7 +5,8 @@
     <title>Pay U</title>
 </head>
 <body>
-<form action="{{ data.action }}" name="payuForm" method="post">
+<h3 style="text-align:center; margin: auto;"> We Are Redirecting You To Payment Gateway ...... </h3>
+<form action="{{ data.action }}" name="payuForm" id="myform" method="post">
     <input type="hidden" name="key" value="{{ data.key }}" />
     <input type="hidden" name="hash" value="{{ data.hash }}"/>
     <input type="hidden" name="txnid" value="{{ data.txnid }}"/>
@@ -17,48 +18,9 @@
     <input type="hidden" name="surl" value="{{ data.surl }}"/>
     <input type="hidden" name="furl" value="{{ data.furl }}" />
     <input type="hidden" name="service_provider" value="{{ data.service_provider }}" />
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12">
-            Amount : {{data.amount}}
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12">
-            Purpose : {{data.productinfo}}
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12">
-            Name : {{data.firstname}}
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12">
-            Email : {{data.email}}
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12">
-            Mobile : {{data.phone}}
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12">
-            Transaction ID : {{data.txnid}}
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12" style="padding-bottom:20px;padding-top:20px;">
-            After clicking 'Pay Now' button, you will be redirected to PayUMoney Secure Gateway.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-12 col-sm-12">
-            <input type="submit" class="btn btn-success btn-sm" value="Pay Now">
-        </div>
-    </div>
 </form>
-
+<script>
+document.forms["myform"].submit();
+</script>
 </body>
 </html>
