@@ -7,7 +7,7 @@
     <!-- Meta Tags -->
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="author" content="Travel Beans">
+	<meta name="author" content="The Travel Square">
     <meta name="description" content="">
     <meta name="distribution" content="global">
     <meta name="country" content="india">
@@ -30,7 +30,7 @@
     
   
     <link rel="stylesheet" href="/Partners Screening Form_files/bootstrap.min.css">
-    <link rel="stylesheet" href="./Partners Screening Form_files/font-awesome.min.css">
+    <link rel="stylesheet" href="/Partners Screening Form_files/font-awesome.min.css">
     <link href="/Partners Screening Form_files/css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/Partners Screening Form_files/animate.min.css">
 
@@ -161,9 +161,10 @@
                                     <div >
                                         <input class="input-text full-width form-control" data-toggle="dropdown" ng-model="searchDeals" placeholder="Enter Hotel To Be Modified"><br><br>
                                             <div  class="container" style="max-height: 100px;overflow-y: scroll;">
-                                                <div style="margin-bottom: 5px;" ng-repeat="data in roomDeals  | filter : searchDeals" >
+                                                <div style="margin-bottom: 5px;" ng-repeat="data in hotelsData  | filter : searchHotel" >
                                                     Price ₹: [[data.price]] &nbsp;&nbsp; 
-                                                    <button class="button s" data-toggle="modal" data-target="#dealModal" ng-click="editDealData(data)">Edit deal</button>
+                                                    <button class="button s" data-toggle="modal" data-target="#dealModal" ng-click="editHotel(data)">Edit Hotel</button>
+                                                    <button class="button s" data-toggle="modal" data-target="#dealModal" ng-click="deleteHotel(data)">Delete Hotel</button>
                                                     <br>
                                                 </div>
                                             </div>
