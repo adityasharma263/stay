@@ -919,7 +919,7 @@ angular.module('comparetravel', ['angular.filter'])
 
     }])
 
-    .controller('adminController', ["$scope", "$http", function ($scope, $http, $filter) {
+    .controller('adminController', ["$scope", "$http", "$filter", function ($scope, $http, $filter) {
         $scope.hotel = {}; // main hotel model
         $scope.hotelImg = []; //for all images array
         $scope.images = {}; //object of image
