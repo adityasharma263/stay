@@ -3,7 +3,7 @@ __author__ = 'aditya'
 
 
 from stay_app import app
-from flask import render_template, request, make_response, jsonify, abort, redirect, session
+from flask import render_template, request, make_response, jsonify, abort, redirect, session, Response
 import requests
 from Crypto.Cipher import AES
 import base64
@@ -13,12 +13,27 @@ import datetime
 import json
 
 
-# @app.route('/business', methods=['GET'])
+# @app.route('/', methods=['GET'])
 # def home():
-#     resp = make_response(render_template('index.html'))
-#     resp.set_cookie('somecookiename', 'I am cookie')
-#     return resp
+#     if request.method == 'GET':
+#         resp = requests.get("http://business.thetravelsquare.in/")
+#         excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+#         headers = [(name, value) for (name, value) in resp.raw.headers.items() if name.lower() not in excluded_headers]
+#         response = Response(resp.content, resp.status_code, headers)
+#     return response
 #
+# @app.route('/login', methods=['GET', 'POST'])
+# def login_php():
+#     if request.method == 'GET':
+#         resp = requests.get("http://business.thetravelsquare.in/login.php")
+#         excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+#         headers = [(name, value) for (name, value) in resp.raw.headers.items() if name.lower() not in excluded_headers]
+#         response = Response(resp.content, resp.status_code, headers)
+#         return response
+#     elif request.method == 'POST':
+#         print(request.form.to_dict())
+
+
 
 
 # @app.route('/payment', methods=['GET','POST'])
