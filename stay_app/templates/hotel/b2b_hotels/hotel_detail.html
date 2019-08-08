@@ -190,7 +190,7 @@
                                         <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
                                             <div ng-repeat="room in {{hotel_data.rooms}} | limitTo:deallimit">
-                                                <article class="col-md-12" ng-repeat="deal in room.deals " >
+                                                <article class="col-md-12" ng-repeat="deal in room.deals" >
                                                     <figure class="col-md-4">
                                                         <a href="[[deal.hotel_url]]" target="_blank" title=""><img style="width:67%" src="[[deal.website.logo_image]]" alt="[[deal.website.website]]"></a>
                                                     </figure>
@@ -341,7 +341,7 @@
                                                             <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i>
                                                         </div>
                                                         <div class="action-section">
-                                                            <a href="" title="" class="button btn-small full-width text-center">Select</a>
+                                                            <a href="" title="" ng-click="bookingPage(room.id)" class="button btn-small sky-blue1 full-width text-center">Book Now</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -793,10 +793,10 @@
                                                         </span>
                                                         <h4 ng-cloak class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
                                                         <!-- <p class="description">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p> -->
-                                                        <div ng-cloak class="action">
+                                                        <!-- <div ng-cloak class="action">
                                                             <a class="button btn-small" href="">Add To Cart</a>
                                                             <a class="button btn-small yellow popup-map" href="" ng-click="bookingPage(hotel.id)" data-box="48.856614, 2.352222">Book Now</a>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </article>
                                             </div>
