@@ -939,6 +939,10 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.UpdateImages = {}; //image data for update
         $scope.hotelData = {}; // hotel data for update 
         $scope.amenitiesData = {}; // hotel amenities for update
+        $scope.commission_in_percentage = {};
+        $scope.margin_price = {};
+        $scope.price = {};
+        $scope.base_price = {};
         var api_url = 'http://139.59.51.174';
 
         $scope.showCreate = function () {

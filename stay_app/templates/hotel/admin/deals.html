@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html ng-app="comparetravel" class=" js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Page Title -->
+    <title>Deals | The Travel Square</title>
+    
+    <!-- Meta Tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+    
+	
+	<link rel="shortcut icon" href="" type="image/x-icon">
+    
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="/About Travel Beans_files/bootstrap.min.css">
+    <link rel="stylesheet" href="/About Travel Beans_files/font-awesome.min.css">
+    <link href="/About Travel Beans_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/About Travel Beans_files/animate.min.css">
+    
+    <!-- Main Style -->
+    <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
+    <script type="text/javascript">
+        var mainStyle = "style.css";
+        if (typeof localStorage != "undefined") {
+            var colorSkin = localStorage.getItem("colorSkin");
+            if (colorSkin != null) {
+                mainStyle = "style-" + colorSkin + ".css";
+            }
+        }
+        document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '">');
+    </script><link id="main-style" rel="stylesheet" href="/About Travel Beans_files/style-light-yellow.css">
+    
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="/About Travel Beans_files/updates.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/About Travel Beans_files/custom.css">
+    
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/About Travel Beans_files/responsive.css">
+    
+    
+	
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}	
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #000;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #000;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+	
+</head>
+<body ng-controller="adminController">
+    <div id="page-wrapper">
+        
+		
+		<header id="header" class="navbar-static-top">
+        
+            
+                
+                <div class="container">
+                        <a href="http://www.thetravelsqaure.in" title="The Travel Sqaure">
+                            <img src="images/The-Travel-Square-India-Logo.png" alt="The Travel Sqaure">
+                        </a>
+                    
+                </div>
+                
+                </div>
+        <div class="page-title-container">
+            <div class="">
+                <div class="page-title">
+                    <h2 class="entry-title uppercase"><center>Administrative Login</center></h2>
+                </div>
+                
+            </div>
+        </div>
+
+      <section id="content" class="gray-area">
+            <div class="container shortcode">
+                <h1></h1><br>
+                <div class="row block"><center>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="pricing-table white box">
+                            <div class="clearfix">
+                                <h3 class="box-title uppercase">Administrator</h3><br>
+								
+                            </div>
+                            <img src="/images/the-travel-square-india-logo.png" height="150" width="150"><br><br>
+                            <button class="btn-medium uppercase full-width" onclick="document.getElementById('admin').style.display='block'" style="width:200;height:500;">Login</button>
+                        </div>
+                    </div>
+					 
+                    </center>
+                </div>
+                  
+				
+            </div>
+        </section>
+        
+       <footer id="footer" class="style5">
+           
+			
+			
+            <div class="bottom">
+                <div class="container">
+                    
+                    <div class="pull-right">
+                        <a id="back-to-top" href="" class="animated bounce" data-animation-type="bounce" style="animation-duration: 1s; visibility: visible;"><i class="soap-icon-longarrow-up circle"></i></a>
+                    </div>
+                    <div class="copyright">
+                        <p>© 2019 Administration | The Travel Square</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+	   
+    </div>
+	
+
+<div id="admin" class="modal">
+  
+  <form class="modal-content animate" action="/action_page.php">
+    
+
+            <div class="container">
+			
+			
+			
+                <div class="row">
+                    <div id="main" class="full-width">
+					
+					
+					
+                        <div class="travelo-box booking-section">
+                            <form class="booking-form"">
+                                <div class="person-information"><center>
+								
+								
+                                    <h2>The Leela Ambience Convention Hotel</h2><hr>
+									
+                                    
+									
+                                </div><br>
+							<div class="group-details"><center>
+                                <div class="form-group row">
+                                        <div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" ng-model="room.commission_in_percentage" value="" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.margin_price" value="" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.price" value="" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div>
+										<div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room With Breakfast</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.margin_price"  value="" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div><div class="col-xs-12 col-md-5 constant-column-2">
+											
+                                                <h4>Premier Room Only</h4>
+											<div>
+                                                <label>Base Price</label>
+                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                            </div>
+											
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-md-5 constant-column-3">
+											<div>
+                                                <label>%</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                            </div>
+                                            <div>
+                                                <label>% Amt</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                            </div>
+											<div>
+                                                <label>B2B Rate</label>
+                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                            </div>
+                                            
+											
+                                            
+                                        </div>
+                                    </div>
+								</div>	
+								
+								
+                                <hr>
+                               
+                                <div class="form-group row">
+                                    <div class="col-sm-6 col-md-5">
+                                        <button type="submit" class="button btn-success btn-medium sky-blue1 uppercase full-width">Submit Form</button>
+                                    </div>
+   
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+  </form>
+</div>
+
+    
+<div id="accounts" class="modal">
+  
+  <form class="modal-content animate" action="/action_page.php">
+    <div class="imgcontainer">
+      <img src="images/the-travel-square-india-logo.png" alt="Avatar">
+	  <hr>
+		<h1>ADMINISTRATION</h1>
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Enter Admin ID</b></label>
+      <input type="text" placeholder="Admin ID" name="uname" required>
+
+      <label for="psw"><b>Enter Password</b></label>
+      <input type="password" placeholder="Password" name="psw" required>
+	  <center>
+	  <button type="button" onclick="document.getElementById('accounts').style.display='none'" class="cancelbtn">Login</button>
+	  <button type="button" onclick="document.getElementById('accounts').style.display='none'" class="cancelbtn">Close</button>
+	</div>
+  </form>
+</div>
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="./About Travel Beans_files/jquery-1.11.1.min.js.download"></script>
+    <script type="text/javascript" src="./About Travel Beans_files/jquery.noconflict.js.download"></script>
+    <script type="text/javascript" src="./About Travel Beans_files/modernizr.2.7.1.min.js.download"></script>
+    <script type="text/javascript" src="./About Travel Beans_files/jquery-migrate-1.2.1.min.js.download"></script>
+    <script type="text/javascript" src="./About Travel Beans_files/jquery.placeholder.js.download"></script>
+    <script type="text/javascript" src="./About Travel Beans_files/jquery-ui.1.10.4.min.js.download"></script>
+    
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="./About Travel Beans_files/bootstrap.js.download"></script>
+    
+    <!-- parallax -->
+    <script type="text/javascript" src="./About Travel Beans_files/jquery.stellar.min.js.download"></script>
+    
+    <!-- waypoint -->
+    <script type="text/javascript" src="./About Travel Beans_files/waypoints.min.js.download"></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src="./About Travel Beans_files/theme-scripts.js.download"></script>
+    <script type="text/javascript" src="./About Travel Beans_files/scripts.js.download"></script>
+</body></html>
