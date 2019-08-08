@@ -13,25 +13,25 @@ import datetime
 import json
 
 
-@app.route('/', methods=['GET'])
-def home():
-    if request.method == 'GET':
-        resp = requests.get("http://business.thetravelsquare.in/")
-        excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
-        headers = [(name, value) for (name, value) in resp.raw.headers.items() if name.lower() not in excluded_headers]
-        response = Response(resp.content, resp.status_code, headers)
-    return response
-
-@app.route('/login', methods=['GET', 'POST'])
-def login_php():
-    if request.method == 'GET':
-        resp = requests.get("http://business.thetravelsquare.in/login.php")
-        excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
-        headers = [(name, value) for (name, value) in resp.raw.headers.items() if name.lower() not in excluded_headers]
-        response = Response(resp.content, resp.status_code, headers)
-        return response
-    elif request.method == 'POST':
-        print(request.form.to_dict())
+# @app.route('/', methods=['GET'])
+# def home():
+#     if request.method == 'GET':
+#         resp = requests.get("http://business.thetravelsquare.in/")
+#         excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+#         headers = [(name, value) for (name, value) in resp.raw.headers.items() if name.lower() not in excluded_headers]
+#         response = Response(resp.content, resp.status_code, headers)
+#     return response
+#
+# @app.route('/login', methods=['GET', 'POST'])
+# def login_php():
+#     if request.method == 'GET':
+#         resp = requests.get("http://business.thetravelsquare.in/login.php")
+#         excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+#         headers = [(name, value) for (name, value) in resp.raw.headers.items() if name.lower() not in excluded_headers]
+#         response = Response(resp.content, resp.status_code, headers)
+#         return response
+#     elif request.method == 'POST':
+#         print(request.form.to_dict())
 
 
 

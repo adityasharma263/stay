@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="69fc71ab-68c3-4ca2-88af-884e839fb46d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/model/hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/model/hotel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/templates/hotel/booking/booking.html" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/templates/hotel/booking/booking.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/view/render.py" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/view/render.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/migrations/versions/ca69b3770fca_.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+            <state relative-caret-position="720">
+              <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
               <folding>
                 <element signature="e#111#133#0" expanded="true" />
               </folding>
@@ -111,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/static/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="38" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="38" />
+            <state relative-caret-position="2505">
+              <caret line="167" selection-start-line="167" selection-end-line="167" />
             </state>
           </provider>
         </entry>
@@ -233,18 +229,20 @@
             <path>
               <item name="stay" type="b2602c69:ProjectViewProjectNode" />
               <item name="stay" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stay" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stay" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-              <item name="versions" type="462c0819:PsiDirectoryNode" />
+              <item name="stay_app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="stay" type="b2602c69:ProjectViewProjectNode" />
               <item name="stay" type="462c0819:PsiDirectoryNode" />
               <item name="stay_app" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stay" type="462c0819:PsiDirectoryNode" />
+              <item name="stay_app" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -307,7 +305,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="28" width="1366" height="740" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7918455" visible="true" weight="0.24869695" />
       <window_info id="Structure" order="1" sideWeight="0.2081545" side_tool="true" weight="0.24050634" />
@@ -319,7 +316,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="bottom" id="Favorites" order="7" weight="0.32952693" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4988831" visible="true" weight="0.44535074" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4988831" visible="true" weight="0.9380098" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.50111693" side_tool="true" weight="0.6639478" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50111693" side_tool="true" weight="0.21207178" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -612,8 +609,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stay_app/static/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="38" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="38" />
+        <state relative-caret-position="2505">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
         </state>
       </provider>
     </entry>
@@ -658,8 +655,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/migrations/versions/ca69b3770fca_.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        <state relative-caret-position="720">
+          <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
           <folding>
             <element signature="e#111#133#0" expanded="true" />
           </folding>

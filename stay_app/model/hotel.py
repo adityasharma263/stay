@@ -229,7 +229,7 @@ class Deal(Base):
 
     __tablename__ = 'deal'
 
-    total_price = db.Column(db.Integer, nullable=True)
+    price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     meal_plan = db.Column(db.Enum(MealPlan))
     commission_in_percentage = db.Column(db.Integer, nullable=True)
