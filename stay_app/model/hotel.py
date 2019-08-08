@@ -2,11 +2,14 @@
 from stay_app import db
 from stay_app.model.base import Base
 
-# import enum
-#
-# class HotelCategory(enum.Enum):
-#     1 = "Crunchy apple"
-#     BANANA = "Sweet banana
+import enum
+
+
+class MealPlan(enum.Enum):
+    CP = "Continental Plan"
+    MAP = "Modified American Plan"
+    EP = "European Plan"
+    AP = "American Plan"
 
 
 class HotelCollection(Base):
@@ -81,7 +84,6 @@ class Room(Base):
     room_type = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     other_room_type = db.Column(db.String, nullable=True)
-    breakfast = db.Column(db.Boolean, default=False, nullable=True)
     balcony = db.Column(db.Boolean, default=False, nullable=True)
     member = db.relationship('Member', uselist=False, backref='room')
     facilities = db.relationship('Facility', uselist=False, backref='room')
@@ -227,7 +229,11 @@ class Deal(Base):
 
     __tablename__ = 'deal'
 
-    price = db.Column(db.Integer, nullable=True)
+    total_price = db.Column(db.Integer, nullable=True)
+    base_price = db.Column(db.Integer, nullable=True)
+    meal_plan = db.Column(db.Enum(MealPlan))
+    commission_in_percentage = db.Column(db.Integer, nullable=True)
+    margin_price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
     weekend = db.Column(db.Boolean, default=False, nullable=True)
     business_deal = db.Column(db.Boolean, default=False, nullable=True)
@@ -247,9 +253,10 @@ class PriceCalendar(Base):
 
     __tablename__ = 'price_calendar'
 
-    price = db.Column(db.Integer, nullable=True)
+    commission_in_percentage = db.Column(db.Integer, nullable=True)
+    margin_price = db.Column(db.Integer, nullable=True)
+    base_price = db.Column(db.Integer, nullable=True)
     date = db.Column(db.DateTime(timezone=True), nullable=True)
-    available = db.Column(db.Boolean, default=False, nullable=True)
     deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
 
     def __init__(self, *args, **kwargs):
