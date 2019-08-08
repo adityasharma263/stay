@@ -82,6 +82,10 @@ def admin():
 def admin_hotel_update():
     return render_template('hotel/admin/hotel_update.html')
 
+@app.route('/admin/deals', methods=['GET'])
+def admin_hotel_deals():
+    return render_template('hotel/admin/deals.html')
+
 
 #================= Booking hotels ==========================
 
@@ -94,9 +98,14 @@ def Business_booking():
 #================= B2B hotels ==========================
 
 
+@app.route('/business', methods=['GET'])
+def business():
+    return render_template('hotel/b2b_hotels/index.html')
+
 @app.route('/business/hotel', methods=['GET'])
 def business_hotel():
     return render_template('hotel/b2b_hotels/hotel.html')
+
 
 
 @app.route('/business/hotel/list', methods=['GET'])
