@@ -102,9 +102,25 @@ def Business_booking():
 def business():
     return render_template('hotel/b2b_hotels/index.html')
 
+
 @app.route('/hotel', methods=['GET'])
 def business_hotel():
-    return render_template('hotel/b2b_hotels/hotel.html')
+    if str(request.cookies["hash"]):
+        php_url = "http://bussiness.thetravelsquare.in/api/product/read_one.php"
+        AES.key_size = 128
+        iv = "DEFGHTABCIESPQXO"
+        key = "pqrstuvwxyz$abcdefghijAB12345678"
+        crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
+        decoded = binascii.unhexlify(str(request.cookies["hash"]))  # your ecrypted and encoded text goes here
+        decrypted = crypt_object.decrypt(decoded)
+        unpad = lambda s: s[:-ord(s[len(s) - 1:])]
+        mobile = unpad(decrypted).decode('utf-8')
+        hotel_data = requests.get(url=php_url, params={"mobile": mobile}).json()
+        print(hotel_data)
+        return render_template('hotel/b2b_hotels/hotel.html')
+    else:
+        return "You are not logged in <br><a href = 'http://thetravelsquare.in/crm/login.php'></b>" + \
+               "click here to log in</b></a>"
 
 
 

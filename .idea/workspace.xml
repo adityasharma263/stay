@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stay_app/view/render.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="146" column="65" lean-forward="true" selection-start-line="146" selection-start-column="65" selection-end-line="146" selection-end-column="65" />
+            <state relative-caret-position="1059">
+              <caret line="120" selection-start-line="120" selection-end-line="120" />
               <folding>
                 <element signature="e#47#71#0" expanded="true" />
               </folding>
@@ -31,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="242" column="69" lean-forward="true" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
+            <state relative-caret-position="3585">
+              <caret line="242" column="69" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
               <folding>
                 <element signature="e#24#47#0" expanded="true" />
               </folding>
@@ -53,8 +53,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="217">
-                <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="36" />
+              <first_editor relative-caret-position="240">
+                <caret line="16" column="36" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="36" />
               </first_editor>
               <second_editor />
             </state>
@@ -64,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/migrations/versions/ca69b3770fca_.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" column="16" lean-forward="true" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+            <state relative-caret-position="540">
+              <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
               <folding>
                 <element signature="e#111#133#0" expanded="true" />
               </folding>
@@ -210,7 +210,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="33" />
+    <option name="x" value="46" />
+    <option name="y" value="70" />
     <option name="width" value="1320" />
     <option name="height" value="735" />
   </component>
@@ -230,17 +231,6 @@
               <item name="stay" type="b2602c69:ProjectViewProjectNode" />
               <item name="stay" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="stay" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stay" type="462c0819:PsiDirectoryNode" />
-              <item name="stay_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stay" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stay" type="462c0819:PsiDirectoryNode" />
-              <item name="stay_app" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -250,7 +240,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../internship" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../college" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -313,7 +303,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="bottom" id="Favorites" order="7" weight="0.32952693" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4988831" visible="true" weight="0.5008157" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4988831" visible="true" weight="0.3735726" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.50111693" side_tool="true" weight="0.6639478" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50111693" side_tool="true" weight="0.21207178" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -567,6 +557,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/f3b48e7ecc04_.py" />
+    <entry file="file://$PROJECT_DIR$/stay_app/view/render.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1059">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+          <folding>
+            <element signature="e#47#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3585">
+          <caret line="242" column="69" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
+          <folding>
+            <element signature="e#24#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="36" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="240">
+            <caret line="16" column="36" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="36" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/ca69b3770fca_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+          <folding>
+            <element signature="e#111#133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stay_app/templates/hotel/booking/booking.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
@@ -598,65 +641,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2505">
           <caret line="167" selection-start-line="167" selection-end-line="167" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/versions/f3b48e7ecc04_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="45" column="39" lean-forward="true" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/versions/ca69b3770fca_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="16" lean-forward="true" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-          <folding>
-            <element signature="e#111#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="242" column="69" lean-forward="true" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
-          <folding>
-            <element signature="e#24#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="217">
-            <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="36" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/view/render.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="146" column="65" lean-forward="true" selection-start-line="146" selection-start-column="65" selection-end-line="146" selection-end-column="65" />
-          <folding>
-            <element signature="e#47#71#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
