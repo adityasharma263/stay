@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stay_app/view/render.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1059">
-              <caret line="120" selection-start-line="120" selection-end-line="120" />
+            <state relative-caret-position="84">
+              <caret line="118" column="25" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
               <folding>
                 <element signature="e#47#71#0" expanded="true" />
               </folding>
@@ -209,7 +209,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="46" />
     <option name="y" value="70" />
     <option name="width" value="1320" />
@@ -560,8 +560,8 @@
     <entry file="file://$PROJECT_DIR$/migrations/versions/f3b48e7ecc04_.py" />
     <entry file="file://$PROJECT_DIR$/stay_app/view/render.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1059">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
+        <state relative-caret-position="84">
+          <caret line="118" column="25" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
           <folding>
             <element signature="e#47#71#0" expanded="true" />
           </folding>
