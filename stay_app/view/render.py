@@ -93,7 +93,15 @@ def admin_hotel_deals():
 
 @app.route('/hotel/booking', methods=['GET'])
 def booking():
-    return render_template('hotel/booking/booking.html')
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        if partner_data["status"] == 'Approved':
+            return render_template('hotel/booking/booking.html', partner_data=partner_data)
+        else:
+            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href = '/college/login'></b>" + \
+           "click here  FOR THE APPROVAL </b></a>"
+    else:
+        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
 
 
 #================= B2B hotels ==========================
@@ -106,7 +114,6 @@ def business():
 
 @app.route('/hotel', methods=['GET'])
 def business_hotel():
-    print(request.url_root, request.cookies, "cookies")
     if request.cookies.get("hash"):
         php_url = str(app.config["PHP_API_URL"]) + "/api/v1/partner.php"
         AES.key_size = 128
@@ -117,35 +124,46 @@ def business_hotel():
         decrypted = crypt_object.decrypt(decoded)
         unpad = lambda s: s[:-ord(s[len(s) - 1:])]
         mobile = unpad(decrypted).decode('utf-8')
-        hotel_data = requests.get(url=php_url, params={"mobile": mobile}).json()
-        print(hotel_data)
-        return str(hotel_data)
-        # return render_template('hotel/b2b_hotels/hotel.html')
+        partner_data = requests.get(url=php_url, params={"mobile": mobile}).json()
+        if partner_data.get("error"):
+            return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
+        else:
+            session["partner_data"] = partner_data
+        return render_template('hotel/b2b_hotels/hotel.html', name=partner_data["name"])
     else:
         return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
 
 
 @app.route('/hotel/list', methods=['GET'])
 def business_hotel_list():
-    args = request.args.to_dict()
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    hotel_data = requests.get(url=hotel_api_url, params=args).json()
-    if len(hotel_data["result"]["hotel"]) > 0:
-        hotel_data = hotel_data["result"]["hotel"]
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        args = request.args.to_dict()
+        hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+        hotel_data = requests.get(url=hotel_api_url, params=args).json()
+        if len(hotel_data["result"]["hotel"]) > 0:
+            hotel_data = hotel_data["result"]["hotel"]
+        else:
+            hotel_data = []
+        return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data["name"])
     else:
-        hotel_data = []
-    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data)
+        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
+
 
 
 @app.route('/hotel/<hotel_id>', methods=['GET'])
 def business_hotel_detail(hotel_id):
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
-    if len(hotel_data["result"]["hotel"]) > 0:
-        hotel_data = hotel_data["result"]["hotel"][0]
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+        hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+        if len(hotel_data["result"]["hotel"]) > 0:
+            hotel_data = hotel_data["result"]["hotel"][0]
+        else:
+            hotel_data = {}
+        return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data["name"])
     else:
-        hotel_data = {}
-    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
+        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
 
 
 # @app.route('/business/hotel/cart', methods=['GET'])
