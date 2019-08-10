@@ -8,7 +8,6 @@ import requests
 from Crypto.Cipher import AES
 import base64
 import binascii
-
 import datetime
 import json
 
@@ -78,9 +77,11 @@ import json
 def admin():
     return render_template('hotel/admin/admin_hotel.html')
 
+
 @app.route('/admin/update', methods=['GET'])
 def admin_hotel_update():
     return render_template('hotel/admin/hotel_update.html')
+
 
 @app.route('/admin/deals', methods=['GET'])
 def admin_hotel_deals():
@@ -89,9 +90,9 @@ def admin_hotel_deals():
 
 #================= Booking hotels ==========================
 
+
 @app.route('/hotel/booking', methods=['GET'])
-def Business_booking():
-    API_URL = app.config['API_URL']
+def booking():
     return render_template('hotel/booking/booking.html')
 
 
@@ -105,9 +106,9 @@ def business():
 
 @app.route('/hotel', methods=['GET'])
 def business_hotel():
-    print(request.url_root,request.cookies, "cooookies")
+    print(request.url_root, request.cookies, "cookies")
     if request.cookies.get("hash"):
-        php_url = "http://bussiness.thetravelsquare.in/api/product/read_one.php"
+        php_url = str(app.config["PHP_API_URL"]) + "/api/v1/partner.php"
         AES.key_size = 128
         iv = "DEFGHTABCIESPQXO"
         key = "pqrstuvwxyz$abcdefghijAB12345678"
@@ -120,25 +121,14 @@ def business_hotel():
         print(hotel_data)
         return render_template('hotel/b2b_hotels/hotel.html')
     else:
-        return "You are not logged in <br><a href = 'http://thetravelsquare.in/crm/login.php'></b>" + \
-               "click here to log in</b></a>"
-
+        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
 
 
 @app.route('/hotel/list', methods=['GET'])
 def business_hotel_list():
     args = request.args.to_dict()
-    # payload = {
-    #     "name": args.get("name"),
-    #     "city": args.get("city"),
-    #     "ci":   args.get("ci"),
-    #     "co":   args.get("co"),
-    # }
-    # print(payload, "payload")
-    hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
-    print(args,"render")
+    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params=args).json()
-    print(hotel_data,"response")
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"]
     else:
@@ -148,7 +138,7 @@ def business_hotel_list():
 
 @app.route('/hotel/<hotel_id>', methods=['GET'])
 def business_hotel_detail(hotel_id):
-    hotel_api_url = str(app.config["API_URL"]) + "api/v1/hotel"
+    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"][0]
@@ -215,7 +205,6 @@ def business_press_release():
 
 
 #================= collection hotels ==========================
-
 
 
 @app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
