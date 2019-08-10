@@ -95,6 +95,7 @@ def admin_hotel_deals():
 def booking():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
+        print(partner_data["status"], "sdfffffffffffffffffffffff")
         if partner_data["status"] == 'Approved':
             return render_template('hotel/booking/booking.html', partner_data=partner_data)
         else:
