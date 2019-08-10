@@ -10,7 +10,7 @@ import base64
 import binascii
 import datetime
 import json
-
+app.secret_key = "partner data session secret key"
 
 # @app.route('/', methods=['GET'])
 # def home():
