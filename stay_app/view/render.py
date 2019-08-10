@@ -101,7 +101,7 @@ def booking():
             return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href = '/college/login'></b>" + \
            "click here  FOR THE APPROVAL </b></a>"
     else:
-        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
+        return redirect(str(app.config["DOMAIN_URL"]) + '/dashboard/login.php', code=302)
 
 
 #================= B2B hotels ==========================
@@ -126,12 +126,12 @@ def business_hotel():
         mobile = unpad(decrypted).decode('utf-8')
         partner_data = requests.get(url=php_url, params={"mobile": mobile}).json()
         if partner_data.get("error"):
-            return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
+            return redirect(str(app.config["DOMAIN_URL"]) + '/dashboard/login.php', code=302)
         else:
             session["partner_data"] = partner_data
         return render_template('hotel/b2b_hotels/hotel.html', name=partner_data["name"])
     else:
-        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
+        return redirect(str(app.config["DOMAIN_URL"]) + '/dashboard/login.php', code=302)
 
 
 @app.route('/hotel/list', methods=['GET'])
@@ -147,7 +147,7 @@ def business_hotel_list():
             hotel_data = []
         return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data["name"])
     else:
-        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
+        return redirect(str(app.config["DOMAIN_URL"]) + '/dashboard/login.php', code=302)
 
 
 
@@ -163,7 +163,7 @@ def business_hotel_detail(hotel_id):
             hotel_data = {}
         return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data["name"])
     else:
-        return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
+        return redirect(str(app.config["DOMAIN_URL"]) + '/dashboard/login.php', code=302)
 
 
 # @app.route('/business/hotel/cart', methods=['GET'])
