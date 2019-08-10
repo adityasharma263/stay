@@ -99,7 +99,7 @@ def booking():
         if partner_data["status"] == 'Approved':
             return render_template('hotel/booking/booking.html', partner_data=partner_data)
         else:
-            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href = '/college/login'></b>" + \
+            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["DOMAIN_URL"]) +  "'/dashboard/lta-registration.php'></b>" + \
            "click here  FOR THE APPROVAL </b></a>"
     else:
         return redirect(str(app.config["DOMAIN_URL"]) + '/dashboard/login.php', code=302)
