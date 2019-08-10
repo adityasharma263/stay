@@ -119,7 +119,8 @@ def business_hotel():
         mobile = unpad(decrypted).decode('utf-8')
         hotel_data = requests.get(url=php_url, params={"mobile": mobile}).json()
         print(hotel_data)
-        return render_template('hotel/b2b_hotels/hotel.html')
+        return str(hotel_data)
+        # return render_template('hotel/b2b_hotels/hotel.html')
     else:
         return redirect(str(app.config["Domain_URL"]) + '/dashboard/login.php', code=302)
 
