@@ -105,7 +105,7 @@ def business():
 
 @app.route('/hotel', methods=['GET'])
 def business_hotel():
-    print(request.url_root ,request.cookies, "cooookies")
+    print(request.url_root,request.cookies, "cooookies")
     if request.cookies.get("hash"):
         php_url = "http://bussiness.thetravelsquare.in/api/product/read_one.php"
         AES.key_size = 128
