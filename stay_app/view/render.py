@@ -199,6 +199,46 @@ def business_hotel_detail(hotel_id):
 #     #         hotel_data = []
 #     return render_template('hotel/b2b_hotels/booking.html', deal_data=args)
 
+
+
+#================= Destination Pages ==========================
+
+# @app.route('/destinations/maldives')
+# def destinations_maldive():
+#     return render_template('/hotel/b2b_hotels/destinations/maldives.html')
+
+# @app.route('/destinations/bali')
+# def destinations_bali():
+#     return render_template('/hotel/b2b_hotels/destinations/bali.html')
+
+# @app.route('/destinations/bangkok')
+# def destinations_bangkok():
+#     return render_template('/hotel/b2b_hotels/destinations/bangkok.html')
+
+# @app.route('/destinations/dubai')
+# def destinations_dubai():
+#     return render_template('/hotel/b2b_hotels/destinations/dubai.html')
+
+# @app.route('/destinations/goa')
+# def destinations_goa():
+#     return render_template('/hotel/b2b_hotels/destinations/goa.html')
+
+# @app.route('/destinations/krabi')
+# def destinations_krabi():
+#     return render_template('/hotel/b2b_hotels/destinations/krabi.html')
+
+# @app.route('/destinations/ladakh')
+# def destinations_ladakh():
+#     return render_template('/hotel/b2b_hotels/destinations/ladakh.html')
+
+# @app.route('/destinations/london')
+# def destinations_london():
+#     return render_template('/hotel/b2b_hotels/destinations/london.html')
+
+# @app.route('/destinations/newyork')
+# def destinations_newyork():
+#     return render_template('/hotel/b2b_hotels/destinations/maldives.html')
+
 #================= Add on Pages hotels ==========================
 
 
