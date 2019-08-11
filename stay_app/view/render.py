@@ -85,6 +85,7 @@ def admin():
         decrypted = crypt_object.decrypt(decoded)
         unpad = lambda s: s[:-ord(s[len(s) - 1:])]
         username = unpad(decrypted).decode('utf-8')
+        print(username, "username")
         admin_data = requests.get(url=php_url, params={"username": username}).json()
         print(admin_data, "admindata")
         if admin_data.get("error"):
