@@ -86,13 +86,16 @@ def admin():
         unpad = lambda s: s[:-ord(s[len(s) - 1:])]
         username = unpad(decrypted).decode('utf-8')
         admin_data = requests.get(url=php_url, params={"username": username}).json()
+        print(admin_data, "admindata")
         if admin_data.get("error"):
-            return redirect(str(app.config["ADMIN_DOMAIN_URL"]) + '/login.php', code=302)
+            print("errroooooorr")
+            return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
         else:
             session["partner_data"] = admin_data
         return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
     else:
-        return redirect(str(app.config["ADMIN_DOMAIN_URL"]) + '/login.php', code=302)
+        print("hashnotfount")
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/update', methods=['GET'])
