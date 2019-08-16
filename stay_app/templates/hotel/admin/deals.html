@@ -272,7 +272,7 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" ng-model="room.commission_in_percentage" value="" placeholder="">
+                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
@@ -280,7 +280,7 @@ span.psw {
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.price" value="" placeholder="">
+                                                <input type="text" class="input-text full-width" ng-model="rooms.price" value="" placeholder=""><p>{{ rooms.base_price + (rooms.commission_in_percentage) + (rooms.margin_price) }}</p>
                                             </div>
                                             
 											
