@@ -1,4 +1,4 @@
-angular.module('comparetravel', ['angular.filter'])
+angular.module('comparetravel', ['angular.filter','ngRoute'])
     .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');
@@ -939,11 +939,110 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.UpdateImages = {}; //image data for update
         $scope.hotelData = {}; // hotel data for update 
         $scope.amenitiesData = {}; // hotel amenities for update
-        $scope.commission_in_percentage = {};
-        $scope.margin_price = {};
-        $scope.price = {};
-        $scope.base_price = {};
-        var api_url = 'http://139.59.51.174:8000:8000';
+    
+        var api_url = 'http://139.59.51.174:8000';
+
+
+        $scope.AddNumbers = function addNum1(add1) {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        };
+        $scope.AddNumber1 = function(add2) {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        };
+        $scope.AddNumber2 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }   
+        $scope.AddNumber3 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber4 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber5 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber6 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber7 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber8 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber9 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber10 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber11 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber12 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber13 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber14 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        $scope.AddNumber15 = function() {
+            Number($scope.base_price || 0);
+            Number($scope.margin_price || 0);
+            Number($scope.commission_in_percentage || 0);
+            $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
+        }
+        
+        // $scope.price = function(){
+        //     return (($scope.base_price - 0) + ($scope.margin_price - 0) + ($scope.commission_in_percentage - 0));
+        // };
 
         $scope.showCreate = function () {
             $scope.hotelDetail = true;

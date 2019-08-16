@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="/files/font-awesome.min.css">
     <link href="/files/css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/files/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="/app.js"></script>
     
     <!-- Main Style -->
     <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
@@ -257,41 +263,42 @@ span.psw {
                                 </div><br>
 							<div class="group-details"><center>
                                 <div class="form-group row">
+                                       
                                         <div class="col-xs-12 col-md-5 constant-column-2">
 											
-                                                <h4>Premier Room Only</h4>
-											<div>
-                                                <label>Base Price</label>
-                                                <input type="number" class="input-text full-width" ng-model="base_price" value="" placeholder="">
-                                            </div>
-											
-                                            
-                                            
-                                            
+                                            <h4>Premier Room Only</h4>
+                                        <div>
+                                            <label>Base Price</label>
+                                            <input type="number" class="input-text full-width" ng-keyup="AddNumbers(add1)" ng-model="base_price"  value="" placeholder="">
                                         </div>
-                                        <div class="col-xs-12 col-md-5 constant-column-3">
-											<div>
-                                                <label>%</label>
-                                                <input type="number" class="input-text full-width" ng-model="commission_in_percentage" value="" placeholder="">
-                                            </div>
-                                            <div>
-                                                <label>% Amt</label>
-                                                <input type="number" class="input-text full-width" ng-model="margin_price" value="" placeholder="">
-                                            </div>
-											<div>
-                                                <label>B2B Rate</label>
-                                                <input type="number" class="input-text full-width" ng-model="price" value="" placeholder=""><p>{{ (base_price) + (commission_in_percentage) + (margin_price) }}</p>
-                                            </div>
-                                            
-											
-                                            
+
+                                    </div>
+                                    <div class="col-xs-12 col-md-5 constant-column-3">
+                                        <div>
+                                            <label>%</label>
+                                            <input type="number" class="input-text full-width" ng-keyup="AddNumbers(add1)" ng-model="commission_in_percentage" value="" placeholder="">
                                         </div>
+                                        <div>
+                                            <label>% Amt</label>
+                                            <input type="number" class="input-text full-width" ng-keyup="AddNumbers(add1)" ng-model="margin_price"  value="" placeholder="">
+                                        </div>
+                                        <div>
+                                            <label>B2B Rate</label>
+                                            <input type="number" class="input-text full-width" value="" ng-model="price" placeholder="">
+                                        </div>
+                                    
+                                        
+                                        
+                                        
+                                    </div>
+
+                                       
 										<div class="col-xs-12 col-md-5 constant-column-2">
 											
                                                 <h4>Premier Room With Breakfast</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber1()" ng-model="base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -301,15 +308,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber1()" ng-model="commission_in_percentage" value="" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.margin_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber1()" ng-model="margin_price"  value="" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model="price" placeholder="">
                                             </div>
                                             
 											
@@ -319,7 +326,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber2()" ng-model="base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -329,15 +336,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber2()" ng-model=" commission_in_percentage" value="" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber2()" value="" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -347,7 +354,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber3()" ng-model=" base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -357,15 +364,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber3()" ng-model=" commission_in_percentage" value="" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber3()" value="" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price"  placeholder="">
                                             </div>
                                             
 											
@@ -375,7 +382,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber4()" ng-model=" base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -385,15 +392,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber4()" value="" ng-model=" commission_in_percentage" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber4()" value="" ng-model=" margin_price"  placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -403,7 +410,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber5()" ng-model=" base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -413,15 +420,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber5()" value="" ng-model=" commission_in_percentage"  placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber5()" value="" ng-model=" margin_price"  placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -431,7 +438,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber6()" ng-model=" base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -441,15 +448,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber6()" value="" ng-model=" commission_in_percentage" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber6()" value="" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -459,7 +466,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber7()" ng-model=" base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -469,15 +476,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber7()" value="" ng-model=" commission_in_percentage"  placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber7()" value="" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -487,7 +494,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber8()" ng-model=" base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -497,15 +504,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber8()" value="" ng-model=" commission_in_percentage"  placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber8()" value="" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -515,7 +522,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber9()" ng-model=" base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -525,15 +532,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber9()" value="" ng-model=" commission_in_percentage"  placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-keyup="AddNumber9()" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price"  placeholder="">
                                             </div>
                                             
 											
@@ -543,7 +550,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber10()" ng-model=" base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -553,15 +560,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber10()" value="" ng-model=" commission_in_percentage" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-keyup="AddNumber10()" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price"  placeholder="">
                                             </div>
                                             
 											
@@ -571,7 +578,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber11()" ng-model=" base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -581,15 +588,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber11()" value="" ng-model=" commission_in_percentage" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber11()" value="" ng-model=" margin_price"  placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price"  placeholder="">
                                             </div>
                                             
 											
@@ -599,7 +606,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber12()" ng-model=" base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -609,15 +616,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber12()" value="" ng-model=" commission_in_percentage"  placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber12()" value="" ng-model=" margin_price"  placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -627,7 +634,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber13()" ng-model=" base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -637,15 +644,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber13()" value="" ng-model=" commission_in_percentage" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber13()" value="" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -655,7 +662,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber14()" ng-model=" base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -665,15 +672,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber14()" value="" ng-model=" commission_in_percentage" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber14()" value="" ng-model=" margin_price" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -683,7 +690,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price"  value="" placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber15()" ng-model=" base_price"  value="" placeholder="">
                                             </div>
 											
                                             
@@ -693,15 +700,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.commission_in_percentage"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber15()" value="" ng-model=" commission_in_percentage"  placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.margin_price"  placeholder="">
+                                                <input type= "number" class="input-text full-width" ng-keyup="AddNumber15()" value="" ng-model=" margin_price"  placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" value="" ng-model="rooms.price" placeholder="">
+                                                <input type= "number" class="input-text full-width" value="" ng-model=" price" placeholder="">
                                             </div>
                                             
 											
@@ -740,7 +747,7 @@ span.psw {
 
     <div class="container">
       <label for="uname"><b>Enter Admin ID</b></label>
-      <input type="text" placeholder="Admin ID" name="uname" required>
+      <input type= "number" placeholder="Admin ID" name="uname" required>
 
       <label for="psw"><b>Enter Password</b></label>
       <input type="password" placeholder="Password" name="psw" required>
