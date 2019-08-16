@@ -262,7 +262,7 @@ span.psw {
                                                 <h4>Premier Room Only</h4>
 											<div>
                                                 <label>Base Price</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.base_price" value="" placeholder="">
+                                                <input type="number" class="input-text full-width" ng-model="base_price" value="" placeholder="">
                                             </div>
 											
                                             
@@ -272,15 +272,15 @@ span.psw {
                                         <div class="col-xs-12 col-md-5 constant-column-3">
 											<div>
                                                 <label>%</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.commission_in_percentage" value="" placeholder="">
+                                                <input type="number" class="input-text full-width" ng-model="commission_in_percentage" value="" placeholder="">
                                             </div>
                                             <div>
                                                 <label>% Amt</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.margin_price" value="" placeholder="">
+                                                <input type="number" class="input-text full-width" ng-model="margin_price" value="" placeholder="">
                                             </div>
 											<div>
                                                 <label>B2B Rate</label>
-                                                <input type="text" class="input-text full-width" ng-model="rooms.price" value="" placeholder=""><p>{{ rooms.base_price + (rooms.commission_in_percentage) + (rooms.margin_price) }}</p>
+                                                <input type="number" class="input-text full-width" ng-model="price" value="" placeholder=""><p>{{ (base_price) + (commission_in_percentage) + (margin_price) }}</p>
                                             </div>
                                             
 											
