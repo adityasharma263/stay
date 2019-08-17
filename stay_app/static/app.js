@@ -212,7 +212,7 @@ angular.module('comparetravel', ['angular.filter'])
         //  }
     }])
 
-    .controller('staylistController', ["$scope", "$window", "$http", function ($scope, $window, $http, ) {
+    .controller('staylistController', ["$scope", "$window", "$http", function ($scope, $window, $http ) {
 
 
 
@@ -904,7 +904,7 @@ angular.module('comparetravel', ['angular.filter'])
         }).then(function successCallback(response) {
             $scope.hotels = response.data.result.hotel;
             for (var j = 0; j < $scope.hotels.length; j++) {
-                $scope.hotelid[$scope.hotels[j].id] = $scope.hotels[j];
+                $scope.hotel_id[$scope.hotels[j].id] = $scope.hotels[j];
             }
 
             console.log("$scope.hotelid", $scope.hotelid);
