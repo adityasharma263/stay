@@ -37,7 +37,7 @@
                             <div class="search-box">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-4 form-group" onmouseover="myFunction(event)">
+                                        <div class="col-sm-4 col-md-5 form-group" onmouseover="myFunction(event)">
                                             <input type="text" class="input-text full-width" ng-keyup="[search(), show()]" ng-model="hotel.search" placeholder="Hotel ? We'll Find The Best Deal For You .... " required>
                                         </div>
                                         <div class="col-xs-6 col-sm-4 col-md-2 form-group">
@@ -47,7 +47,7 @@
                                                 <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
                                             </div>
                                         </div>
-                                        <div class="col-xs-6 col-sm-5 col-md-2 form-group">
+                                        <div class="col-xs-6 col-sm-4 col-md-2 form-group">
                                             <div class="datepicker-wrap">
                                                 <input type="text" name="date_to" class="input-text full-width" autocomplete="off" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
                                                 <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
@@ -67,6 +67,18 @@
                                     </div>
                                 </form>
                             </div>
+
+                            <div class="row col-md-5" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)">
+                                <div class="col-sm-12" style="position: relative; z-index: 99;"> 
+                                    <div style="max-height:100px; text-align: left;
+                                    margin: 0;
+                                    border-radius: 8px;
+                                    box-sizing: border-box;
+                                    z-index: 99;
+                                    font-size: 12px;
+                                    width: 96%;
+                                    padding: 0;
+                                    position: absolute;">
 
                             <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
