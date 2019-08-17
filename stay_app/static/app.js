@@ -34,7 +34,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
 
-    .controller('stayController', ["$scope", "$http", "$location", function ($scope, $http, $filter, $location) {
+    .controller('stayController', ["$scope", "$http", "$location", "$filter", function ($scope, $http, $filter, $location) {
         var api_url = 'http://139.59.51.174:8000';
 
         $scope.hotelid = {};// hotel object on the basis of id
