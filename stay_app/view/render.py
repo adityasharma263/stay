@@ -70,10 +70,7 @@ app.secret_key = "partner data session secret key"
 #         hotel_data = {}
 #     return render_template('hotel/b2c_hotels/hotel_detail.html', hotel_data=hotel_data)
 
-
 #================= Admin hotels ==========================
-
-
 @app.route('/admin/hotel', methods=['GET'])
 def admin():
     if request.cookies.get("hash2"):
@@ -96,7 +93,6 @@ def admin():
             session["partner_data"] = admin_data
         return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
     else:
-        print("hashnotfount")
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
@@ -164,6 +160,8 @@ def booking():
 
 @app.route('/', methods=['GET'])
 def business():
+    if 'partner_data' in session:
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/dashboard', code=302)
     return render_template('hotel/b2b_hotels/index.html')
 
 
