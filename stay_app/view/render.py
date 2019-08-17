@@ -131,6 +131,10 @@ def work():
 def contact():
     return render_template('hotel/b2b_hotels/partner-care.html')
 
+@app.route('/testimonials')
+def testimonials():
+    return render_template('hotel/b2b_hotels/testimonials.html')
+
 
 
 
