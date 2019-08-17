@@ -82,6 +82,7 @@ def hotel_api():
             check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
             check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
             q_price = q_price.filter(PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
+	print(q, "data")
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         for hotel in hotels:
             rooms = q_room.filter(Room.hotel_id == hotel.id).all()
