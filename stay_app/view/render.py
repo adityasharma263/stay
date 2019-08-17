@@ -135,6 +135,10 @@ def contact():
 def testimonials():
     return render_template('hotel/b2b_hotels/testimonials.html')
 
+@app.route('/coming-soon')
+def coming_soon():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
 
 
 
