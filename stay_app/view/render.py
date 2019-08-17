@@ -109,6 +109,31 @@ def admin_hotel_update():
 def admin_hotel_deals():
     return render_template('hotel/admin/deals.html')
 
+#================= Index Pages ==========================
+
+@app.route('/agent/rishabh', methods=['GET'])
+def rishabh():
+    return render_template('hotel/b2b_hotels/partners-review-rishabh-jain-the-travel-square.html')
+
+@app.route('/agent/abhinav', methods=['GET'])
+def abhinav():
+    return render_template('hotel/b2b_hotels/partners-review-abhinav-patil-the-travel-square.html')
+
+@app.route('/suppliers', methods=['GET'])
+def suppliers():
+    return render_template('hotel/b2b_hotels/top-suppliers.html')
+
+@app.route('/work', methods=['GET'])
+def work():
+    return render_template('hotel/b2b_hotels/how-do-we-work.html')
+
+@app.route('/contact', methods=['GET'])
+def contact():
+    return render_template('hotel/b2b_hotels/partner-care.html')
+
+
+
+
 
 #================= Booking hotels ==========================
 
