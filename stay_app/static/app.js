@@ -898,26 +898,26 @@ angular.module('comparetravel', ['angular.filter'])
 
 
 
-        $http({
-            method: 'GET',
-            url: api_url + '/api/v1/hotel'
-        }).then(function successCallback(response) {
-            $scope.hotels = response.data.result.hotel;
-            for (var j = 0; j < $scope.hotels.length; j++) {
-                $scope.hotelid[$scope.hotels[j].id] = $scope.hotels[j];
-            }
+    //     $http({
+    //         method: 'GET',
+    //         url: api_url + '/api/v1/hotel'
+    //     }).then(function successCallback(response) {
+    //         $scope.hotels = response.data.result.hotel;
+    //         for (var j = 0; j < $scope.hotels.length; j++) {
+    //             $scope.hotelid[$scope.hotels[j].id] = $scope.hotels[j];
+    //         }
 
-            console.log("$scope.hotelid", $scope.hotelid);
-            console.log("$scope.hotels=====", $scope.hotels);
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        })
+    //         console.log("$scope.hotelid", $scope.hotelid);
+    //         console.log("$scope.hotels=====", $scope.hotels);
+    //         // this callback will be called asynchronously
+    //         // when the response is available
+    //     }, function errorCallback(response) {
+    //         // called asynchronously if an error occurs
+    //         // or server returns response with an error status.
+    //     })
 
 
-    }])
+    // }])
 
     .controller('adminController', ["$scope", "$http", "$filter", function ($scope, $http, $filter) {
         $scope.hotel = {}; // main hotel model
