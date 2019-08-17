@@ -1,4 +1,4 @@
-angular.module('comparetravel', ['angular.filter','ngRoute'])
+angular.module('comparetravel', ['angular.filter'])
     .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');
@@ -34,7 +34,7 @@ angular.module('comparetravel', ['angular.filter','ngRoute'])
 
 
 
-    .controller('stayController', ["$scope", "$http", "$location", function ($scope, $http, $filter, $location) {
+    .controller('stayController', ["$scope", "$http", "$location", "$filter", function ($scope, $http, $filter, $location) {
         var api_url = 'http://139.59.51.174:8000';
 
         $scope.hotelid = {};// hotel object on the basis of id
@@ -212,7 +212,7 @@ angular.module('comparetravel', ['angular.filter','ngRoute'])
         //  }
     }])
 
-    .controller('staylistController', ["$scope", "$window", "$http", function ($scope, $window, $http, ) {
+    .controller('staylistController', ["$scope", "$window", "$http", function ($scope, $window, $http ) {
 
 
 

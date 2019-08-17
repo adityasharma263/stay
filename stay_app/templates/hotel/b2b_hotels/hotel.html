@@ -32,70 +32,76 @@
                     <div class="table-wrapper full-width">
                         <div class="table-cell">
                             <div class="heading box">
-                                <h1 class="title">Find Your Ideal Stay Here</h1>
+                                <h1 class="title">#TB Hotels</h1>
+                                <h3 class="sub-title"><font color="white">We Have More Than Just Hotels Explore More Unique Places !</font></h3>
                             </div>
-                            <div class="search-box">
+
+                            <div class="search-box" style="margin-bottom:0px;">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-4 form-group" onmouseover="myFunction(event)">
-                                            <input type="text" class="input-text full-width" ng-keyup="[search(), show()]" ng-model="hotel.search" placeholder="Hotel ? We'll Find The Best Deal For You .... " required>
+                                        <div class="col-sm-4 col-md-5 form-group" onmouseover="myFunction(event)">
+                                            <input type="text" class="input-text full-width" style="border-radius: 5px;" ng-keyup="[search() , show()]"   ng-model="hotel.search"  placeholder="Where Do You Wanna Visit ? .... " required >
+
                                         </div>
                                         <div class="col-xs-6 col-sm-4 col-md-2 form-group">
                                             <div class="datepicker-wrap">         
-                                                <input type="text" name="date_from" class="input-text full-width" autocomplete="off" ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >                                              
-                                                <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
+                                                <input type="text" name="date_from" class="input-text full-width"  ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >                                              
                                                 <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-5 col-md-2 form-group">
                                             <div class="datepicker-wrap">
-                                                <input type="text" name="date_to" class="input-text full-width" autocomplete="off" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
-                                                <!-- <img class="ui-datepicker-trigger" src="./cico_files/blank.png" alt="" title=""> -->
+                                                <input type="text" name="date_to" class="input-text full-width" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
                                                 <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
 
                                             </div>
                                             
 
                                         </div> 
-                                        
-                                            
-                                            <div class="col-sm-4 col-md-4 form-group">
-                                                <button class="button btn-medium full-width uppercase sky-blue1 animated" ng-click="getHotel()" data-animation-type="tada">Search Now</button>
-                                            </div>
-                                            
-                                        
-                                    </div>
+                                            <div class="col-sm-3 form-group">
+                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>                                            </div>
+                                        </div> 
                                 </form>
                             </div>
 
-                            <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
+                            <div class="row col-md-5" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)">
+                                <div class="col-sm-12" style="position: relative; z-index: 99;"> 
+                                    <div style="max-height:100px; text-align: left;
+                                    margin: 0;
+                                    border-radius: 8px;
+                                    box-sizing: border-box;
+                                    z-index: 99;
+                                    font-size: 12px;
+                                    width: 96%;
+                                    padding: 0;
+                                    position: absolute;">
+                               
+                                
 
-                                <tbody id="search" class="input-text full-width"" >
-                                  <tr ng-autocomplete class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
-                                    <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
-                                        <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
+                                <table id="search" class="table table-hover input-text full-width col-sm-4 col-md-5" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
-                                  </tr>
-                                  <tr ng-autocomplete class="ng-cloak" ng-repeat="name in names | limitTo:2">
-                                    <td class="ng-cloak" style="border: 0" ng-click="result([[name]],'name')">
-                                        <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[name]]</td>
+                                        <tbody id="search" class="input-text full-width"" >
+                                          <tr ng-autocomplete class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
+                                            <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
+                                                <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
 
-                                  </tr>
-                                  <tr class="ng-cloak" ng-if="resp">
-                                      <td>No result found</td>
-                                  </tr>
-                                </tbody>
-                              </table>
+                                          </tr>
+                                          <tr ng-autocomplete class="ng-cloak" ng-repeat="name in names | limitTo:2">
+                                            <td class="ng-cloak" style="border: 0" ng-click="result([[name]],'name')">
+                                                <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[name]]</td>
 
-
-                            <div class="text-center">
-                                &nbsp;&nbsp;
-                            </div>
+                                          </tr>
+                                          <tr class="ng-cloak" ng-if="resp">
+                                              <td>No result found</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                </div>
-				
-			</div>
+                </div>	
 			
             
         </section>
