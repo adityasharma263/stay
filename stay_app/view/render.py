@@ -70,6 +70,7 @@ app.secret_key = "partner data session secret key"
 #         hotel_data = {}
 #     return render_template('hotel/b2c_hotels/hotel_detail.html', hotel_data=hotel_data)
 
+
 #================= Admin hotels ==========================
 
 

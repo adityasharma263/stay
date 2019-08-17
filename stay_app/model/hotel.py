@@ -230,6 +230,7 @@ class Deal(Base):
     __tablename__ = 'deal'
 
     price = db.Column(db.Integer, nullable=True)
+    selling_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     meal_plan = db.Column(db.Enum(MealPlan))
     commission_in_percentage = db.Column(db.Integer, nullable=True)
@@ -254,6 +255,7 @@ class PriceCalendar(Base):
     __tablename__ = 'price_calendar'
 
     commission_in_percentage = db.Column(db.Integer, nullable=True)
+    selling_price = db.Column(db.Integer, nullable=True)
     margin_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     date = db.Column(db.DateTime(timezone=True), nullable=True)

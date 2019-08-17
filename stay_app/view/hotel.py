@@ -32,7 +32,6 @@ app.json_encoder = MyJSONEncoder
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        print(args," api")
         rating = request.args.get('rating')
         args.pop('rating', None)
         # lowest_price_room = request.args.get('lowest_price_room')
@@ -54,22 +53,18 @@ def hotel_api():
         args.pop('ci', None)
         args.pop('co', None)
         room_list = []
-        print(check_in,check_out)
-        q = db.session.query(Hotel).outerjoin(Hotel.amenities)
-        q_room = db.session.query(Room).outerjoin(Room.facilities)
-        q_deal = db.session.query(Deal)
-        q_price = db.session.query(PriceCalendar)
+        q = db.session.query(Hotel).outerjoin(Amenity).outerjoin(Room).outerjoin(Deal).outerjoin(PriceCalendar)
         for key in args:
             if key in Hotel.__dict__:
                 q = q.filter(getattr(Hotel, key) == args[key])
             elif key in Amenity.__dict__:
                 q = q.filter(getattr(Amenity, key) == args[key])
             elif key in Room.__dict__:
-                q_room = q_room.filter(getattr(Room, key) == args[key])
+                q = q.filter(getattr(Room, key) == args[key])
             elif key in Deal.__dict__:
-                q_deal = q.filter(getattr(Deal, key) == args[key])
+                q = q.filter(getattr(Deal, key) == args[key])
             elif key in PriceCalendar.__dict__:
-                q_price = q_price.filter(getattr(PriceCalendar, key) == args[key])
+                q = q.filter(getattr(PriceCalendar, key) == args[key])
         if city:
             q = q.filter(Hotel.city.ilike('%' + city + '%'))
         if name:
@@ -77,34 +72,62 @@ def hotel_api():
         if rating:
             q = q.filter(Hotel.rating >= rating)
         if price_start and price_end:
-            q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
+            q = q.filter(Deal.price >= price_start, Deal.price <= price_end)
         if check_in and check_out:
             check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
             check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
-            q_price = q_price.filter(PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
+            q = q.filter(PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
-        for hotel in hotels:
-            rooms = q_room.filter(Room.hotel_id == hotel.id).all()
-            for room in rooms:
-                room_list.append(room.id)
-                deals = q_deal.filter(Deal.room_id == room.id).all()
-                for deal in deals:
-                    prices = q_price.filter(PriceCalendar.deal_id == deal.id).all()
-                    total_price = 0
-                    for price in prices:
-                        total_price = price.price + total_price
-                    deal.price_calendar = prices
-                room.deals = deals
-            deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.price.asc()).first()
-            business_deal = q_deal.filter(Deal.room_id.in_(room_list), Deal.business_deal == True).order_by(Deal.price.asc()).first()
-            if deal:
-                room = q_room.filter(Room.id == deal.room_id).first()
-                room.lowest_price_room = True
-            if business_deal:
-                room = q_room.filter(Room.id == business_deal.room_id).first()
-                room.b2b_lowest_price_room = True
-            hotel.rooms = rooms
-        print(hotels, "ssffs")
+        # q = db.session.query(Hotel).outerjoin(Hotel.amenities)
+        # q_room = db.session.query(Room).outerjoin(Room.facilities)
+        # q_deal = db.session.query(Deal)
+        # q_price = db.session.query(PriceCalendar)
+        # for key in args:
+        #     if key in Hotel.__dict__:
+        #         q = q.filter(getattr(Hotel, key) == args[key])
+        #     elif key in Amenity.__dict__:
+        #         q = q.filter(getattr(Amenity, key) == args[key])
+        #     elif key in Room.__dict__:
+        #         q_room = q_room.filter(getattr(Room, key) == args[key])
+        #     elif key in Deal.__dict__:
+        #         q_deal = q.filter(getattr(Deal, key) == args[key])
+        #     elif key in PriceCalendar.__dict__:
+        #         q_price = q_price.filter(getattr(PriceCalendar, key) == args[key])
+        # if city:
+        #     q = q.filter(Hotel.city.ilike('%' + city + '%'))
+        # if name:
+        #     q = q.filter(Hotel.name.ilike('%' + name + '%'))
+        # if rating:
+        #     q = q.filter(Hotel.rating >= rating)
+        # if price_start and price_end:
+        #     q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
+        # if check_in and check_out:
+        #     check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
+        #     check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
+        #     q_price = q_price.filter(PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
+        # hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        # for hotel in hotels:
+        #     rooms = q_room.filter(Room.hotel_id == hotel.id).all()
+        #     for room in rooms:
+        #         room_list.append(room.id)
+        #         deals = q_deal.filter(Deal.room_id == room.id).all()
+        #         for deal in deals:
+        #             # if q_price:
+        #             prices = q_price.filter(PriceCalendar.deal_id == deal.id).all()
+        #             total_price = 0
+        #             for price in prices:
+        #                 total_price = price.price + total_price
+        #             deal.price_calendar = prices
+        #         room.deals = deals
+        #     deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.price.asc()).first()
+        #     business_deal = q_deal.filter(Deal.room_id.in_(room_list), Deal.business_deal == True).order_by(Deal.price.asc()).first()
+        #     if deal:
+        #         room = q_room.filter(Room.id == deal.room_id).first()
+        #         room.lowest_price_room = True
+        #     if business_deal:
+        #         room = q_room.filter(Room.id == business_deal.room_id).first()
+        #         room.b2b_lowest_price_room = True
+        #     hotel.rooms = rooms
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
