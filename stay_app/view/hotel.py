@@ -133,9 +133,11 @@ def hotel_api():
     else:
         hotel = request.json
         images = hotel.get("images", None)
+        rooms = hotel.get("rooms", None)
         amenities = hotel.get("amenities", None)
         hotel.pop('amenities', None)
         hotel.pop('images', None)
+        hotel.pop('rooms', None)
         hotel_post = Hotel(**hotel)
         hotel_post.save()
         for image in images:
@@ -143,6 +145,23 @@ def hotel_api():
             image_post = Image(**image)
             hotel_post.images.append(image_post)
             image_post.save()
+        for room in rooms:
+            member = room.get("member", None)
+            facilities = room.get("facilities", None)
+            room.pop('member', None)
+            room.pop('facilities', None)
+            room["hotel_id"] = hotel_post.id
+            room_post = Room(**room)
+            hotel_post.rooms.append(room_post)
+            room_post.save()
+            facilities["room_id"] = room_post.id
+            facility_post = Facility(**facilities)
+            room_post.facilities = facility_post
+            facility_post.save()
+            member["room_id"] = room_post.id
+            member_post = Member(**member)
+            room_post.member = member_post
+            member_post.save()
         amenities["hotel_id"] = hotel_post.id
         amenities_post = Amenity(**amenities)
         hotel_post.amenities = amenities_post
@@ -289,12 +308,6 @@ def room_api():
         room_post.save()
         for deal in deals:
             deal["room_id"] = room_post.id
-            # if index == 0:
-            #     min_price_deal = deal['price']
-            #     best_room = deal["room_id"]
-            # if deal['price'] < min_price_deal:
-            #     min_price_deal = deal['price']
-            #     best_room = deal["room_id"]
             price_calendar = deal.get("price_calendar", None)
             deal.pop('price_calendar', None)
             deal_post = Deal(**deal)
@@ -606,9 +619,17 @@ def deal_api():
         result = DealSchema(many=True).dump(deals)
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
-        post = Deal(**request.json)
-        post.save()
-        result = DealSchema().dump(post)
+        deal = request.json
+        price_calendar = deal.get("price_calendar", None)
+        deal.pop('price_calendar', None)
+        deal_post = Deal(**deal)
+        deal_post.save()
+        for price in price_calendar:
+            price["deal_id"] = deal_post.id
+            price_post = PriceCalendar(**price)
+            deal_post.price_calendar.append(price_post)
+            price_post.save()
+        result = DealSchema().dump(deal_post)
         return jsonify({'result': {'deal': result.data}, 'message': 'Success', 'error': False})
 
 

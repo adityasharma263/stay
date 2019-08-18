@@ -123,7 +123,6 @@ class RoomDealSchema(ma.ModelSchema):
 
 class BookingDealSchema(ma.ModelSchema):
     website = ma.Nested(WebsiteSchema, many=False)
-    price_calendar = ma.Nested(PriceCalendarSchema, many=True)
     room = ma.Nested(RoomDealSchema, many=False)
     booking_date = ma.Method('booking_date_epoch')
 

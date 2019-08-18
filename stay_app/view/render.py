@@ -161,7 +161,7 @@ def booking():
 @app.route('/', methods=['GET'])
 def business():
     if 'partner_data' in session:
-        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/dashboard', code=302)
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]), code=302)
     return render_template('hotel/b2b_hotels/index.html')
 
 
