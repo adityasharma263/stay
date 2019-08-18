@@ -10,6 +10,7 @@ from stay_app.model.hotel import Room
 from stay_app.model.hotel import HotelCollection
 from stay_app.model.hotel import CollectionProduct
 from stay_app.model.hotel import Booking
+from stay_app.model.hotel import BookingDeal
 from stay_app.model.hotel import PriceCalendar
 from stay_app import ma
 from stay_app.schema.base import safe_execute
