@@ -79,9 +79,9 @@ def hotel_api():
             q = q.filter(PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         # q = db.session.query(Hotel).outerjoin(Hotel.amenities)
-        # q_room = db.session.query(Room).outerjoin(Room.facilities)
-        # q_deal = db.session.query(Deal)
-        # q_price = db.session.query(PriceCalendar)
+        q_room = db.session.query(Room).outerjoin(Room.facilities)
+        q_deal = db.session.query(Deal)
+        q_price = db.session.query(PriceCalendar)
         # for key in args:
         #     if key in Hotel.__dict__:
         #         q = q.filter(getattr(Hotel, key) == args[key])
@@ -106,36 +106,38 @@ def hotel_api():
         #     check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
         #     q_price = q_price.filter(PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
         # hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
-        # for hotel in hotels:
-        #     rooms = q_room.filter(Room.hotel_id == hotel.id).all()
-        #     for room in rooms:
-        #         room_list.append(room.id)
-        #         deals = q_deal.filter(Deal.room_id == room.id).all()
-        #         for deal in deals:
-        #             # if q_price:
-        #             prices = q_price.filter(PriceCalendar.deal_id == deal.id).all()
-        #             total_price = 0
-        #             for price in prices:
-        #                 total_price = price.price + total_price
-        #             deal.price_calendar = prices
-        #         room.deals = deals
-        #     deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.price.asc()).first()
-        #     business_deal = q_deal.filter(Deal.room_id.in_(room_list), Deal.business_deal == True).order_by(Deal.price.asc()).first()
-        #     if deal:
-        #         room = q_room.filter(Room.id == deal.room_id).first()
-        #         room.lowest_price_room = True
-        #     if business_deal:
-        #         room = q_room.filter(Room.id == business_deal.room_id).first()
-        #         room.b2b_lowest_price_room = True
-        #     hotel.rooms = rooms
+        for hotel in hotels:
+            rooms = q_room.filter(Room.hotel_id == hotel.id).all()
+            for room in rooms:
+                room_list.append(room.id)
+                # deals = q_deal.filter(Deal.room_id == room.id).all()
+                # for deal in deals:
+                #     # if q_price:
+                #     prices = q_price.filter(PriceCalendar.deal_id == deal.id).all()
+                #     total_price = 0
+                #     for price in prices:
+                #         total_price = price.b2c_selling_price + total_price
+                #     deal.price_calendar = prices
+                # room.deals = deals
+            deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.b2c_selling_price.asc()).first()
+            business_deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.b2b_selling_price.asc()).first()
+            if deal:
+                room = q_room.filter(Room.id == deal.room_id).first()
+                room.lowest_price_room = True
+            if business_deal:
+                room = q_room.filter(Room.id == business_deal.room_id).first()
+                room.b2b_lowest_price_room = True
+            hotel.rooms = rooms
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
         hotel = request.json
         images = hotel.get("images", None)
+        rooms = hotel.get("rooms", None)
         amenities = hotel.get("amenities", None)
         hotel.pop('amenities', None)
         hotel.pop('images', None)
+        hotel.pop('rooms', None)
         hotel_post = Hotel(**hotel)
         hotel_post.save()
         for image in images:
@@ -143,6 +145,23 @@ def hotel_api():
             image_post = Image(**image)
             hotel_post.images.append(image_post)
             image_post.save()
+        for room in rooms:
+            member = room.get("member", None)
+            facilities = room.get("facilities", None)
+            room.pop('member', None)
+            room.pop('facilities', None)
+            room["hotel_id"] = hotel_post.id
+            room_post = Room(**room)
+            hotel_post.rooms.append(room_post)
+            room_post.save()
+            facilities["room_id"] = room_post.id
+            facility_post = Facility(**facilities)
+            room_post.facilities = facility_post
+            facility_post.save()
+            member["room_id"] = room_post.id
+            member_post = Member(**member)
+            room_post.member = member_post
+            member_post.save()
         amenities["hotel_id"] = hotel_post.id
         amenities_post = Amenity(**amenities)
         hotel_post.amenities = amenities_post
@@ -289,12 +308,6 @@ def room_api():
         room_post.save()
         for deal in deals:
             deal["room_id"] = room_post.id
-            # if index == 0:
-            #     min_price_deal = deal['price']
-            #     best_room = deal["room_id"]
-            # if deal['price'] < min_price_deal:
-            #     min_price_deal = deal['price']
-            #     best_room = deal["room_id"]
             price_calendar = deal.get("price_calendar", None)
             deal.pop('price_calendar', None)
             deal_post = Deal(**deal)
@@ -606,9 +619,17 @@ def deal_api():
         result = DealSchema(many=True).dump(deals)
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
-        post = Deal(**request.json)
-        post.save()
-        result = DealSchema().dump(post)
+        deal = request.json
+        price_calendar = deal.get("price_calendar", None)
+        deal.pop('price_calendar', None)
+        deal_post = Deal(**deal)
+        deal_post.save()
+        for price in price_calendar:
+            price["deal_id"] = deal_post.id
+            price_post = PriceCalendar(**price)
+            deal_post.price_calendar.append(price_post)
+            price_post.save()
+        result = DealSchema().dump(deal_post)
         return jsonify({'result': {'deal': result.data}, 'message': 'Success', 'error': False})
 
 

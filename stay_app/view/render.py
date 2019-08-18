@@ -160,8 +160,26 @@ def booking():
 
 @app.route('/', methods=['GET'])
 def business():
-    if 'partner_data' in session:
-        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/dashboard', code=302)
+    # if request.cookies.get("hash"):
+    #     php_url = str(app.config["PARTNER_API_URL"]) + "/api/v1/partner.php"
+    #     AES.key_size = 128
+    #     iv = "DEFGHTABCIESPQXO"
+    #     key = "pqrstuvwxyz$abcdefghijAB12345678"
+    #     crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
+    #     decoded = binascii.unhexlify(str(request.cookies["hash"]))  # your ecrypted and encoded text goes here
+    #     decrypted = crypt_object.decrypt(decoded)
+    #     unpad = lambda s: s[:-ord(s[len(s) - 1:])]
+    #     mobile = unpad(decrypted).decode('utf-8')
+    #     partner_data = requests.get(url=php_url, params={"mobile": mobile}).json()
+    #     if partner_data.get("error"):
+    #         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+    #     else:
+    #         session["partner_data"] = partner_data
+    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]), code=302)
+    # else:
+    #     return render_template('hotel/b2b_hotels/index.html')
+    # if 'partner_data' in session:
+    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]), code=302)
     return render_template('hotel/b2b_hotels/index.html')
 
 
