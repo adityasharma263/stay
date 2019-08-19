@@ -112,6 +112,17 @@ def testimonials():
 def coming_soon():
     return render_template('hotel/b2b_hotels/coming-soon.html')
 
+@app.route('/join')
+def join():
+    return render_template('hotel/b2b_hotels/signup.html')
+
+@app.route('/group')
+def group():
+    return render_template('hotel/b2b_hotels/join-chat-forum.html')
+@app.route('/onetimeverification')
+def verification():
+    return render_template('hotel/b2b_hotels/otp-chat-forum.html')
+
 
 
 
