@@ -35,7 +35,6 @@ class Hotel(Base):
 
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
-    is_partner = db.Column(db.Boolean, default=False, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
     phone = db.Column(db.String, nullable=True)
     city = db.Column(db.String, nullable=True)
@@ -176,7 +175,7 @@ class Facility(Base):
 
     bed_type = db.Column(db.Integer, nullable=True)
     no_of_bed = db.Column(db.Integer, nullable=True)
-    jacuzzi = db.Column(db.Integer, nullable=True)
+    jacuzzi = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
     wardrobes_closet = db.Column(db.Boolean, default=False, nullable=True)
@@ -239,7 +238,7 @@ class Deal(Base):
     weekend = db.Column(db.Boolean, default=False, nullable=True)
     ts_exclusive = db.Column(db.Boolean, default=False, nullable=True)
     partner_id = db.Column(db.Integer, nullable=True)
-    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
+    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)
     price_calendar = db.relationship('PriceCalendar', backref='deal')

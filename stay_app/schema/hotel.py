@@ -78,7 +78,6 @@ class RoomSchema(ma.ModelSchema):
     member = ma.Nested(MemberSchema, many=False)
     facilities = ma.Nested(FacilitySchema, many=False)
 
-
     class Meta:
         model = Room
         exclude = ('updated_at', 'created_at')
