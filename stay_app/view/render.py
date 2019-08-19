@@ -17,7 +17,6 @@ app.secret_key = "partner data session secret key"
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        print("woooking")
         if request.cookies.get("hash"):
             if 'hash' in session:
                 if session["hash"] != request.cookies.get("hash"):
@@ -128,7 +127,7 @@ def booking():
         if partner_data["status"] == 'Approved':
             return render_template('hotel/booking/booking.html', partner_data=partner_data)
         else:
-            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["DOMAIN_URL"]) +  "/lta-registration.php'></b>" + \
+            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
            "click here  FOR THE APPROVAL </b></a>"
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
@@ -139,10 +138,10 @@ def booking():
 
 @app.route('/', methods=['GET'])
 def business():
-    if 'hash' in session:
-        return redirect(str(app.config["PARTNER_DOMAIN_URL"]), code=302)
-    else:
-        return render_template('hotel/b2b_hotels/index.html')
+    # if 'hash' in session:
+    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]), code=302)
+    # else:
+    return render_template('hotel/b2b_hotels/index.html')
 
 
 @app.route('/hotel', methods=['GET'])
