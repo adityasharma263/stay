@@ -138,7 +138,6 @@ def booking():
 
 
 @app.route('/', methods=['GET'])
-@login_required
 def business():
     if 'hash' in session:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]), code=302)
