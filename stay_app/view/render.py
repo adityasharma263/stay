@@ -119,9 +119,31 @@ def join():
 @app.route('/group')
 def group():
     return render_template('hotel/b2b_hotels/join-chat-forum.html')
+
 @app.route('/onetimeverification')
 def verification():
     return render_template('hotel/b2b_hotels/otp-chat-forum.html')
+
+
+
+#================= Destination Pages ==========================
+
+@app.route('/not-found')
+def not_found():
+    return render_template('hotel/b2b_hotels/errors/404-not-found.html')
+    
+@app.route('/time-out')
+def time_out():
+    return render_template('hotel/b2b_hotels/errors/408-time-out.html')
+
+@app.route('/internal-server-error')
+def internal_server_error():
+    return render_template('hotel/b2b_hotels/errors/500-internal-server.html')
+
+@app.route('/bad-gateway')
+def bad_gateway():
+    return render_template('hotel/b2b_hotels/errors/502-bad-gateway.html')
+
 
 
 
