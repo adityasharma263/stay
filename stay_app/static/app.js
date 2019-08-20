@@ -36,7 +36,11 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
+<<<<<<< HEAD
         var api_url = 'http://192.168.0.107:8000';
+=======
+        var api_url = 'http://121.0.0.1:8000';
+>>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
 
         $scope.hotelid = {};// hotel object on the basis of id
         $scope.hotel = {};
@@ -238,7 +242,11 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.imagesData = {};
         $scope.min = 0;
         $scope.max = 200000;
+<<<<<<< HEAD
         var api_url = 'http://192.168.0.107:8000';
+=======
+        var api_url = 'http://121.0.0.1:8000';
+>>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
 
 
         $scope.showBusinessDetail = function (hotel_id) {
@@ -941,7 +949,11 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.hotelData = {}; // hotel data for update 
         $scope.amenitiesData = {}; // hotel amenities for update
     
+<<<<<<< HEAD
         var api_url = 'http://192.168.0.107:8000';
+=======
+        var api_url = 'http://121.0.0.1:8000';
+>>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
 
 
         $scope.AddNumbers = function addNum1(add1) {
@@ -1450,7 +1462,11 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.limit = 10;
         $scope.roomPrice = {};
         $scope.deallimit = 1;
+<<<<<<< HEAD
         var api_url = 'http://192.168.0.107:8000';
+=======
+        var api_url = 'http://121.0.0.1:8000';
+>>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
 
         $scope.openGallery = function (data) {
             $scope.imagesData = data;
