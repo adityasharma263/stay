@@ -56,14 +56,26 @@ def hotel_api():
         q = db.session.query(Hotel).outerjoin(Amenity).outerjoin(Room).outerjoin(Facility).outerjoin(Deal).outerjoin(PriceCalendar)
         q_room = db.session.query(Room)
         q_deal = db.session.query(Deal)
+        q_price = db.session.query(PriceCalendar)
         for hotel in q:
             rooms = q_room.filter(Room.hotel_id == hotel.id).all()
             for room in rooms:
                 room_list.append(room.id)
-            # if check_in and check_out:
-            #     check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
-            #     check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
-            #     q = q_deal.filter(PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
+                if check_in and check_out:
+                    deals = q_deal.filter(Deal.room_id == room.id).all()
+                    for deal in deals:
+                        print(check_in)
+                        check_in = datetime.datetime.fromtimestamp(check_in).date()
+                        check_out = datetime.datetime.fromtimestamp(check_out).date()
+                        price_list = q_price.filter(PriceCalendar.deal_id == deal.id, PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
+                        d = check_out - check_in
+                        price = 0
+                        for i in range(d.days):
+                            if i <= len(price_list):
+                                price_list = price_list[i] + price
+                            else:
+                                price = deal.b2b_selling_price + price
+                        deal.price = int(price/d.days)
             deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.b2c_selling_price.asc()).first()
             business_deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.b2b_selling_price.asc()).first()
             if deal:
@@ -258,7 +270,6 @@ def room_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        lowest_price_room = request.args.get('lowest_price_room')
         args.pop('lowest_price_room', None)
         rooms = Room.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = RoomSchema(many=True).dump(rooms)
@@ -617,7 +628,7 @@ def deal_id(id):
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
-@app.route('/hotel/search', methods=['GET', 'POST'])
+@app.route('/hotel/search', methods=['POST'])
 def hotel_search():
     search = request.json
     search = search['search']
