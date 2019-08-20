@@ -244,11 +244,11 @@
                                                         </div>
 
                                                 </div>                                                
-                                                <span ng-repeat="room in rooms.room_type" >[[room.other_room_type]]</span>                                                   
+                                                <span ng-repeat="room in rooms.room_type" >[[room.room_type]]</span>                                                   
                                                     <div >
                                                         <div class="ng-cloak">
                                                             <div class="amenities" style="float:left">
-                                                                    <p style="overflow: hidden; float: left;">[[room.other_room_type]]</p>
+                                                                    <p style="overflow: hidden; float: left;">[[room.room_type]]</p>
                                                                     <div>
                                                                 <i class="soap-icon-wifi circle" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
                                                                 <i class="soap-icon-breakfast circle" ng-if="room.breakfast" aria-hidden="true"></i>

@@ -10,6 +10,7 @@ from stay_app.model.hotel import Room
 from stay_app.model.hotel import HotelCollection
 from stay_app.model.hotel import CollectionProduct
 from stay_app.model.hotel import Booking
+from stay_app.model.hotel import BookingDeal
 from stay_app.model.hotel import PriceCalendar
 from stay_app import ma
 from stay_app.schema.base import safe_execute
@@ -77,7 +78,6 @@ class RoomSchema(ma.ModelSchema):
     member = ma.Nested(MemberSchema, many=False)
     facilities = ma.Nested(FacilitySchema, many=False)
 
-
     class Meta:
         model = Room
         exclude = ('updated_at', 'created_at')
@@ -123,7 +123,6 @@ class RoomDealSchema(ma.ModelSchema):
 
 class BookingDealSchema(ma.ModelSchema):
     website = ma.Nested(WebsiteSchema, many=False)
-    price_calendar = ma.Nested(PriceCalendarSchema, many=True)
     room = ma.Nested(RoomDealSchema, many=False)
     booking_date = ma.Method('booking_date_epoch')
 
