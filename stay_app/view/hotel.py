@@ -9,6 +9,7 @@ from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema,\
     MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema
 import datetime
+import time
 from itertools import cycle
 # import simplejson as json
 # import json
@@ -63,19 +64,21 @@ def hotel_api():
                 room_list.append(room.id)
                 if check_in and check_out:
                     deals = q_deal.filter(Deal.room_id == room.id).all()
+                    ci = datetime.datetime.fromtimestamp(int(check_in)).date()
+                    co = datetime.datetime.fromtimestamp(int(check_out)).date()
+                    delta = co - ci
                     for deal in deals:
-                        print(check_in)
-                        check_in = datetime.datetime.fromtimestamp(check_in).date()
-                        check_out = datetime.datetime.fromtimestamp(check_out).date()
-                        price_list = q_price.filter(PriceCalendar.deal_id == deal.id, PriceCalendar.date >= check_in, PriceCalendar.date < check_out)
-                        d = check_out - check_in
+                        price_list = q_price.filter(PriceCalendar.deal_id == deal.id, PriceCalendar.date >= ci, PriceCalendar.date < co).all()
                         price = 0
-                        for i in range(d.days):
-                            if i <= len(price_list):
-                                price_list = price_list[i] + price
-                            else:
-                                price = deal.b2b_selling_price + price
-                        deal.price = int(price/d.days)
+                        if delta.days > 0:
+                            for i in range(delta.days):
+                                if i < len(price_list):
+                                    price_list = price_list[i] + price
+                                else:
+                                    if deal.b2b_selling_price:
+                                        price = deal.b2b_selling_price + price
+                            price = int(price/delta.days)
+                        deal.price = price
             deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.b2c_selling_price.asc()).first()
             business_deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.b2b_selling_price.asc()).first()
             if deal:
@@ -107,6 +110,7 @@ def hotel_api():
         if price_start and price_end:
             q = q.filter(Deal.sell >= price_start, Deal.price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        print(hotels, "hotelss")
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -147,6 +151,7 @@ def hotel_api():
         amenities_post.save()
         hotel_result = HotelSchema().dump(hotel_post)
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
+
 
 
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])

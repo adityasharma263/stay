@@ -226,6 +226,7 @@ class Deal(Base):
 
     b2b_selling_price = db.Column(db.Integer, nullable=True)
     b2c_selling_price = db.Column(db.Integer, nullable=True)
+    price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     commission_in_percentage = db.Column(db.Integer, nullable=True)
     b2b_margin_price = db.Column(db.Integer, nullable=True)
