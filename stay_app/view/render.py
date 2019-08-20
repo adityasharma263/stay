@@ -109,6 +109,10 @@ def admin_hotel_update():
 def admin_hotel_deals():
     return render_template('hotel/admin/deals.html')
 
+@app.route('/admin/update', methods=['GET'])
+def admin_update():
+    return render_template('hotel/admin/hotel_update.html')
+
 
 #================= Booking hotels ==========================
 
