@@ -45,11 +45,6 @@ def login_required(f):
     return decorated_function
 
 
-
-
-
-
-
 #================= Admin hotels ==========================
 @app.route('/admin/hotel', methods=['GET'])
 def admin():

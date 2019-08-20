@@ -10,14 +10,15 @@ from stay_app.model.hotel import Room
 from stay_app.model.hotel import HotelCollection
 from stay_app.model.hotel import CollectionProduct
 from stay_app.model.hotel import Booking
+from stay_app.model.hotel import MealPlan
 from stay_app.model.hotel import BookingDeal
 from stay_app.model.hotel import PriceCalendar
 from stay_app import ma
+from marshmallow_enum import EnumField
 from stay_app.schema.base import safe_execute
 
 
 class WebsiteSchema(ma.ModelSchema):
-
     class Meta:
         model = Website
         exclude = ('updated_at', 'created_at', 'hotel')
@@ -77,6 +78,7 @@ class RoomSchema(ma.ModelSchema):
     deals = ma.Nested(DealSchema, many=True)
     member = ma.Nested(MemberSchema, many=False)
     facilities = ma.Nested(FacilitySchema, many=False)
+    meal_plan = EnumField(MealPlan, by_value=True)
 
     class Meta:
         model = Room
