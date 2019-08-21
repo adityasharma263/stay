@@ -30,7 +30,6 @@ class HotelCollection(Base):
 
 
 class Hotel(Base):
-
     __tablename__ = 'hotel'
 
     name = db.Column(db.String)
@@ -74,20 +73,19 @@ class CollectionProduct(Base):
 
 
 class Room(Base):
+
     __tablename__ = 'room'
 
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
-    status = db.Column(db.Boolean, default=False, nullable=True)
+    max_no_of_guest = db.Column(db.Integer, nullable=True)
     lowest_price_room = db.Column(db.Boolean, default=False, nullable=True)
     b2b_lowest_price_room = db.Column(db.Boolean, default=False, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     room_type = db.Column(db.String, nullable=True)
     meal_plan = db.Column(db.Enum(MealPlan))
     balcony = db.Column(db.Boolean, default=False, nullable=True)
-    member = db.relationship('Member', uselist=False, backref='room')
     facilities = db.relationship('Facility', uselist=False, backref='room')
     deals = db.relationship('Deal', backref='room')
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -146,24 +144,6 @@ class Image(Base):
 
     def __repr__(self):
         return '<image_url %r>' % self.image_url
-
-
-class Member(Base):
-
-    __tablename__ = 'member'
-
-    no_of_adults = db.Column(db.Integer, nullable=True)
-    children = db.Column(db.Integer, nullable=True)
-    age_of_child_1 = db.Column(db.Integer, nullable=True)
-    age_of_child_2 = db.Column(db.Integer, nullable=True)
-    total_members = db.Column(db.Integer, nullable=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True, nullable=False)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<total_members %r>' % self.total_members
 
 
 class Facility(Base):
@@ -225,6 +205,7 @@ class Deal(Base):
     __tablename__ = 'deal'
 
     b2b_selling_price = db.Column(db.Integer, nullable=True)
+    sold_out = db.Column(db.Boolean, default=False, nullable=True)
     b2c_selling_price = db.Column(db.Integer, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
@@ -232,7 +213,6 @@ class Deal(Base):
     b2b_margin_price = db.Column(db.Integer, nullable=True)
     b2c_margin_price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
-    weekend = db.Column(db.Boolean, default=False, nullable=True)
     ts_exclusive = db.Column(db.Boolean, default=False, nullable=True)
     partner_id = db.Column(db.Integer, nullable=True)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=True)
@@ -252,11 +232,13 @@ class PriceCalendar(Base):
     __tablename__ = 'price_calendar'
 
     commission_in_percentage = db.Column(db.Integer, nullable=True)
+    sold_out = db.Column(db.Boolean, default=False, nullable=True)
     b2b_selling_price = db.Column(db.Integer, nullable=True)
     b2c_selling_price = db.Column(db.Integer, nullable=True)
     b2b_margin_price = db.Column(db.Integer, nullable=True)
     b2c_margin_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
+    weekend = db.Column(db.Boolean, default=False, nullable=True)
     date = db.Column(db.DateTime(timezone=True), nullable=True)
     deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
 
@@ -265,6 +247,40 @@ class PriceCalendar(Base):
 
     def __repr__(self):
         return '<deal_id %r>' % self.deal_id
+
+
+class Cart(Base):
+    __tablename__ = 'cart'
+
+    partner_id = db.Column(db.Integer, nullable=False)
+    total_no_of_deals = db.Column(db.Integer, nullable=False)
+    total_booking_amount = db.Column(db.Integer, nullable=True)
+    cart_deals = db.relationship('CartDeal', backref='cart')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<partner_id %r>' % self.partner_id
+
+
+class CartDeal(Base):
+
+    __tablename__ = 'cart_deal'
+
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), unique=False)
+    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
+    current_deal_amount = db.Column(db.Integer, nullable=True)
+    ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    co_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    deal = db.relationship('Deal', foreign_keys=deal_id)
+    no_of_deals = db.Column(db.Integer, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<booking_id %r>' % self.booking_id
 
 
 class Booking(Base):
@@ -290,6 +306,7 @@ class BookingDeal(Base):
 
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
     room = db.relationship('Room', foreign_keys=room_id)
+    current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
     selling_price = db.Column(db.Integer, nullable=True)

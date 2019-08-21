@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, \
+from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Room, HotelCollection, \
     CollectionProduct, Booking, PriceCalendar, BookingDeal
 from stay_app import app, db
 # from sqlalchemy import or_
 from sqlalchemy import func
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema,\
-    MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema
+     RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema
 import datetime
 import time
 from itertools import cycle
@@ -110,7 +110,6 @@ def hotel_api():
         if price_start and price_end:
             q = q.filter(Deal.sell >= price_start, Deal.price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
-        print(hotels, "hotelss")
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -129,9 +128,7 @@ def hotel_api():
             hotel_post.images.append(image_post)
             image_post.save()
         for room in rooms:
-            member = room.get("member", None)
             facilities = room.get("facilities", None)
-            room.pop('member', None)
             room.pop('facilities', None)
             room["hotel_id"] = hotel_post.id
             room_post = Room(**room)
@@ -141,17 +138,12 @@ def hotel_api():
             facility_post = Facility(**facilities)
             room_post.facilities = facility_post
             facility_post.save()
-            member["room_id"] = room_post.id
-            member_post = Member(**member)
-            room_post.member = member_post
-            member_post.save()
         amenities["hotel_id"] = hotel_post.id
         amenities_post = Amenity(**amenities)
         hotel_post.amenities = amenities_post
         amenities_post.save()
         hotel_result = HotelSchema().dump(hotel_post)
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
-
 
 
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
@@ -177,7 +169,6 @@ def hotel_id(id):
         if rooms:
             for room in rooms:
                 Facility.query.filter_by(room_id=room.id).delete()
-                Member.query.filter_by(room_id=room.id).delete()
                 Deal.query.filter_by(room_id=room.id).delete()
                 Room.delete_db(room)
         Hotel.delete_db(hotel)
@@ -281,10 +272,8 @@ def room_api():
         return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
     else:
         room = request.json
-        member = room.get("member", None)
         facilities = room.get("facilities", None)
         deals = room.get('deals', None)
-        room.pop('member', None)
         room.pop('deals', None)
         room.pop('facilities', None)
         room_post = Room(**room)
@@ -305,20 +294,7 @@ def room_api():
         facility_post = Facility(**facilities)
         room_post.facilities = facility_post
         facility_post.save()
-        member["room_id"] = room_post.id
-        member_post = Member(**member)
-        room_post.member = member_post
-        member_post.save()
         room_result = RoomSchema().dump(room_post)
-        # member = room.get("member", None)
-        # if member:
-        #     member_obj = {
-        #         "no_of_adults": member.get("no_of_adults", None),
-        #         "total_members": member.get("total_members", None),
-        #         "children": member.get("children", None),
-        #         "room_id": room_result.data['id'],
-        #     }
-        #     Member(**member_obj).save()
         # facility = room.get("facilities", None)
         # if facility:
         #     facility_obj = {
@@ -378,7 +354,6 @@ def room_id(id):
         if not rooms:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Facility.query.filter_by(room_id=id).delete()
-        Member.query.filter_by(room_id=id).delete()
         Deal.query.filter_by(room_id=id).delete()
         Room.delete_db(rooms)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
@@ -451,41 +426,6 @@ def image_id(id):
         if not images:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Image.delete_db(images)
-        return jsonify({'result': {}, 'message': "Success", 'error': False})
-
-
-@app.route('/api/v1/member', methods=['GET', 'POST'])
-def member_api():
-    if request.method == 'GET':
-        args = request.args.to_dict()
-        args.pop('page', None)
-        args.pop('per_page', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
-        members = Member.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = MemberSchema(many=True).dump(members)
-        return jsonify({'result': {'members': result.data}, 'message': "Success", 'error': False})
-    else:
-        post = Member(**request.json)
-        post.save()
-        result = MemberSchema().dump(post)
-        return jsonify({'result': {'member': result.data}, 'message': "Success", 'error': False})
-
-
-@app.route('/api/v1/member/<int:id>', methods=['PUT', 'DELETE'])
-def member_id(id):
-    if request.method == 'PUT':
-        put = Member.query.filter_by(id=id).update(request.json)
-        if put:
-            Member.update_db()
-            s = Member.query.filter_by(id=id).first()
-            result = MemberSchema(many=False).dump(s)
-            return jsonify({'result': result.data, "status": "Success", 'error': False})
-    else:
-        members = Member.query.filter_by(id=id).first()
-        if not members:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True})
-        Member.delete_db(members)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
