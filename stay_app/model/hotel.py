@@ -96,7 +96,6 @@ class Room(Base):
         return '<hotel_id %r>' % self.hotel_id
 
 
-
 class Amenity(Base):
     __tablename__ = 'amenity'
 
@@ -129,7 +128,6 @@ class Amenity(Base):
     twenty_four_hr_reception = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_room_service = db.Column(db.Boolean, default=False, nullable=True)
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -148,7 +146,6 @@ class Image(Base):
 
     def __repr__(self):
         return '<image_url %r>' % self.image_url
-
 
 
 class Member(Base):
@@ -216,7 +213,6 @@ class Website(Base):
     website = db.Column(db.String)
     logo_image = db.Column(db.String, nullable=True)
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -230,6 +226,7 @@ class Deal(Base):
 
     b2b_selling_price = db.Column(db.Integer, nullable=True)
     b2c_selling_price = db.Column(db.Integer, nullable=True)
+    price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     commission_in_percentage = db.Column(db.Integer, nullable=True)
     b2b_margin_price = db.Column(db.Integer, nullable=True)

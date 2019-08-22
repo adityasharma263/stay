@@ -35,7 +35,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
-        var api_url = 'http://139.59.51.174:8000';
+        var api_url = 'http://192.168.0.107:8000';
 
         $scope.hotelid = {};// hotel object on the basis of id
         $scope.hotel = {};
@@ -237,11 +237,11 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.imagesData = {};
         $scope.min = 0;
         $scope.max = 200000;
-        var api_url = 'http://139.59.51.174:8000';
+        var api_url = 'http://192.168.0.107:8000';
 
 
         $scope.showBusinessDetail = function (hotel_id) {
-            window.open('/business/hotel/' + hotel_id, '_self');
+            window.open('/hotel/' + hotel_id, '_self');
             console.log(hotel_id);
 
         }
@@ -940,7 +940,7 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.hotelData = {}; // hotel data for update 
         $scope.amenitiesData = {}; // hotel amenities for update
     
-        var api_url = 'http://139.59.51.174:8000';
+        var api_url = 'http://192.168.0.107:8000';
 
 
         $scope.AddNumbers = function addNum1(add1) {
@@ -1434,7 +1434,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
 
-    .controller('hotelController', ["$scope", "$http", function ($scope, $http, $filter) {
+    .controller('hotelController', ["$scope", "$http", "$filter", function ($scope, $http, $filter) {
         $scope.roomData = {};
         $scope.room = {};
         $scope.id = [];
@@ -1449,7 +1449,7 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.limit = 10;
         $scope.roomPrice = {};
         $scope.deallimit = 1;
-        var api_url = 'http://139.59.51.174:8000';
+        var api_url = 'http://192.168.0.107:8000';
 
         $scope.openGallery = function (data) {
             $scope.imagesData = data;
