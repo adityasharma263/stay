@@ -61,7 +61,6 @@ class ImageSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at', 'hotel')
 
 
-
 class FacilitySchema(ma.ModelSchema):
     class Meta:
         model = Facility
