@@ -64,12 +64,11 @@ class ImageSchema(ma.ModelSchema):
 class FacilitySchema(ma.ModelSchema):
     class Meta:
         model = Facility
-        exclude = ('updated_at', 'created_at', 'hotel')
+        exclude = ('updated_at', 'created_at')
 
 
 class RoomSchema(ma.ModelSchema):
     deals = ma.Nested(DealSchema, many=True)
-
     facilities = ma.Nested(FacilitySchema, many=False)
     meal_plan = EnumField(MealPlan, by_value=True)
 

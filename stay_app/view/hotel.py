@@ -143,6 +143,7 @@ def hotel_api():
         hotel_post.amenities = amenities_post
         amenities_post.save()
         hotel_result = HotelSchema().dump(hotel_post)
+
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
 
 
