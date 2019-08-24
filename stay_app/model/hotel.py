@@ -12,6 +12,13 @@ class MealPlan(enum.Enum):
     AP = "American Plan"
 
 
+class BedType(enum.Enum):
+    Single = "Single"
+    Double = "Double"
+    Queen = "Queen"
+    King = "King"
+
+
 class HotelCollection(Base):
     __tablename__ = 'hotel_collection'
 
@@ -151,7 +158,7 @@ class Facility(Base):
 
     __tablename__ = 'facility'
 
-    bed_type = db.Column(db.Integer, nullable=True)
+    bed_type = db.Column(db.Enum(BedType))
     no_of_bed = db.Column(db.Integer, nullable=True)
     jacuzzi = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)

@@ -10,6 +10,7 @@ from stay_app.model.hotel import HotelCollection
 from stay_app.model.hotel import CollectionProduct
 from stay_app.model.hotel import Booking
 from stay_app.model.hotel import MealPlan
+from stay_app.model.hotel import BedType
 from stay_app.model.hotel import BookingDeal
 from stay_app.model.hotel import PriceCalendar
 from stay_app import ma
@@ -62,6 +63,8 @@ class ImageSchema(ma.ModelSchema):
 
 
 class FacilitySchema(ma.ModelSchema):
+    bed_type = EnumField(BedType, by_value=True)
+
     class Meta:
         model = Facility
         exclude = ('updated_at', 'created_at')

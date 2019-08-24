@@ -175,9 +175,9 @@ def business_hotel_list():
     return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
 
 
-@app.route('/hotel/<hotel_id>', methods=['GET'])
+@app.route('/hotel/<string:slug>', methods=['GET'])
 @login_required
-def business_hotel_detail(hotel_id):
+def business_hotel_detail(slug):
     # if 'partner_data' in session:
     #     partner_data = "name"
     #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
@@ -192,8 +192,7 @@ def business_hotel_detail(hotel_id):
         # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
     # else:
     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
-    print("data= ",hotel_data)
+    hotel_data = requests.get(url=hotel_api_url, params={"slug": slug}).json()
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"][0]
         print("data= ", hotel_data)
