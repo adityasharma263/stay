@@ -35,6 +35,7 @@ class Hotel(Base):
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
+    slug = db.Column(db.String(255))
     phone = db.Column(db.String, nullable=True)
     city = db.Column(db.String, nullable=True)
     country = db.Column(db.String, nullable=True)
