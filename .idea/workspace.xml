@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69fc71ab-68c3-4ca2-88af-884e839fb46d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/schema/hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/schema/hotel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/templates/hotel/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/templates/hotel/components/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stay_app/view/hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/stay_app/view/hotel.py" afterDir="false" />
-    </list>
+    <list default="true" id="69fc71ab-68c3-4ca2-88af-884e839fb46d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/schema/hotel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-627">
-              <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+            <state relative-caret-position="765">
+              <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
               <folding>
                 <element signature="e#24#62#0" expanded="true" />
               </folding>
@@ -33,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/seed.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="6" column="40" lean-forward="true" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+            <state relative-caret-position="45">
+              <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
               <folding>
                 <element signature="e#47#79#0" expanded="true" />
               </folding>
@@ -46,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -54,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/middleware.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="40" column="101" lean-forward="true" selection-start-line="40" selection-start-column="101" selection-end-line="40" selection-end-column="101" />
+            <state relative-caret-position="555">
+              <caret line="40" column="101" selection-start-line="40" selection-start-column="101" selection-end-line="40" selection-end-column="101" />
               <folding>
                 <element signature="e#47#91#0" expanded="true" />
               </folding>
@@ -67,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/stay_app/view/payment.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
-              <caret line="5" column="24" lean-forward="true" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -75,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+            <state relative-caret-position="165">
+              <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
               <folding>
                 <element signature="e#24#47#0" expanded="true" />
               </folding>
@@ -87,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/model/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-35">
-              <caret line="14" column="64" lean-forward="true" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
+            <state relative-caret-position="210">
+              <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -96,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stay_app/view/render.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="181" column="53" lean-forward="true" selection-start-line="181" selection-start-column="53" selection-end-line="181" selection-end-column="53" />
+            <state relative-caret-position="2775">
+              <caret line="193" column="53" selection-start-line="193" selection-start-column="53" selection-end-line="193" selection-end-column="53" />
               <folding>
                 <element signature="e#47#71#0" expanded="true" />
               </folding>
@@ -105,20 +100,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="15" column="54" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="54" />
+            <state relative-caret-position="7">
+              <caret line="15" column="75" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="75" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stay_app/view/hotel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="187" column="60" lean-forward="true" selection-start-line="187" selection-start-column="60" selection-end-line="187" selection-end-column="60" />
+            <state relative-caret-position="82">
+              <caret line="50" column="34" lean-forward="true" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
               <folding>
                 <element signature="e#25#189#0" expanded="true" />
               </folding>
@@ -256,12 +251,6 @@
               <item name="stay" type="b2602c69:ProjectViewProjectNode" />
               <item name="stay" type="462c0819:PsiDirectoryNode" />
               <item name="stay_app" type="462c0819:PsiDirectoryNode" />
-              <item name="schema" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stay" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stay" type="462c0819:PsiDirectoryNode" />
-              <item name="stay_app" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -336,7 +325,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="bottom" id="Favorites" order="7" weight="0.32952693" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4981385" visible="true" weight="0.75367045" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4981385" visible="true" weight="0.502447" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.50111693" side_tool="true" weight="0.6639478" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5018615" side_tool="true" weight="0.27732465" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -609,44 +598,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/view/payment.py">
+    <entry file="file://$PROJECT_DIR$/stay_app/schema/hotel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="24" lean-forward="true" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/model/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="14" column="64" lean-forward="true" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        <state relative-caret-position="765">
+          <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
           <folding>
-            <element signature="e#24#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/middleware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="40" column="101" lean-forward="true" selection-start-line="40" selection-start-column="101" selection-end-line="40" selection-end-column="101" />
-          <folding>
-            <element signature="e#47#91#0" expanded="true" />
+            <element signature="e#24#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stay_app/seed.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="6" column="40" lean-forward="true" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        <state relative-caret-position="45">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
           <folding>
             <element signature="e#47#79#0" expanded="true" />
           </folding>
@@ -656,44 +621,68 @@
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/schema/hotel.py">
+    <entry file="file://$PROJECT_DIR$/stay_app/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-627">
-          <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+        <state relative-caret-position="555">
+          <caret line="40" column="101" selection-start-line="40" selection-start-column="101" selection-end-line="40" selection-end-column="101" />
           <folding>
-            <element signature="e#24#62#0" expanded="true" />
+            <element signature="e#47#91#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stay_app/view/payment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stay_app/model/hotel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding>
+            <element signature="e#24#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stay_app/model/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stay_app/view/render.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="181" column="53" lean-forward="true" selection-start-line="181" selection-start-column="53" selection-end-line="181" selection-end-column="53" />
+        <state relative-caret-position="2775">
+          <caret line="193" column="53" selection-start-line="193" selection-start-column="53" selection-end-line="193" selection-end-column="53" />
           <folding>
             <element signature="e#47#71#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stay_app/view/hotel.py">
+    <entry file="file://$PROJECT_DIR$/config.cfg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="187" column="60" lean-forward="true" selection-start-line="187" selection-start-column="60" selection-end-line="187" selection-end-column="60" />
-          <folding>
-            <element signature="e#25#189#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="7">
+          <caret line="15" column="75" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="75" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.cfg">
+    <entry file="file://$PROJECT_DIR$/stay_app/view/hotel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="15" column="54" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="54" />
+        <state relative-caret-position="82">
+          <caret line="50" column="34" lean-forward="true" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+          <folding>
+            <element signature="e#25#189#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
