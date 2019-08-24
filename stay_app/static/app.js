@@ -35,7 +35,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
-        var api_url = '127.0.0.1:8000';
+        var api_url = 'http://127.0.0.1:8000';
 
         $scope.hotelid = {};// hotel object on the basis of id
         $scope.hotel = {};
@@ -152,7 +152,7 @@ angular.module('comparetravel', ['angular.filter'])
             console.log("$scope.hotel", $scope.hotel);
             $http({
                 method: 'POST',
-                url: api_url + '/hotel/search',
+                url: api_url + '/api/v1/hotel/search',
                 data: $scope.hotel
 
             }).then(function successCallback(response) {
@@ -237,7 +237,7 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.imagesData = {};
         $scope.min = 0;
         $scope.max = 200000;
-        var api_url = '127.0.0.1:8000';
+        var api_url = 'http://127.0.0.1:8000';
 
 
         $scope.showBusinessDetail = function (hotel_id) {
@@ -1449,7 +1449,7 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.limit = 10;
         $scope.roomPrice = {};
         $scope.deallimit = 1;
-        var api_url = '127.0.0.1:8000';
+        var api_url = 'http://127.0.0.1:8000';
 
         $scope.openGallery = function (data) {
             $scope.imagesData = data;
