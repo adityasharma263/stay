@@ -151,7 +151,7 @@ angular.module('comparetravel', ['angular.filter'])
             console.log("$scope.hotel", $scope.hotel);
             $http({
                 method: 'POST',
-                url: api_url + '/hotel/search',
+                url: api_url + '/api/v1/hotel/search',
                 data: $scope.hotel
 
             }).then(function successCallback(response) {
@@ -1448,6 +1448,7 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.limit = 10;
         $scope.roomPrice = {};
         $scope.deallimit = 1;
+        var api_url = 'http://127.0.0.1:8000';
 
         var api_url = 'http://127.0.0.1:8000';
         $scope.openGallery = function (data) {

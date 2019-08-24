@@ -152,10 +152,7 @@ def hotel_api():
             return jsonify({'result': {'hotel': []}, 'message': "hotel name already exist", 'error': True})
 
 
-
-
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
-
 def hotel_id(id):
     if request.method == 'PUT':
         put = Hotel.query.filter_by(id=id).update(request.json)
@@ -170,10 +167,10 @@ def hotel_id(id):
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Amenity.query.filter_by(hotel_id=id).delete()
         Image.query.filter_by(hotel_id=id).delete()
-        collection = HotelCollection.query.filter_by(hotel_id=id).first()
-        if collection:
-            CollectionProduct.query.filter_by(hotel_collection_id=collection.id).delete()
-            HotelCollection.delete_db(collection)
+        # collection = HotelCollection.query.filter_by(hotel_id=id).first()
+        # if collection:
+        #     CollectionProduct.query.filter_by(hotel_collection_id=collection.id).delete()
+        #     HotelCollection.delete_db(collection)
         rooms = Room.query.filter_by(hotel_id=id).all()
         if rooms:
             for room in rooms:
