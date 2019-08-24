@@ -2,9 +2,10 @@
 
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Room, HotelCollection, \
     CollectionProduct, Booking, PriceCalendar, BookingDeal
-from stay_app import app, db
+from stay_app import app, db, cors
 # from sqlalchemy import or_
 from sqlalchemy import func
+from slugify import slugify
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema,\
      RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema
@@ -32,7 +33,6 @@ app.json_encoder = MyJSONEncoder
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
 def hotel_api():
     if request.method == 'GET':
-        print("hello")
         args = request.args.to_dict()
         args.pop('b2b_lowest_price_room', None)
         args.pop('lowest_price_room', None)
@@ -112,43 +112,50 @@ def hotel_api():
             q = q.filter(Deal.sell >= price_start, Deal.price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelSchema(many=True).dump(hotels)
-        print(result)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
         hotel = request.json
         images = hotel.get("images", None)
         rooms = hotel.get("rooms", None)
         amenities = hotel.get("amenities", None)
+        hotel["slug"] = slugify(hotel.get("name"))
         hotel.pop('amenities', None)
         hotel.pop('images', None)
         hotel.pop('rooms', None)
-        hotel_post = Hotel(**hotel)
-        hotel_post.save()
-        for image in images:
-            image["hotel_id"] = hotel_post.id
-            image_post = Image(**image)
-            hotel_post.images.append(image_post)
-            image_post.save()
-        for room in rooms:
-            facilities = room.get("facilities", None)
-            room.pop('facilities', None)
-            room["hotel_id"] = hotel_post.id
-            room_post = Room(**room)
-            hotel_post.rooms.append(room_post)
-            room_post.save()
-            facilities["room_id"] = room_post.id
-            facility_post = Facility(**facilities)
-            room_post.facilities = facility_post
-            facility_post.save()
-        amenities["hotel_id"] = hotel_post.id
-        amenities_post = Amenity(**amenities)
-        hotel_post.amenities = amenities_post
-        amenities_post.save()
-        hotel_result = HotelSchema().dump(hotel_post)
-        return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
+        hotel_slug = Hotel.query.filter_by(slug=slugify(hotel.get("name"))).first()
+        if not hotel_slug:
+            hotel_post = Hotel(**hotel)
+            hotel_post.save()
+            for image in images:
+                image["hotel_id"] = hotel_post.id
+                image_post = Image(**image)
+                hotel_post.images.append(image_post)
+                image_post.save()
+            for room in rooms:
+                facilities = room.get("facilities", None)
+                room.pop('facilities', None)
+                room["hotel_id"] = hotel_post.id
+                room_post = Room(**room)
+                hotel_post.rooms.append(room_post)
+                room_post.save()
+                facilities["room_id"] = room_post.id
+                facility_post = Facility(**facilities)
+                room_post.facilities = facility_post
+                facility_post.save()
+            amenities["hotel_id"] = hotel_post.id
+            amenities_post = Amenity(**amenities)
+            hotel_post.amenities = amenities_post
+            amenities_post.save()
+            hotel_result = HotelSchema().dump(hotel_post)
+            return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
+        else:
+            return jsonify({'result': {'hotel': []}, 'message': "hotel name already exist", 'error': True})
+
+
 
 
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
+
 def hotel_id(id):
     if request.method == 'PUT':
         put = Hotel.query.filter_by(id=id).update(request.json)
@@ -575,7 +582,7 @@ def deal_id(id):
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
-@app.route('/hotel/search', methods=['POST'])
+@app.route('/api/v1/hotel/search', methods=['POST'])
 def hotel_search():
     search = request.json
     search = search['search']
