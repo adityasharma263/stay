@@ -2,7 +2,7 @@
 
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Room, HotelCollection, \
     CollectionProduct, Booking, PriceCalendar, BookingDeal
-from stay_app import app, db
+from stay_app import app, db, cors
 # from sqlalchemy import or_
 from sqlalchemy import func
 from flask import jsonify, request
@@ -131,11 +131,14 @@ def hotel_api():
             image_post.save()
         for room in rooms:
             facilities = room.get("facilities", None)
+            print(facilities)
             room.pop('facilities', None)
             room["hotel_id"] = hotel_post.id
+            print(room)
             room_post = Room(**room)
             hotel_post.rooms.append(room_post)
             room_post.save()
+            print(room_post.id)
             facilities["room_id"] = room_post.id
             facility_post = Facility(**facilities)
             room_post.facilities = facility_post
@@ -149,6 +152,7 @@ def hotel_api():
 
 
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
+
 def hotel_id(id):
     if request.method == 'PUT':
         put = Hotel.query.filter_by(id=id).update(request.json)
@@ -575,7 +579,7 @@ def deal_id(id):
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
-@app.route('/hotel/search', methods=['POST'])
+@app.route('api/v1/hotel/search', methods=['POST'])
 def hotel_search():
     search = request.json
     search = search['search']
