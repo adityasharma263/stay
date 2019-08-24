@@ -63,7 +63,8 @@ def admin():
     #         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
     #     else:
     #         session["partner_data"] = admin_data
-    return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
+    # return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
+    return render_template('hotel/admin/admin_hotel.html')
     # else:
     #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 

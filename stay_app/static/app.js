@@ -940,7 +940,7 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.hotelData = {}; // hotel data for update 
         $scope.amenitiesData = {}; // hotel amenities for update
     
-        var api_url = 'http://121.0.0.1:8000';
+        var api_url = 'http://localhost:8000';
 
 
         $scope.AddNumbers = function addNum1(add1) {
@@ -972,7 +972,7 @@ angular.module('comparetravel', ['angular.filter'])
             Number($scope.margin_price || 0);
             Number($scope.commission_in_percentage || 0);
             $scope.price = $scope.base_price + $scope.margin_price + $scope.commission_in_percentage;
-        }
+        };
         $scope.AddNumber5 = function() {
             Number($scope.base_price || 0);
             Number($scope.margin_price || 0);
