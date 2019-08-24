@@ -20,7 +20,7 @@ from stay_app.schema.base import safe_execute
 class WebsiteSchema(ma.ModelSchema):
     class Meta:
         model = Website
-        exclude = ('updated_at', 'created_at', 'hotel')
+        exclude = ('updated_at', 'created_at')
 
 
 class PriceCalendarSchema(ma.ModelSchema):
