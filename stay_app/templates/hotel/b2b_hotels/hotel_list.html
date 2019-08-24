@@ -183,7 +183,7 @@
                                     <div class="ng-cloak">
                                         <article class="box" ng-if="room.b2b_lowest_price_room">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:160px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
+                                                <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:160px; cursor: pointer" src="http://[[data.images[0].image_url]]" alt="Travel Square">
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="[[hotel.id]]" role="dialog">
                                                     <div class="modal-dialog">
@@ -261,7 +261,7 @@
                                                             </div>
                                                         </div>                
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
-                                                            <span class="price" ng-if="deal.business_deal == true" ng-click="showBusinessDetail(hotel.id)" aria-hidden="true" style="text-align: initial; cursor: pointer;">₹[[deal.price]]</a></span>
+                                                            <span class="price" ng-if="deal.ts_exclusive == true" ng-click="showBusinessDetail(hotel.id)" aria-hidden="true" style="text-align: initial; cursor: pointer;">₹[[deal.b2b_selling_price]]</a></span>
                                                     </div>   
                                                 </div>
                                             </div>

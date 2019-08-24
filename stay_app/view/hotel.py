@@ -111,6 +111,7 @@ def hotel_api():
             q = q.filter(Deal.sell >= price_start, Deal.price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelSchema(many=True).dump(hotels)
+        print(result)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
         hotel = request.json
@@ -143,7 +144,6 @@ def hotel_api():
         hotel_post.amenities = amenities_post
         amenities_post.save()
         hotel_result = HotelSchema().dump(hotel_post)
-
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
 
 
