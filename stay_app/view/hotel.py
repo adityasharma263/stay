@@ -32,6 +32,7 @@ app.json_encoder = MyJSONEncoder
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
 def hotel_api():
     if request.method == 'GET':
+        print("hello")
         args = request.args.to_dict()
         args.pop('b2b_lowest_price_room', None)
         args.pop('lowest_price_room', None)
