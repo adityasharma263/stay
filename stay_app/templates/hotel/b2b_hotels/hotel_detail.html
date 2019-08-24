@@ -144,6 +144,9 @@
                                                                 0/10
                                                         {% endif %}
                                                     </span>
+                                                    <!-- <script>
+                                                    console.log("HOTEL DATA = ","{{hotel_data.star}}");
+                                                    </script>
                                                     <div ng-if="{{hotel_data.star}}==1">
                                                         <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
                                                     </div>
@@ -164,7 +167,7 @@
                                                     </div>
                                                     <div ng-if="{{hotel_data.star}}==7">
                                                         <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
-                                                    </div>
+                                                    </div> -->
                                                     <a href="" class="goto-writereview-pane button green btn-small full-width" style="margin-top:2px;">WRITE A REVIEW</a>
                                                 </div>
                                             </div>
@@ -189,7 +192,7 @@
                                     <div class="tab-pane fade" id="hotel-moredeals">
                                         <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
-                                            <div ng-repeat="room in {{hotel_data.rooms}} | limitTo:deallimit">
+                                            <div ng-repeat="room in {{hotel_data.rooms}}">
                                                 <article class="col-md-12" ng-repeat="deal in room.deals" >
                                                     <figure class="col-md-4">
                                                         <a href="[[deal.hotel_url]]" target="_blank" title=""><img style="width:67%" src="[[deal.website.logo_image]]" alt="[[deal.website.website]]"></a>
@@ -317,7 +320,7 @@
 
                                                                 <dl class="description">
                                                                     <dt>Max Guests:</dt>
-                                                                    <dd>{{room.member.total_members}}</dd>
+                                                                   
                                                                 </dl>
                                                             </div>
                                                            
@@ -326,7 +329,7 @@
 
                                                          <div class="price-section">
                                                             {% for deal in room.deals %}
-                                                            {% if deal.business_deal %}
+                                                            {% if deal.ts_exclusive %}
                                                                 <span class="price"><small> Mini. PER/NIGHT</small>₹ {{deal.price}}</span>
                                                             {% endif%}    
                                                             {% endfor %}
@@ -352,129 +355,108 @@
                                     </div>
                                     <div class="tab-pane fade" id="hotel-amenities">
                                         <h2>Room Facilities</h2>
-                                        
+                                        {% for room in hotel_data.rooms %}
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
-                                                {% if hotel_data.rooms[0].facilities.wifi %}
+                                              
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.tv %}
+                                            
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
-                                            {% endif %}
+                                            
                                            
-                                            {% if hotel_data.rooms[0].facilities.electric_kettle %}
+                                            
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.ac %}
+                                            
+                                            
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.jacuzzi %}    
+                                            
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with bathtub</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.bathroom_with_shower %}
+                                            
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
                                             </li>
-                                            {% endif %}
-                                          
-                                            {% if hotel_data.rooms[0].facilities.desk %}
+                                            
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-minus"></i>Desk</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.hairdryer %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-horn"></i>Hairdryer</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.room_safe %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-securevault"></i>Room safe</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.telephone %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.food_serve_at_room %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-food"></i>Food Serve at Room</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.bathroom_cosmetics %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-check-1"></i>Bathroom Cosmetics</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.bathroom_nightie %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-features"></i>Bathroom Nightie</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.ironing_facility %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-flexible"></i>Ironing Facility</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.weighing_machine %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-clock"></i>Weighing Machine</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.wardrobes_closet %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-trunk-2"></i>Wardrobes / Closet</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.view %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-beach"></i>View </div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.room_seating_area %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-passenger"></i>Room Seating Area</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.room_slipper %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-ski"></i>Room Slipper</div>
                                             </li>
-                                            {% endif %}
-                                            
-                                            {% if hotel_data.rooms[0].facilities.morning_newspaper %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-magazine-1"></i>Morning Newspaper </div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.bathroom_towels %}
+                                           
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-shopping-2"></i>Bathroom Towels </div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.rooms[0].facilities.free_evening_snacks %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
-                                            {% endif %}
-                                            
+                                            {% endfor %}
                                         </ul>
                                         <br>
                                         
                                         <h2>Hotel Amenities</h2>
                                         <ul class="amenities clearfix style2">
-                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.twenty_four_hr_room_service}}">
+                                            <li class="col-md-4 col-sm-6" ng-show="[[hotel_data.amenities.twenty_four_hr_room_service]]">
                                                 <div class="icon-box style2">
                                                     <i class="soap-icon-24-hrroomservice circle" >
                                                         <div style="width: 60%;margin: auto;" class="main-icon" data-type="svg">
@@ -497,128 +479,109 @@
                                                     </i>
                                                     24/7 Room Service</div>
                                             </li>
-                                            {% if hotel_data.amenities.twenty_four_hr_reception %}
+                                            {% for amenities in hotel_data.hotel %}
+                                            
                                                 <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style2"><i class="soap-icon-waiting-room circle" ></i>24/7 reception</div>
                                                 </li>
-                                            {% endif %}
+                                            
                                            
-                                            {% if hotel_data.amenities.parking %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-parking circle"></i>Car Park</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.conference_rooms %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-conference circle"></i>Conference Rooms</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.express_check_in_out %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Express check-in / out</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.bar %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-winebar circle"></i>Hotel bar</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.lift %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Elevator in Building</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.laundry_service %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-shopping-2 circle"></i>Laundry service</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.indoor_swimming_pool %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Indoor swimming pool</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.outdoor_swimming_pool %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Outdoor swimming pool</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.porter_service %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-porter circle"></i>Porter service</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.restaurant %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-breakfast circle"></i>Restaurant</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.Room_cleaning_service %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-wifi"></i>Room Cleaning Service</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.terrace %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-terrace circle"></i>Terrace</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.pool %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-beach circle"></i>Towels at the pool / beach</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.spa %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-spa circle"></i>Wellness centre/Spa</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.wifi_in_lobby %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-wifi circle"></i>WiFi in lobby</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.child_baby_cot %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-cot circle"></i>Child/Baby cot</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.wheelchair_accessible %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-handicapaccessiable circle"></i>Wheelchair Accessible</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.doorman %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-doorman circle"></i>Doorman</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.gym %}
+                                           
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Gym</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.hairdresser %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-hairdresser circle"></i>Hairdresser</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.non_smoking_smoking_rooms %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-smoking circle"></i>Non-Smoking / Smoking Rooms</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.pet_allowance %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-pets circle"></i>Pets Allowence</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel_data.amenities.banquets %}
+                                           
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-banquets circle"></i>Banquets</div>
                                             </li>
-                                            {% endif %}
+                                           
+                                            {% endfor %}
                                         </ul>
+                                    </div>
                                     </div>
                                     <div class="tab-pane fade" id="hotel-reviews">
                                         <div class="intro table-wrapper full-width hidden-table-sms">
@@ -630,29 +593,7 @@
                                                                 0/10
                                                         {% endif %}
                                                 </span>
-                                                <div ng-if="{{hotel_data.star}}==1">
-                                                    <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
-                                                </div>
-                                                <div ng-if="{{hotel_data.star}}==2">
-                                                    <span ng-repeat="i in [1,2]"><img src="/images/star.png"></span>
-                                                </div>
-                                                <div ng-if="{{hotel_data.star}}==3">
-                                                    <span ng-repeat="i in [1,2,3]"><img src="/images/star.png"></span>
-                                                </div>
-                                                <div ng-if="{{hotel_data.star}}==4">
-                                                    <span ng-repeat="i in [1,2,3,4]"><img src="/images/star.png"></span>
-                                                </div>
-                                                <div ng-if="{{hotel_data.star}}==5">
-                                                    <span ng-repeat="i in [1,2,3,4,5]"><img src="/images/star.png"></span>
-                                                </div>
-                                                <div ng-if="{{hotel_data.star}}==6">
-                                                    <span ng-repeat="i in [1,2,3,4,5,6]"><img src="/images/star.png"></span>
-                                                </div>
-                                                <div ng-if="{{hotel_data.star}}==7">
-                                                    <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
-                                                </div>
-                                                <a href="" class="goto-writereview-pane button green btn-small full-width">WRITE A REVIEW</a>
-                                            </div>
+                                               
                                             <div class="table-cell col-sm-8">
                                                 <div class="detailed-rating">
                                                 </div>
@@ -784,12 +725,12 @@
                                             <div ng-cloak class="col-sm-6 col-md-12">
                                                 <article class="box">
                                                     <figure>
-                                                        <a ng-cloak href="" ng-repeat="image in {{hotel_data.images}} | limitTo : 1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
+                                                        <a ng-cloak href="" ng-repeat="image in {{hotel_data.images}} | limitTo:1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
                                                     </figure>
                                                     <div ng-cloak class="details" ng-repeat="deal in [[room.deals]]">
-                                                        <span ng-cloak class="price" ng-if="[[deal.business_deal]]">
+                                                        <span ng-cloak class="price" ng-if="[[deal.ts_exclusive]]">
                                                             <small></small>
-                                                            ₹[[deal.price]]
+                                                            <!-- ₹[[deal.b2b_selling_price]] -->
                                                         </span>
                                                         <h4 ng-cloak class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
                                                         <!-- <p class="description">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p> -->
@@ -846,7 +787,7 @@
                             </div>
 
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
-                                    <div ng-repeat="room in hotel.rooms">
+                                    <div ng-repeat="room in {{hotel_data.rooms}}">
                                         <div>
                                             <article class="box" ng-if="[[room.basic_room]]">
                                                 <figure class="col-sm-5 col-md-4">
@@ -917,7 +858,7 @@
 
         <!-- load page Javascript -->
         <script type="text/javascript" src="/js/theme-scripts.js.download"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+        
 
         <script type="text/javascript" src="/js/top-scroller.js"></script>
         

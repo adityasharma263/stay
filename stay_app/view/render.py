@@ -63,7 +63,8 @@ def admin():
     #         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
     #     else:
     #         session["partner_data"] = admin_data
-    return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
+    # return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
+    return render_template('hotel/admin/admin_hotel.html')
     # else:
     #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
@@ -175,41 +176,32 @@ def business():
 @app.route('/hotel', methods=['GET'])
 @login_required
 def business_hotel():
-<<<<<<< HEAD
     partner_data = "adnan"
     return render_template('hotel/b2b_hotels/hotel.html', name=partner_data)
-=======
-    # partner_data = session["partner_data"]
-    return render_template('hotel/b2b_hotels/hotel.html')
->>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
 
 
 @app.route('/hotel/list', methods=['GET'])
 @login_required
 def business_hotel_list():
-<<<<<<< HEAD
     partner_data = "adnan"
-=======
-    # partner_data = session["partner_data"]
->>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
     args = request.args.to_dict()
     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    hotel_data = requests.get(url=hotel_api_url, params=args).json()
+    print(hotel_api_url, args)
+    hotel_data = requests.get(url=hotel_api_url, params=args)
+    print(hotel_data, hotel_data.status_code)
+    hotel_data = hotel_data.json()
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"]
     else:
         hotel_data = []
-<<<<<<< HEAD
+
     return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
-=======
-    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data)
->>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
 
 
 @app.route('/hotel/<hotel_id>', methods=['GET'])
 @login_required
 def business_hotel_detail(hotel_id):
-<<<<<<< HEAD
+
     if 'partner_data' in session:
         partner_data = "name"
         hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
@@ -218,18 +210,20 @@ def business_hotel_detail(hotel_id):
             hotel_data = hotel_data["result"]["hotel"][0]
         else:
             hotel_data = {}
-        return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
-=======
-    # if 'partner_data' in session:
-    partner_data = session["partner_data"]
+        render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
+    # else:
     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+    print("data= ",hotel_data)
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"][0]
->>>>>>> 8099419609afec836b24f73033ccc6d48dad716b
     else:
         hotel_data = {}
     return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
+    print("data= ", hotel_data)
+    # hotel_data = {}
+    # print("in the last = ", hotel_id)
+    # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
     # else:
     #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
