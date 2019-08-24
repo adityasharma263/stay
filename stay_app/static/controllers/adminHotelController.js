@@ -20,16 +20,88 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
     $scope.amenitiesData = {}; // hotel amenities for update
 
     $scope.mealPlanEnum = {
-
         CP : "Continental Plan",
         MAP : "Modified American Plan",
         EP : "European Plan",
         AP : "American Plan"
+    };
+
+    $scope.bedTypeEnum = {
+
+        Single : "Single",
+        Double : "Double",
+        Queen : "Queen",
+        King : "King",
 
     };
+
+    $scope.facilities = {
+        "ac": null,
+        "bathroom_cosmetics": null,
+        "bathroom_nightie": null,
+        "bathroom_towels": null,
+        "bathroom_with_shower": false,
+        "bed_type": null,
+        "desk": null,
+        "electric_kettle": null,
+        "fan": null,
+        "food_serve_at_room": null,
+        "free_evening_snacks": null,
+        "free_toiletries": null,
+        "hairdryer": null,
+        "heater": null,
+        "ironing_facility": null,
+        "jacuzzi": null,
+        "morning_newspaper": null,
+        "no_of_bed": null,
+        "phone": null,
+        "room_safe": null,
+        "room_seating_area": null,
+        "room_slipper": true,
+        "tv": null,
+        "view": null,
+        "wardrobes_closet": null,
+        "weighing_machine": null,
+        "wifi": null
+      };
+
+      $scope.roomDetailsArray =[
+        {
+            room_type : "",
+            image_url : "",
+            max_no_of_guest: "",
+            meal_plan : "",
+            facilities : {},
+            balcony : ""
+
+          }
+      ];
     
 
     var api_url = 'http://localhost:8000';
+
+    $scope.addMoreRoom = function(){
+        $scope.roomDetailsArray.push(
+            {
+                room_type : "",
+                image_url : "",
+                max_no_of_guest: "",
+                meal_plan : "",
+                facilities : {},
+                balcony : ""
+    
+              }
+        );
+    };
+
+    $scope.addHotelAndRoomsData = function(){
+
+        console.log("scope.hotel = ",$scope.hotel);
+
+        console.log("\n\n$scope.roomDetailsArray = ",$scope.roomDetailsArray);
+
+        
+    }
 
 
     $scope.AddNumbers = function addNum1(add1) {
@@ -477,8 +549,9 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
         $scope.room.deals = $scope.hotelDeals;
         // $scope.hotelRooms.push($scope.room);
         console.log("rooms array", $scope.room);
-        sendPostCall('/api/v1/room', $scope.room)
+        // sendPostCall('/api/v1/room', $scope.room)
 
+        console.log("");
         createToast("'Room Added!!'", "green");
         // $scope.deals.hotel_url="";
         $scope.hotelDeals = [];
