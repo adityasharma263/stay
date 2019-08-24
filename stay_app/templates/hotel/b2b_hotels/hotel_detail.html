@@ -144,6 +144,9 @@
                                                                 0/10
                                                         {% endif %}
                                                     </span>
+                                                    <!-- <script>
+                                                    console.log("HOTEL DATA = ","{{hotel_data.star}}");
+                                                    </script>
                                                     <div ng-if="{{hotel_data.star}}==1">
                                                         <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
                                                     </div>
@@ -164,7 +167,7 @@
                                                     </div>
                                                     <div ng-if="{{hotel_data.star}}==7">
                                                         <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
-                                                    </div>
+                                                    </div> -->
                                                     <a href="" class="goto-writereview-pane button green btn-small full-width" style="margin-top:2px;">WRITE A REVIEW</a>
                                                 </div>
                                             </div>
@@ -189,7 +192,7 @@
                                     <div class="tab-pane fade" id="hotel-moredeals">
                                         <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
-                                            <div ng-repeat="room in {{hotel_data.rooms}} | limitTo:deallimit">
+                                            <div ng-repeat="room in {{hotel_data.rooms}}">
                                                 <article class="col-md-12" ng-repeat="deal in room.deals" >
                                                     <figure class="col-md-4">
                                                         <a href="[[deal.hotel_url]]" target="_blank" title=""><img style="width:67%" src="[[deal.website.logo_image]]" alt="[[deal.website.website]]"></a>
@@ -326,7 +329,7 @@
 
                                                          <div class="price-section">
                                                             {% for deal in room.deals %}
-                                                            {% if deal.business_deal %}
+                                                            {% if deal.ts_exclusive %}
                                                                 <span class="price"><small> Mini. PER/NIGHT</small>₹ {{deal.price}}</span>
                                                             {% endif%}    
                                                             {% endfor %}
@@ -350,9 +353,9 @@
                                         </div>
                                         
                                     </div>
-                                    <div class="tab-pane fade" id="hotel-amenities">
+                                    <!-- <div class="tab-pane fade" id="hotel-amenities">
                                         <h2>Room Facilities</h2>
-                                        
+                                        {% for room in hotel_data.rooms %}
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
                                                 {% if hotel_data.rooms[0].facilities.wifi %}
@@ -468,13 +471,14 @@
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
                                             {% endif %}
+                                            {% endfor %}
                                             
                                         </ul>
                                         <br>
                                         
                                         <h2>Hotel Amenities</h2>
                                         <ul class="amenities clearfix style2">
-                                            <li class="col-md-4 col-sm-6" ng-show="{{hotel_data.amenities.twenty_four_hr_room_service}}">
+                                            <li class="col-md-4 col-sm-6" ng-show="[[hotel_data.amenities.twenty_four_hr_room_service]]">
                                                 <div class="icon-box style2">
                                                     <i class="soap-icon-24-hrroomservice circle" >
                                                         <div style="width: 60%;margin: auto;" class="main-icon" data-type="svg">
@@ -497,6 +501,7 @@
                                                     </i>
                                                     24/7 Room Service</div>
                                             </li>
+                                            {% for amenities in hotel_data.hotel %}
                                             {% if hotel_data.amenities.twenty_four_hr_reception %}
                                                 <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style2"><i class="soap-icon-waiting-room circle" ></i>24/7 reception</div>
@@ -618,7 +623,8 @@
                                                 <div class="icon-box style2"><i class="soap-icon-banquets circle"></i>Banquets</div>
                                             </li>
                                             {% endif %}
-                                        </ul>
+                                            {% endfor %}
+                                        </ul> -->
                                     </div>
                                     <div class="tab-pane fade" id="hotel-reviews">
                                         <div class="intro table-wrapper full-width hidden-table-sms">
@@ -630,7 +636,7 @@
                                                                 0/10
                                                         {% endif %}
                                                 </span>
-                                                <div ng-if="{{hotel_data.star}}==1">
+                                                <!-- <div ng-if="{{hotel_data.star}}==1">
                                                     <span ng-repeat="i in [1]"><img class=""src="/images/star.png"></span>
                                                 </div>
                                                 <div ng-if="{{hotel_data.star}}==2">
@@ -652,7 +658,7 @@
                                                     <span ng-repeat="i in [1,2,3,4,5,6,7]"><img src="/images/star.png"></span>
                                                 </div>
                                                 <a href="" class="goto-writereview-pane button green btn-small full-width">WRITE A REVIEW</a>
-                                            </div>
+                                            </div> -->
                                             <div class="table-cell col-sm-8">
                                                 <div class="detailed-rating">
                                                 </div>
@@ -784,12 +790,12 @@
                                             <div ng-cloak class="col-sm-6 col-md-12">
                                                 <article class="box">
                                                     <figure>
-                                                        <a ng-cloak href="" ng-repeat="image in {{hotel_data.images}} | limitTo : 1"><img width="250px" height="161px" alt="" src="http://[[image.image_url]]"></a>
+                                                        <a ng-cloak href="" ng-repeat="image in {{hotel_data.images}}"><img width="250px" height="161px" alt="" src="http://[[hotel.image]]"></a>
                                                     </figure>
-                                                    <div ng-cloak class="details" ng-repeat="deal in [[room.deals]]">
-                                                        <span ng-cloak class="price" ng-if="[[deal.business_deal]]">
+                                                    <div ng-cloak class="details" ng-repeat="deal in room.deals">
+                                                        <span ng-cloak class="price" ng-if="deal.ts_exclusive">
                                                             <small></small>
-                                                            ₹[[deal.price]]
+                                                            ₹[[deal.b2b_selling_price]]
                                                         </span>
                                                         <h4 ng-cloak class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
                                                         <!-- <p class="description">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p> -->
@@ -846,7 +852,7 @@
                             </div>
 
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
-                                    <div ng-repeat="room in hotel.rooms">
+                                    <div ng-repeat="room in {{hotel_data.rooms}}">
                                         <div>
                                             <article class="box" ng-if="[[room.basic_room]]">
                                                 <figure class="col-sm-5 col-md-4">
@@ -917,7 +923,7 @@
 
         <!-- load page Javascript -->
         <script type="text/javascript" src="/js/theme-scripts.js.download"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+        
 
         <script type="text/javascript" src="/js/top-scroller.js"></script>
         

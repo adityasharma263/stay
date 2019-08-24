@@ -2,7 +2,6 @@
 from stay_app.model.hotel import Hotel
 from stay_app.model.hotel import Image
 from stay_app.model.hotel import Facility
-from stay_app.model.hotel import Member
 from stay_app.model.hotel import Amenity
 from stay_app.model.hotel import Deal
 from stay_app.model.hotel import Website
@@ -21,7 +20,7 @@ from stay_app.schema.base import safe_execute
 class WebsiteSchema(ma.ModelSchema):
     class Meta:
         model = Website
-        exclude = ('updated_at', 'created_at', 'hotel')
+        exclude = ('updated_at', 'created_at')
 
 
 class PriceCalendarSchema(ma.ModelSchema):
@@ -62,21 +61,14 @@ class ImageSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at', 'hotel')
 
 
-class MemberSchema(ma.ModelSchema):
-    class Meta:
-        model = Member
-        exclude = ('updated_at', 'created_at', 'hotel')
-
-
 class FacilitySchema(ma.ModelSchema):
     class Meta:
         model = Facility
-        exclude = ('updated_at', 'created_at', 'hotel')
+        exclude = ('updated_at', 'created_at')
 
 
 class RoomSchema(ma.ModelSchema):
     deals = ma.Nested(DealSchema, many=True)
-    member = ma.Nested(MemberSchema, many=False)
     facilities = ma.Nested(FacilitySchema, many=False)
     meal_plan = EnumField(MealPlan, by_value=True)
 
@@ -114,7 +106,6 @@ class HotelDealSchema(ma.ModelSchema):
 
 
 class RoomDealSchema(ma.ModelSchema):
-    member = ma.Nested(MemberSchema, many=False)
     facilities = ma.Nested(FacilitySchema, many=False)
     hotel = ma.Nested(HotelDealSchema, many=False)
 

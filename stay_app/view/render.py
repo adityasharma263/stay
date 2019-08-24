@@ -154,14 +154,14 @@ def business():
 @app.route('/hotel', methods=['GET'])
 @login_required
 def business_hotel():
-    # partner_data = session["partner_data"]
-    return render_template('hotel/b2b_hotels/hotel.html')
+    partner_data = "adnan"
+    return render_template('hotel/b2b_hotels/hotel.html', name=partner_data)
 
 
 @app.route('/hotel/list', methods=['GET'])
 @login_required
 def business_hotel_list():
-    # partner_data = session["partner_data"]
+    partner_data = "adnan"
     args = request.args.to_dict()
     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params=args).json()
@@ -169,21 +169,34 @@ def business_hotel_list():
         hotel_data = hotel_data["result"]["hotel"]
     else:
         hotel_data = []
-    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data)
+    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
 
 
 @app.route('/hotel/<hotel_id>', methods=['GET'])
 @login_required
 def business_hotel_detail(hotel_id):
     # if 'partner_data' in session:
-    partner_data = session["partner_data"]
+    #     partner_data = "name"
+    #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+    #     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+    #     print("data= ",hotel_data)
+    #     if len(hotel_data["result"]["hotel"]) > 0:
+    #         hotel_data = hotel_data["result"]["hotel"][0]
+    #         print("data= ", hotel_data)
+        # else:
+        #     hotel_data = {}
+        # # print("in the last1 = ", hotel_data)
+        # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
+    # else:
     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+    print("data= ",hotel_data)
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"][0]
-    else:
-        hotel_data = {}
-    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
+        print("data= ", hotel_data)
+    # hotel_data = {}
+    # print("in the last = ", hotel_id)
+    # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
     # else:
     #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
