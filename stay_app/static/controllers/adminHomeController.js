@@ -2,12 +2,10 @@
 app.requires.push('ui.bootstrap');
 app.controller("adminHomeController", function($scope, $http) {
 
-
-    
    
     $scope.searchHotelOnChange = function(){
 
-        if($scope.searchHotel.length > 2){
+        if($scope.searchHotel && $scope.searchHotel.length > 2){
 
             console.log($scope.searchHotel);
 
