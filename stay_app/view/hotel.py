@@ -13,7 +13,7 @@ import datetime
 import time
 from itertools import cycle
 # import simplejson as json
-# import json
+import json
 import decimal
 import flask.json
 
@@ -592,9 +592,11 @@ def hotel_search():
     hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).limit(5).all()
     for hotel_name in hotel_names:
         names.append({"name": hotel_name.name.lower(),
-                      "slug": hotel_name.slug.lower(),
+                      "slug": hotel_name.slug if hotel_name.slug else "",
                       "id": hotel_name.id})
-    return jsonify({'result': {'cities': list(set(cities)), "names": list(set(names))}, 'message': "Success", 'error': False})
+    print(names)
+    # names = json.dumps(names)
+    return jsonify({'result': {'cities': list(set(cities)), "names": list((names))}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/booking', methods=['GET', 'POST'])
