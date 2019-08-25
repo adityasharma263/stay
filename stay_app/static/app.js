@@ -242,7 +242,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
         $scope.showBusinessDetail = function (hotel_id) {
             window.open('/hotel/' + hotel_id, '_self');
-            console.log(hotel_id);
 
         }
 

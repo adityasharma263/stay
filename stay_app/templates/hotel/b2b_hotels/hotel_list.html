@@ -178,14 +178,21 @@
                                 <h4 class="sort-by-title block-sm"></h4>
                                 <p><input class="input-text full-width" type="text"  placeholder="SEARCH BY KEYWORD"></p>
                             </div>
-                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
-                                <div ng-repeat="room in hotel.rooms">
+                            {% for hotel in hotel_data %}
+
+                            <div class="hotel-list listing-style3 hotel ">
+                                {% for room in hotel[rooms] %}
+                                <div >
                                     <div class="ng-cloak">
-                                        <article class="box" ng-if="room.b2b_lowest_price_room">
+                                        {% if room[b2b_lowest_price_room] %}
+                                        aditya
+                                        <article class="box">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:160px; cursor: pointer" src="http://[[data.images[0].image_url]]" alt="Travel Square">
+                                                <a href="/hotel/{{hotel['slug']}}">
+                                                <img data-toggle="modal"  style="height:160px; cursor: pointer" src="http://{{hotel['images'][0]['image_url']}}" alt="Travel Square">
+                                                </a>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="[[hotel.id]]" role="dialog">
+                                                <div class="modal fade" id="{{hotel['id']}}" role="dialog">
                                                     <div class="modal-dialog">
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
@@ -202,11 +209,15 @@
                                             <div class="details col-sm-7 col-md-8">
                                                 <div>
                                                     <div class="ng-cloak">
-                                                        <h4 ng-click="showBusinessDetail(hotel.id)" style="cursor: pointer;" class="box-title">[[hotel.name]]  
+                                                        <a href="/hotel/{{hotel['slug']}}">
+                                                        <h4 style="cursor: pointer;" class="box-title">{{hotel["name"]}}
                                                             <small>
                                                             
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                                                        <span id="latitude" style="cursor:pointer" ng-click="showBusinessDetail(hotel.id)"  data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.city]]</span></small></h4>
+                                                        <span id="latitude" style="cursor:pointer"  data-toggle="modal" data-target="#mapModal" data-latitude = "{{hotel['latitude']}}"  data-longitude ="{{hotel['longitude']}}">{{hotel['city']}}</span>
+                                                            </small>
+                                                        </h4>
+                                                            </a>
                                                             <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
                                                                 
@@ -244,7 +255,7 @@
                                                         </div>
 
                                                 </div>                                                
-                                                <span ng-repeat="room in rooms.room_type" >[[room.room_type]]</span>                                                   
+                                                <span ng-repeat="room in rooms" >[[room.room_type]]</span>
                                                     <div >
                                                         <div class="ng-cloak">
                                                             <div class="amenities" style="float:left">
@@ -266,12 +277,12 @@
                                                 </div>
                                             </div>
                                           </article>
+                                        {% endif %}
                                     </div>    
                                 </div>
+                                {% endfor %}
                             </div>
-
-
-                          
+                            {% endfor %}
 
 
 
