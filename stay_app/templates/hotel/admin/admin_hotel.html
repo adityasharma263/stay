@@ -2047,7 +2047,7 @@
 
                             <!-- Add Rooms Details Form -->
 
-                            <div class="form-horizontal">
+                            <div class="form-horizontal travelo-box booking-section">
                                 <div ng-show="roomDetail">
                                     <h2>Room Details(For: [[hotel.name]]) </h2>
                                     <hr>
@@ -2081,13 +2081,14 @@
                                         </div>
 
                                         <div class="form-group">
-                                                <label class="control-label col-sm-2" for="balcony">Balcony:
-                                                </label>
-                                                <div class="col-sm-10">
-                                                    <input class="" id="balcony"
-                                                        ng-model="roomDetails.balcony" ng-true-value="true" ng-false-value="false" type="checkbox" required>
-                                                </div>
+                                            <label class="control-label col-sm-2" for="balcony">Balcony:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input class="" id="balcony" ng-model="roomDetails.balcony"
+                                                    ng-true-value="true" ng-false-value="false" type="checkbox"
+                                                    required>
                                             </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-sm-2" for="total_members">Meal Plan:
@@ -2096,7 +2097,7 @@
                                                 style="margin-left: 215px;">
 
                                                 <label for="mealplan-[[key]]" class="">
-                                                    <input id="mealplan-[[key]]" class="" type="radio" name="bed_type"
+                                                    <input id="mealplan-[[key]]" class="" type="radio" name="MEAL_PLAN"
                                                         value="[[key]]" ng-model="roomDetails.meal_plan" />[[value]]
                                                 </label>
                                             </div>
@@ -2104,29 +2105,33 @@
 
 
 
-                                        <h2>Room Facilities</h2>
+                                        <h3>Room Facilities</h3>
 
-                                        <div></div>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2" for="no_of_bed">No. of Bed: </label>
-                                            <div class="col-sm-10">
-                                                <input class="form-control" id="name"
-                                                    ng-model="roomDetails.facilities.no_of_bed" type="number" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2" for="total_members">Bed Type:
-                                            </label>
-
-
-
-                                            <div class="radio" ng-repeat="(key, value) in bedTypeEnum"
-                                                style="margin-left: 215px;">
-                                                <label>
-                                                    <input id="bed_type1" type="radio" name="bed_type" value="[[key]]"
-                                                        ng-model="roomDetails.facilities.bed_type" />[[value]]
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label class=" col-sm-4" for="no_of_bed">No. of Bed:
                                                 </label>
+                                                <div class="col-sm-6">
+                                                    <input class="form-control" id="name"
+                                                        ng-model="roomDetails.facilities.no_of_bed" type="number"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-6">
+                                                <label class=" col-sm-2" for="total_members">Bed Type:
+                                                </label>
+
+
+
+                                                <div class="radio" ng-repeat="(key, value) in bedTypeEnum"
+                                                    style="margin-left:100px;">
+                                                    <label>
+                                                        <input id="bed_type1" type="radio" name="bed_type"
+                                                            value="[[key]]"
+                                                            ng-model="roomDetails.facilities.bed_type" />[[value]]
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <br>
@@ -2150,12 +2155,13 @@
                                     <button type="submit" class="btn btn-success"
                                         ng-click="addHotelAndRoomsData()">Submit</button>
 
-                                    <button type="button" class="btn btn-success"
+                                    <button type="button" class="btn btn-secondary"
                                         onclick="window.location.reload()">Next hotel</button>
 
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-warning" ng-click="addMoreRoom()">Add More Room</button>
+                            <button type="button" class="btn btn-warning" ng-click="addMoreRoom()">Add More
+                                Room</button>
                         </div>
                     </div>
 

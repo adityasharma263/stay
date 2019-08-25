@@ -79,6 +79,7 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
     
 
     var api_url = 'http://localhost:8000';
+    var api_base_url = 'http://localhost:8000/api/v1';
 
     $scope.addMoreRoom = function(){
         $scope.roomDetailsArray.push(
@@ -96,12 +97,20 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
 
     $scope.addHotelAndRoomsData = function(){
 
+        $scope.hotel.rooms = $scope.roomDetailsArray;
+        $scope.hotel.images = $scope.hotelImg;
+
         console.log("scope.hotel = ",$scope.hotel);
+  
+        $http.post(api_base_url+"/hotel", $scope.hotel)
+        .then(function(response){
+            console.log("response = ",response);
 
-        console.log("\n\n$scope.roomDetailsArray = ",$scope.roomDetailsArray);
-
-        
-    }
+        })
+        .catch(function(err){
+            console.log("err = ", err);
+        });
+    };
 
 
     $scope.AddNumbers = function addNum1(add1) {

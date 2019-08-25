@@ -68,6 +68,9 @@ def admin():
     # else:
     #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
+@app.route('/admin/home', methods=["GET"])
+def admin_home():
+    return render_template("hotel/admin/dashboard.html")
 
 @app.route('/admin/update', methods=['GET'])
 def admin_hotel_update():
