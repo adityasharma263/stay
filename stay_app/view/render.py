@@ -89,6 +89,13 @@ def admin_hotel_search():
     search_data = requests.post(HOTEL_SEARCH_API_ROUTE, json=search)
     return jsonify(search_data.json())
 
+
+@app.route("/admin/hotel/deal/<deal_id>", methods=["GET"])
+def admin_deal_id(deal_id):
+    
+    return render_template("hotel/admin/deals-dashboard.html")
+
+
 #================= Index Pages ==========================
 
 @app.route('/agent/rishabh', methods=['GET'])

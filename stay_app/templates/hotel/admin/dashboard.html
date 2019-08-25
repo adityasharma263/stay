@@ -88,7 +88,10 @@ body {
   color: #fff;
   opacity: 1;
 }
+.dropdown-input + ul.dropdown-menu{
 
+    width: 95%;
+}
 </style>
 
 
@@ -166,7 +169,6 @@ body {
                 <div class="page-title pull-left">
                     <h2 class="entry-title">Administrator | Data Management</h2>
                 </div>
-                
             </div>
         </div>
 			
@@ -220,26 +222,8 @@ body {
                                 <form>
                                     <div class="row">
                                         <div class="col-sm-4 col-md-6 form-group">
-                                            <input  ng-model="searchHotel" ng-change="searchHotelOnChange($event)" uib-typeahead="state for state in searchResult" type="text" class="input-text full-width" placeholder="Where Do You Wish To Travel ? .... ">
-
-                                            <div class="bg-success" >
-                                                <ul>
-                                                    <li>
-                                                        [[searchHotel]]
-                                                        
-                                                    </li>
-                                                    <li>
-                                                        
-                                                        Leela Hotel Logn name testing...
-                                                        
-                                                    </li>
-                                                    <li>
-                                                        
-                                                        Leela Hotel Logn name testing...
-                                                        
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <input  typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel" ng-change="searchHotelOnChange($event)" uib-typeahead="state.name for state in searchResult" 
+                                                type="text" class="input-text full-width dropdown-input" placeholder="Where Do You Wish To Travel ? .... ">
 
                                         </div>
                                         

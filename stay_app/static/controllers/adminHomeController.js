@@ -5,7 +5,7 @@ app.controller("adminHomeController", function($scope, $http) {
    
     $scope.searchHotelOnChange = function(){
 
-        if($scope.searchHotel && $scope.searchHotel.length > 2){
+        if($scope.searchHotel){
 
             console.log($scope.searchHotel);
 
@@ -20,6 +20,13 @@ app.controller("adminHomeController", function($scope, $http) {
 
         }
     };
+
+    $scope.onHotelSelect = function (item) {
+        console.log(item);
+        
+        
+    };
+
 });
 
 
