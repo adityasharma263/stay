@@ -90,10 +90,18 @@ def admin_hotel_search():
     return jsonify(search_data.json())
 
 
-@app.route("/admin/hotel/deal/<deal_id>", methods=["GET"])
-def admin_deal_id(deal_id):
-    
-    return render_template("hotel/admin/deals-dashboard.html")
+@app.route("/admin/hotel/deal", methods=["GET"])
+def admin_deal_id():
+
+    hotel_id = request.args.get('id')
+
+    if(hotel_id):
+        args = request.args.to_dict()
+        hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel", params=args)
+        hotel_data = hotel_data.json()["result"]
+        return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
+    else:    
+        return render_template("hotel/admin/deals-dashboard.html")
 
 
 #================= Index Pages ==========================

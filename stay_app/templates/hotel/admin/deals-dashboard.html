@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html class="js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html ng-app="comparetravel" class="js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Page Title -->
     <title>The Travel Square</title>
     
@@ -88,16 +88,22 @@ body {
   color: #fff;
   opacity: 1;
 }
-
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
 </style>
 
 
 	
     <!-- Theme Styles -->
-    <link rel="stylesheet" href="files/bootstrap.min.css">
-    <link rel="stylesheet" href="files/font-awesome.min.css">
-    <link href="files/css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="files/animate.min.css">
+    <link rel="stylesheet" href="/files/bootstrap.min.css">
+    <link rel="stylesheet" href="/files/font-awesome.min.css">
+    <link href="/files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/files/animate.min.css">
+    <script type="text/javascript" src="/js/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
+    <script src="/js/angular-filter.js"></script>
     
 	
     <!-- Main Style -->
@@ -111,23 +117,23 @@ body {
             }
         }
         document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '">');
-    </script><link id="main-style" rel="stylesheet" href="files/style-light-yellow.css">
+    </script><link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css">
     
     <!-- Updated Styles -->
-    <link rel="stylesheet" href="files/updates.css">
+    <link rel="stylesheet" href="/files/updates.css">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="files/custom.css">
+    <link rel="stylesheet" href="/files/custom.css">
     
     <!-- Responsive Styles -->
-    <link rel="stylesheet" href="files/responsive.css">
+    <link rel="stylesheet" href="/files/responsive.css">
 	
 	
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 
-<body>
+<body ng-controller="adminHotelDealController" >
     <div id="page-wrapper">
        
 	           <header id="header" class="navbar-static-top">
@@ -151,9 +157,11 @@ body {
                 <div class="container">
                    <h1 class="navbar-brand" style="height:0%">
                         <a href="index.php" title="The Travel Square">
-                            <img src="images/the-travel-square-india-logo.png" alt="The Travel Square">
+                            <img src="/images/the-travel-square-india-logo.png" alt="The Travel Square">
                         </a>
                     </h1>
+
+                   
                     
                     
                 </div>
@@ -166,6 +174,25 @@ body {
             <div class="container">
                 <div class="page-title pull-left">
                     <h2 class="entry-title">Administrator | Data Management</h2>
+
+
+                </div>
+
+
+                <div style="margin-top: 10px;" >
+
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-6 form-group">
+                                <input  typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel" ng-change="searchHotelOnChange($event)" uib-typeahead="state.name for state in searchResult" 
+                                    value="{{hotel_data['hotel'][0]['name']}}" type="text" class="input-text full-width dropdown-input" placeholder="Where Do You Wish To Travel ? .... ">
+                            </div>
+                                <div class="col-sm-2 form-group">
+                                    <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
+                                </div>
+                        </div>
+                    </form>
+
                 </div>
                 
             </div>
@@ -2501,12 +2528,12 @@ body {
 
 
     <!-- Javascript -->
-    <script type="text/javascript" src="files/jquery-1.11.1.min.js.download"></script>
-    <script type="text/javascript" src="files/jquery.noconflict.js.download"></script>
-    <script type="text/javascript" src="files/modernizr.2.7.1.min.js.download"></script>
-    <script type="text/javascript" src="files/jquery-migrate-1.2.1.min.js.download"></script>
-    <script type="text/javascript" src="files/jquery.placeholder.js.download"></script>
-    <script type="text/javascript" src="files/jquery-ui.1.10.4.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery-1.11.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.noconflict.js.download"></script>
+    <script type="text/javascript" src="/files/modernizr.2.7.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery-migrate-1.2.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.placeholder.js.download"></script>
+    <script type="text/javascript" src="/files/jquery-ui.1.10.4.min.js.download"></script>
 	
 	    
     <script type="text/javascript" src="js/js"></script>
@@ -2514,20 +2541,20 @@ body {
     <script type="text/javascript" src="js/theme-scripts.js.download"></script>
     
     <!-- Twitter Bootstrap -->
-    <script type="text/javascript" src="files/bootstrap.js.download"></script>
+    <script type="text/javascript" src="/files/bootstrap.js.download"></script>
 
     <!-- Flex Slider -->
-    <script type="text/javascript" src="files/jquery.flexslider-min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.flexslider-min.js.download"></script>
     
     <!-- parallax -->
-    <script type="text/javascript" src="files/jquery.stellar.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.stellar.min.js.download"></script>
     
     <!-- waypoint -->
-    <script type="text/javascript" src="files/waypoints.min.js.download"></script>
+    <script type="text/javascript" src="/files/waypoints.min.js.download"></script>
 
     <!-- load page Javascript -->
-    <script type="text/javascript" src="files/theme-scripts.js.download"></script>
-    <script type="text/javascript" src="files/scripts.js.download"></script>
+    <script type="text/javascript" src="/files/theme-scripts.js.download"></script>
+    <script type="text/javascript" src="/files/scripts.js.download"></script>
 
     <script type="text/javascript">
         tjq("#slideshow .flexslider").flexslider({
@@ -2550,7 +2577,7 @@ body {
 						<div class="popup-wrapper">
 						<div class="col-xs-12 col-sm-9 popup-content">
 						<div class="travelo-signup-box travelo-box" style="display: block;">
-				<center><img src="images/the-travel-square-logo-200x200.png"></center><br>
+				<center><img src="/images/the-travel-square-logo-200x200.png"></center><br>
 				<br>
             <div class="">
                     <form action="" Method="POST">
@@ -2579,7 +2606,7 @@ body {
 						<div class="popup-wrapper">
 						<div class="col-xs-12 col-sm-9 popup-content">
 						<div class="travelo-signup-box travelo-box" style="display: block;">
-				<center><img src="images/the-travel-square-logo-200x200.png"></center><br>
+				<center><img src="/images/the-travel-square-logo-200x200.png"></center><br>
 				<br>
             <div class="">
                     <form action="" Method="POST">
@@ -2607,7 +2634,7 @@ body {
           <span aria-hidden="true">&times;</span>
         </button>
           <!-- 16:9 aspect ratio -->
-            <a href="car-campaign-offer.html"><img src="images/the-travel-square-campaign-offer.jfif" width="950" height="400"></a>
+            <a href="car-campaign-offer.html"><img src="/images/the-travel-square-campaign-offer.jfif" width="950" height="400"></a>
 
     </div>
   </div>
@@ -2618,11 +2645,16 @@ body {
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-          <!-- 16:9 aspect ratio -->
-            <iframe height="600" width="900" class="autoplay embed-responsive-item" src="https://www.youtube.com/embed/tVHSTtQfbAI?autoplay=1" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
-
+    
     </div>
   </div>
+
+  <script>
+       console.log({{hotel_data|tojson}});
+  </script>
+
+  <script type="text/javascript" src="/app.js"></script>
+  <script type="text/javascript" src="/controllers/adminHotelDealController.js"></script>
 
 
 
