@@ -1,4 +1,4 @@
-var app = angular.module('comparetravel', ['angular.filter'])
+var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
     .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');

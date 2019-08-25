@@ -582,6 +582,7 @@ def deal_id(id):
 @app.route('/api/v1/hotel/search', methods=['POST'])
 def hotel_search():
     search = request.json
+    print(search)
     search = search['search']
     cities = []
     names = []

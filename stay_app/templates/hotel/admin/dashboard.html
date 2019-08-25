@@ -125,6 +125,9 @@ body {
 	
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script type="text/javascript" src="/js/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
+  <script src="/js/angular-filter.js"></script>
 </head>
 
 <body ng-controller="adminHomeController">
@@ -216,7 +219,27 @@ body {
                                 <form>
                                     <div class="row">
                                         <div class="col-sm-4 col-md-6 form-group">
-                                            <input type="text" class="input-text full-width" placeholder="Where Do You Wish To Travel ? .... " ng-change="">
+                                            <input  ng-model="searchHotel" ng-keydown="searchHotelOnChange($event)" uib-typeahead="state for state in searchResult" type="text" class="input-text full-width" placeholder="Where Do You Wish To Travel ? .... ">
+
+                                            <div class="bg-success" >
+                                                <ul>
+                                                    <li>
+                                                        [[searchHotel]]
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        
+                                                        Leela Hotel Logn name testing...
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        
+                                                        Leela Hotel Logn name testing...
+                                                        
+                                                    </li>
+                                                </ul>
+                                            </div>
+
                                         </div>
                                         
                                             
@@ -1096,7 +1119,7 @@ body {
   </div>
 
   <script type="text/javascript" src="/app.js"></script>
-  <script type="text/javascript" src="/controller/adminHomeController.js"></script>
+  <script type="text/javascript" src="/controllers/adminHomeController.js"></script>
   
 
 

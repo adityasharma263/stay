@@ -81,6 +81,14 @@ def admin_hotel_update():
 def admin_hotel_deals():
     return render_template('hotel/admin/deals.html')
 
+
+@app.route('/admin/hotel/search', methods=["POST"])
+def admin_hotel_search():
+    HOTEL_SEARCH_API_ROUTE = str(app.config["API_URL"]) + "/api/v1/hotel/search"
+    search = request.json
+    search_data = requests.post(HOTEL_SEARCH_API_ROUTE, json=search)
+    return jsonify(search_data.json())
+
 #================= Index Pages ==========================
 
 @app.route('/agent/rishabh', methods=['GET'])
