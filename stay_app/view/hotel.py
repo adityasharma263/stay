@@ -590,7 +590,9 @@ def hotel_search():
         cities.append(hotel_city.city.lower())
     hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).limit(5).all()
     for hotel_name in hotel_names:
-        names.append(hotel_name.name.lower())
+        names.append({"name": hotel_name.name.lower(),
+                      "slug": hotel_name.slug.lower(),
+                      "id": hotel_name.id})
     return jsonify({'result': {'cities': list(set(cities)), "names": list(set(names))}, 'message': "Success", 'error': False})
 
 
