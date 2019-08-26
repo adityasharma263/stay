@@ -179,26 +179,24 @@
                                 <p><input class="input-text full-width" type="text"  placeholder="SEARCH BY KEYWORD"></p>
                             </div>
                             {% for hotel in hotel_data %}
-
                             <div class="hotel-list listing-style3 hotel ">
-                                {% for room in hotel[rooms] %}
+                                {% for room in hotel['rooms'] %}
                                 <div >
+                                    {{room['b2b_lowest_price_room']}}
                                     <div class="ng-cloak">
-                                        {% if room[b2b_lowest_price_room] %}
-                                        aditya
+                                        {% if room['b2b_lowest_price_room'] %}
                                         <article class="box">
                                             <figure class="col-sm-5 col-md-4">
                                                 <a href="/hotel/{{hotel['slug']}}">
+                                                {% if len(hotel['images']) > 0%}
                                                 <img data-toggle="modal"  style="height:160px; cursor: pointer" src="http://{{hotel['images'][0]['image_url']}}" alt="Travel Square">
+                                                 {% endif %}
                                                 </a>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="{{hotel['id']}}" role="dialog">
                                                     <div class="modal-dialog">
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
-                                                        
-
-
                                                         </div>
                                                     
                                                     </div>
@@ -230,28 +228,10 @@
                                                     
 
                                                         <div>
-                                                            <div ng-if="[[hotel.star]]==1">
+
+                                                            <div ng-if="hotel.star]]==1">
                                                                 <span ng-repeat="i in [1]" style="width:10px; height:10px"><img style="width:12px" src="/images/star.png"></span>
-                                                            </div> 
-                                                            <div ng-if="[[hotel.star]]==2">
-                                                                <span ng-repeat="i in [1,2]" style="width:10px; height:10px"><img style="width:12px" src="/images/star.png"></span>
                                                             </div>
-                                                            <div ng-if="[[hotel.star]]==3">
-                                                                <span ng-repeat="i in [1,2,3]" style="width:10px; height:10px"><img style="width:12px" src="/images/star.png"></span>
-                                                            </div>
-                                                            <div ng-if="[[hotel.star]]==4">
-                                                                <span ng-repeat="i in [1,2,3,4]" style="width:10px; height:10px"><img style="width:12px" src="/images/star.png"></span>
-                                                            </div>
-                                                            <div ng-if="[[hotel.star]]==5">
-                                                                <span ng-repeat="i in [1,2,3,4,5]" style="width:10px; height:10px"><img style="width:12px" src="/images/star.png"></span>
-                                                            </div>
-                                                            <div ng-if="[[hotel.star]]==6">
-                                                                <span ng-repeat="i in [1,2,3,4,5,6]" style="width:10px; height:10px"><img style="width:12px" src="/images/star.png"></span>
-                                                            </div>
-                                                            <div ng-if="[[hotel.star]]==7">
-                                                                <span ng-repeat="i in [1,2,3,4,5,6,7]" style="width:10px; height:10px"><img style="width:12px" src="/images/star.png"></span>
-                                                            </div>
-                                                            
                                                         </div>
 
                                                 </div>                                                
@@ -270,7 +250,7 @@
                                                                 <i class="soap-icon-swimming circle" ng-if="hotel.amenities.outdoor_swimming_pool" aria-hidden="true"></i>
                                                                 </div>
                                                             </div>
-                                                        </div>                
+                                                        </div>
                                                     <div class="amenities" ng-repeat = "deal in room.deals" style="float:left">
                                                             <span class="price" ng-if="deal.ts_exclusive == true" ng-click="showBusinessDetail(hotel.id)" aria-hidden="true" style="text-align: initial; cursor: pointer;">₹[[deal.b2b_selling_price]]</a></span>
                                                     </div>   
