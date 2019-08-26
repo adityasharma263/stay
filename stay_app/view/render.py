@@ -119,29 +119,31 @@ def group():
 @app.route('/onetimeverification')
 def verification():
     return render_template('hotel/b2b_hotels/otp-chat-forum.html')
+    
 
 
 
 #================= Destination Pages ==========================
 
-@app.route('/not-found')
-def not_found():
-    return render_template('hotel/b2b_hotels/errors/404-not-found.html')
+# @app.route('/not-found')
+# def not_found():
+#     return render_template('hotel/b2b_hotels/errors/404-not-found.html')
     
-@app.route('/time-out')
-def time_out():
-    return render_template('hotel/b2b_hotels/errors/408-time-out.html')
+# @app.route('/time-out')
+# def time_out():
+#     return render_template('hotel/b2b_hotels/errors/408-time-out.html')
 
-@app.route('/internal-server-error')
-def internal_server_error():
-    return render_template('hotel/b2b_hotels/errors/500-internal-server.html')
+# @app.route('/internal-server-error')
+# def internal_server_error():
+#     return render_template('hotel/b2b_hotels/errors/500-internal-server.html')
 
-@app.route('/bad-gateway')
-def bad_gateway():
-    return render_template('hotel/b2b_hotels/errors/502-bad-gateway.html')
+# @app.route('/bad-gateway')
+# def bad_gateway():
+#     return render_template('hotel/b2b_hotels/errors/502-bad-gateway.html')
 
 
 
+#================= Error Pages =============================
 
 
 
@@ -269,9 +271,21 @@ def business_hotel_detail(hotel_id):
 #================= Add on Pages hotels ==========================
 
 
-@app.errorhandler(400)
-def page_not_found():
-    return render_template("404.html"), 400
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("hotel/b2b_hotels/errors/404-not-found.html"), 404
+
+@app.errorhandler(500)
+def internal_server(error):
+    return render_template("hotel/b2b_hotels/errors/500-internal-server.html"), 500
+
+@app.errorhandler(502)
+def bad_gateway(error):
+    return render_template("hotel/b2b_hotels/errors/502-bad-gateway.html"), 502
+
+@app.errorhandler(408)
+def time_out(error):
+    return render_template("hotel/b2b_hotels/errors/408-time-out.html"), 408
 
 
 @app.route('/about', methods=['GET'])
