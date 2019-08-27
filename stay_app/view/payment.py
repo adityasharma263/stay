@@ -24,8 +24,8 @@ def payment():
         data["email"] = booking_details["email"]
         data["phone"] = booking_details["phone"]
         data["service_provider"] = "payu_paisa"
-        data["furl"] = str(app.config["API_URL"]) + "payment/fail"
-        data["surl"] = str(app.config["API_URL"]) + "payment/success"
+        data["furl"] = str(app.config["API_URL"]) + "/payment/fail"
+        data["surl"] = str(app.config["API_URL"]) + "/payment/success"
         data['action'] = 'https://sandboxsecure.payu.in/_payment'
         return render_template("payment/form.html", data=data)
 

@@ -69,16 +69,13 @@ def admin():
     #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
-@app.route('/admin/update', methods=['GET'])
-def admin_hotel_update():
-    return render_template('hotel/admin/hotel_update.html')
-
-
 @app.route('/admin/deals', methods=['GET'])
 def admin_hotel_deals():
     return render_template('hotel/admin/deals.html')
 
+
 #================= Index Pages ==========================
+
 
 @app.route('/agent/rishabh', methods=['GET'])
 def rishabh():
@@ -195,123 +192,11 @@ def business_hotel_detail(slug):
     hotel_data = requests.get(url=hotel_api_url, params={"slug": slug}).json()
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"][0]
-        print("data= ", hotel_data)
+    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name="adnan")
     # hotel_data = {}
     # print("in the last = ", hotel_id)
     # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
     # else:
     #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
-
-
-
-#================= Destination Pages ==========================
-
-# @app.route('/destinations/maldives')
-# def destinations_maldive():
-#     return render_template('/hotel/b2b_hotels/destinations/maldives.html')
-
-# @app.route('/destinations/bali')
-# def destinations_bali():
-#     return render_template('/hotel/b2b_hotels/destinations/bali.html')
-
-# @app.route('/destinations/bangkok')
-# def destinations_bangkok():
-#     return render_template('/hotel/b2b_hotels/destinations/bangkok.html')
-
-# @app.route('/destinations/dubai')
-# def destinations_dubai():
-#     return render_template('/hotel/b2b_hotels/destinations/dubai.html')
-
-# @app.route('/destinations/goa')
-# def destinations_goa():
-#     return render_template('/hotel/b2b_hotels/destinations/goa.html')
-
-# @app.route('/destinations/krabi')
-# def destinations_krabi():
-#     return render_template('/hotel/b2b_hotels/destinations/krabi.html')
-
-# @app.route('/destinations/ladakh')
-# def destinations_ladakh():
-#     return render_template('/hotel/b2b_hotels/destinations/ladakh.html')
-
-# @app.route('/destinations/london')
-# def destinations_london():
-#     return render_template('/hotel/b2b_hotels/destinations/london.html')
-
-# @app.route('/destinations/newyork')
-# def destinations_newyork():
-#     return render_template('/hotel/b2b_hotels/destinations/maldives.html')
-
-#================= Add on Pages hotels ==========================
-
-
-@app.errorhandler(400)
-def page_not_found():
-    return render_template("404.html"), 400
-
-
-@app.route('/about', methods=['GET'])
-def business_about():
-    return render_template('hotel/footer_pages/about.html')
-
-
-@app.route('/contact-us', methods=['GET'])
-def business_contact_us():
-    return render_template('hotel/footer_pages/contact-us.html')
-
-
-@app.route('/customer-care', methods=['GET'])
-def business_customer_care():
-    return render_template('hotel/footer_pages/customer-care.html')
-
-
-@app.route('/jobs', methods=['GET'])
-def business_jobs():
-    return render_template('hotel/footer_pages/job-and-internship-application-form.html')
-
-
-@app.route('/legal', methods=['GET'])
-def business_legal():
-    return render_template('hotel/footer_pages/legal.html')
-
-
-@app.route('/partner-care', methods=['GET'])
-def business_partner_care():
-    return render_template('hotel/footer_pages/partner-care.html')
-
-
-@app.route('/press-release', methods=['GET'])
-def business_press_release():
-    return render_template('hotel/footer_pages/press-release.html')
-
-
-
-#================= collection hotels ==========================
-
-
-@app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
-def collection1():
-    return render_template('hotel/collections/bed-and-breakfast.html')  
-     
-
-@app.route('/hotel/collection/boatstays-travel-beans', methods=['GET'])
-def collection2():
-    return render_template('hotel/collections/boatstays.html')   
-
-
-@app.route('/hotel/collection/boutique-hotels-travel-beans', methods=['GET'])
-def collection3():
-    return render_template('hotel/collections/boutique-hotels.html')  
-
-
-@app.route('/hotel/collection/budget-hotels-travel-beans', methods=['GET'])
-def collection4():
-    return render_template('hotel/collections/budget-hotels.html')             
-
-
-@app.route('/hotel/collection/campsite-travel-beans', methods=['GET'])
-def collection5():
-    return render_template('hotel/collections/campsite.html')   
-
 
 
