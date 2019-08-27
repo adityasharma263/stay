@@ -21,7 +21,7 @@ def login_required(f):
         #     if 'hash' in session:
         #         if session["hash"] != request.cookies.get("hash"):
         #             session.clear()
-        #             return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+        #             return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
         #     else:
         #         php_url = str(app.config["PARTNER_API_URL"]) + "/api/v1/partner.php"
         #         AES.key_size = 128
@@ -35,12 +35,12 @@ def login_required(f):
         #         mobile = unpad(decrypted).decode('utf-8')
         #         partner_data = requests.get(url=php_url, params={"mobile": mobile}).json()
         #         if partner_data.get("error"):
-        #             return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+        #             return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
         #         else:
         #             session["partner_data"] = partner_data
         #             session["hash"] = str(request.cookies["hash"])
         # else:
-        #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+        #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
         return f(*args, **kwargs)
     return decorated_function
 
@@ -60,13 +60,13 @@ def admin():
     #     username = unpad(decrypted).decode('utf-8')
     #     admin_data = requests.get(url=php_url, params={"username": username}).json()
     #     if admin_data.get("error"):
-    #         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+    #         return redirect(str(app.config["ADMIN_BUSINESS_DOMAIN_URL"]), code=302)
     #     else:
     #         session["partner_data"] = admin_data
     # return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
     return render_template('hotel/admin/admin_hotel.html')
     # else:
-    #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+    #     return redirect(str(app.config["ADMIN_BUSINESS_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/deals', methods=['GET'])
@@ -131,10 +131,10 @@ def booking():
         if partner_data["status"] == 'Approved':
             return render_template('hotel/booking/booking.html', partner_data=partner_data)
         else:
-            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
+            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
            "click here  FOR THE APPROVAL </b></a>"
     else:
-        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+        return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= B2B hotels ==========================
@@ -143,7 +143,7 @@ def booking():
 @app.route('/', methods=['GET'])
 def business():
     # if 'hash' in session:
-    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]), code=302)
+    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]), code=302)
     # else:
     return render_template('hotel/b2b_hotels/index.html')
 
@@ -197,6 +197,6 @@ def business_hotel_detail(slug):
     # print("in the last = ", hotel_id)
     # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
     # else:
-    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
 
 
