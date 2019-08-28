@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 from stay_app.model.hotel import Hotel
 from stay_app.model.hotel import Image
 from stay_app.model.hotel import Facility
