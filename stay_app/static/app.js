@@ -1,21 +1,10 @@
-angular.module('comparetravel', ['angular.filter'])
+angular.module('stay', ['angular.filter'])
     .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');
         // $locationProvider.html5Mode(true);
     }])
 
-    // .controller('hotelCart', ["$scope", "$window", "$cookieStore", "$http", function ($scope, $window, $cookieStore, $http, ) {
-    //     $scope.SetCookies = function ($cookieStore) {
-    //         $cookieStore.put("username", $scope.username);
-    //     };
-    //     $scope.GetCookies = function ($cookieStore) {
-    //         $window.alert($cookieStore.get('username'));
-    //     };
-    //     $scope.ClearCookies = function ($cookieStore) {
-    //         $cookieStore.remove('username');
-    //     };
-    // }])
 
     .controller('bookingController', ["$scope", "$http", function ($scope, $http) {
 
@@ -34,9 +23,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
-        var api_url = 'http://127.0.0.1:8000';
 
-        $scope.hotelid = {};// hotel object on the basis of id
         $scope.hotel = {};
         $scope.myVar = false;
         $scope.resp = false;
