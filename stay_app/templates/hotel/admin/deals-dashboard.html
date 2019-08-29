@@ -39,6 +39,8 @@
 
 
     <link rel="shortcut icon" href="" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
     <script>
 
@@ -141,8 +143,7 @@
     <link rel="stylesheet" href="/files/responsive.css">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
 </head>
 
 <body ng-controller="adminHotelDealController">
@@ -160,6 +161,7 @@
                             <font color="black"><a class="button white btn-small uppercase"
                                     style="height: 30px; font-size: 1em; color:black">Log Out
                                     &ensp;</a></font>
+                        </li>
 
                     </ul>
                 </div>
@@ -225,10 +227,10 @@
                     <ul class="tabs">
                         <li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Update
                                 Property</a></li>
-                        <li class=""><a data-toggle="tab" href="#b2b"><i class="fa fa-list"></i>Direct</a></li>
-                        <li class=""><a data-toggle="tab" href="#b2c"><i class="fa fa-list"></i>Suppliers</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2b" ng-click="listPartnerType(partnerType.DIRECT)"><i class="fa fa-list"></i>Direct</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2c" ng-click="listPartnerType(partnerType.SUPPLIER)"><i class="fa fa-list"></i>Suppliers</a></li>
 
-                        <li class=""><a data-toggle="tab" href="#booking"><i
+                        <li class=""><a data-toggle="tab" href="#booking" ng-click="listPartnerType(partnerType.PARTNER)"><i
                                     class="soap-icon-conference circle"></i>Partners</a></li>
                     </ul>
                     <div class="tab-content">
@@ -251,7 +253,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="city">
                                             <label>City Name</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="city"
                                                 ng-model="hotel.city" type="text" required>
                                         </div>
                                     </div>
@@ -270,12 +272,12 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5" for="name">
                                             <label>Description</label>
-                                            <textarea rows="4" type="text" class="input-text full-width" id="name"
+                                            <textarea rows="4" type="text" class="input-text full-width" id="description"
                                                 ng-model="hotel.desc" type="textarea" required></textarea>
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="city">
                                             <label>Category</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="category"
                                                 ng-model="hotel.category" type="number">
                                         </div>
                                     </div>
@@ -295,7 +297,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="image_url"
                                                 ng-model="images.image_url" type="text">
                                         </div>
                                         <div class="col-sm-6 col-md-5">
@@ -306,19 +308,19 @@
 
                                     </div>
 
-                                </div><br/>
+                                </div><br />
                                 <div class="group-details">
                                     <h2>Maps Details</h2>
                                     <hr>
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
                                             <label>Latitude</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="latitude"
                                                 ng-model="hotel.longitude" step="any" type="number" required>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label>Longitude</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="longitude"
                                                 ng-model="hotel.latitude" type="number" step="any" required>
                                         </div>
 
@@ -373,7 +375,7 @@
 
                                     </div>
                                 </div>
-                                <br/>
+                                <br />
                                 <div class="booking-type">
                                     <h2>Amenities & Facility</h2>
                                     <hr>
@@ -691,10 +693,10 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <br/>
-                            <br/>
-                            <br/>
-                            <hr/>
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
 
                             <div class="container shortcode">
                                 <form class="booking-form">
@@ -704,12 +706,12 @@
 
 
                                             <h2>[[hotelDetails.name]]</h2>
-                                            <hr/>
+                                            <hr />
 
 
                                         </center>
                                     </div>
-                                    <br/>
+                                    <br />
                                     <div class="group-details">
                                         <center>
                                             <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
@@ -760,7 +762,7 @@
                                     </div>
 
 
-                                    <hr/>
+                                    <hr />
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -790,10 +792,10 @@
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT SUPPLIER</label>
                                 <div class="selector">
-                                    <select class="full-width">
-                                        <option>Date</option>
-                                        <option>Female</option>
-                                        <option>Unspecified</option>
+                                    <select class="full-width" ng-model="selectedPartner" ng-change="loadDealByPartnerID(selectedPartner)">
+                                        <option value="[[supplier.id]]"
+                                        ng-repeat="supplier in partners[partnerType.SUPPLIER]" >[[supplier.name]] ([[supplier.status]])</option>
+                                        
                                     </select><span class="custom-select full-width"></span>
                                 </div>
                             </div>
@@ -805,7 +807,7 @@
                                     SUPPLIER</button>
                             </div>
 
-                            <br/><br/><br/>
+                            <br /><br /><br />
                             <hr>
 
                             <div class="container shortcode">
@@ -815,12 +817,12 @@
                                         <center>
 
 
-                                            <h2>The Leela Ambience Convention Hotel</h2>
+                                            <h2>[[hotelDetails.name]]</h2>
                                             <hr>
 
 
 
-                                    </div><br/>
+                                    </div><br />
                                     <div class="group-details">
                                         <center>
                                             <div class="form-group row">
@@ -830,7 +832,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -841,17 +843,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -863,7 +865,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -874,17 +876,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -896,7 +898,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -907,17 +909,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -929,7 +931,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -940,17 +942,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -962,7 +964,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -973,17 +975,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -995,7 +997,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1006,17 +1008,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1028,7 +1030,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1039,17 +1041,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1061,7 +1063,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1072,17 +1074,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1094,7 +1096,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1105,17 +1107,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1127,7 +1129,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1138,17 +1140,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1160,7 +1162,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1171,17 +1173,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1193,7 +1195,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1204,17 +1206,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1226,7 +1228,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1237,17 +1239,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1259,7 +1261,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1270,17 +1272,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1292,7 +1294,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1303,17 +1305,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1325,7 +1327,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1336,17 +1338,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1356,7 +1358,7 @@
                                     </div>
 
 
-                                    <hr>
+                                    <hr/>
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -1367,21 +1369,8 @@
 
                                     </div>
                                 </form>
-
                             </div>
-
                         </div>
-
-
-
-
-
-
-
-
-
-
-
 
                         <div id="booking" class="tab-pane fade">
 
@@ -1399,17 +1388,17 @@
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT PARTNER</label>
                                 <div class="selector">
-                                    <select class="full-width">
-                                        <option>Date</option>
-                                        <option>Female</option>
-                                        <option>Unspecified</option>
+                                    <select class="full-width" ng-model="selectedPartner" ng-change="loadDealByPartnerID(selectedPartner)">
+                                        <option value="[[partner.id]]"
+                                        ng-repeat="partner in partners[partnerType.PARTNER]" >[[partner.name]] ([[partner.status]])</option>
+                                        
                                     </select><span class="custom-select full-width"></span>
                                 </div>
                             </div>
 
 
 
-                            <br/><br/><br/>
+                            <br /><br /><br />
                             <hr>
 
                             <div class="container shortcode">
@@ -1419,12 +1408,12 @@
                                         <center>
 
 
-                                            <h2>The Leela Ambience Convention Hotel</h2>
+                                            <h2>[[hotelDetails.name]]</h2>
                                             <hr>
 
 
 
-                                    </div><br/>
+                                    </div><br />
                                     <div class="group-details">
                                         <center>
                                             <div class="form-group row">
@@ -1434,7 +1423,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1445,17 +1434,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1467,7 +1456,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1478,17 +1467,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1500,7 +1489,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1511,17 +1500,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1533,7 +1522,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1544,17 +1533,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1566,7 +1555,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1577,17 +1566,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1599,7 +1588,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1610,17 +1599,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1632,7 +1621,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1643,17 +1632,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1665,7 +1654,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1676,17 +1665,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1698,7 +1687,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1709,17 +1698,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1731,7 +1720,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1742,17 +1731,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1764,7 +1753,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1775,17 +1764,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1797,7 +1786,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1808,17 +1797,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1830,7 +1819,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1841,17 +1830,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1863,7 +1852,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1874,17 +1863,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1896,7 +1885,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1907,17 +1896,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1929,7 +1918,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -1940,17 +1929,17 @@
                                                     <div>
                                                         <label>%</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>% Amt</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
                                                     <div>
                                                         <label>B2B Rate</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                            placeholder=""/>
                                                     </div>
 
 
@@ -2192,13 +2181,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br />Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br/>
+                                                        <span class="skin-color">Bali</span><br />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2226,13 +2215,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br />Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br/>
+                                                        <span class="skin-color">Bali</span><br />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2260,13 +2249,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br />Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br/>
+                                                        <span class="skin-color">Bali</span><br />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2294,13 +2283,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br />Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br/>
+                                                        <span class="skin-color">Bali</span><br />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2328,13 +2317,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br />Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br/>
+                                                        <span class="skin-color">Bali</span><br />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2362,13 +2351,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br />Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br/>
+                                                        <span class="skin-color">Bali</span><br />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2459,7 +2448,7 @@
                                                         class="soap-icon-pinterest"></i></a></li>
                                         </ul>
                                     </div>
-                                    <br/>
+                                    <br />
                                     <div class="form-group col-sm-5 col-md-4 no-float no-padding no-margin">
                                         <button type="submit" class="btn-medium full-width">SUBMIT REVIEW</button>
                                     </div>
@@ -2615,8 +2604,8 @@
                     <div class="popup-wrapper">
                         <div class="col-xs-12 col-sm-9 popup-content">
                             <div class="travelo-signup-box travelo-box" style="display: block;">
-                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br/>
-                                <br/>
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br />
+                                <br />
                                 <div class="">
                                     <form action="" Method="POST">
                                         <div class="form-group">
@@ -2651,8 +2640,8 @@
                     <div class="popup-wrapper">
                         <div class="col-xs-12 col-sm-9 popup-content">
                             <div class="travelo-signup-box travelo-box" style="display: block;">
-                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br/>
-                                <br/>
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br />
+                                <br />
                                 <div class="">
                                     <form action="" Method="POST">
                                         <div class="form-group">

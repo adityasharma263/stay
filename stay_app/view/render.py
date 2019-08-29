@@ -98,7 +98,7 @@ def admin_deal_id():
     args = request.args.to_dict()
     if(not hotel_id):
         args = {"id" : 1}
-    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel/b2b", params=args)
+    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel", params=args)
     hotel_data = hotel_data.json()["result"]
     return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
     # else:
