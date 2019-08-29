@@ -29,22 +29,28 @@
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#modify-search-panel" class="collapsed" aria-expanded="false">Modify Search</a>
                                         </h4>
-                                        <div id="modify-search-panel" class="panel-collapse" aria-expanded="false" style="height: 200px;">
+                                        <div id="modify-search-panel" class="panel-collapse" aria-expanded="true" style="height: 200px;">
                                             <div class="panel-content">
-                                                <form>
-                                                    <div class="datepicker-wrap input-text">
-                                                        <label>check in</label>
-                                                            <input type="text" class="input-text full-width" ng-model="hotel.ci" placeholder="mm/dd/yy"> 
-                                                            <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title="">                                                 
+                                                <form >
+                                                    
+                                                    <div class="search-when">
+                                                        <div class="form-group">
+                                                            <label>Check In</label>
+                                                            <div class="datepicker-wrap from-today">
+                                                                <input name="date_from" type="text" autocomplete="off" class="input-text full-width" placeholder="mm/dd/yy" ng-model="hotel.ci" id="dp1566640682637">
+                                                                <img class="ui-datepicker-trigger" src="" alt="" title="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Check Out</label>
+                                                            <div class="datepicker-wrap from-today">
+                                                                <input name="date_to" type="text" autocomplete="off" class="input-text full-width" placeholder="mm/dd/yy" ng-model="hotel.co" id="dp1566640682638">
+                                                                <img class="ui-datepicker-trigger" src="" alt="" title="">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="datepicker-wrap form-group">
-                                                        <label>check out</label>
-                                                            <input type="text" class="input-text full-width" ng-model="hotel.co"  placeholder="mm/dd/yy">
-                                                            <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
-                                                    </div>
-                                                    <!-- <span style="color:red">[[errMessage]]</span> -->
                                                     <br>
-                                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getHotels()">search again</button>
+                                                    <button class="btn-medium icon-check uppercase full-width">search again</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -83,10 +89,10 @@
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>
                                     </h4>
-                                    <div id="price-filter" class="panel-collapse collapse filters-container">
+                                    <div id="price-filter" class="panel-collapse collapse filters-container"style="height: 0px;">
                                         <div class="panel-content">
 
-                                            <div class="form-group">
+                                            <div id="price-range" class="form-group">
                                                 <div class="ng-cloak" >
                                                         <label>Max Price:</label>
                                                         <input type="range" min="[[min]]" max="[[max]]" value="[[max]]" ng-model="hotel.price_end" >
@@ -101,32 +107,22 @@
                                 </div>
                                 
                                 <div class="panel style1 arrow-right">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#rating-filter" class="collapsed">User Rating</a>
-                                    </h4>
-                                    <div id="rating-filter" class="panel-collapse collapse filters-container">
-                                        <div class="panel-content">
-                                            <div class="form-group">
-                                                <input id="rating1" type="radio" name="rating" value="9" ng-click="getHotelsData()" ng-model="hotel.rating"/>
-                                                <label class="label success">9+</label>
-                                                <br>
-                                                <input id="rating2" type="radio" name="rating" value="8" ng-click="getHotelsData()" ng-model="hotel.rating"/>
-                                                <label class="label info">8+</label>
-                                                <br>
-                                                <input id="rating3" type="radio" name="rating" value="7" ng-click="getHotelsData()" ng-model="hotel.rating"/>
-                                                <label class="label warning">7+</label>
-                                                <br>
-                                                <input id="rating4" type="radio" name="rating" value="5" ng-click="getHotelsData()" ng-model="hotel.rating"/>
-                                                <label class="label danger">5+</label>
-                                                <br>
-                                                <input id="rating5" type="radio" name="rating" value="0" ng-click="getHotelsData()" ng-model="hotel.rating"/>
-                                                <label class="label other">0+</label>
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#tour-type-filter" class="collapsed">Tour Type</a>
+                                        </h4>
+                                        <div id="tour-type-filter" data-url-notour_type="/wordpress/travelo/?post_type=tour&amp;s&amp;view=list" class="panel-collapse collapse" style="height: 0px;">
+                                            <div class="panel-content">
+                                                <ul class="check-square filters-option">
+                                                    <li class="all-types">
+                                                        <a href="">Rating<small><b>8</b></small></a></li><li data-term-id="47">
+                                                            <a href="">Rating<small><b>7</b></small></a></li><li data-term-id="48">
+                                                                <a href="">Rating<small><b>6</b></small></a></li><li data-term-id="49">
+                                                                    <a href="">Rating<small><b>5</b></small></a></li><li data-term-id="50">
+                                                                        <a href="">Rating<small>0</small></a></li>                             
+                                                                           </ul>
                                             </div>
-                                            <br>
-                                            <!-- <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelRating()">search again</button> -->
                                         </div>
                                     </div>
-                                </div>
 
                                 <div class="panel style1 arrow-right">
                                     <h4 class="panel-title">

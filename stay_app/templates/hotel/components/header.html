@@ -107,9 +107,19 @@
                                     <li><a href="">Dashboard Home</a></li>
                                     <li><a href="/logout.php">Log Out</a></li>
                             </ul>
+                        </li>
+                    </ul> -->
+                    <ul class="quick-menu pull-right">
+                        <li class="ribbon">
+                           <font color="black"> <a class="button white btn-small uppercase" style="height: 30px; font-size: 1em; color:black">Hello &ensp; {{ name }}</a></font>
+                            <ul class="menu mini uppercase left">
+                                <li><a href="">Dashboard Home</a></li>
+                                <li><a href="/logout.php">Log Out</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="/booking-cart"><img height="27" width="45" src="images/cart-icon.jpg"></a></li>
                             </li>
                             <li><a href="/booking-cart"><img height="27" width="45" src="images/cart-icon.jpg"></a></li>
-
                         </ul>
                     </div>
                 </div>
@@ -189,6 +199,8 @@
                 </div>
         </header>
         </div>
+
+        
         <section class="">
                 {% block content%} {% endblock %}
         </section>
@@ -316,7 +328,7 @@
                 google.maps.event.addDomListener(window, 'load', initialize);
             </script>
         </div>
-        <script>var api_url = {{config.cfg["API_URL"]}}</script>
+        <script>var api_url = "{{config.API_URL}}"</script>
         <script type="text/javascript" src="/app.js"></script>
     </body>
 </html>

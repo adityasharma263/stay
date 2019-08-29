@@ -30,7 +30,7 @@ class MyJSONEncoder(flask.json.JSONEncoder):
 app.json_encoder = MyJSONEncoder
 
 
-@app.route('/api/v1/hotel/<string:type>', methods=['GET', 'POST'])
+@app.route('/api/v1/hotel/b2b/<string:type>', methods=['GET', 'POST'])
 def hotel_api(type):
     if request.method == 'GET':
         args = request.args.to_dict()
@@ -159,7 +159,7 @@ def hotel_api(type):
             return jsonify({'result': {'hotel': []}, 'message': "hotel name already exist", 'error': True})
 
 
-@app.route('/api/v1/hotel', methods=['GET'])
+@app.route('/api/v1/hotel/b2b/', methods=['GET'])
 def hotel_terminal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
@@ -171,7 +171,6 @@ def hotel_terminal_api():
         hotels = q.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelTerminalSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
-
 
 
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
@@ -189,10 +188,6 @@ def hotel_id():
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Amenity.query.filter_by(hotel_id=id).delete()
         Image.query.filter_by(hotel_id=id).delete()
-        # collection = HotelCollection.query.filter_by(hotel_id=id).first()
-        # if collection:
-        #     CollectionProduct.query.filter_by(hotel_collection_id=collection.id).delete()
-        #     HotelCollection.delete_db(collection)
         rooms = Room.query.filter_by(hotel_id=id).all()
         if rooms:
             for room in rooms:
