@@ -479,6 +479,10 @@ def deal_api():
         args.pop('price_end', None)
         order_by = request.args.get('order_by', None)
         args.pop('order_by', None)
+        b2b_selected_deal = request.args.get('b2b_selected_deal', None)
+        args.pop('b2b_selected_deal', None)
+        b2c_selected_deal = request.args.get('b2c_selected_deal', None)
+        args.pop('b2c_selected_deal', None)
         hotel_id = request.args.get('hotel_id', None)
         args.pop('hotel_id', None)
         page = request.args.get('page', 1)
@@ -486,6 +490,16 @@ def deal_api():
         args.pop('page', None)
         args.pop('per_page', None)
         q_deal = db.session.query(Deal)
+        if b2b_selected_deal:
+            b2b_deal = Deal.query.filter(Deal.b2b_selected_deal).all()
+            if len(b2b_deal) == 0:
+                q = Deal.query.order_by(getattr(Deal, "base_price").asc()).first()
+                q.b2b_selected_deal = True
+        if b2c_selected_deal:
+            b2c_deal = Deal.query.filter(Deal.b2c_selected_deal).all()
+            if len(b2c_deal) == 0:
+                q = Deal.query.order_by(getattr(Deal, "base_price").asc()).first()
+                q.b2c_selected_deal = True
         if hotel_id:
             rooms_list = Room.query.filter(Room.hotel_id == hotel_id).all()
             for room_obj in rooms_list:
