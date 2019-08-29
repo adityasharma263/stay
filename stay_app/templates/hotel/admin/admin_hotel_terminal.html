@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html ng-app="comparetravel"
+<html ng-app="stay"
     class="js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
 <!--<![endif]-->
 
@@ -272,36 +272,27 @@
                     </div>
 
                     <div class="col-sm-3" ng-repeat="room in hotelsData[0].rooms">
-                        <div class="row">
+                        <div class="row" ng-init="getRoomPriceByID(room.id)">
                             <div class="col-sm-12 border-bottom border-right" style="text-align:center;">
                                 <strong>[[room.room_type]]</strong>
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
-                                data-target="#myModal" ng-click="loadRoomPartners(1, 'b2b')">Low Price B2B</div>
+                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 'b2b_selling_price')">Low Price B2B</div>
                             <div class="col-sm-3 border-right border-bottom">
-
                                 <input type="text" value="1550" class="form-control small-text"
                                     ng-keydown="changeSitePrice($event, 'b2b')" />
-
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
-                                data-target="#myModal" ng-click="loadRoomPartners(1, 'b2c')">Low Price B2c</div>
+                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 'b2c_selling_price')">Low Price B2C</div>
                             <div class="col-sm-3 border-right border-bottom">
                                 <input type="text" value="2000" class="small-text form-control "
                                     ng-keydown="changeSitePrice($event, 'b2c')" />
-
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </section>
-
-
-
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
