@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html ng-app="comparetravel"
+    class="js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<!--<![endif]-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Page Title -->
+    <title>The Travel Square</title>
+
+    <!-- Meta Tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Travel Beans" />
+    <meta name="description" content="" />
+    <meta name="distribution" content="global" />
+    <meta name="country" content="india" />
+    <meta name="copyright" content="The Travel Square" />
+    <meta name="revisit-after" content="1 hour" />
+    <meta name="designer" content="The Travel Square" />
+    <meta name="language" content="english" />
+    <meta name="robots" content="index, follow" />
+    <meta name="rating" content="general" />
+    <meta name="publisher" content="The Travel Square" />
+
+    <meta property="og:title" content="The Travel Square" />
+    <meta property="og:description"
+        content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits." />
+    <meta property="og:image" content="" />
+
+    <meta name="twitter:card"
+        content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits." />
+
+    <meta name="keywords"
+        content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits." />
+    <meta name="format-detection" content="7428558566" />
+
+
+
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            // Gets the video src from the data-src on each button
+
+            var $videoSrc;
+            $(".video-btn").click(function () {
+                $videoSrc = $(this).data("src");
+            });
+            console.log($videoSrc);
+
+            // when the modal is opened autoplay it
+            $("#myModal").on("shown.bs.modal", function (e) {
+                // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+                $("#video").attr(
+                    "src",
+                    $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0"
+                );
+            });
+
+            // stop playing the youtube video when I close the modal
+            $("#myModal").on("hide.bs.modal", function (e) {
+                // a poor man's stop video
+                $("#video").attr("src", $videoSrc);
+            });
+
+            // document ready
+        });
+
+
+    </script>
+
+    <style>
+        body {
+            margin: 2rem;
+        }
+
+        .modal-dialog {
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 0px;
+        }
+
+        .close {
+            position: absolute;
+            right: -30px;
+            top: 0;
+            z-index: 999;
+            font-size: 2rem;
+            font-weight: normal;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .vertical-align {
+            display: flex;
+            align-items: center;
+        }
+
+        .center {
+            display: table-cell;
+            vertical-align: middle;
+            float: none;
+        }
+
+        .text-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .border-right {
+            border-right: 1px solid #E0E0E0;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .equal {
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: wrap;
+        }
+
+        .mt-3 {
+            margin-top: 30px;
+        }
+
+        .hotel-name {
+            margin-top: 6px;
+            margin-bottom: 6px;
+            margin-left: 15px;
+        }
+
+        .small-text {
+            font-size: 85% !important;
+        }
+
+        .testimonial-group>.row {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .testimonial-group>.row>.col-sm-3 {
+            display: inline-block;
+            float: none;
+        }
+
+
+        
+        /* Custom Scroll */
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 2px;
+            height: 2px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .p10{
+            padding: 10px;
+        }
+    </style>
+
+
+
+    <!-- Theme Styles -->
+
+    <link rel="stylesheet" href="/files/bootstrap.min.css" />
+    <link rel="stylesheet" href="/files/font-awesome.min.css" />
+    <link href="/files/css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/files/animate.min.css" />
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
+    <script src="/js/angular-filter.js"></script>
+
+
+    <!-- Main Style -->
+    <!--<link id="main-style" rel="stylesheet" href="css/style.css"/>-->
+    <script type="text/javascript">
+        var mainStyle = "style.css";
+        if (typeof localStorage != "undefined") {
+            var colorSkin = localStorage.getItem("colorSkin");
+            if (colorSkin != null) {
+                mainStyle = "style-" + colorSkin + ".css";
+            };
+        };
+        document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '"/>');
+    </script>
+    <link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css" />
+
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="/files/updates.css" />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/files/custom.css" />
+
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/files/responsive.css" />
+
+
+
+</head>
+
+<body ng-controller="adminHotelTerminalController">
+    <div id="page-wrapper">
+        <header id="header" class="navbar-static-top">
+            <div class="topnav hidden-xs">
+                <div class="container">
+                    <ul class="quick-menu pull-right">
+                        <li class="ribbon">
+                            <font color="black"><a class="button white btn-small uppercase"
+                                    style="height: 30px; font-size: 1em; color:black">Log Out
+                                    &ensp;</a></font>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-header">
+                <div class="container">
+                    <h1 class="navbar-brand" style="height:0%">
+                        <a href="index.php" title="The Travel Square">
+                            <img src="/images/the-travel-square-india-logo.png" alt="The Travel Square" />
+                        </a>
+                    </h1>
+                </div>
+            </div>
+            <div class="page-title-container">
+                <div class="container">
+                    <div class="page-title pull-left">
+                        <h2 class="entry-title">Administrator | Hotel Terminal</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section>
+
+
+            <div class="testimonial-group" ng-repeat="(hotelName, hotelsData) in hotelDetails | groupBy: 'name'">
+                <div class="row">
+
+                    <div class="col-sm-3 border-right border-bottom">
+                        <h3 class="hotel-name">
+                            [[hotelName]]
+                        </h3>
+
+                    </div>
+
+                    <div class="col-sm-3" ng-repeat="room in hotelsData[0].rooms">
+                        <div class="row">
+                            <div class="col-sm-12 border-bottom border-right" style="text-align:center;">
+                                <strong>[[room.room_type]]</strong>
+                            </div>
+                            <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
+                                data-target="#myModal" ng-click="loadRoomPartners(1, 'b2b')">Low Price B2B</div>
+                            <div class="col-sm-3 border-right border-bottom">
+
+                                <input type="text" value="1550" class="form-control small-text"
+                                    ng-keydown="changeSitePrice($event, 'b2b')" />
+
+                            </div>
+                            <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
+                                data-target="#myModal" ng-click="loadRoomPartners(1, 'b2c')">Low Price B2c</div>
+                            <div class="col-sm-3 border-right border-bottom">
+                                <input type="text" value="2000" class="small-text form-control "
+                                    ng-keydown="changeSitePrice($event, 'b2c')" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="confirmModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/controllers/adminHotelTerminalController.js"></script>
+
+
+</body>
+
+</html>

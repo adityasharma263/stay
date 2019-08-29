@@ -129,6 +129,7 @@
         document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '">');
     </script>
     <link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css">
+    <!-- <link id="main-style" rel="stylesheet" href="/calendar_css/style-light-yellow.css"> -->
 
     <!-- Updated Styles -->
     <link rel="stylesheet" href="/files/updates.css">
@@ -158,7 +159,7 @@
 
                             <font color="black"><a class="button white btn-small uppercase"
                                     style="height: 30px; font-size: 1em; color:black">Log Out
-                                    &ensp;<?php echo $name;?></a></font>
+                                    &ensp;</a></font>
 
                     </ul>
                 </div>
@@ -305,7 +306,7 @@
 
                                     </div>
 
-                                </div><br>
+                                </div><br/>
                                 <div class="group-details">
                                     <h2>Maps Details</h2>
                                     <hr>
@@ -372,7 +373,7 @@
 
                                     </div>
                                 </div>
-                                <br>
+                                <br/>
                                 <div class="booking-type">
                                     <h2>Amenities & Facility</h2>
                                     <hr>
@@ -583,10 +584,117 @@
                                     </select><span class="custom-select full-width"></span>
                                 </div>
                             </div>
-                            <br />
-                            <br />
-                            <br />
-                            <hr />
+                            <!-- <div id="hotel-main-content">
+                                <div id="calendar-tab" class="tab-pane fade active in">
+                                    <label>SELECT MONTH</label>
+                                    <div class="col-sm-6 col-md-4 no-float no-padding">
+                                        <div class="selector">
+                                            <select class="full-width" id="select-month">
+                                                <option value="2014-6">June 2014</option>
+                                                <option value="2014-7">July 2014</option>
+                                                <option value="2014-8">August 2014</option>
+                                                <option value="2014-9">September 2014</option>
+                                                <option value="2014-10">October 2014</option>
+                                                <option value="2014-11">November 2014</option>
+                                                <option value="2014-12">December 2014</option>
+                                            </select><span class="custom-select full-width">June 2014</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <div class="calendar">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <td>sunday</td>
+                                                            <td>monday</td>
+                                                            <td>tuesday</td>
+                                                            <td>wednesday</td>
+                                                            <td>thursday</td>
+                                                            <td>friday</td>
+                                                            <td>saturday</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="prev-month"></td>
+                                                            <td class="prev-month"></td>
+                                                            <td class="prev-month"></td>
+                                                            <td class="prev-month"></td>
+                                                            <td class=" date-passed"><span>1</span></td>
+                                                            <td class=" date-passed"><span>2</span></td>
+                                                            <td class=" date-passed"><span>3</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class=" date-passed"><span>4</span></td>
+                                                            <td class=" date-passed"><span>5</span></td>
+                                                            <td class=" date-passed"><span>6</span></td>
+                                                            <td class=" date-passed"><span>7</span></td>
+                                                            <td class=" date-passed"><span>8</span></td>
+                                                            <td class=" date-passed"><span>9</span></td>
+                                                            <td class=" date-passed"><span>10</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class=" date-passed"><span>11</span></td>
+                                                            <td class=" date-passed"><span>12</span></td>
+                                                            <td class=" date-passed"><span>13</span></td>
+                                                            <td class=" date-passed"><span>14</span></td>
+                                                            <td class=" date-passed"><span>15</span></td>
+                                                            <td class=" date-passed"><span>16</span></td>
+                                                            <td class=" date-passed"><span>17</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class=" date-passed"><span>18</span></td>
+                                                            <td class=" date-passed"><span>19</span></td>
+                                                            <td class=" date-passed"><span>20</span></td>
+                                                            <td class=" date-passed"><span>21</span></td>
+                                                            <td class=" date-passed"><span>22</span></td>
+                                                            <td class=" date-passed"><span>23</span></td>
+                                                            <td class=" date-passed"><span>24</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class=" date-passed"><span>25</span></td>
+                                                            <td class=" date-passed"><span>26</span></td>
+                                                            <td class=" date-passed"><span>27</span></td>
+                                                            <td class=" today unavailable"><span>28</span></td>
+                                                            <td class=" unavailable"><span>29</span></td>
+                                                            <td class=" unavailable"><span>30</span></td>
+                                                            <td class=" unavailable"><span>31</span></td>
+                                                        </tr>
+                                                        <tr></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="calendar-legend">
+                                                <label class="available">available</label>
+                                                <label class="unavailable">unavailable</label>
+                                                <label class="past">past</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <p class="description">
+                                                The calendar is updated every five minutes and is only an approximation
+                                                of
+                                                availability.
+                                                <br/><br/>
+                                                Some hosts set custom pricing for certain days on their calendar, like
+                                                weekends or holidays. The rates listed are per day and do not include
+                                                any
+                                                cleaning fee or rates for extra people the host may have for this
+                                                listing.
+                                                Please refer to the listing's Description tab for more details.
+                                                <br/><br/>
+                                                We suggest that you contact the host to confirm availability and rates
+                                                before submitting a reservation request.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <br/>
+                            <br/>
+                            <br/>
+                            <hr/>
 
                             <div class="container shortcode">
                                 <form class="booking-form">
@@ -596,12 +704,12 @@
 
 
                                             <h2>[[hotelDetails.name]]</h2>
-                                            <hr />
+                                            <hr/>
 
 
                                         </center>
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="group-details">
                                         <center>
                                             <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
@@ -619,8 +727,7 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="text" class="input-text full-width" value=""
-                                                            ng-model="room  "
-                                                            placeholder="" />
+                                                            ng-model="akshay" placeholder="" />
                                                     </div>
 
                                                 </div>
@@ -653,7 +760,7 @@
                                     </div>
 
 
-                                    <hr />
+                                    <hr/>
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -698,7 +805,7 @@
                                     SUPPLIER</button>
                             </div>
 
-                            <br><br><br>
+                            <br/><br/><br/>
                             <hr>
 
                             <div class="container shortcode">
@@ -713,7 +820,7 @@
 
 
 
-                                    </div><br>
+                                    </div><br/>
                                     <div class="group-details">
                                         <center>
                                             <div class="form-group row">
@@ -1302,7 +1409,7 @@
 
 
 
-                            <br><br><br>
+                            <br/><br/><br/>
                             <hr>
 
                             <div class="container shortcode">
@@ -1317,7 +1424,7 @@
 
 
 
-                                    </div><br>
+                                    </div><br/>
                                     <div class="group-details">
                                         <center>
                                             <div class="form-group row">
@@ -2085,13 +2192,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br>
+                                                        <span class="skin-color">Bali</span><br/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2119,13 +2226,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br>
+                                                        <span class="skin-color">Bali</span><br/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2153,13 +2260,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br>
+                                                        <span class="skin-color">Bali</span><br/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2187,13 +2294,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br>
+                                                        <span class="skin-color">Bali</span><br/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2221,13 +2328,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br>
+                                                        <span class="skin-color">Bali</span><br/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2255,13 +2362,13 @@
                                                 <div class="date col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
                                                     </div>
                                                 </div>
                                                 <div class="departure col-xs-6">
 
                                                     <div>
-                                                        <span class="skin-color">Bali</span><br>
+                                                        <span class="skin-color">Bali</span><br/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2352,7 +2459,7 @@
                                                         class="soap-icon-pinterest"></i></a></li>
                                         </ul>
                                     </div>
-                                    <br>
+                                    <br/>
                                     <div class="form-group col-sm-5 col-md-4 no-float no-padding no-margin">
                                         <button type="submit" class="btn-medium full-width">SUBMIT REVIEW</button>
                                     </div>
@@ -2508,8 +2615,8 @@
                     <div class="popup-wrapper">
                         <div class="col-xs-12 col-sm-9 popup-content">
                             <div class="travelo-signup-box travelo-box" style="display: block;">
-                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br>
-                                <br>
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br/>
+                                <br/>
                                 <div class="">
                                     <form action="" Method="POST">
                                         <div class="form-group">
@@ -2544,8 +2651,8 @@
                     <div class="popup-wrapper">
                         <div class="col-xs-12 col-sm-9 popup-content">
                             <div class="travelo-signup-box travelo-box" style="display: block;">
-                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br>
-                                <br>
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br/>
+                                <br/>
                                 <div class="">
                                     <form action="" Method="POST">
                                         <div class="form-group">
