@@ -30,7 +30,7 @@ class MyJSONEncoder(flask.json.JSONEncoder):
 app.json_encoder = MyJSONEncoder
 
 
-@app.route('/api/v1/hotel/<string:type>', methods=['GET', 'POST'])
+@app.route('/api/v1/hotel/b2b/<string:type>', methods=['GET', 'POST'])
 def hotel_api(type):
     if request.method == 'GET':
         args = request.args.to_dict()
@@ -159,7 +159,7 @@ def hotel_api(type):
             return jsonify({'result': {'hotel': []}, 'message': "hotel name already exist", 'error': True})
 
 
-@app.route('/api/v1/hotel', methods=['GET'])
+@app.route('/api/v1/hotel/b2b/', methods=['GET'])
 def hotel_terminal_api():
     if request.method == 'GET':
         args = request.args.to_dict()

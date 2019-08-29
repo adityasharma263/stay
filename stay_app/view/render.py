@@ -149,9 +149,11 @@ def join():
 @app.route('/group')
 def group():
     return render_template('hotel/b2b_hotels/join-chat-forum.html')
+
 @app.route('/onetimeverification')
 def verification():
     return render_template('hotel/b2b_hotels/otp-chat-forum.html')
+
 
 #================= Booking hotels ==========================
 
@@ -193,7 +195,7 @@ def business_hotel():
 def business_hotel_list():
     partner_data = "adnan"
     args = request.args.to_dict()
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/b2b"
     print(hotel_api_url, args)
     hotel_data = requests.get(url=hotel_api_url, params=args)
     print(hotel_data, hotel_data.status_code)
@@ -202,26 +204,25 @@ def business_hotel_list():
         hotel_data = hotel_data["result"]["hotel"]
     else:
         hotel_data = []
+
     return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
 
 
 @app.route('/hotel/<string:slug>', methods=['GET'])
 @login_required
-def business_hotel_detail(slug):
-    # if 'partner_data' in session:
-    #     partner_data = "name"
-    #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    #     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
-    #     print("data= ",hotel_data)
-    #     if len(hotel_data["result"]["hotel"]) > 0:
-    #         hotel_data = hotel_data["result"]["hotel"][0]
-    #         print("data= ", hotel_data)
-        # else:
-        #     hotel_data = {}
-        # # print("in the last1 = ", hotel_data)
-        # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
+def business_hotel_detail(hotel_id):
+
+    if 'partner_data' in session:
+        partner_data = "name"
+        hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/b2b"
+        hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+        if len(hotel_data["result"]["hotel"]) > 0:
+            hotel_data = hotel_data["result"]["hotel"][0]
+        else:
+            hotel_data = {}
+        render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
     # else:
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/b2b"
     hotel_data = requests.get(url=hotel_api_url, params={"slug": slug}).json()
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"][0]
