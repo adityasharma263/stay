@@ -55,6 +55,7 @@ app.controller("adminHotelDealController", function ($scope, $http) {
             })
             .catch(function (err) {
                 console.log(err);
+                console.log("make sure all the ");
             });
     };
 
