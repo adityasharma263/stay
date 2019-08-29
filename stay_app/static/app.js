@@ -1,5 +1,4 @@
-
-angular.module('stay', ['angular.filter'])
+var app = angular.module('stay', ['angular.filter'])
     .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');

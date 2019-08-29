@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+
+<html ng-app="stay" class="js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Page Title -->
+    <title>The Travel Square</title>
+    
+    <!-- Meta Tags -->
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Travel Beans">
+    <meta name="description" content="">
+    <meta name="distribution" content="global">
+    <meta name="country" content="india">
+    <meta name="copyright" content="The Travel Square">
+    <meta name="revisit-after" content="1 hour">
+    <meta name="designer" content="The Travel Square">
+    <meta name="language" content="english">
+    <meta name="robots" content="index, follow">
+    <meta name="rating" content="general">
+    <meta name="publisher" content="The Travel Square">
+
+    <meta property="og:title" content="The Travel Square">
+    <meta property="og:description" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta property="og:image" content="">
+  
+    <meta name="twitter:card" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+  
+    <meta name="keywords" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta name="format-detection" content="7428558566">
+    
+	
+	
+	<link rel="shortcut icon" href="" type="image/x-icon">
+    
+	<script>
+
+$(document).ready(function() {
+  // Gets the video src from the data-src on each button
+
+  var $videoSrc;
+  $(".video-btn").click(function() {
+    $videoSrc = $(this).data("src");
+  });
+  console.log($videoSrc);
+
+  // when the modal is opened autoplay it
+  $("#myModal").on("shown.bs.modal", function(e) {
+    // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+    $("#video").attr(
+      "src",
+      $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0"
+    );
+  });
+
+  // stop playing the youtube video when I close the modal
+  $("#myModal").on("hide.bs.modal", function(e) {
+    // a poor man's stop video
+    $("#video").attr("src", $videoSrc);
+  });
+
+  // document ready
+});
+
+
+</script>
+	
+	<style>
+body {
+  margin: 2rem;
+}
+
+.modal-dialog {
+  max-width: 1000px;
+  margin: 30px auto;
+}
+
+.modal-body {
+  position: relative;
+  padding: 0px;
+}
+.close {
+  position: absolute;
+  right: -30px;
+  top: 0;
+  z-index: 999;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #fff;
+  opacity: 1;
+}
+.dropdown-input + ul.dropdown-menu{
+
+    width: 95%;
+}
+</style>
+
+
+	
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="/files/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/files/font-awesome.min.css"/>
+    <link href="/files/css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/files/animate.min.css"/>
+    
+	
+    <!-- Main Style -->
+    <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
+    <script type="text/javascript">
+        var mainStyle = "style.css";
+        if (typeof localStorage != "undefined") {
+            var colorSkin = localStorage.getItem("colorSkin");
+            if (colorSkin != null) {
+                mainStyle = "style-" + colorSkin + ".css";
+            }
+        }
+        document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '">');
+    </script>
+    <link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css"/>
+    
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="/files/updates.css"/>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/files/custom.css"/>
+    
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/files/responsive.css"/>
+	
+	
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script type="text/javascript" src="/js/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
+  <script src="/js/angular-filter.js"></script>
+</head>
+
+<body ng-controller="adminHomeController">
+    <div id="page-wrapper">
+       
+	           <header id="header" class="navbar-static-top">
+            <div class="topnav hidden-xs">
+                <div class="container">
+				
+				
+                    
+                    <ul class="quick-menu pull-right">
+                        <li class="ribbon">
+						
+                        <font color="black"><a class="button white btn-small uppercase" style="height: 30px; font-size: 1em; color:black">Log Out &ensp;<?php echo $name;?></a></font>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="main-header">
+                
+
+                <div class="container">
+                   <h1 class="navbar-brand" style="height:0%">
+                        <a href="index.php" title="The Travel Square">
+                            <img src="/images/the-travel-square-india-logo.png" alt="The Travel Square">
+                        </a>
+                    </h1>
+                </div>
+            </div>
+			
+					<div class="page-title-container">
+            <div class="container">
+                <div class="page-title pull-left">
+                    <h2 class="entry-title">Administrator | Data Management</h2>
+                </div>
+            </div>
+        </div>
+			
+        </header>
+		
+		<section id="content" >
+		
+                <div id="main">
+                    <div class="tab-container full-width-style arrow-left dashboard">
+                        <ul class="tabs">
+						<li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Dashboard</a></li>
+                            <li class=""><a data-toggle="tab" href="#b2b"><i class="fa fa-list"></i>B2B Data</a></li>
+                            <li class=""><a data-toggle="tab" href="#b2c"><i class="fa fa-list"></i>B2C Data</a></li>
+							
+                            <li class=""><a data-toggle="tab" href="#suppliers"><i class="soap-icon-conference circle"></i>Suppliers</a></li>
+                            <li class=""><a data-toggle="tab" href="#partners"><i class="soap-icon-wishlist circle"></i>Partners</a></li>
+                            <li class=""><a data-toggle="tab" href="#customers"><i class="soap-icon-wishlist circle"></i>Customers</a></li>
+                            <li class=""><a data-toggle="tab" href="#affiliates"><i class="soap-icon-conference circle"></i>Affiliates</a></li>
+                        </ul>
+                        <div class="tab-content">
+                             <div id="datadashboard" class="tab-pane fade in active">
+							
+                                <center>
+                                
+								<img src="https://nepaleconomicforum.org/wp-content/uploads/2018/02/table2.jpg" style="width:50%"></center><br><br>
+								
+                               
+                            </div>
+
+							
+						   
+						<div id="b2b" class="tab-pane  fade in">
+                                
+								<div class="container shortcode">
+                
+								<div class="row block">
+							
+								<h3 class="box-title uppercase">Accomodations Data Management</h3><br><br>
+								<center>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="pricing-table white box">
+                            <div class="clearfix">
+								
+                            </div>
+                            <img src="/images/admin/add-property.png" height="70" width="70"><br><br>
+                            <a href="hotel-add.html" target="_blank"><button class="btn-small sky-blue1 uppercase">Add New Property</button></a>
+                        </div>
+                    </div>
+					</center>
+								
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-6 form-group">
+                                            <input  typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel" ng-change="searchHotelOnChange($event)" uib-typeahead="state.name for state in searchResult" 
+                                                type="text" class="input-text full-width dropdown-input" placeholder="Where Do You Wish To Travel ? .... ">
+
+                                        </div>
+                                        
+                                            
+                                            <div class="col-sm-2 form-group">
+                                                <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
+                                            </div>
+											<div class="col-sm-2 form-group">
+                                                <button class="button btn-medium full-width uppercase sky-blue1">Add / Update Deal</button>
+                                            </div>
+											<div class="col-sm-2 form-group">
+                                                <button class="button btn-medium full-width uppercase sky-blue1">Update Property Info</button>
+                                            </div>
+                                        
+                                    </div>
+                                </form>
+				
+								
+                </div>
+                   <div class="row block"><center>
+				   
+                    </center>
+					
+                </div>
+					<div class="row block"><center>
+                    
+                    </center>
+                </div>
+				
+            </div>
+								
+                            </div>
+						
+						
+						<div id="b2c" class="tab-pane fade in">
+                                
+								<div class="container shortcode">
+                <div class="row block">
+				
+                                <h3 class="box-title uppercase">B2C Properties & Accomodations</h3><br>
+					<center>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="pricing-table white box">
+                            <div class="clearfix">
+								
+                            </div>
+                            <img src="/images/admin/add-property.png" height="70" width="70"><br><br>
+                            <a href="hotel-add.html" target="_blank"><button class="btn-small sky-blue1 uppercase">Add New Property</button></a>
+                        </div>
+                    </div>
+					<div class="col-sm-6 col-md-3">
+                        <div class="pricing-table white box">
+                            <div class="clearfix">
+								
+                            </div>
+                            <img src="/images/admin/update-property.png" height="70" width="70"><br><br>
+                            <a href="hotel-update.html" target="_blank"><button class="btn-small uppercase">Update Propert</button></a>
+                        </div>
+                    </div>
+					<div class="col-sm-6 col-md-3">
+                        <div class="pricing-table white box">
+                            <div class="clearfix">
+								
+                            </div>
+                            <img src="/images/admin/add-property-deal.png" height="70" width="70"><br><br>
+                            <a href="hotel-deal.html" target="_blank"><button class="btn-small uppercase">Update Deal</button></a>
+                        </div>
+                    </div>
+                    </center>
+                </div>
+                   <div class="row block"><center>
+				   
+                    </center>
+					
+				
+                    
+                    
+                </div>
+				
+					<div class="row block"><center>
+                    
+                    </center>
+                </div>
+				
+            </div>
+								
+                            </div>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+                            
+							<div id="booking" class="tab-pane fade">
+                                <h2>Trips Booked Under Trav Travels Pvt. Ltd.</h2>
+                                <div class="filter-section gray-area clearfix">
+                                    <form>
+                                        <label class="radio radio-inline checked">
+                                            <input type="radio" name="filter" checked="checked">
+                                            All Bookings
+                                        </label>
+                                        <label class="radio radio-inline">
+                                            <input type="radio" name="filter">
+                                            Hotels
+                                        </label>
+                                        <label class="radio radio-inline">
+                                            <input type="radio" name="filter">
+                                            Holiday Packages
+                                        </label>
+                                        <label class="radio radio-inline">
+                                            <input type="radio" name="filter">
+                                            Flights
+                                        </label>
+                                        <label class="radio radio-inline">
+                                            <input type="radio" name="filter">
+                                            Cabs
+                                        </label>
+                                        <div class="pull-right col-md-6 action">
+                                            <h5 class="pull-left no-margin col-md-4">Sort results by:</h5>
+                                            <button class="btn-small white gray-color">PENDING</button>
+                                            <button class="btn-small white gray-color">CANCELLED</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="booking-history">
+                                    <div class="booking-info clearfix">
+                                        <div class="date">
+                                            <label class="month">OCT</label>
+                                            <label class="date">12</label>
+                                            <label class="day">FRI</label>
+                                        </div>
+                                        <h4 class="box-title"><i class="icon soap-icon-plane-right takeoff-effect yellow-color circle"></i>Park Plaza , Delhi<small>Mr. Amarjeet Singh</small></h4>
+                                        <dl class="info">
+                                            <dt>TRIP ID</dt>
+                                            <dd>5754-8dk8-8ee</dd>
+                                            <dt>booked on</dt>
+                                            <dd>saturday, nov 23, 2013</dd>
+                                        </dl>
+                                        <button class="btn-mini status">SUCCESS</button>
+                                    </div>
+                                    <div class="booking-info clearfix">
+                                        <div class="date">
+                                            <label class="month">OCT</label>
+                                            <label class="date">13</label>
+                                            <label class="day">SAT</label>
+                                        </div>
+                                        <h4 class="box-title"><i class="icon soap-icon-plane-right takeoff-effect yellow-color circle"></i>Country INN , Ghaziabad<small>Mr. Akash Tiwari</small></h4>
+                                        <dl class="info">
+                                            <dt>TRIP ID</dt>
+                                            <dd>5754-8dk8-8ee</dd>
+                                            <dt>booked on</dt>
+                                            <dd>saturday, nov 30, 2013</dd>
+                                        </dl>
+                                        <button class="btn-mini status">SUCCESS</button>
+                                    </div>
+                                    <div class="booking-info clearfix">
+                                        <div class="date">
+                                            <label class="month">NOV</label>
+                                            <label class="date">1</label>
+                                            <label class="day">MON</label>
+                                        </div>
+                                        <h4 class="box-title"><i class="icon soap-icon-hotel blue-color circle"></i>The Leela Ambience Convention Hotel , Delhi<small>Mr. Ishan Sachdev</small></h4>
+                                        <dl class="info">
+                                            <dt>TRIP ID</dt>
+                                            <dd>5754-8dk8-8ee</dd>
+                                            <dt>booked on</dt>
+                                            <dd>monday, dec 11, 2013</dd>
+                                        </dl>
+                                        <button class="btn-mini status">PENDING</button>
+                                    </div>
+                                    <div class="booking-info clearfix">
+                                        <div class="date">
+                                            <label class="month">DEC</label>
+                                            <label class="date">2</label>
+                                            <label class="day">THU</label>
+                                        </div>
+                                        <h4 class="box-title"><i class="icon soap-icon-car red-color circle"></i>Delhi-Agra , Outstation Cab<small>Mr. Anirudh Jain</small></h4>
+                                        <dl class="info">
+                                            <dt>TRIP ID</dt>
+                                            <dd>5754-8dk8-8ee</dd>
+                                            <dt>booked on</dt>
+                                            <dd>thursday, dec 18, 2013</dd>
+                                        </dl>
+                                        <button class="btn-mini status">PENDING</button>
+                                    </div>
+                                    <div class="booking-info clearfix">
+                                        <div class="date">
+                                            <label class="month">DEC</label>
+                                            <label class="date">5</label>
+                                            <label class="day">SUN</label>
+                                        </div>
+                                        <h4 class="box-title"><i class="icon soap-icon-cruise green-color circle"></i>DEL-LKO<small>Mrs. Vibha Goel</small></h4>
+                                        <dl class="info">
+                                            <dt>TRIP ID</dt>
+                                            <dd>5754-8dk8-8ee</dd>
+                                            <dt>booked on</dt>
+                                            <dd>sunday, dec 22, 2013</dd>
+                                        </dl>
+                                        <button class="btn-mini status">PENDING</button>
+                                    </div>
+                                    <div class="booking-info clearfix cancelled">
+                                        <div class="date">
+                                            <label class="month">NOV</label>
+                                            <label class="date">3</label>
+                                            <label class="day">SAT</label>
+                                        </div>
+                                        <h4 class="box-title"><i class="icon soap-icon-plane-right takeoff-effect circle"></i>Park Plaza , Delhi<small>Ms. Sushmita Kohli</small></h4>
+                                        <dl class="info">
+                                            <dt>TRIP ID</dt>
+                                            <dd>5754-8dk8-8ee</dd>
+                                            <dt>booked on</dt>
+                                            <dd>saturday, nov 30, 2013</dd>
+                                        </dl>
+                                        <button class="btn-mini status">CANCELLED</button>
+                                    </div>
+                                    <div class="booking-info clearfix cancelled">
+                                        <div class="date">
+                                            <label class="month">DEC</label>
+                                            <label class="date">11</label>
+                                            <label class="day">THU</label>
+                                        </div>
+                                        <h4 class="box-title"><i class="icon soap-icon-car circle"></i>DEL-IXM<small>Mr. Prashant Sharma</small></h4>
+                                        <dl class="info">
+                                            <dt>TRIP ID</dt>
+                                            <dd>5754-8dk8-8ee</dd>
+                                            <dt>booked on</dt>
+                                            <dd>thursday, dec 18, 2013</dd>
+                                        </dl>
+                                        <button class="btn-mini status">CANCELLED</button>
+                                    </div>
+                                </div>
+
+                            </div>
+							
+								
+
+
+
+
+ <div id="offers" class="tab-pane fade">
+                                <h2>Your Wish List</h2>
+                                <div class="row image-box listing-style2">
+                                    <div class="col-sm-6 col-md-4">
+											<article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/1.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Savona to Italy</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$170</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/17.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Hotel Hilton</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$620</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/7.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Forte Do Vale</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$120</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/18.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Roosevelt Hotel</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$170</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/2.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Miami to Florida</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$620</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/5.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Forte Do Vale</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$120</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/3.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">New York to Paris</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$170</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/8.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Hotel Hilton</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$620</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/6.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Forte Do Vale</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$120</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/16.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">Roosevelt Hotel</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$170</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure>
+                                                <a class="hover-effect" title="" href=""><img width="300" height="161" alt="" src="./index_files/4.png"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="http://www.soaptheme.net/html/travelo/dashboard1.html" title="View all">select</a>
+                                                <h4 class="box-title">England to Asia</h4>
+                                                <label class="price-wrapper">
+                                                    <span class="price-per-unit">$620</span>avg/night
+                                                </label>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+							
+							 <div id="b2bleads" class="tab-pane fade">
+                                
+								
+								<div class="row image-box style3 cruise listing-style1">
+                    <div class="col-sm-6 col-md-3">
+                        <article class="box">
+                            <div class="details">
+                                <span class="price"><small>Cost</small>₹120</span>
+                                <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
+                                <div class="feedback">
+                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="3 stars"><span style="width: 60%;" class="five-stars"></span></div>
+                                    <span class="review">2 PAX</span>
+                                </div>
+                                <div class="row time">
+                                    <div class="date col-xs-6">
+                                        
+                                        <div>
+                                            <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                        </div>
+                                    </div>
+                                    <div class="departure col-xs-6">
+                                       
+                                        <div>
+                                            <span class="skin-color">Bali</span><br>
+                                        </div>
+                                    </div>
+                                </div><center>
+                                <h5><b>BUDGET : </b>₹ 1,40,000</h5></center>
+                                <div class="action">
+                                    <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                     <div class="col-sm-6 col-md-3">
+                        <article class="box">
+                            <div class="details">
+                                <span class="price"><small>Cost</small>₹120</span>
+                                <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
+                                <div class="feedback">
+                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="3 stars"><span style="width: 60%;" class="five-stars"></span></div>
+                                    <span class="review">2 PAX</span>
+                                </div>
+                                <div class="row time">
+                                    <div class="date col-xs-6">
+                                        
+                                        <div>
+                                            <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                        </div>
+                                    </div>
+                                    <div class="departure col-xs-6">
+                                       
+                                        <div>
+                                            <span class="skin-color">Bali</span><br>
+                                        </div>
+                                    </div>
+                                </div><center>
+                                <h5><b>BUDGET : </b>₹ 1,40,000</h5></center>
+                                <div class="action">
+                                    <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                     <div class="col-sm-6 col-md-3">
+                        <article class="box">
+                            <div class="details">
+                                <span class="price"><small>Cost</small>₹120</span>
+                                <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
+                                <div class="feedback">
+                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="3 stars"><span style="width: 60%;" class="five-stars"></span></div>
+                                    <span class="review">2 PAX</span>
+                                </div>
+                                <div class="row time">
+                                    <div class="date col-xs-6">
+                                        
+                                        <div>
+                                            <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                        </div>
+                                    </div>
+                                    <div class="departure col-xs-6">
+                                       
+                                        <div>
+                                            <span class="skin-color">Bali</span><br>
+                                        </div>
+                                    </div>
+                                </div><center>
+                                <h5><b>BUDGET : </b>₹ 1,40,000</h5></center>
+                                <div class="action">
+                                    <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+					 <div class="col-sm-6 col-md-3">
+                        <article class="box">
+                            <div class="details">
+                                <span class="price"><small>Cost</small>₹120</span>
+                                <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
+                                <div class="feedback">
+                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="3 stars"><span style="width: 60%;" class="five-stars"></span></div>
+                                    <span class="review">2 PAX</span>
+                                </div>
+                                <div class="row time">
+                                    <div class="date col-xs-6">
+                                        
+                                        <div>
+                                            <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                        </div>
+                                    </div>
+                                    <div class="departure col-xs-6">
+                                       
+                                        <div>
+                                            <span class="skin-color">Bali</span><br>
+                                        </div>
+                                    </div>
+                                </div><center>
+                                <h5><b>BUDGET : </b>₹ 1,40,000</h5></center>
+                                <div class="action">
+                                    <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+					 <div class="col-sm-6 col-md-3">
+                        <article class="box">
+                            <div class="details">
+                                <span class="price"><small>Cost</small>₹120</span>
+                                <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
+                                <div class="feedback">
+                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="3 stars"><span style="width: 60%;" class="five-stars"></span></div>
+                                    <span class="review">2 PAX</span>
+                                </div>
+                                <div class="row time">
+                                    <div class="date col-xs-6">
+                                        
+                                        <div>
+                                            <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                        </div>
+                                    </div>
+                                    <div class="departure col-xs-6">
+                                       
+                                        <div>
+                                            <span class="skin-color">Bali</span><br>
+                                        </div>
+                                    </div>
+                                </div><center>
+                                <h5><b>BUDGET : </b>₹ 1,40,000</h5></center>
+                                <div class="action">
+                                    <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+					 <div class="col-sm-6 col-md-3">
+                        <article class="box">
+                            <div class="details">
+                                <span class="price"><small>Cost</small>₹120</span>
+                                <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
+                                <div class="feedback">
+                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="3 stars"><span style="width: 60%;" class="five-stars"></span></div>
+                                    <span class="review">2 PAX</span>
+                                </div>
+                                <div class="row time">
+                                    <div class="date col-xs-6">
+                                        
+                                        <div>
+                                            <span class="skin-color">Delhi</span><br>Jan 26, 2014
+                                        </div>
+                                    </div>
+                                    <div class="departure col-xs-6">
+                                       
+                                        <div>
+                                            <span class="skin-color">Bali</span><br>
+                                        </div>
+                                    </div>
+                                </div><center>
+                                <h5><b>BUDGET : </b>₹ 1,40,000</h5></center>
+                                <div class="action">
+                                    <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+					
+					
+                </div>
+								
+                            </div>
+							
+							
+                            <div id="travel-stories" class="tab-pane fade">
+                                <h2>Share Your Story</h2>
+                                <div class="col-sm-9 no-float no-padding">
+                                    <form>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Story Title</label>
+                                                <input type="text" class="input-text full-width">
+                                            </div>
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Name</label>
+                                                <input type="text" class="input-text full-width">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Select Miles</label>
+                                                <div class="selector full-width">
+                                                    <select>
+                                                        <option>4,528 Miles</option>
+                                                        <option>5,218 Miles</option>
+                                                    </select><span class="custom-select">4,528 Miles</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Email Address</label>
+                                                <input type="text" class="input-text full-width">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Select Category</label>
+                                                <div class="selector full-width">
+                                                    <select>
+                                                        <option value="">Adventure, Romance, Beach</option>
+                                                    </select><span class="custom-select">Adventure, Romance, Beach</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Type Your Story</label>
+                                            <textarea rows="6" class="input-text full-width" placeholder="please tell us about you"></textarea>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group">
+                                            <h4>Do you have photos to share? <small>(Optional)</small> </h4>
+                                            <div class="fileinput col-sm-6 no-float no-padding" style="line-height: 34px;">
+                                                <input type="file" class="input-text" data-placeholder="select image/s"><input type="text" class="custom-fileinput input-text" placeholder="select image/s">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h4>Share with friends <small>(Optional)</small></h4>
+                                            <p>Share your review with your friends on different social media networks.</p>
+                                            <ul class="social-icons icon-circle clearfix">
+                                                <li class="twitter"><a title="" href="" data-toggle="tooltip" data-original-title="Twitter"><i class="soap-icon-twitter"></i></a></li>
+                                                <li class="facebook"><a title="" href="" data-toggle="tooltip" data-original-title="Facebook"><i class="soap-icon-facebook"></i></a></li>
+                                                <li class="googleplus"><a title="" href="" data-toggle="tooltip" data-original-title="GooglePlus"><i class="soap-icon-googleplus"></i></a></li>
+                                                <li class="pinterest"><a title="" href="" data-toggle="tooltip" data-original-title="Pinterest"><i class="soap-icon-pinterest"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <br>
+                                        <div class="form-group col-sm-5 col-md-4 no-float no-padding no-margin">
+                                            <button type="submit" class="btn-medium full-width">SUBMIT REVIEW</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="settings" class="tab-pane fade">
+                                <h2>Account Settings</h2>
+                                <h5 class="skin-color">Change Your Password</h5>
+                                <form>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <label>Old Password</label>
+                                            <input type="text" class="input-text full-width">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <label>Enter New Password</label>
+                                            <input type="text" class="input-text full-width">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <label>Confirm New password</label>
+                                            <input type="text" class="input-text full-width">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn-medium">UPDATE PASSWORD</button>
+                                    </div>
+                                </form>
+                                <hr>
+                                <h5 class="skin-color">Change Your Email</h5>
+                                <form>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <label>Old email</label>
+                                            <input type="text" class="input-text full-width">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <label>Enter New Email</label>
+                                            <input type="text" class="input-text full-width">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <label>Confirm New Email</label>
+                                            <input type="text" class="input-text full-width">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn-medium">UPDATE EMAIL ADDRESS</button>
+                                    </div>
+                                </form>
+                                <hr>
+                                <h5 class="skin-color">Send Me Emails When</h5>
+                                <form>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Travelo has periodic offers and deals on really cool destinations.
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Travelo has fun company news, as well as periodic emails.
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> I have an upcoming reservation.
+                                        </label>
+                                    </div>
+                                    <button class="btn-medium uppercase">Update All Settings</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        
+         <footer id="footer" class="style5">
+
+            <div class="bottom">
+                <div class="container">
+                    
+                    <div class="pull-right">
+                        <a id="back-to-top" href="" class="animated bounce" data-animation-type="bounce" style="animation-duration: 1s; visibility: visible;"><i class="soap-icon-longarrow-up circle"></i></a>
+                    </div>
+                    <div class="copyright pull-left">
+                        <p>© 2019 Partners | The Travel Square</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="/files/jquery-1.11.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.noconflict.js.download"></script>
+    <script type="text/javascript" src="/files/modernizr.2.7.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery-migrate-1.2.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.placeholder.js.download"></script>
+    <script type="text/javascript" src="/files/jquery-ui.1.10.4.min.js.download"></script>
+	
+	    
+    <script type="text/javascript" src="js/js"></script>
+    <script type="text/javascript" src="js/gmap3.min.js.download"></script>
+    <script type="text/javascript" src="js/theme-scripts.js.download"></script>
+    
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="/files/bootstrap.js.download"></script>
+
+    <!-- Flex Slider -->
+    <script type="text/javascript" src="/files/jquery.flexslider-min.js.download"></script>
+    
+    <!-- parallax -->
+    <script type="text/javascript" src="/files/jquery.stellar.min.js.download"></script>
+    
+    <!-- waypoint -->
+    <script type="text/javascript" src="/files/waypoints.min.js.download"></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src="/files/theme-scripts.js.download"></script>
+    <script type="text/javascript" src="/files/scripts.js.download"></script>
+
+    <script type="text/javascript">
+        tjq("#slideshow .flexslider").flexslider({
+            animation: "fade",
+            controlNav: false,
+            animationLoop: true,
+            directionNav: false,
+            slideshow: true,
+            slideshowSpeed: 3000
+        });
+    </script>
+
+
+
+<div class="modal fade" id="customerlogin">
+    <div class="modal-dialog modal-lg modal-sm">
+      <div class="modal-content">
+        <div class="container">
+		
+						<div class="popup-wrapper">
+						<div class="col-xs-12 col-sm-9 popup-content">
+						<div class="travelo-signup-box travelo-box" style="display: block;">
+				<center><img src="/images/the-travel-square-logo-200x200.png"></center><br>
+				<br>
+            <div class="">
+                    <form action="" Method="POST">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="input-text full-width" name="mobile" placeholder="Mobile" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" autocomplete="off" class="input-text full-width" name="pass" placeholder="Password" required>
+                        </div>
+                        <button type="submit" name="vlogin" class="full-width sky-blue1 btn-medium">LOGIN</button>
+                    </form>
+                </div>
+                <div class="seperator"></div>
+                <p>Don't Have an Account ? <a href="" class="goto-login" data-toggle="modal" data-target="#customersignup" >Sign Up Here</a></p>
+            </div></div></div></div>
+        
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="customersignup">
+    <div class="modal-dialog modal-lg modal-sm">
+      <div class="modal-content">
+        <div class="container">
+		
+						<div class="popup-wrapper">
+						<div class="col-xs-12 col-sm-9 popup-content">
+						<div class="travelo-signup-box travelo-box" style="display: block;">
+				<center><img src="/images/the-travel-square-logo-200x200.png"></center><br>
+				<br>
+            <div class="">
+                    <form action="" Method="POST">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="input-text full-width" name="mobile" placeholder="Mobile" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" autocomplete="off" class="input-text full-width" name="pass" placeholder="Password" required>
+                        </div>
+                        <button type="submit" name="vlogin" class="full-width sky-blue1 btn-medium">LOGIN</button>
+                    </form>
+                </div>
+                <div class="seperator"></div>
+                <p>Don't Have an Account ? <a href="signup.php" class="goto-login">Sign Up Here</a></p>
+            </div></div></div></div>
+        
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="offer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          <!-- 16:9 aspect ratio -->
+            <a href="car-campaign-offer.html"><img src="/images/the-travel-square-campaign-offer.jfif" width="950" height="400"></a>
+
+    </div>
+  </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/app.js"></script>
+  <script type="text/javascript" src="/controllers/adminHomeController.js"></script>
+  
+
+
+</body></html>

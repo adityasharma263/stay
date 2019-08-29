@@ -66,12 +66,49 @@ def admin():
     # return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
     return render_template('hotel/admin/admin_hotel.html')
     # else:
-    #     return redirect(str(app.config["ADMIN_BUSINESS_DOMAIN_URL"]), code=302)
+    #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+
+@app.route('/admin/home', methods=["GET"])
+def admin_home():
+    return render_template("hotel/admin/dashboard.html")
+
+@app.route('/admin/update', methods=['GET'])
+def admin_hotel_update():
+    return render_template('hotel/admin/hotel_update.html')
 
 
 @app.route('/admin/deals', methods=['GET'])
 def admin_hotel_deals():
     return render_template('hotel/admin/deals.html')
+
+
+@app.route('/admin/hotel/search', methods=["POST"])
+def admin_hotel_search():
+    HOTEL_SEARCH_API_ROUTE = str(app.config["API_URL"]) + "/api/v1/hotel/search"
+    search = request.json
+    search_data = requests.post(HOTEL_SEARCH_API_ROUTE, json=search)
+    return jsonify(search_data.json())
+
+
+@app.route("/admin/hotel/deal", methods=["GET"])
+def admin_deal_id():
+
+    hotel_id = request.args.get('id')
+
+    args = request.args.to_dict()
+    if(not hotel_id):
+        args = {"id" : 1}
+    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel/b2b", params=args)
+    hotel_data = hotel_data.json()["result"]
+    return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
+    # else:
+    #     return render_template("hotel/admin/deals-dashboard.html")
+
+
+@app.route("/admin/hotel/terminal", methods=["GET"])
+def admin_terminal():
+
+    return render_template("hotel/admin/admin_hotel_terminal.html")
 
 
 #================= Index Pages ==========================
@@ -115,10 +152,6 @@ def group():
 @app.route('/onetimeverification')
 def verification():
     return render_template('hotel/b2b_hotels/otp-chat-forum.html')
-
-
-
-
 
 #================= Booking hotels ==========================
 
