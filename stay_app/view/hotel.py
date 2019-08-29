@@ -173,7 +173,6 @@ def hotel_terminal_api():
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
 
 
-
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
 def hotel_id():
     if request.method == 'PUT':
@@ -189,10 +188,6 @@ def hotel_id():
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Amenity.query.filter_by(hotel_id=id).delete()
         Image.query.filter_by(hotel_id=id).delete()
-        # collection = HotelCollection.query.filter_by(hotel_id=id).first()
-        # if collection:
-        #     CollectionProduct.query.filter_by(hotel_collection_id=collection.id).delete()
-        #     HotelCollection.delete_db(collection)
         rooms = Room.query.filter_by(hotel_id=id).all()
         if rooms:
             for room in rooms:
