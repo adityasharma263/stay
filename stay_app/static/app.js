@@ -1,21 +1,10 @@
-var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
+var app = angular.module('stay', ['angular.filter', 'ui.bootstrap'])
     .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');
         // $locationProvider.html5Mode(true);
     }])
 
-    // .controller('hotelCart', ["$scope", "$window", "$cookieStore", "$http", function ($scope, $window, $cookieStore, $http, ) {
-    //     $scope.SetCookies = function ($cookieStore) {
-    //         $cookieStore.put("username", $scope.username);
-    //     };
-    //     $scope.GetCookies = function ($cookieStore) {
-    //         $window.alert($cookieStore.get('username'));
-    //     };
-    //     $scope.ClearCookies = function ($cookieStore) {
-    //         $cookieStore.remove('username');
-    //     };
-    // }])
 
     .controller('bookingController', ["$scope", "$http", function ($scope, $http) {
 
@@ -26,7 +15,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         $scope.emailAddress = {};
 
         $scope.submitBooking = function () {
-            console.log("Booking");
             window.open('/hotel/booking/payment', '_self');
 
         }
@@ -35,9 +23,7 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
-        var api_url = 'http://127.0.0.1:8000';
 
-        $scope.hotelid = {};// hotel object on the basis of id
         $scope.hotel = {};
         $scope.myVar = false;
         $scope.resp = false;
@@ -53,7 +39,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         // $location.search=
 
         $scope.showDetail = function (roomid) {
-            console.log(roomid);
             window.open('/hotel/' + roomid);
 
         }
@@ -62,14 +47,11 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         $scope.result = function (data, status) {
             $scope.hotel.search = data;
             searchKey = status;
-            console.log("$scope.hotel.search", $scope.hotel.search);
-            console.log("$status", status);
             $scope.getHotel();
 
         }
 
         $scope.show = function () {
-            console.log("........");
             if ($scope.myVar == false) {
                 $scope.myVar = true;
             }
@@ -133,33 +115,26 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
         $scope.getHotel = function () {
             // console.log("$location.path",$location.path);
-            console.log("status", searchKey);
             $scope.location = document.location.href;
-            console.log("$scope.location", $scope.location);
             $scope.hotel.ci = Date.parse($scope.hotel.ci) / 1000;
             $scope.hotel.co = Date.parse($scope.hotel.co) / 1000;
-            console.log($scope.hotel.ci, $scope.hotel.co);
             if (searchKey == 0) {
                 $scope.message = 'enter valid location ';
             }
 
             window.open($scope.location + "/list?" + searchKey + "=" + $scope.hotel.search + '&' + 'ci' + '=' + $scope.hotel.ci + '&' + 'co' + '=' + $scope.hotel.co, '_self');
-            console.log("$scope.hotel.city", $scope.hotel.city)
         }
 
         $scope.search = function () {
             $scope.hotel.search = $scope.hotel.search.toLowerCase();
-            console.log("$scope.hotel", $scope.hotel);
             $http({
                 method: 'POST',
                 url: api_url + '/api/v1/hotel/search',
                 data: $scope.hotel
 
             }).then(function successCallback(response) {
-                console.log("response", response.data.result);
                 $scope.cities = response.data.result.cities;
                 $scope.names = response.data.result.names;
-                console.log("ye h", $scope.cities, response.data.result.names);
                 // if($scope.cities.length==0 && $scope.names.length==0){
                 //      $scope.resp = true;
                 //     $scope.error = function(){
@@ -198,9 +173,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             for (var j = 0; j < $scope.hotels.length; j++) {
                 $scope.hotelid[$scope.hotels[j].id] = $scope.hotels[j];
             }
-
-            console.log("$scope.hotelid", $scope.hotelid);
-            console.log("$scope.hotels=====", $scope.hotels);
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {
@@ -240,14 +212,13 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         var api_url = 'http://127.0.0.1:8000';
 
 
-        $scope.showBusinessDetail = function (hotel_id) {
-            window.open('/hotel/' + hotel_id, '_self');
+         $scope.getNumber = function(num) {
+         return new Array(num);
 
         }
 
         $scope.bookingPage = function (room_id) {
             window.open('/business/hotel/booking/' + room_id, '_self');
-            console.log(hotel_id);
 
         }
 
@@ -291,15 +262,12 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         //for image pop up
         $scope.openGallery = function (data) {
             $scope.imagesData = data;
-            console.log("$scope.images", $scope.imagesData);
         }
 
         //for map pop up
 
         $scope.openMap = function (data) {
             $scope.mapData = data;
-            console.log("$scope.mapData", $scope.mapData);
-            console.log("$scope.mapData.latitude", $scope.mapData.latitude);
             $scope.myMap();
         }
         $scope.myMap = function () {
@@ -308,9 +276,7 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
                 zoom: 10,
                 mapTypeId: google.maps.MapTypeId.HYBRID
             }
-            console.log("mapOptions", mapOptions);
             var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-            console.log("map", map);
         }
 
         //slide images
@@ -389,7 +355,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         var i = 1;
         // var j=1;
         if (window.screen.availWidth >= 440) {
-            console.log(window.screen.availWidth);
             $(".flex-next").click(function () {
                 if ($scope.imagesData.images.length > 10) {
                     var totalSlides = ($scope.imagesData.images.length) / 10;
@@ -488,7 +453,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         if (window.screen.availWidth <= 440) {
 
             $(".flex-next").click(function () {
-                console.log(window.screen.availWidth);
                 if ($scope.imagesData.images.length > 3) {
                     var totalSlides = ($scope.imagesData.images.length) / 3;
                 }
@@ -694,8 +658,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         var str = document.location.search;
         var key = str.split("?");
         var key1 = key[1].split("=");
-        console.log("key1", key1[0]);
-
 
         $scope.loadmoredeals = function () {
             $scope.lim = $scope.lim + 5;
@@ -705,7 +667,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         //for detail page
         $scope.showDetail = function (hotel_id) {
             window.open('/hotel/' + hotel_id, '_self');
-            console.log(hotel_id);
 
         }
 
@@ -725,11 +686,9 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             if (!cb) $scope.hotel.page = 1;
 
             let searchURL = api_url + '/api/v1/hotel' + document.location.search
-            console.log("searchurl", searchURL);
 
 
             Object.keys($scope.hotel).forEach(function (param) {
-                console.log($scope.hotel[param]);
                 if ($scope.hotel[param])
                     searchURL += `&${param}=${$scope.hotel[param]}`;
             });
@@ -743,11 +702,9 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
                     cb(res);
                 } else {
                     $scope.hotelData = res.data.result.hotel;
-                    console.log("$scope.hotelData", $scope.hotelData);
                 }
             })
         }
-
 
         $scope.loadMoreHotelsData = function () {
             $scope.hotel.page = $scope.hotel.page + 1;
@@ -755,7 +712,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             $scope.getHotelsData(function (res) {
                 $scope.hotelData = $scope.hotelData.concat(res.data.result.hotel);
             });
-
 
         }
 
@@ -781,7 +737,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             $scope.curDate = new Date();
 
             var check_in = $scope.hotel.check_in;
-            console.log("check in", check_in);
             if ($scope.hotel.check_in == undefined) {
                 $scope.hotel.check_in = check_in;
             }
@@ -839,19 +794,15 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             // console.log("$location.path",$location.path);
             var pathname = window.location.pathname;
             var appId = pathname.split('/')[6];
-            console.log("appId", pathname);
             // console.log("status",searchKey);
             $scope.location = document.location.href;
-            console.log("$scope.location", $scope.location);
             $scope.hotel.ci = Date.parse($scope.hotel.ci) / 1000;
             $scope.hotel.co = Date.parse($scope.hotel.co) / 1000;
-            console.log($scope.hotel.ci, $scope.hotel.co);
             // if(searchKey == 0){
             //   $scope.message = 'enter valid location '; 
             // }
 
             window.open($scope.location + "/list?" + searchKey + "=" + $scope.hotel.search + '&' + 'ci' + '=' + $scope.hotel.ci + '&' + 'co' + '=' + $scope.hotel.co, '_self');
-            console.log("$scope.hotel.city", $scope.hotel.city)
         }
 
         // $scope.search = function()  {
@@ -905,9 +856,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             for (var j = 0; j < $scope.hotels.length; j++) {
                 $scope.hotelid[$scope.hotels[j].id] = $scope.hotels[j];
             }
-
-            console.log("$scope.hotelid", $scope.hotelid);
-            console.log("$scope.hotels=====", $scope.hotels);
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {
@@ -1277,16 +1225,13 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         var sendPostHotel = function (url, data) {
             $scope.hotel.city = $scope.hotel.city.toLowerCase();
             $scope.hotel.name = $scope.hotel.name.toLowerCase();
-            console.log(data);
 
             $http({
                 method: 'POST',
                 url: url,
                 data: data
             }).then(function (res) {
-                console.log(res);
                 $scope.j = res.data.result.hotel.id;
-                console.log("j", $scope.j);
 
 
                 createToast("'hotel successfully created!!!'", "green");
@@ -1318,7 +1263,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
         }
         var sendPostCall = function (url, data) {
-            console.log(data);
 
             $http({
                 method: 'POST',
@@ -1337,14 +1281,12 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
         }
         var sendPutCall = function (url, data) {
-            console.log(data);
 
             $http({
                 method: 'PUT',
                 url: url,
                 data: data
             }).then(function (res) {
-                console.log(res);
 
                 // createToast("'hotel successfully created!!!'","green");
 
@@ -1378,7 +1320,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             $scope.hotelDeals.push($scope.deals);
             $scope.room.deals = $scope.hotelDeals;
             // $scope.hotelRooms.push($scope.room);
-            console.log("rooms array", $scope.room);
             sendPostCall('/api/v1/room', $scope.room)
 
             createToast("'Room Added!!'", "green");
@@ -1422,8 +1363,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             $scope.hotelImg.push($scope.images);
             // $scope.hotel.collection.products=$scope.collectionProdcut;
             $scope.hotel.images = $scope.hotelImg;
-            console.log("$scope.hotel", $scope.hotel);
-
             sendPostHotel('/api/v1/hotel', $scope.hotel)
         }
     }])
@@ -1452,7 +1391,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
         $scope.openGallery = function (data) {
             $scope.imagesData = data;
-            console.log("$scope.images", $scope.imagesData);
         }
 
         // window.onresize = function(){ location.reload(); }
@@ -1510,7 +1448,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
         $scope.bookingPage = function (room_id) {
             window.open('/hotel/booking/' + room_id, '_self');
-            console.log(hotel_id);
 
         }
 
@@ -1536,13 +1473,11 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
             var id = key1[3];
         else
             var id = key1[2];
-        console.log(id);
         $http({
             method: 'GET',
             url: api_url + '/api/v1/hotel?id=' + id
         }).then(function successCallback(response) {
             $scope.hotel = response.data.result.hotel;
-            console.log($scope.hotel);
             getSimilarHotels();
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
@@ -1551,12 +1486,10 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
 
 
         var getSimilarHotels = function () {
-            console.log("$scope.hotel.city", $scope.hotel[0].city);
             $http({
                 method: 'GET',
                 url: api_url + '/api/v1/hotel?city=' + $scope.hotel[0].city
             }).then(function successCallback(response) {
-                console.log("response city hotels", response.data.result.hotel);
 
                 for (var i = 0; i < response.data.result.hotel.length; i++) {
                     if (response.data.result.hotel[i].id == $scope.hotel[0].id) {
@@ -1566,7 +1499,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
                         $scope.similarhotels.push(response.data.result.hotel[i])
                     }
                 }
-                console.log("similar", $scope.similarhotels);
 
 
 
@@ -1583,7 +1515,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         var i = 1;
         // var j=1;
         if (window.screen.availWidth >= 440) {
-            console.log(window.screen.availWidth);
             $(".flex-next").click(function () {
                 if ($scope.hotel[0].images.length > 10) {
                     var totalSlides = ($scope.hotel[0].images.length) / 10;
@@ -1682,7 +1613,6 @@ var app = angular.module('comparetravel', ['angular.filter', 'ui.bootstrap'])
         if (window.screen.availWidth <= 440) {
 
             $(".flex-next").click(function () {
-                console.log(window.screen.availWidth);
                 if ($scope.hotel[0].images.length > 3) {
                     var totalSlides = ($scope.hotel[0].images.length) / 3;
                 }
