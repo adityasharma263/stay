@@ -30,7 +30,7 @@ class MyJSONEncoder(flask.json.JSONEncoder):
 app.json_encoder = MyJSONEncoder
 
 
-@app.route('/api/v1/hotel/b2b/<string:type>', methods=['GET', 'POST'])
+@app.route('/api/v1/hotel/<string:type>', methods=['GET', 'POST'])
 def hotel_api(type):
     if request.method == 'GET':
         args = request.args.to_dict()
@@ -50,8 +50,10 @@ def hotel_api(type):
         per_page = request.args.get('per_page', 10)
         args.pop('page', None)
         args.pop('per_page', None)
-        ci = request.args.get('ci')
-        co = request.args.get('co')
+        check_in = request.args.get('ci')
+        check_out = request.args.get('co')
+        check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
+        check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
         args.pop('ci', None)
         args.pop('co', None)
         room_list = []
@@ -63,13 +65,12 @@ def hotel_api(type):
             rooms = q_room.filter(Room.hotel_id == hotel.id).all()
             for room in rooms:
                 room_list.append(room.id)
-                if ci and co:
+                if check_in and check_out:
                     deals = q_deal.filter(Deal.room_id == room.id).all()
-                    ci = datetime.datetime.fromtimestamp(int(ci)).date()
-                    co = datetime.datetime.fromtimestamp(int(co)).date()
-                    delta = co - ci
+                    delta = check_out - check_in
                     for deal in deals:
-                        price_list = q_price.filter(PriceCalendar.deal_id == deal.id, PriceCalendar.date >= ci, PriceCalendar.date < co).all()
+                        price_list = q_price.filter(PriceCalendar.deal_id == deal.id, PriceCalendar.date >= check_in,
+                                                    PriceCalendar.date < check_out).all()
                         price = 0
                         if delta.days > 0:
                             for i in range(delta.days):
@@ -159,7 +160,7 @@ def hotel_api(type):
             return jsonify({'result': {'hotel': []}, 'message': "hotel name already exist", 'error': True})
 
 
-@app.route('/api/v1/hotel/b2b/', methods=['GET'])
+@app.route('/api/v1/hotel', methods=['GET'])
 def hotel_terminal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
