@@ -93,8 +93,9 @@ class HotelTerminalSchema(ma.ModelSchema):
 
     class Meta:
         model = Hotel
-        exclude = ('updated_at', "city" ,'created_at', "star", "rating", "phone", "desc", "address", "images", "slug", "latitude",
-                   "amenities", "collection_id", "hotel_collection", "longitude", "longitude", "country", "category")
+        exclude = ('updated_at', "city", 'created_at', "star", "rating", "phone", "desc", "address",
+                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
+                   "longitude", "longitude", "country", "category")
 
 
 class HotelSchema(ma.ModelSchema):
