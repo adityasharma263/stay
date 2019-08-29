@@ -306,56 +306,37 @@
                                         <h2>Available Rooms</h2>
                                         <div class="room-list listing-style3 hotel">
                                             <article class="box">
-                                                {% for room in hotel_data.rooms %}
-                                                
-                                                <figure class="col-sm-4 col-md-3">
-                                                    <a  href="" title=""><img width="230" height="161" src="http://{{room.image_url}}" alt="{{room.other_room_type}}"></a>
+                                                    {% for room in hotel_data.rooms %}
+                                                <figure class="col-sm-5 col-md-4">
+                                                    <a href="#" title=""><img width="230" height="161" src="http://{{room.image_url}}" alt="{{room.room_type}}"></a>
                                                 </figure>
-                                                <div class="details col-xs-12 col-sm-8 col-md-9">
+                                                <div class="details col-xs-12 col-sm-7 col-md-8">
                                                     <div>
                                                         <div>
-                                                            <div class="box-title">
-                                                                <h4 class="title" >{{room.room_type}}</h4>
-                                                                
-
-                                                                <dl class="description">
-                                                                    <dt>Max Guests:</dt>
-                                                                   
-                                                                </dl>
-                                                            </div>
-                                                           
+                                                            <h4 class="box-title">{{room.room_type}}</h4>
                                                         </div>
-
-
-                                                         <div class="price-section">
-                                                            {% for deal in room.deals %}
-                                                            {% if deal.ts_exclusive %}
-                                                                <span class="price"><small> Mini. PER/NIGHT</small>₹ {{deal.price}}</span>
-                                                            {% endif%}    
-                                                            {% endfor %}
-                                                        </div> 
+                                                        <div>
+                                                            <div class="five-stars-container">
+                                                                <span class="price"><small>avg/night</small>₹ {{deal.price}}</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div>
-                                                         <div class="amenities">
-                                                            <i class="soap-icon-wifi circle" ng-show="room.facilities.wifi"></i>
-                                                            <i class="soap-icon-coffee circle" ng-show="room.facilities.electric_kettle"></i>
-                                                            <i class="soap-icon-breakfast circle"  ng-show="room.facilities.breakfast"></i>
-                                                            <i class="soap-icon-aircon circle"  ng-show="room.facilities.ac"></i>
-                                                            <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i>
-                                                        </div>
-                                                        <div class="action-section">
-                                                            <a href="" title="" ng-click="bookingPage(room.id)" class="button btn-small sky-blue1 full-width text-center">Book Now</a>
+                                                        <p>Max Guests: </p>
+                                                        <div>
+                                                            <a class="button btn-small full-width text-center" title="select" href="">SELECT</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 {% endfor %}
                                             </article>
+                                
                                         </div>
                                         
                                     </div>
                                     <div class="tab-pane fade" id="hotel-amenities">
                                         <h2>Room Facilities</h2>
-                                        {% for room in hotel_data.rooms %}
+                                        
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
                                               
@@ -450,7 +431,7 @@
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
-                                            {% endfor %}
+                                          
                                         </ul>
                                         <br>
                                         
