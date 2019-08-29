@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 from stay_app.model.hotel import Hotel
 from stay_app.model.hotel import Image
 from stay_app.model.hotel import Facility
@@ -78,6 +78,24 @@ class RoomSchema(ma.ModelSchema):
     class Meta:
         model = Room
         exclude = ('updated_at', 'created_at')
+
+
+class RoomTerminalSchema(ma.ModelSchema):
+    meal_plan = EnumField(MealPlan, by_value=True)
+
+    class Meta:
+        model = Room
+        exclude = ('updated_at', 'created_at', "max_no_of_guest", "image_url", "facilities", "deals")
+
+
+class HotelTerminalSchema(ma.ModelSchema):
+    rooms = ma.Nested(RoomTerminalSchema, many=True)
+
+    class Meta:
+        model = Hotel
+        exclude = ('updated_at', "city", 'created_at', "star", "rating", "phone", "desc", "address",
+                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
+                   "longitude", "longitude", "country", "category")
 
 
 class HotelSchema(ma.ModelSchema):

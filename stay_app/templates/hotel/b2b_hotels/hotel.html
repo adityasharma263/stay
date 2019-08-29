@@ -1,33 +1,23 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}stayController{% endblock %} {% block
     content%}
+</script>
+    <div class="search-box-wrapper">
 
-    
-
-    
-	</script>
-            <div class="search-box-wrapper">
- 
-		<section id="content" class="tour">
+        <section class="tour">
             <div id="slideshow" class="slideshow-bg full-screen" style="height: 305px;">
                 <div class="flexslider">
                     <ul class="slides">
-						<li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
+                        <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
                             <div class="slidebg" style="background-image: url(http://thetravelsquare.in/images/the-travel-square-luxury.jpg);"></div>
                         </li>
-						<li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
+                        <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
                             <div class="slidebg" style="background-image: url(http://thetravelsquare.in/images/the-travel-square-accomodations.jpg);"></div>
                         </li>
                         <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
                             <div class="slidebg" style="background-image: url(http://thetravelsquare.in/images/the-travel-square-campsite.jpg);"></div>
                         </li>
-						
-						
-						
-
                     </ul>
                 </div>
-				
-				
                 <div class="container">
                     <div class="table-wrapper full-width">
                         <div class="table-cell">
@@ -44,28 +34,28 @@
 
                                         </div>
                                         <div class="col-xs-6 col-sm-4 col-md-2 form-group">
-                                            <div class="datepicker-wrap">         
-                                                <input type="text" name="date_from" class="input-text full-width"  ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >                                              
-                                                <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
+                                            <div class="datepicker-wrap">
+                                                <input type="text" name="date_from" class="input-text full-width"  ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >
+                                                <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title="">
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-5 col-md-2 form-group">
                                             <div class="datepicker-wrap">
                                                 <input type="text" name="date_to" class="input-text full-width" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
-                                                <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title=""> 
+                                                <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title="">
 
                                             </div>
-                                            
 
-                                        </div> 
+
+                                        </div>
                                             <div class="col-sm-3 form-group">
                                                 <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>                                            </div>
-                                        </div> 
+                                        </div>
                                 </form>
                             </div>
 
                             <div class="row col-md-5" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)">
-                                <div class="col-sm-12" style="position: relative; z-index: 99;"> 
+                                <div class="col-sm-12" style="position: relative; z-index: 99;">
                                     <div style="max-height:100px; text-align: left;
                                     margin: 0;
                                     border-radius: 8px;
@@ -75,12 +65,12 @@
                                     width: 96%;
                                     padding: 0;
                                     position: absolute;">
-                               
-                                
+
+
 
                                 <table id="search" class="table table-hover input-text full-width col-sm-4 col-md-5" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
-                                        <tbody id="search" class="input-text full-width"" >
+                                        <tbody class="input-text full-width" >
                                           <tr ng-autocomplete class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
                                             <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
                                                 <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
@@ -101,21 +91,16 @@
                                 </div>
                         </div>
                     </div>
-                </div>	
-			
-            
+                </div>
+            </div>
         </section>
-        
+
         <section id="content">
-			 
-			 
-			
-			
-                <div class="container section">
-				<center><h1 class="title"><big><b>POPULAR HOTELS & RESORTS</b></big></h1>
-				<p><font color="black"><b>Discover Luxury at The Best Hotels In Town , Experience The Leisure at Best Budget</b></font></p><br></center>
-				<div class="image-carousel style2" data-animation="slide" data-item-width="370" data-item-margin="30">
-                    
+            <div class="container section">
+                <center><h1 class="title"><big><b>POPULAR HOTELS & RESORTS</b></big></h1>
+                <p><font color="black"><b>Discover Luxury at The Best Hotels In Town , Experience The Leisure at Best Budget</b></font></p><br></center>
+                <div class="image-carousel style2" data-animation="slide" data-item-width="370" data-item-margin="30">
+
                 <div class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides image-box style10" style="width: 800%; transition-duration: 0s; transform: translate3d(-400px, 0px, 0px);">
                         <li class="box post" style="width: 370px; float: left; display: block;">
                             <figure>
@@ -126,18 +111,17 @@
                                 </figcaption>
                             </figure>
                             <div class="details">
-							<a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
+                            <a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
                             <h4 class="post-title entry-title">The Leela</h4>
-								
                                 <div class="post-meta single-line-meta vcard">
                                     <span class="hidden updated">Aug 29, 2013</span>
                                 </div>
-								<label class="price-wrapper uppercase">
-									Starting @ <span class="price-per-unit">₹4999<span>
-                                </label>
+                                    <label class="price-wrapper uppercase">
+                                        Starting @ <span class="price-per-unit">₹4999</span>
+                                    </label>
                             </div>
                         </li>
-						<li class="box post" style="width: 370px; float: left; display: block;">
+                        <li class="box post" style="width: 370px; float: left; display: block;">
                             <figure>
                                 <a href="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-the-lodhi-member-of-worlds-leading-chain.jpg" alt="Phi Phi Island Tour" draggable="false"></a>
                                 <figcaption class="entry-date">
@@ -146,18 +130,18 @@
                                 </figcaption>
                             </figure>
                             <div class="details">
-							<a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
+                            <a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
                             <h4 class="post-title entry-title">The Lodhi</h4>
-								
+
                                 <div class="post-meta single-line-meta vcard">
                                     <span class="hidden updated">Aug 29, 2013</span>
                                 </div>
-								<label class="price-wrapper uppercase">
-									Starting @ <span class="price-per-unit">₹14999<span>
+                                <label class="price-wrapper uppercase">
+                                    Starting @ <span class="price-per-unit">₹14999</span>
                                 </label>
                             </div>
                         </li>
-						<li class="box post" style="width: 370px; float: left; display: block;">
+                        <li class="box post" style="width: 370px; float: left; display: block;">
                             <figure>
                                 <a href="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-roseate-house.jpg" alt="Phi Phi Island Tour" draggable="false"></a>
                                 <figcaption class="entry-date">
@@ -166,18 +150,18 @@
                                 </figcaption>
                             </figure>
                             <div class="details">
-							<a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
+                            <a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
                             <h4 class="post-title entry-title">Roseate House</h4>
-								
+
                                 <div class="post-meta single-line-meta vcard">
                                     <span class="hidden updated">Aug 29, 2013</span>
                                 </div>
-								<label class="price-wrapper uppercase">
-									Starting @ <span class="price-per-unit">₹1499<span>
+                                <label class="price-wrapper uppercase">
+                                    Starting @ <span class="price-per-unit">₹1499</span>
                                 </label>
                             </div>
                         </li>
-						<li class="box post" style="width: 370px; float: left; display: block;">
+                        <li class="box post" style="width: 370px; float: left; display: block;">
                             <figure>
                                 <a href="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-hyatt-regency-gurugram.jpg" alt="Phi Phi Island Tour" draggable="false"></a>
                                 <figcaption class="entry-date">
@@ -186,18 +170,18 @@
                                 </figcaption>
                             </figure>
                             <div class="details">
-							<a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
+                            <a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
                             <h4 class="post-title entry-title">Hyatt Regency , Gurgaon</h4>
-								
+
                                 <div class="post-meta single-line-meta vcard">
                                     <span class="hidden updated">Aug 29, 2013</span>
                                 </div>
-								<label class="price-wrapper uppercase">
-									Starting @ <span class="price-per-unit">₹1499<span>
+                                <label class="price-wrapper uppercase">
+                                    Starting @ <span class="price-per-unit">₹1499</span>
                                 </label>
                             </div>
                         </li>
-						<li class="box post" style="width: 370px; float: left; display: block;">
+                        <li class="box post" style="width: 370px; float: left; display: block;">
                             <figure>
                                 <a href="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-sqaure-country-inn-sahibabad.jpg" alt="Phi Phi Island Tour" draggable="false"></a>
                                 <figcaption class="entry-date">
@@ -206,18 +190,18 @@
                                 </figcaption>
                             </figure>
                             <div class="details">
-							<a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
+                            <a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
                             <h4 class="post-title entry-title">Country Inn , Sahibabad</h4>
-								
+
                                 <div class="post-meta single-line-meta vcard">
                                     <span class="hidden updated">Aug 29, 2013</span>
                                 </div>
-								<label class="price-wrapper uppercase">
-									Starting @ <span class="price-per-unit">₹1499<span>
+                                <label class="price-wrapper uppercase">
+                                    Starting @ <span class="price-per-unit">₹1499</span>
                                 </label>
                             </div>
                         </li>
-						<li class="box post" style="width: 370px; float: left; display: block;">
+                        <li class="box post" style="width: 370px; float: left; display: block;">
                             <figure>
                                 <a href="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-umrao.jpg" alt="Phi Phi Island Tour" draggable="false"></a>
                                 <figcaption class="entry-date">
@@ -225,18 +209,18 @@
                                 </figcaption>
                             </figure>
                             <div class="details">
-							<a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
+                            <a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
                             <h4 class="post-title entry-title">Umrao</h4>
-								
+
                                 <div class="post-meta single-line-meta vcard">
                                     <span class="hidden updated">Aug 29, 2013</span>
                                 </div>
-								<label class="price-wrapper uppercase">
-									Starting @ <span class="price-per-unit">₹1499<span>
+                                <label class="price-wrapper uppercase">
+                                    Starting @ <span class="price-per-unit">₹1499</span>
                                 </label>
                             </div>
                         </li>
-						<li class="box post" style="width: 370px; float: left; display: block;">
+                        <li class="box post" style="width: 370px; float: left; display: block;">
                             <figure>
                                 <a href="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-the-lalit.jpg" alt="Phi Phi Island Tour" draggable="false"></a>
                                 <figcaption class="entry-date">
@@ -245,32 +229,41 @@
                                 </figcaption>
                             </figure>
                             <div class="details">
-							<a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
+                            <a href="" class="button btn-small sky-blue1 uppercase">View Details</a>
                             <h4 class="post-title entry-title">The lalit</h4>
-								
+
                                 <div class="post-meta single-line-meta vcard">
                                     <span class="hidden updated">Aug 29, 2013</span>
                                 </div>
-								<label class="price-wrapper uppercase">
-									Starting @ <span class="price-per-unit">₹1499<span>
+                                <label class="price-wrapper uppercase">
+                                    Starting @ <span class="price-per-unit">₹1499</span>
                                 </label>
                             </div>
                         </li>
-                        
-                    </ul></div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="">Previous</a></li><li><a class="flex-next" href="">Next</a></li></ul>
-					
-				</div><br><br>
-                
-                    <div class="block">
+
+                    </ul>
+                </div>
+                    <ol class="flex-control-nav flex-control-paging">
+                        <li><a class="">1</a></li>
+                        <li><a class="flex-active">2</a></li>
+                    </ol>
+                    <ul class="flex-direction-nav">
+                        <li><a class="flex-prev" href="">Previous</a></li>
+                        <li><a class="flex-next" href="">Next</a></li>
+                    </ul>
+                </div>
+                <br>
+                <br>
+                <div class="block">
                     <center><h1 class="title"><big><b>BEST OFFERS & DEALS</b></big></h1>
-				<br></center>
+                <br></center>
                     <div class="row image-box style1">
                         <div class="col-sm-6 col-md-3">
                             <article class="box">
                                 <figure>
                                     <a href="" title="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-promotional-offer-BESTBUY.jpg" alt="" width="270" height="160"></a>
                                 </figure>
-                                
+
                             </article>
                         </div>
                         <div class="col-sm-6 col-md-3">
@@ -278,7 +271,7 @@
                                 <figure>
                                     <a href="" title="" class="hover-effect"><img src="http://thetravelsquare.in/images/monsoon-offer-MSN20OFF.jpg" alt="" width="270" height="160"></a>
                                 </figure>
-                                
+
                             </article>
                         </div>
                         <div class="col-sm-6 col-md-3">
@@ -286,7 +279,7 @@
                                 <figure>
                                     <a href="" title="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-luxury-promotional-offer.jpg" alt="" width="270" height="160"></a>
                                 </figure>
-                                
+
                             </article>
                         </div>
                         <div class="col-sm-6 col-md-3">
@@ -294,26 +287,19 @@
                                 <figure>
                                     <a href="" title="" class="hover-effect"><img src="http://thetravelsquare.in/images/the-travel-square-no-cost-emi.jpg" alt="" width="270" height="160"></a>
                                 </figure>
-                                
+
                             </article>
                         </div>
                     </div>
                 </div>
-					
-				
-				</div>
-				
-            
-			
-			
-			
+                </div>
             <div class="global-map-area promo-box no-margin parallax" data-stellar-background-ratio="0.5" style="background-position: 50% 0px;">
                 <div class="container">
                     <div class="content-section description pull-right col-sm-9" style="height: 273px;">
                         <div class="table-wrapper hidden-table-sm" style="height: 100%;">
                             <div class="table-cell">
                                 <h2 class="m-title animated" data-animation-type="fadeInDown">
-                                   <font color="black"> Tell us where would you wish to travel next.<br><em>12,600+ Experiences Available</font></em>
+                                    <font color="black"> Tell us where would you wish to travel next.<br><em></em>12,600+ Experiences Available</em></font>>
                                 </h2>
                             </div>
                             <div class="table-cell action-section col-md-4 no-float">
@@ -332,133 +318,15 @@
                     </div>
                     <div class="image-container col-sm-4" style="height: 300px; margin-left: -5%; position: relative;">
                         <img src="http://thetravelsquare.in/images/the-travel-square-trolley-bag.png" alt="" width="200" height="275" class="animated" data-animation-type="fadeInUp" data-animation-duration="2" style="position: absolute; bottom: 0px; left: 0px;">
-                   
-				   </div>
+
+                   </div>
                 </div>
             </div>
-			
-			<br>
+            <br>
         </section>
-        
-         <footer id="footer" class="style5">
-            <div class="footer-wrapper">
-                <div class="container">
-                    <div class="row">
-                       
-						
-						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                            <h2>The Travel Square</h2>
-                            <ul class="discover triangle hover row">
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/about">About Company</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/jobs.html">Jobs & Carreers</a></li>
-								<li class="col-xs-6"><a href="http://www.thetravelsquare.in/about">Corporate Offices</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/legal.html">Legal Information</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/press.html">Press Release</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/legal.html">T & C</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/customer-care.html">Customer Care</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/legal.html">Privacy Policies</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/partner-Care.html">Partner Help</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/faq.html">FAQ's</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/site-map.html">Site Map</a></li>
-                                <li class="col-xs-6"><a href="http://www.thetravelsquare.in/contact-Us.html">Contact Us</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                            <h2>More of us !</h2>
-                            <ul class="discover triangle hover row">
-                                <li class="col-xs-"><a href="http://www.thetravelsquare.in/pro">Travel Square Business</a></li>
-                                <li class="col-xs-"><a href="http://www.signatureclubmembership.com/">Signature Club</a></li>
-                                <li class="col-xs-"><a href="http://www.cruisader.com/">Cruisader</a></li>
-                                <li class="col-xs-"><a href="http://www.cruisingindia.in/">Cruising India</a></li>
-                                <li class="col-xs-"><a href="http://www.happenings.ind.in/">Happenings</a></li>
-                                <li class="col-xs-"><a href="http://www.shoppist.in/">Shoppist</a></li>
-                                
-                            </ul>
-                        </div><hr>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                            <h2>About Us</h2>
-                            <p>The Travel Square is a Network of 10000+ Travel Suppliers , DMC & Hotel Chains Inspiring the World to Travel In Style With Luxury at Affordabe Pricing . </p>
-                            <br>
-                            <ul class="social-icons clearfix">
-                                <li class="twitter"><a title="Join Us on Twitter" href="https://twitter.com/travelsquare_" data-toggle="tooltip"  Target="_blank" data-original-title="twitter"><i class="soap-icon-twitter"></i></a></li>
-                                <li class="facebook"><a title="Join Us on Facebook" href="https://www.facebook.com/thetravelsquare/" Target="_blank" data-toggle="tooltip" data-original-title="facebook"><i class="soap-icon-facebook"></i></a></li>
-                                <li class="linkedin"><a title="Join Us on Linked In" href="https://www.linkedin.com/company/thetravelsquare" Target="_blank" data-toggle="tooltip" data-original-title="linkedin"><i class="soap-icon-linkedin"></i></a></li>
-                                <li class="vimeo"><a title="Join Us on Instagram" href="https://www.instagram.com/The_Travel_Square/" data-toggle="tooltip" Target="_blank" data-original-title="vimeo"><i class="soap-icon-instagram"></i></a></li>
-                                <li class="dribble"><a title="Join Us on Youtube" href="https://www.youtube.com/channel/UCqi_w8JlO-1VEmVUItvr8og" Target="_blank" data-toggle="tooltip" data-original-title="dribble"><i class="soap-icon-youtube"></i></a></li>
- 
-                            </ul><br>
-                        </div><center>
-						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-						<br>
-                            <img src="http://thetravelsquare.in/images/the-travel-square-logo-200x200.png">
-                        </div></center>
-                    </div>
-					<center><br><br><br>
-					<a href="https://play.google.com/store?hl=en"><img src="http://thetravelsquare.in/images/the-travel-square-google-playstore.png" height="60" width="300">
-					<a href="https://www.apple.com/in/"><img src="http://thetravelsquare.in/images/the-travel-square-apple-store-ios.png" height="60" width="300">
-					</center><br>
-                </div>
-				
-			<center>
-			<a href="https://www.paypal.com/in/home"><img src="http://thetravelsquare.in/images/the-travel-square-visa-debit-credit-card.png" height="70" width="350">
-			<a href="https://www.payumoney.com/"><img src="http://thetravelsquare.in/images/the-travel-square-payu-paypal.png" height="70" width="300">
-			</center><br>
-            </div>
-			
-			
-            <div class="bottom gray-area">
-                <div class="container">
-                    
-                    <div class="pull-right">
-                        <a id="back-to-top" href="" class="animated bounce" data-animation-type="bounce" style="animation-duration: 1s; visibility: visible;"><i class="soap-icon-longarrow-up circle"></i></a>
-                    </div>
-                    <div class="copyright pull-right">
-                        <p>© 2019 Hotels | The Travel Square</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+
+
 
     </div>
 
-
-    <!-- Javascript -->
-    <script type="text/javascript" src="files/jquery-1.11.1.min.js.download"></script>
-    <script type="text/javascript" src="files/jquery.noconflict.js.download"></script>
-    <script type="text/javascript" src="files/modernizr.2.7.1.min.js.download"></script>
-    <script type="text/javascript" src="files/jquery-migrate-1.2.1.min.js.download"></script>
-    <script type="text/javascript" src="files/jquery.placeholder.js.download"></script>
-    <script type="text/javascript" src="files/jquery-ui.1.10.4.min.js.download"></script>
-    <script src="/app.js"></script>
-    
-    <!-- Twitter Bootstrap -->
-    <script type="text/javascript" src="files/bootstrap.js.download"></script>
-
-    <!-- Flex Slider -->
-    <script type="text/javascript" src="files/jquery.flexslider-min.js.download"></script>
-    
-    <!-- parallax -->
-    <script type="text/javascript" src="files/jquery.stellar.min.js.download"></script>
-    
-    <!-- waypoint -->
-    <script type="text/javascript" src="files/waypoints.min.js.download"></script>
-
-    <!-- load page Javascript -->
-    <script type="text/javascript" src="files/theme-scripts.js.download"></script>
-    <script type="text/javascript" src="files/scripts.js.download"></script>
-
-    <script type="text/javascript">
-        tjq("#slideshow .flexslider").flexslider({
-            animation: "fade",
-            controlNav: false,
-            animationLoop: true,
-            directionNav: false,
-            slideshow: true,
-            slideshowSpeed: 5000
-        });
-    </script>
-
-
-
-</body></html>
 {% endblock %}

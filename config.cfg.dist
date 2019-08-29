@@ -21,9 +21,10 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 DOMAIN_URL = 'http://business.thetravelsquare.in'
 ADMIN_DOMAIN_URL = 'http://admin.thetravelsquare.in'
 PARTNER_DOMAIN_URL = 'http://partner.thetravelsquare.in'
-API_URL = 'http://139.59.51.174:8000'
-PARTNER_API_URL = 'http://139.59.51.174:7000'
-ADMIN_API_URL = 'http://139.59.51.174:9000'
+API_URL = 'http://127.0.0.1:8000'
+PARTNER_API_URL = 'http://127.0.0.1:7000'
+ADMIN_API_URL = 'http://127.0.0.1:9000'
+
 
 #payment
 
