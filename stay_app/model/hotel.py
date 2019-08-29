@@ -88,7 +88,6 @@ class Room(Base):
     room_type = db.Column(db.String, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     meal_plan = db.Column(db.Enum(MealPlan))
-    balcony = db.Column(db.Boolean, default=False, nullable=True)
     facilities = db.relationship('Facility', uselist=False, backref='room')
     deals = db.relationship('Deal', backref='room')
 
@@ -157,6 +156,7 @@ class Facility(Base):
 
     bed_type = db.Column(db.Enum(BedType))
     no_of_bed = db.Column(db.Integer, nullable=True)
+    balcony = db.Column(db.Boolean, default=False, nullable=True)
     jacuzzi = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
@@ -220,7 +220,8 @@ class Deal(Base):
     hotel_url = db.Column(db.String)
     b2b_lowest_price = db.Column(db.Boolean, default=False, nullable=True)
     b2c_lowest_price = db.Column(db.Boolean, default=False, nullable=True)
-    selected_deal = db.Column(db.Boolean, default=False, nullable=True)
+    b2b_selected_deal = db.Column(db.Boolean, default=False, nullable=True)
+    b2c_selected_deal = db.Column(db.Boolean, default=False, nullable=True)
     ts_exclusive = db.Column(db.Boolean, default=False, nullable=True)
     partner_id = db.Column(db.Integer, nullable=True)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=True)

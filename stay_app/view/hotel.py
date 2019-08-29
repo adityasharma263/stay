@@ -8,7 +8,7 @@ from sqlalchemy import func
 from slugify import slugify
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema,\
-     RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema
+     RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema, HotelTerminalSchema
 import datetime
 import time
 from itertools import cycle
@@ -159,8 +159,23 @@ def hotel_api(type):
             return jsonify({'result': {'hotel': []}, 'message': "hotel name already exist", 'error': True})
 
 
+@app.route('/api/v1/hotel', methods=['GET'])
+def hotel_terminal_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        page = request.args.get('page', 1)
+        per_page = request.args.get('per_page', 10)
+        args.pop('page', None)
+        args.pop('per_page', None)
+        q = db.session.query(Hotel)
+        hotels = q.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        result = HotelTerminalSchema(many=True).dump(hotels)
+        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+
+
+
 @app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
-def hotel_id(id):
+def hotel_id():
     if request.method == 'PUT':
         put = Hotel.query.filter_by(id=id).update(request.json)
         if put:
