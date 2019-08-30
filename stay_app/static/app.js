@@ -5,22 +5,6 @@ var app = angular.module('stay', ['angular.filter'])
         // $locationProvider.html5Mode(true);
     }])
 
-    .controller('bookingController', ["$scope", "$http", function ($scope, $http) {
-
-        $scope.firstName = {};
-        $scope.lastName = {};
-        $scope.phoneNumber = {};
-        $scope.address = {};
-        $scope.emailAddress = {};
-
-        $scope.submitBooking = function () {
-            window.open('/hotel/booking/payment', '_self');
-
-        }
-    }])
-
-
-
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
         $scope.hotel = {};
         $scope.showSearchResult = false;

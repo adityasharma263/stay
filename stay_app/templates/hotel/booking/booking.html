@@ -1,97 +1,192 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}bookingController{% endblock %} {% block
     content%}
-   
 
-    <section id="content">
-            <div class="container">
-			
+<style>
+    .mt-5 {
+        margin-top: 7px;
+    }
+</style>
+
+<section id="content">
+    <div class="container">
+
+
+
+
+
+
         <div class="row">
-                    <div id="main" class="col-sm-6 col-md-9">
-                    <div class="travelo-box booking-section">
-<<<<<<< HEAD:stay_app/templates/hotel/b2b_hotels/booking.html
+            <div id="main" class="col-sm-6 col-md-9">
 
-                        
+                <div class="travelo-box booking-section">
+                    <div class="row">
 
-
-            <form class="booking-form" method="post">
-=======
-            <form class="booking-form" action="/payment" method="post">
->>>>>>> 725e2810ca2612270ddb3f98cfcb54d7f8b1758d:stay_app/templates/hotel/booking/booking.html
-                <div class="person-information">
-                    <h2>Book Your Hotel Here</h2>
-                    <div class="form-group row">
-                            <div class="col-sm-6 col-md-5">
-                               <label for="firstName">First Name</label>
-                               <input type="text" required class="input-text full-width" name="firstname"  placeholder="Enter Your First Name">
-                            </div>
-                            <div class="col-sm-6 col-md-5">
-                                   <label for="LastName">Last Name</label>
-                                   <input type="text" required class="input-text full-width" placeholder="Enter Your Last Name">
-                                </div>
-                           </div>
-                 <div class="form-group row">
-                 <div class="col-sm-6 col-md-5">
-                    <label for="email">Email Address</label>
-                    <input type="text" required class="input-text full-width" name="email"  placeholder="Enter Your Email Address">
-                 </div>
-                 <div class="col-sm-6 col-md-5">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" required class="input-text full-width" name="phone" placeholder="Enter Your Phone Number">
-                     </div>
-                </div>
-                <div class="form-group row">
-                        <div class="col-sm-6 col-md-10">
-                            <label for="address">Address</label>
-                                <input type="textarea" required class="input-text full-width" placeholder="Enter Your Full Address">
-                       </div>
-                      </div>
-  	        </div>
-                <button type="submit" class="button btn-medium sky-blue1 uppercase">pay now</button>
-            </div>
-
-
-
-
-
-                                <hr>
-                                
-                            </form>
+                        <div class="col-sm-2">
+                            <img src="https://via.placeholder.com/70" alt="" srcset="" />
                         </div>
-                    <div class="sidebar col-sm-4 col-md-3">
-                            <div class="travelo-box contact-box">
-                                <center><h4>Need Some Help ?</h4>
-                                <p>Our Travel Sqaure Executives Are Always Ready Help You 24/7 .</p>
-                                <address class="contact-details">
-                                    <span class="contact-phone">+91-9560001807</span><br>
-                                    <br>
-                                    <a class="contact-email" href="">partnerhelp@travelsqaure.com</a>
-                                </address></center>
-                            </div>
-                            <div class="travelo-box book-with-us-box">
-                                <center><h4>Why Join Us ?</h4></center>
-                                <ul>
-                                    <li>
-                                        <i class="soap-icon-hotel-1 circle"></i>
-                                        <h5 class="title"><a href="" class="skin-color">4,35,000+ Accomodations</a></h5>
-                                        <p>We Gaurantee Best Supply Rates From Over 100+ Chains Of Hotels & Resorts .</p>
-                                    </li>
-                                    <li>
-                                        <i class="soap-icon-savings circle"></i>
-                                        <h5 class="title"><a href="#" class="skin-color">Lowest B2B Rates</a></h5>
-                                        <p>We Gaurantee Lowest B2B Rates For You to Create More Margins & Profits .</p>
-                                    </li>
-                                    <li>
-                                        <i class="soap-icon-support circle"></i>
-                                        <h5 class="title"><a href="#" class="skin-color">24/7 Leads</a></h5>
-                                        <p>We Gaurantee 24/7 Targeted Leads From the Travel Market For You .</p>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="col-sm-8">
+                            <small>Hotel Name</small>
+                            <h3>Room 1 (Some Room Type)</h3>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="" id="" class="form-control" />
+                        </div>
+
+
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-sm-2 col-md-2">
+                            <img src="https://via.placeholder.com/70" alt="" srcset="" />
+                        </div>
+                        <div class="col-sm-8 col-md-8">
+                            <small>Hotel Name</small>
+                            <h3>Room 1 (Some Room Type)</h3>
+                        </div>
+                        <div class="col-sm-2 col-md-2">
+                            <input type="text" name="" id="" class="form-control" />
                         </div>
                     </div>
+
+                    <div class="row mt-5">
+
+
+                        <div class="col-sm-2 col-md-2">
+                            <img src="https://via.placeholder.com/70" alt="" srcset="" />
+                        </div>
+
+                        <div class="col-sm-8">
+                            <small>Hotel Name</small>
+                            <h3>Room 1 (Some Room Type)</h3>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="" id="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label for="firstName">First Name</label>
+                                <input type="text" required class="input-text full-width" name="firstname"
+                                    placeholder="Enter Your First Name">
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <label for="LastName">Last Name</label>
+                                <input type="text" required class="input-text full-width"
+                                    placeholder="Enter Your Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label for="email">Email Address</label>
+                                <input type="text" required class="input-text full-width" name="email"
+                                    placeholder="Enter Your Email Address">
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <label for="phone">Phone Number</label>
+                                <input type="text" required class="input-text full-width" name="phone"
+                                    placeholder="Enter Your Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-10">
+                                <label for="address">Address</label>
+                                <input type="textarea" required class="input-text full-width"
+                                    placeholder="Enter Your Full Address">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="" ng-click="addMoreCustomer()">Add Customer</button>
+
                 </div>
-            </section>
 
-    {% include '/hotel/components/footer.html' %}
+                <div class="travelo-box booking-section">
+                    <form class="booking-form" action="/payment" method="post">
+                        <div class="person-information">
+                            <h2>Book Your Hotel Here</h2>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" required class="input-text full-width" name="firstname"
+                                        placeholder="Enter Your First Name">
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="LastName">Last Name</label>
+                                    <input type="text" required class="input-text full-width"
+                                        placeholder="Enter Your Last Name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="email">Email Address</label>
+                                    <input type="text" required class="input-text full-width" name="email"
+                                        placeholder="Enter Your Email Address">
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" required class="input-text full-width" name="phone"
+                                        placeholder="Enter Your Phone Number">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-10">
+                                    <label for="address">Address</label>
+                                    <input type="textarea" required class="input-text full-width"
+                                        placeholder="Enter Your Full Address">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="button btn-medium sky-blue1 uppercase">pay now</button>
+                    </form>
+                </div>
+                <hr />
+            </div>
+            <div class="sidebar col-sm-4 col-md-3">
+                <div class="travelo-box contact-box">
+                    <center>
+                        <h4>Need Some Help ?</h4>
+                        <p>Our Travel Sqaure Executives Are Always Ready Help You 24/7 .</p>
+                        <address class="contact-details">
+                            <span class="contact-phone">+91-9560001807</span><br>
+                            <br>
+                            <a class="contact-email" href="">partnerhelp@travelsqaure.com</a>
+                        </address>
+                    </center>
+                </div>
+                <div class="travelo-box book-with-us-box">
+                    <center>
+                        <h4>Why Join Us ?</h4>
+                    </center>
+                    <ul>
+                        <li>
+                            <i class="soap-icon-hotel-1 circle"></i>
+                            <h5 class="title"><a href="" class="skin-color">4,35,000+ Accomodations</a></h5>
+                            <p>We Gaurantee Best Supply Rates From Over 100+ Chains Of Hotels & Resorts .</p>
+                        </li>
+                        <li>
+                            <i class="soap-icon-savings circle"></i>
+                            <h5 class="title"><a href="#" class="skin-color">Lowest B2B Rates</a></h5>
+                            <p>We Gaurantee Lowest B2B Rates For You to Create More Margins & Profits .</p>
+                        </li>
+                        <li>
+                            <i class="soap-icon-support circle"></i>
+                            <h5 class="title"><a href="#" class="skin-color">24/7 Leads</a></h5>
+                            <p>We Gaurantee 24/7 Targeted Leads From the Travel Market For You .</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    {% endblock %}
+
+{% endblock %}
+
+{% block footJS %}
+<script src="/controllers/bookingController.js"> </script>
+{% endblock %}

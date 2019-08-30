@@ -55,7 +55,7 @@ app.controller("adminHotelDealController", function ($scope, $http) {
             })
             .catch(function (err) {
                 console.log(err);
-                console.log("make sure all the ");
+                console.log("make sure apache server is started");
             });
     };
 
@@ -64,14 +64,21 @@ app.controller("adminHotelDealController", function ($scope, $http) {
 
         $http.get("/api/v1/deal", { params: { hotel_id: $scope.hotelDetails.id, partner_id: selectedPartnerID } })
             .then(function (response) {
-                console.log(response.data);
 
-                $scope.dealsData[$scope.hotelDetails.id][selectedPartnerID] = response.data;
-
+                var dealsDataResponse = response.data.result.deal; 
+                console.log(dealsDataResponse);
+                
                 // we may need to create data structure like hotel_id => partner_id => room_id => (deals data)
                 // it will help in ng-repeat of rooms to show deals according to partner_id
 
+                for(i=0; i< dealsDataResponse.length; i++){
+                    $scope.dealsData[$scope.hotelDetails.id][selectedPartnerID][dealsDataResponse[i].room] = dealsDataResponse[i];
+                }
+
+                console.log($scope.dealsData);
+
                 
+
 
 
             })
