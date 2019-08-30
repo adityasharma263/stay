@@ -300,6 +300,12 @@ class Booking(Base):
 
     booking_no = db.Column(db.String, nullable=True)
     booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    gst_no = db.Column(db.String, nullable=True)
+    business_email = db.Column(db.String, nullable=True)
+    office_address = db.Column(db.String, nullable=True)
+    business_contact_no = db.Column(db.String, nullable=True)
+    contact_no = db.Column(db.String, nullable=True)
+    company_name = db.Column(db.String, nullable=True)
     partner_id = db.Column(db.Integer, nullable=False)
     total_booking_amount = db.Column(db.Integer, nullable=True)
     deals = db.relationship('BookingDeal', backref='booking')
@@ -314,6 +320,7 @@ class Booking(Base):
 class BookingDeal(Base):
 
     __tablename__ = 'booking_deal'
+
 
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
     room = db.relationship('Room', foreign_keys=room_id)
