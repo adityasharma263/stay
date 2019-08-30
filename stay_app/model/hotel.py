@@ -280,10 +280,10 @@ class CartDeal(Base):
     __tablename__ = 'cart_deal'
 
     cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), unique=False)
-    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
     current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
     deal = db.relationship('Deal', foreign_keys=deal_id)
     no_of_deals = db.Column(db.Integer, nullable=True)
 
@@ -300,6 +300,12 @@ class Booking(Base):
 
     booking_no = db.Column(db.String, nullable=True)
     booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    gst_no = db.Column(db.String, nullable=True)
+    business_email = db.Column(db.String, nullable=True)
+    office_address = db.Column(db.String, nullable=True)
+    business_contact_no = db.Column(db.String, nullable=True)
+    contact_no = db.Column(db.String, nullable=True)
+    company_name = db.Column(db.String, nullable=True)
     partner_id = db.Column(db.Integer, nullable=False)
     total_booking_amount = db.Column(db.Integer, nullable=True)
     deals = db.relationship('BookingDeal', backref='booking')
@@ -315,12 +321,14 @@ class BookingDeal(Base):
 
     __tablename__ = 'booking_deal'
 
+
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
     room = db.relationship('Room', foreign_keys=room_id)
     current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
-    selling_price = db.Column(db.Integer, nullable=True)
+    base_booking_price = db.Column(db.Integer, nullable=True)
+    final_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     commission_in_percentage = db.Column(db.Integer, nullable=True)
     margin_price = db.Column(db.Integer, nullable=True)
