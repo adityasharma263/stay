@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from stay_app.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Room, HotelCollection, \
-    CollectionProduct, Booking, PriceCalendar, BookingDeal
+    CollectionProduct, Booking, PriceCalendar, BookingDeal, CartDeal, Cart
 from stay_app import app, db, cors
 # from sqlalchemy import or_
 from sqlalchemy import func
 from slugify import slugify
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema,\
-     RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema, HotelTerminalSchema
+    RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema, HotelTerminalSchema,\
+    CartDealSchema, CartSchema
 import datetime
 import time
 from itertools import cycle
@@ -503,7 +504,6 @@ def deal_api():
             rooms = Room.query.filter(Room.hotel_id == hotel_id).all()
             for room_obj in rooms:
                 room_list.append(room_obj.id)
-            print(room_list)
             q_deal = q_deal.filter(Deal.room_id.in_(room_list))
         if price_start and price_end:
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
@@ -547,7 +547,6 @@ def deal_id(id):
 @app.route('/api/v1/hotel/search', methods=['POST'])
 def hotel_search():
     search = request.json
-    print(search)
     search = search['search']
     cities = []
     names = []
@@ -559,8 +558,6 @@ def hotel_search():
         names.append({"name": hotel_name.name.lower(),
                       "slug": hotel_name.slug if hotel_name.slug else "",
                       "id": hotel_name.id})
-    print(names)
-    # names = json.dumps(names)
     return jsonify({'result': {'cities': list(set(cities)), "names": list((names))}, 'message': "Success", 'error': False})
 
 
@@ -606,3 +603,33 @@ def booking_id(id):
         Booking.delete_db(bookings)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
+
+@app.route('/api/v1/cart', methods=['GET', 'POST'])
+def cart_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        q = db.session.query(Hotel).outerjoin(Room).outerjoin(Deal)
+        data = Cart.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        for cart in data:
+            for deal in cart.cart_deals:
+                hotel = q.filter(Deal.id == deal.deal_id).first()
+            cart.hotel_id = 1
+        result = CartSchema(many=True).dump(data)
+        return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
+    else:
+        cart = request.json
+        cart_deals = cart.get("cart_deals", None)
+        cart.pop('cart_deals', None)
+        cart_post = Cart(**cart)
+        cart_post.save()
+        for deal in cart_deals:
+            deal["cart_id"] = cart_post.id
+            deal_post = CartDeal(**deal)
+            cart_post.cart_deals.append(deal_post)
+            deal_post.save()
+        result = CartSchema().dump(cart_post)
+        return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
