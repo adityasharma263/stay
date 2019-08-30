@@ -280,10 +280,10 @@ class CartDeal(Base):
     __tablename__ = 'cart_deal'
 
     cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), unique=False)
-    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
     current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
     deal = db.relationship('Deal', foreign_keys=deal_id)
     no_of_deals = db.Column(db.Integer, nullable=True)
 
@@ -320,7 +320,8 @@ class BookingDeal(Base):
     current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
-    selling_price = db.Column(db.Integer, nullable=True)
+    base_booking_price = db.Column(db.Integer, nullable=True)
+    final_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     commission_in_percentage = db.Column(db.Integer, nullable=True)
     margin_price = db.Column(db.Integer, nullable=True)
