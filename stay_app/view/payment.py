@@ -27,7 +27,7 @@ def payment():
         data["furl"] = str(app.config["DOMAIN_URL"]) + "/payment/fail"
         data["surl"] = str(app.config["DOMAIN_URL"]) + "/payment/success"
         data['action'] = 'https://sandboxsecure.payu.in/_payment'
-        return render_template("payment/form.html", data=data)
+        return render_template("hotel/payment/form.html", data=data)
 
 
 # generate the hash
@@ -67,11 +67,11 @@ def get_transaction_id():
 @app.route('/payment/success', methods=['GET'])
 def payment_success():
     data = {}
-    return render_template("payment/success.html", data=data)
+    return render_template("hotel/payment/success.html", data=data)
 
 
 # no csrf token require to go to Failure page. This page displays the message and reason of failure.
-@app.route('/payment/fail', methods=['GET'])
+@app.route('hotel/payment/fail', methods=['GET'])
 def payment_failure():
     data = {}
-    return render_template("payment/failure.html", data=data)
+    return render_template("hotel/payment/failure.html", data=data)
