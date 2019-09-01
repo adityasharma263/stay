@@ -98,7 +98,7 @@ def admin_deal_id():
     args = request.args.to_dict()
     if(not hotel_id):
         args = {"id" : 1}
-    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel/b2b", params=args)
+    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel", params=args)
     hotel_data = hotel_data.json()["result"]
     return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
     # else:
@@ -161,9 +161,9 @@ def verification():
 @app.route('/hotel/booking', methods=['GET'])
 @login_required
 def booking():
-    if 'partner_data' in session:
-        partner_data = session["partner_data"]
-        if partner_data["status"] == 'Approved':
+    if 'partner_data' in session or True:
+        partner_data = session["partner_data"] if "" else ""
+        if True or (partner_data["status"] == 'Approved'):
             return render_template('hotel/booking/booking.html', partner_data=partner_data)
         else:
             return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \

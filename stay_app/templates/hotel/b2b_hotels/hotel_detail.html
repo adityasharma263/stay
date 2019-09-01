@@ -228,7 +228,7 @@
                                                     <span class="price"><small style="margin-bottom: 5px;">PER/NIGHT</small>₹ {{deal.price}}</span>
                                                 </div>
                                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px; margin-left: 70px;">
-                                                    <a href="" title="" class="button btn-small sky-blue1 text-center">Book Now</a>
+                                                    <a href="/hotel/booking" title="" class="button btn-small sky-blue1 text-center">Book Now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -307,7 +307,7 @@
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Indoor swimming pool</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.outdoor_swimming_pool %}
+                                            {% if hotel.amenities.swimming %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Outdoor swimming pool</div>
                                             </li>
@@ -486,6 +486,7 @@
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
                                         </ul>
+                                       =
                                     </div>
                                     <div class="tab-pane fade" id="hotel-Booking" >
                                         <h3>Call Hotel</h3>
@@ -524,6 +525,7 @@
                                                 {% endfor %}
                                             <div class="details">
                                                 <h4 ng-cloak class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
+                                                <p><a class="button sky-blue1 full-width uppercase btn-small" >Book Now</a> </p>
                                             </div>
                                         </article>
                                     </div>

@@ -1,97 +1,276 @@
 {% extends '/hotel/components/header.html' %} {% block controller%}bookingController{% endblock %} {% block
     content%}
-   
 
-    <section id="content">
-            <div class="container">
-			
+<style>
+    .mt-5 {
+        margin-top: 7px;
+    }
+
+    body {
+        padding-right: 0 !important
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+</style>
+
+<script src="/js/checklist-model.js"></script>
+
+<section id="content">
+    <div class="container">
         <div class="row">
-                    <div id="main" class="col-sm-6 col-md-9">
-                    <div class="travelo-box booking-section">
-<<<<<<< HEAD:stay_app/templates/hotel/b2b_hotels/booking.html
+            <div id="main" class="col-sm-6 col-md-9">
 
-                        
+                <div class="travelo-box booking-section">
+                    <h2>Rooms in the Cart</h2>
 
-
-            <form class="booking-form" method="post">
-=======
-            <form class="booking-form" action="/payment" method="post">
->>>>>>> 725e2810ca2612270ddb3f98cfcb54d7f8b1758d:stay_app/templates/hotel/booking/booking.html
-                <div class="person-information">
-                    <h2>Book Your Hotel Here</h2>
-                    <div class="form-group row">
-                            <div class="col-sm-6 col-md-5">
-                               <label for="firstName">First Name</label>
-                               <input type="text" required class="input-text full-width" name="firstname"  placeholder="Enter Your First Name">
-                            </div>
-                            <div class="col-sm-6 col-md-5">
-                                   <label for="LastName">Last Name</label>
-                                   <input type="text" required class="input-text full-width" placeholder="Enter Your Last Name">
+                    <div class="flight-list listing-style3 flight">
+                        <article class="box" ng-repeat="cart in cartDetails[0].cart_deals">
+                            <figure class="col-xs-3 col-sm-2">
+                                <img width="140" height="100" ng-src="[[cart.deal.image_url]]">
+                            </figure>
+                            <div class="details col-xs-9 col-sm-10">
+                                <div class="details-wrapper">
+                                    <div class="first-row">
+                                        <div>
+                                            <h4 class="box-title">
+                                                [[cart.deal.room.hotel.name]]<small>[[cart.deal.room.hotel.city]]</small>
+                                            </h4>
+                                            <a class="button btn-mini stop uppercase">Change Deal</a>
+                                            <div class="amenities">
+                                                <i class="soap-icon-wifi circle"></i>
+                                                <i class="soap-icon-entertainment circle"></i>
+                                                <i class="soap-icon-fork circle"></i>
+                                                <i class="soap-icon-suitcase circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="price"><small>TOTAL (INR)</small>10,112</span>
+                                        </div>
+                                    </div>
+                                    <div class="second-row">
+                                        <div class="time">
+                                            <div class="take-off col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i>
+                                                </div>
+                                                <div>
+                                                    <span class="skin-color">Check In</span><br />Wed Nov 13, 2013 7:50
+                                                    Am
+                                                </div>
+                                            </div>
+                                            <div class="landing col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i>
+                                                </div>
+                                                <div>
+                                                    <span class="skin-color">Check Out</span><br />Wed Nov 13, 2013 9:20
+                                                    am
+                                                </div>
+                                            </div>
+                                            <div class="total-time col-sm-4">
+                                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">Rooms & Person</span><br />2 Rooms, 4
+                                                    Adults
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="action">
+                                            <a href="flight-detailed.html"
+                                                class="button btn-small full-width uppercase">Remove Deal</a>
+                                        </div>
+                                    </div>
                                 </div>
-                           </div>
-                 <div class="form-group row">
-                 <div class="col-sm-6 col-md-5">
-                    <label for="email">Email Address</label>
-                    <input type="text" required class="input-text full-width" name="email"  placeholder="Enter Your Email Address">
-                 </div>
-                 <div class="col-sm-6 col-md-5">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" required class="input-text full-width" name="phone" placeholder="Enter Your Phone Number">
-                     </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <h3 class="mt-5">Customer Details</h3>
+
+                    <div class=" mt-5" ng-repeat="customer in customerDetails">
+                        <span class="pull-right bg-danger" style="padding: 7px;font-weight: bolder;"
+                            ng-if="customerDetails.length > 1" ng-click="removeCustomer($index)"
+                            role="button">&times;</span>
+
+                        <form>
+                           
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" required class="input-text full-width" name="firstname"
+                                        ng-model="customer.guest_fist_name" placeholder="Enter Your First Name">
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="LastName">Last Name</label>
+                                    <input type="text" required class="input-text full-width"
+                                        ng-model="customer.guest_last_name" placeholder="Enter Your Last Name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="email">Email Address</label>
+                                    <input type="text" required class="input-text full-width" name="email"
+                                        ng-model="customer.email" placeholder="Enter Your Email Address">
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" required class="input-text full-width" name="phone"
+                                        ng-model="customer.contact_no" placeholder="Enter Your Phone Number">
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row" ng-if="false">
+
+                            <div class="col-sm-6">
+                                <h4>Rooms</h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <button ng-click="addRoomForCustomers($index)" data-toggle="modal"
+                                    data-target="#myModal">Add Room</button>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-if="customersSelectedRooms.rooms[$index]"
+                            ng-repeat="rooms in customersSelectedRooms.rooms[$index]">
+
+
+                            <div class="col-sm-1 checkbox-container">
+                                <input type="checkbox" checklist-model="customersSelectedRooms.rooms"
+                                    checklist-value="cart" />
+                            </div>
+                            <div class="col-sm-3 room-image-container">
+                                <img class="img-responsive" ng-src="[[cart.deal.room.image_url]]" alt="" srcset="">
+
+                            </div>
+                            <div class="col-sm-4">
+                                [[cart.deal.room.hotel.name]]
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+                        <div class="col-sm-12">
+                            <hr style="border-color:#cacaca;" />
+
+                            <center>
+                                <button class="button sky-blue1 full-width uppercase btn-small" ng-click="processBook()">Process Payment</button>
+                            </center>
+                        </div>
+
+                    </div>
+
+                    <button class="" ng-click="addMoreCustomer()" ng-if="false">Add Customer</button>
+
                 </div>
-                <div class="form-group row">
-                        <div class="col-sm-6 col-md-10">
-                            <label for="address">Address</label>
-                                <input type="textarea" required class="input-text full-width" placeholder="Enter Your Full Address">
-                       </div>
-                      </div>
-  	        </div>
-                <button type="submit" class="button btn-medium sky-blue1 uppercase">pay now</button>
+
+
             </div>
 
 
-
-
-
-                                <hr>
-                                
-                            </form>
-                        </div>
-                    <div class="sidebar col-sm-4 col-md-3">
-                            <div class="travelo-box contact-box">
-                                <center><h4>Need Some Help ?</h4>
-                                <p>Our Travel Sqaure Executives Are Always Ready Help You 24/7 .</p>
-                                <address class="contact-details">
-                                    <span class="contact-phone">+91-9560001807</span><br>
-                                    <br>
-                                    <a class="contact-email" href="">partnerhelp@travelsqaure.com</a>
-                                </address></center>
-                            </div>
-                            <div class="travelo-box book-with-us-box">
-                                <center><h4>Why Join Us ?</h4></center>
-                                <ul>
-                                    <li>
-                                        <i class="soap-icon-hotel-1 circle"></i>
-                                        <h5 class="title"><a href="" class="skin-color">4,35,000+ Accomodations</a></h5>
-                                        <p>We Gaurantee Best Supply Rates From Over 100+ Chains Of Hotels & Resorts .</p>
-                                    </li>
-                                    <li>
-                                        <i class="soap-icon-savings circle"></i>
-                                        <h5 class="title"><a href="#" class="skin-color">Lowest B2B Rates</a></h5>
-                                        <p>We Gaurantee Lowest B2B Rates For You to Create More Margins & Profits .</p>
-                                    </li>
-                                    <li>
-                                        <i class="soap-icon-support circle"></i>
-                                        <h5 class="title"><a href="#" class="skin-color">24/7 Leads</a></h5>
-                                        <p>We Gaurantee 24/7 Targeted Leads From the Travel Market For You .</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <div class="sidebar col-sm-4 col-md-3">
+                <div class="travelo-box contact-box" ng-init="finalQunatity = 1">
+                    <center>
+                        <h4
+                            ng-bind="cartDetails[0].cart_deals[0].deal.room.hotel.name+ ' ('+cartDetails[0].cart_deals[0].deal.room.hotel.city+')'">
+                        </h4>
+                        <p ng-bind="cartDetails[0].cart_deals[0].deal.room.room_type">Room Type</p>
+                        <p>Book room for: <input type="number" class=" form-control"
+                                style="width: 40px;display: inline-block;padding: 8px;" ng-model="finalQunatity" 
+                                 ng-change="qunatityChange()" /></p>
+                        <hr />
+                        <p ng-init="finalAmount = finalQunatity * cartDetails[0].cart_deals[0].deal.price;;" >Total Amount: ₹[[finalAmount]]</p>
+                    </center>
+                    <button class="button sky-blue1 full-width uppercase btn-small" ng-click="processBook()" >Process Payment</button>
                 </div>
-            </section>
+                <div class="travelo-box book-with-us-box">
+                    <center>
+                        <h4>Why Join Us ?</h4>
+                    </center>
+                    <ul>
+                        <li>
+                            <i class="soap-icon-hotel-1 circle"></i>
+                            <h5 class="title"><a href="" class="skin-color">4,35,000+ Accomodations</a></h5>
+                            <p>We Gaurantee Best Supply Rates From Over 100+ Chains Of Hotels & Resorts .</p>
+                        </li>
+                        <li>
+                            <i class="soap-icon-savings circle"></i>
+                            <h5 class="title"><a href="#" class="skin-color">Lowest B2B Rates</a></h5>
+                            <p>We Gaurantee Lowest B2B Rates For You to Create More Margins & Profits .</p>
+                        </li>
+                        <li>
+                            <i class="soap-icon-support circle"></i>
+                            <h5 class="title"><a href="#" class="skin-color">24/7 Leads</a></h5>
+                            <p>We Gaurantee 24/7 Targeted Leads From the Travel Market For You .</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    {% include '/hotel/components/footer.html' %}
+<div id="myModal" class="modal " role="dialog">
+    <div class="modal-dialog">
 
-    {% endblock %}
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Rooms</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" ng-repeat="cart in cartDetails[0].cart_deals">
+                    <div class="col-sm-1 checkbox-container">
+                        <input type="checkbox" checklist-model="customersSelectedRooms[customerDetailsArrayIndex]"
+                            checklist-value="cart" />
+                    </div>
+                    <div class="col-sm-3 room-image-container">
+                        <img class="img-responsive" ng-src="[[cart.deal.room.image_url]]" alt="" srcset="">
+                    </div>
+                    <div class="col-sm-4">
+                        [[cart.deal.room.hotel.name]]
+                    </div>
+
+                    <div class="col-sm-4">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <button class="btn"><i class="fa fa-minus"></i></button>
+                                <input class="form-control" ng-model="cart.customersSelectedRoomsQuantity" type="number"
+                                    size="1" style="width: 45px;" required>
+                                <button class="btn"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal"
+                    1ng-disabled="!customersSelectedRooms.rooms.length || !customersSelectedRooms.rooms[0].customersSelectedRoomsQuantity"
+                    ng-click="rooomsAdded()">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="repsonse" >
+
+</div>
+
+
+
+{% endblock %}
+
+{% block footJS %}
+<script src="/controllers/bookingController.js"> </script>
+{% endblock %}

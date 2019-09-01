@@ -5,7 +5,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
     $scope.roomPriceStructureB2B = {};
 
 
-    $http.get("/api/v1/hotel/b2b")
+    $http.get("/api/v1/hotel")
         .then(function (response) {
 
             $scope.hotelDetails = response.data.result.hotel;
@@ -19,19 +19,14 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
 
         $scope.getRoomPriceByID  = function(roomID){
 
-            // $http.get("/api/v1/deal",
-            // { params: { room_id: roomID, order_by : loadRoomPriceFor} })
-            // .then(function(response) {
-            //     console.log("loadRoomPriceFor = ",response.data);
-            // }).catch(function(err) {
-            //     console.log(err);
-            // });
-
-
+            $http.get("/api/v1/deal",
+            { params: { room_id: roomID, b2b_selected_price: true}})
+            .then(function(response) {
+                roomPriceStructureB2B[roomID] = response.data;
+            }).catch(function(err) {
+                console.log(err);
+            });
             console.log("roomID = ",roomID);
-
-
-
         };
     
 
@@ -68,13 +63,13 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
 
         console.log("hotelId = ", roomID);
 
-        $http.get("/api/v1/deal",
-            { params: { room_id: roomID, order_by : loadRoomPriceFor} })
-            .then(function(response) {
-                console.log("loadRoomPriceFor = ",response.data);
-            }).catch(function(err) {
-                console.log(err);
-            });
+        // $http.get("/api/v1/deal",
+        //     { params: { room_id: roomID, order_by : loadRoomPriceFor} })
+        //     .then(function(response) {
+        //         console.log("loadRoomPriceFor = ",response.data);
+        //     }).catch(function(err) {
+        //         console.log(err);
+        //     });
 
 
 

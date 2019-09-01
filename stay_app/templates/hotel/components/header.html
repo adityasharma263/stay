@@ -25,13 +25,10 @@
     <meta name="format-detection" content="7428558566">
     <link rel="shortcut icon" href="" type="image/x-icon">
     <!-- Theme Styles -->
-    <link rel="stylesheet" href="http://thetravelsquare.in/files/bootstrap.min.css">
-    <link rel="stylesheet" href="http://thetravelsquare.in/files/font-awesome.min.css">
-    <link rel="stylesheet" href="http://thetravelsquare.in/files/animate.min.css">
-    
-    <!-- Current Page Styles -->
-    <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    <link rel="stylesheet" href="/files/bootstrap.min.css">
+    <link rel="stylesheet" href="/files/font-awesome.min.css">
+    <link rel="stylesheet" href="/files/animate.min.css">
+    <link href="stylesheet" href="/font/flaticon.css">    
     <link rel="stylesheet" type="text/css" href="/styles.css" media="screen">
 
     <link id="main-style" rel="stylesheet" href="http://thetravelsquare.in/files/style-light-yellow.css">    
@@ -84,8 +81,9 @@
                                 <li><a href="/logout.php">Log Out</a></li>
                         </ul>
                         </li>
-
-                            <li><a href="/booking-cart"><img height="27" width="45" src="http://thetravelsquare.in/images/cart-icon.jpg"></a></li>
+                        <li><a href="/booking-cart"></a></li>
+                            </li>
+                            <li><a href="/booking-cart"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -100,7 +98,7 @@
 
                         <h1 class="navbar-brand" style="height: 20%;">
                             <a href="index.html" title="The Travel Square">
-                                <img src="  /images/the-travel-square-india-logo.png " alt="The Travel Square">
+                                
                             </a>
                         </h1>
 
@@ -175,7 +173,7 @@
             <!-- Javascript -->
             <script type="text/javascript" src="/js/jquery-1.11.1.min.js.download"></script>
             <script type="text/javascript" src="/js/jquery.noconflict.js.download"></script>
-            <script type="text/javascript" src="/js/modernizr.2.7.1.min.js.download"></script>
+            
             <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js.download"></script>
             <script type="text/javascript" src="/js/jquery.placeholder.js.download"></script>
             <script type="text/javascript" src="/js/jquery-ui.1.10.4.min.js.download"></script>
@@ -210,5 +208,6 @@
         </div>
         <script>var api_url = "{{config.API_URL}}"</script>
         <script type="text/javascript" src="/app.js"></script>
+        {% block footJS%} {% endblock %}
     </body>
 </html>
