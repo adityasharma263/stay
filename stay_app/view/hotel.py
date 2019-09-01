@@ -34,6 +34,7 @@ app.json_encoder = MyJSONEncoder
 @app.route('/api/v1/hotel/<string:type>', methods=['GET', 'POST'])
 def hotel_api(type):
     if request.method == 'GET':
+        print(type, "bgrgrbgfvnfvjvgfjbvhfkjkgr")
         args = request.args.to_dict()
         args.pop('b2b_lowest_price', None)
         args.pop('lowest_price', None)
@@ -53,8 +54,9 @@ def hotel_api(type):
         args.pop('per_page', None)
         check_in = request.args.get('ci')
         check_out = request.args.get('co')
-        check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
-        check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
+        if check_in and check_out:
+            check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
+            check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
         args.pop('ci', None)
         args.pop('co', None)
         room_list = []
@@ -85,7 +87,7 @@ def hotel_api(type):
                                     if i < len(price_list):
                                         price = price_list[i].b2c_selling_price + price
                                     else:
-                                        if deal.b2b_selling_price:
+                                        if deal.b2c_selling_price:
                                             price = deal.b2c_selling_price + price
                             price = int(price/delta.days)
                         deal.price = price

@@ -175,17 +175,17 @@
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
                                 <div ng-repeat="room in hotel.rooms">
-                                    <div class="ng-cloak">
-                                        <article class="box" ng-if="room.b2b_lowest_price_room">
-                                            <div ng-repeat = "deal in room.deals" ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false" >
+                                    <div class="ng-cloak" ng-repeat="deal in room.deals">
+                                        <article class="box"  ng-if="deal.b2b_lowest_price">
+                                            <div ng-repeat = "deal in room.deals" ng-if="deal.ts_exclusive" >
                                                 <a href="/hotel/[[hotel.slug]]">
                                                 <figure class="col-sm-5 col-md-4" style="padding: 15px;">
-                                                    <img data-toggle="modal"  style="height:100%; width:100%; cursor: pointer" src="[[hotel.images[0].image_url]]" alt="Travel Square">
+                                                    <img data-toggle="modal"  style="height:100%; width:100%; cursor: pointer" src="http://[[room.image_url]]" alt="Travel Square">
                                                 </figure>
                                                 </a>
                                                 <div class="details col-sm-7 col-md-8">
                                                 <div>
-                                                    <a href="/hotel/[[hotel.slug]]">
+                                                  <a href="/hotel/[[hotel.slug]]">  
                                                     <div class="ng-cloak" style="margin-top: 5px;">
                                                         <h3 style="cursor: pointer;" class="box-title">[[hotel.name]]
                                                             <small>
@@ -212,7 +212,6 @@
                                                                 <i class="soap-icon-couples circle" aria-hidden="true"></i>
                                                                 <!-- <i class="soap-icon-restaurant circle" ng-if="hotel.amenities.restaurant" aria-hidden="true"></i> -->
                                                                 <i class="soap-icon-fitnessfacility circle" aria-hidden="true"></i>
-                                                                <i class="soap-icon-swimming circle" aria-hidden="true"></i>
                                                                 <i class="soap-icon-swimming circle" aria-hidden="true"></i>
                                                                 </div>
                                                             </div>
