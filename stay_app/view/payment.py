@@ -11,18 +11,18 @@ from random import randint
 @app.route('/payment', methods=['POST'])
 def payment():
     if request.method == 'POST':
-        booking_details = request.form.to_dict()
+        booking_details = request.json
         data = {}
         txnid = get_transaction_id()
         hash_ = generate_hash(txnid, booking_details)
-        data["amount"] = float(1)
+        data["amount"] = float(booking_details["total_booking_amount"])
         data["productinfo"] = "Message showing product details."
         data["key"] = str(app.config["KEY"])
         data["txnid"] = txnid
         data["hash"] = hash_
-        data["firstname"] = booking_details["firstname"]
-        data["email"] = booking_details["email"]
-        data["phone"] = booking_details["phone"]
+        data["firstname"] = booking_details["company_name"]
+        data["email"] = booking_details["business_email"]
+        data["phone"] = booking_details["contact_no"]
         data["service_provider"] = "payu_paisa"
         data["furl"] = str(app.config["DOMAIN_URL"]) + "/payment/fail"
         data["surl"] = str(app.config["DOMAIN_URL"]) + "/payment/success"
@@ -49,7 +49,7 @@ def generate_hash(txnid, booking_details):
 def get_hash_string(txnid, booking_details):
     hash_string = str(app.config["KEY"])+"|"+txnid + "|" + str(
         float(1)) + "|" + "Message showing product details." + "|"
-    hash_string += str(booking_details["firstname"]) + "|" + str(booking_details["email"]) + "|"
+    hash_string += str(booking_details["company_name"]) + "|" + str(booking_details["business_email"]) + "|"
     hash_string += "||||||||||" + str(app.config["SALT"])
     return hash_string
 
