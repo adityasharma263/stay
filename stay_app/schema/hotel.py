@@ -19,71 +19,6 @@ from stay_app import ma
 from marshmallow_enum import EnumField
 from stay_app.schema.base import safe_execute
 
-#-------------------------------------------------------cart--------------------------------------------
-
-
-class CartHotelSchema(ma.ModelSchema):
-    class Meta:
-        model = Hotel
-        exclude = ('updated_at', 'created_at', "star", "rating", "phone", "desc", "address",
-                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
-                   "longitude", "longitude", "country", "category")
-
-
-class CartRoomSchema(ma.ModelSchema):
-    meal_plan = EnumField(MealPlan, by_value=True)
-    hotel = ma.Nested(CartHotelSchema, many=False)
-
-    class Meta:
-        model = Room
-        exclude = ('updated_at', 'created_at')
-
-
-class CartDealSchema(ma.ModelSchema):
-    room = ma.Nested(CartRoomSchema, many=False)
-
-    class Meta:
-        model = Deal
-        exclude = ('updated_at', 'created_at')
-
-
-class CartItemSchema(ma.ModelSchema):
-    deal = ma.Nested(CartDealSchema, many=False)
-
-    class Meta:
-        model = CartDeal
-        exclude = ('updated_at', 'created_at')
-
-
-class CartSchema(ma.ModelSchema):
-    cart_deals = ma.Nested(CartItemSchema, many=True)
-
-    class Meta:
-        model = Cart
-        exclude = ('updated_at', 'created_at')
-
-
-
-
-#-------------------------------------------------------Terminal-------------------------------------------
-
-
-class RoomTerminalSchema(ma.ModelSchema):
-    meal_plan = EnumField(MealPlan, by_value=True)
-
-    class Meta:
-        model = Room
-        exclude = ('updated_at', 'created_at', "max_no_of_guest", "image_url", "facilities", "deals")
-
-
-class HotelTerminalSchema(ma.ModelSchema):
-    rooms = ma.Nested(RoomTerminalSchema, many=True)
-
-    class Meta:
-        model = Hotel
-        exclude = ('updated_at', "city", 'created_at', "star", "rating", "phone", "desc", "address",
-                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
-                   "longitude", "longitude", "country", "category")
 
 
 #-------------------------------------------------------Hotel-------------------------------------------
@@ -169,6 +104,106 @@ class HotelCollectionSchema(ma.ModelSchema):
     class Meta:
         model = HotelCollection
         exclude = ('updated_at', 'created_at', 'hotel')
+
+#-------------------------------------------------------cart--------------------------------------------
+
+
+class CartHotelSchema(ma.ModelSchema):
+    class Meta:
+        model = Hotel
+        exclude = ('updated_at', 'created_at', "star", "rating", "phone", "desc", "address",
+                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
+                   "longitude", "longitude", "country", "category")
+
+
+class CartRoomSchema(ma.ModelSchema):
+    meal_plan = EnumField(MealPlan, by_value=True)
+    hotel = ma.Nested(CartHotelSchema, many=False)
+
+    class Meta:
+        model = Room
+        exclude = ('updated_at', 'created_at', "deals", "facilities")
+
+
+class CartDealSchema(ma.ModelSchema):
+    room = ma.Nested(CartRoomSchema, many=False)
+
+    class Meta:
+        model = Deal
+        exclude = ('updated_at', 'created_at')
+
+
+class CartItemSchema(ma.ModelSchema):
+    deal = ma.Nested(CartDealSchema, many=False)
+
+    class Meta:
+        model = CartDeal
+        exclude = ('updated_at', 'created_at')
+
+
+class CartSchema(ma.ModelSchema):
+    cart_deals = ma.Nested(CartItemSchema, many=True)
+
+    class Meta:
+        model = Cart
+        exclude = ('updated_at', 'created_at')
+
+#-------------------------------------------------------Terminal-------------------------------------------
+
+
+
+
+
+
+class RoomTerminalSchema(ma.ModelSchema):
+    meal_plan = EnumField(MealPlan, by_value=True)
+
+    class Meta:
+        model = Room
+        exclude = ('updated_at', 'created_at', "max_no_of_guest", "image_url", "facilities", "deals")
+
+
+class HotelTerminalSchema(ma.ModelSchema):
+    rooms = ma.Nested(RoomTerminalSchema, many=True)
+
+    class Meta:
+        model = Hotel
+        exclude = ('updated_at', "city", 'created_at', "star", "rating", "phone", "desc", "address",
+                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
+                   "longitude", "longitude", "country", "category")
+
+
+#------------------------------------------------------- B2B List view ------------------------------------------------------
+
+
+class DealSchema(ma.ModelSchema):
+
+    class Meta:
+        model = Deal
+        exclude = ('updated_at', 'created_at', "website", "price_calender" "b2c_selling_price",
+                   "b2b_final_price", "base_price", "commission_in_percentage", "b2b_margin_price",
+                   "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal", "room_id", "website_id")
+
+
+class RoomB2BListSchema(ma.ModelSchema):
+    meal_plan = EnumField(MealPlan, by_value=True)
+    deals = ma.Nested(DealSchema, many=True)
+
+    class Meta:
+        model = Room
+        exclude = ('updated_at', 'created_at', "facilities")
+
+
+class HotelB2BListSchema(ma.ModelSchema):
+    amenities = ma.Nested(AmenitySchema, many=False)
+    rooms = ma.Nested(RoomB2BListSchema, many=True)
+
+    class Meta:
+        model = Hotel
+        exclude = ('updated_at', 'created_at', "phone", "desc", "address",
+                   "images", "latitude", "collection_id", "hotel_collection",
+                   "longitude", "longitude", "country", "category")
+
 
 
 #-------------------------------------------------------Booking-------------------------------------------
