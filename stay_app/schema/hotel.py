@@ -176,22 +176,22 @@ class HotelTerminalSchema(ma.ModelSchema):
 #------------------------------------------------------- B2B List view ------------------------------------------------------
 
 
-class DealB2BSchema(ma.ModelSchema):
+class DealB2BListSchema(ma.ModelSchema):
 
     class Meta:
         model = Deal
-        exclude = ('updated_at', 'created_at', "website", "price_calender" "b2c_selling_price",
-                   "b2b_final_price", "base_price", "commission_in_percentage", "b2b_margin_price",
-                   "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal", "room_id", "website_id")
+        exclude = ('updated_at', 'created_at', "website", "price_calendar" "b2c_selling_price",
+                   "b2c_final_price", "base_price", "commission_in_percentage", "b2b_margin_price", "b2b_selling_price",
+                   "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal", "room", "website_id")
 
 
 class RoomB2BListSchema(ma.ModelSchema):
     meal_plan = EnumField(MealPlan, by_value=True)
-    deals = ma.Nested(DealB2BSchema, many=True)
+    deals = ma.Nested(DealB2BListSchema, many=True)
 
     class Meta:
         model = Room
-        exclude = ('updated_at', 'created_at', "facilities")
+        exclude = ('updated_at', 'created_at', "facilities", "hotel")
 
 
 class HotelB2BListSchema(ma.ModelSchema):
