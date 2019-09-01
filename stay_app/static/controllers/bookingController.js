@@ -32,7 +32,7 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
                     "deal": {
                         "id": 1,
                         "partner_id": 1,
-                        "price": 150,
+                        "price": 7000,
                         "room": {
                             "hotel": {
                                 "city": "delhi",
@@ -40,40 +40,12 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
                                 "name": "leela"
                             },
                             "id": 1,
-                            "image_url": "https://seoimgak.mmtcdn.com/blog/sites/default/files/images/hotels-in-mahabaleshwar-saj%20resort.jpg",
+                            "image_url": "https://www.theleela.com/new-delhi-hotel-images/rooms-and-suites/premiere-room.jpg",
                             "max_no_of_guest": null,
                             "meal_plan": "Continental Plan",
                             "room_type": null
                         },
                         "sold_out": false,
-                    },
-
-                },
-                {
-                    "cart": 1,
-                    "ci_date": "2019-08-30T10:51:20.309919+00:00",
-                    "co_date": "2019-08-30T10:51:20.309919+00:00",
-                    "current_deal_amount": 200,
-                    "id": 2,
-                    "no_of_deals": 1,
-                    "deal": {
-
-                        "id": 2,
-                        "partner_id": 1,
-                        "price": 200,
-                        "room": {
-                            "hotel": {
-                                "city": "delhi",
-                                "id": 1,
-                                "name": "leela"
-                            },
-                            "id": 1,
-                            "image_url": "https://seoimgak.mmtcdn.com/blog/sites/default/files/images/hotels-in-mahabaleshwar-saj%20resort.jpg",
-                            "max_no_of_guest": null,
-                            "meal_plan": "Continental Plan",
-                            "room_type": null
-                        },
-                        "sold_out": false
                     },
 
                 }
