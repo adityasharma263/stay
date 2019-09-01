@@ -211,10 +211,6 @@ def business_hotel_list():
 @app.route('/hotel/<string:slug>', methods=['GET'])
 @login_required
 def business_hotel_detail(slug):
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c9540b0204a8a38a070eb73da8164e0ee58c751
     # if 'partner_data' in session:
     #     partner_data = "name"
     #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/b2b"

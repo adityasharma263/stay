@@ -240,7 +240,7 @@
                                         <h2>Hotel Amenities</h2>
                                         <p>Hotel Have  All of These Amenities</p>
                                         <ul class="amenities clearfix style2">
-                                            
+                                            {% if hotel.amenities.twenty_four_hr_room_service %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2">
                                                     <i class="soap-icon-24-hrroomservice circle" >
@@ -264,41 +264,51 @@
                                                     </i>
                                                     24/7 Room Service</div>
                                             </li>
-                                            
+                                            {% endif %}
+                                            {% if hotel.amenities.user %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-user circle" ></i>24/7 reception</div>
                                             </li>
+                                            {% endif %}
+                                            {% if hotel.amenities.parking%}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-parking circle"></i>Car Park</div>
                                             </li>
-
+                                            {% endif %}
+                                            {% if hotel.amenities.conference %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-conference circle"></i>Conference Rooms</div>
                                             </li>
-
+                                            {% endif %}
+                                            {% if hotel.amenities.fitnessfacility %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Express check-in / out</div>
                                             </li>
-
+                                            {% endif %}
+                                            {% if hotel.amenities.winebar %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-winebar circle"></i>Hotel bar</div>
                                             </li>
-
+                                            {% endif %}
+                                            {% if hotel.amenities.elevator %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Elevator in Building</div>
                                             </li>
-
+                                            {% endif%}
+                                            {% if hotel.amenities.shopping %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-shopping-2 circle"></i>Laundry service</div>
                                             </li>
-
+                                            {% endif %}
+                                            {% if hotel.amenities.swimming %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Indoor swimming pool</div>
                                             </li>
-
+                                            {% if hotel.amenities.swimming %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Outdoor swimming pool</div>
                                             </li>
+                                            {% endif %}
 
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-baggage-5 circle"></i>Porter service</div>
