@@ -176,7 +176,7 @@ class HotelTerminalSchema(ma.ModelSchema):
 #------------------------------------------------------- B2B List view ------------------------------------------------------
 
 
-class DealSchema(ma.ModelSchema):
+class DealB2BSchema(ma.ModelSchema):
 
     class Meta:
         model = Deal
@@ -187,7 +187,7 @@ class DealSchema(ma.ModelSchema):
 
 class RoomB2BListSchema(ma.ModelSchema):
     meal_plan = EnumField(MealPlan, by_value=True)
-    deals = ma.Nested(DealSchema, many=True)
+    deals = ma.Nested(DealB2BSchema, many=True)
 
     class Meta:
         model = Room
