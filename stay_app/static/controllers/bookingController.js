@@ -201,8 +201,8 @@ $scope.processBook = function() {
 
     console.log($scope.bookingData);
 
-    return;
-    $http.post("/api/v1/booking", $scope.bookingData)
+    // return;
+    $http.post("/payment", $scope.bookingData)
     .then(function(response) {
         console.log(response.data);
 
