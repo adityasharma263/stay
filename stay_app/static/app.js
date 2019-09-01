@@ -138,7 +138,7 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.imagesData = {};
         $scope.min = 0;
         $scope.max = 200000;
-
+        
         $scope.showBusinessDetail=function(hotel_id){
             window.open('/business/hotel/'+hotel_id,'_self');
             console.log("hotel id",hotel_id);
@@ -185,7 +185,7 @@ var app = angular.module('stay', ['angular.filter'])
 
             $http({
                 method: 'GET',
-                url: searchURL
+                url: api_url + '/api/v1/hotel/list/b2b'
             }).then(function (res) {
 
                 if (cb) {
