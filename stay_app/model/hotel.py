@@ -327,7 +327,7 @@ class BookingDeal(Base):
     current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
-    base_booking_price = db.Column(db.Integer, nullable=True)
+    # base_booking_price = db.Column(db.Integer, nullable=True)
     final_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     commission_in_percentage = db.Column(db.Integer, nullable=True)

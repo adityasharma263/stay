@@ -17,7 +17,6 @@
         appearance: none;
         margin: 0;
     }
-
 </style>
 
 <script src="/js/checklist-model.js"></script>
@@ -90,57 +89,42 @@
                         </article>
                     </div>
 
-
-
-                    <!-- <div class="row" ng-repeat="cart in cartDetails">
-
-                        <div class="col-sm-2">
-                            <img src="https://via.placeholder.com/70" alt="" srcset="" />
-                        </div>
-                        <div class="col-sm-8">
-                            <small>Hotel Name</small>
-                            <h3>Room 1 (Some Room Type)</h3>
-
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" name="" id="" class="form-control" />
-                        </div>
-
-
-                    </div> -->
-
                     <h3 class="mt-5">Customer Details</h3>
 
                     <div class=" mt-5" ng-repeat="customer in customerDetails">
-                        <span class="pull-right bg-danger" style="padding: 7px;font-weight: bolder;" ng-if="customerDetails.length > 1"
-                            ng-click="removeCustomer($index)" role="button">&times;</span>
+                        <span class="pull-right bg-danger" style="padding: 7px;font-weight: bolder;"
+                            ng-if="customerDetails.length > 1" ng-click="removeCustomer($index)"
+                            role="button">&times;</span>
 
-                        <div class="form-group row">
-                            <div class="col-sm-6 col-md-5">
-                                <label for="firstName">First Name</label>
-                                <input type="text" required class="input-text full-width" name="firstname"
-                                    ng-model="customer.guest_fist_name" placeholder="Enter Your First Name">
+                        <form>
+                           
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" required class="input-text full-width" name="firstname"
+                                        ng-model="customer.guest_fist_name" placeholder="Enter Your First Name">
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="LastName">Last Name</label>
+                                    <input type="text" required class="input-text full-width"
+                                        ng-model="customer.guest_last_name" placeholder="Enter Your Last Name">
+                                </div>
                             </div>
-                            <div class="col-sm-6 col-md-5">
-                                <label for="LastName">Last Name</label>
-                                <input type="text" required class="input-text full-width"
-                                    ng-model="customer.guest_last_name" placeholder="Enter Your Last Name">
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="email">Email Address</label>
+                                    <input type="text" required class="input-text full-width" name="email"
+                                        ng-model="customer.email" placeholder="Enter Your Email Address">
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" required class="input-text full-width" name="phone"
+                                        ng-model="customer.contact_no" placeholder="Enter Your Phone Number">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 col-md-5">
-                                <label for="email">Email Address</label>
-                                <input type="text" required class="input-text full-width" name="email"
-                                    ng-model="customer.email" placeholder="Enter Your Email Address">
-                            </div>
-                            <div class="col-sm-6 col-md-5">
-                                <label for="phone">Phone Number</label>
-                                <input type="text" required class="input-text full-width" name="phone"
-                                    ng-model="customer.contact_no" placeholder="Enter Your Phone Number">
-                            </div>
-                        </div>
+                        </form>
 
-                        <div class="row" ng-if="false" >
+                        <div class="row" ng-if="false">
 
                             <div class="col-sm-6">
                                 <h4>Rooms</h4>
@@ -151,21 +135,21 @@
                             </div>
                         </div>
 
-                        <div class="row" ng-if="customersSelectedRooms.rooms[$index]" ng-repeat="rooms in customersSelectedRooms.rooms[$index]">
+                        <div class="row" ng-if="customersSelectedRooms.rooms[$index]"
+                            ng-repeat="rooms in customersSelectedRooms.rooms[$index]">
 
-                            
-                                <div class="col-sm-1 checkbox-container">
-                                        <input type="checkbox" checklist-model="customersSelectedRooms.rooms" checklist-value="cart" />
-                                    </div>
-                                    <div class="col-sm-3 room-image-container">
-                                        <img class="img-responsive"
-                                            ng-src="[[cart.deal.room.image_url]]"
-                                            alt="" srcset="">
-                
-                                    </div>
-                                    <div class="col-sm-4">
-                                        [[cart.deal.room.hotel.name]]
-                                    </div>
+
+                            <div class="col-sm-1 checkbox-container">
+                                <input type="checkbox" checklist-model="customersSelectedRooms.rooms"
+                                    checklist-value="cart" />
+                            </div>
+                            <div class="col-sm-3 room-image-container">
+                                <img class="img-responsive" ng-src="[[cart.deal.room.image_url]]" alt="" srcset="">
+
+                            </div>
+                            <div class="col-sm-4">
+                                [[cart.deal.room.hotel.name]]
+                            </div>
 
 
 
@@ -177,12 +161,14 @@
                         <div class="col-sm-12">
                             <hr style="border-color:#cacaca;" />
 
-                            <center><button class="btn"  style="padding: auto 50px" >Proceed to Pay</button></center>
+                            <center>
+                                <button class="button sky-blue1 full-width uppercase btn-small" ng-click="processBook()">Process Payment</button>
+                            </center>
                         </div>
 
                     </div>
 
-                    <button class="" ng-click="addMoreCustomer()" ng-if="false" >Add Customer</button>
+                    <button class="" ng-click="addMoreCustomer()" ng-if="false">Add Customer</button>
 
                 </div>
 
@@ -191,16 +177,19 @@
 
 
             <div class="sidebar col-sm-4 col-md-3">
-                <div class="travelo-box contact-box">
+                <div class="travelo-box contact-box" ng-init="finalQunatity = 1">
                     <center>
-                        <h4>Need Some Help ?</h4>
-                        <p>Our Travel Sqaure Executives Are Always Ready Help You 24/7 .</p>
-                        <address class="contact-details">
-                            <span class="contact-phone">+91-9560001807</span><br>
-                            <br>
-                            <a class="contact-email" href="">partnerhelp@travelsqaure.com</a>
-                        </address>
+                        <h4
+                            ng-bind="cartDetails[0].cart_deals[0].deal.room.hotel.name+ ' ('+cartDetails[0].cart_deals[0].deal.room.hotel.city+')'">
+                        </h4>
+                        <p ng-bind="cartDetails[0].cart_deals[0].deal.room.room_type">Room Type</p>
+                        <p>Book room for: <input type="number" class=" form-control"
+                                style="width: 40px;display: inline-block;padding: 8px;" ng-model="finalQunatity" 
+                                 ng-change="qunatityChange()" /></p>
+                        <hr />
+                        <p ng-init="finalAmount = finalQunatity * cartDetails[0].cart_deals[0].deal.price;;" >Total Amount: ₹[[finalAmount]]</p>
                     </center>
+                    <button class="button sky-blue1 full-width uppercase btn-small" ng-click="processBook()" >Process Payment</button>
                 </div>
                 <div class="travelo-box book-with-us-box">
                     <center>
@@ -239,18 +228,13 @@
                 <h4 class="modal-title">Add Rooms</h4>
             </div>
             <div class="modal-body">
-
-
                 <div class="row" ng-repeat="cart in cartDetails[0].cart_deals">
-
                     <div class="col-sm-1 checkbox-container">
-                        <input type="checkbox" checklist-model="customersSelectedRooms[customerDetailsArrayIndex]" checklist-value="cart" />
+                        <input type="checkbox" checklist-model="customersSelectedRooms[customerDetailsArrayIndex]"
+                            checklist-value="cart" />
                     </div>
                     <div class="col-sm-3 room-image-container">
-                        <img class="img-responsive"
-                            ng-src="[[cart.deal.room.image_url]]"
-                            alt="" srcset="">
-
+                        <img class="img-responsive" ng-src="[[cart.deal.room.image_url]]" alt="" srcset="">
                     </div>
                     <div class="col-sm-4">
                         [[cart.deal.room.hotel.name]]
@@ -260,8 +244,8 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <button class="btn"><i class="fa fa-minus"></i></button>
-                                <input class="form-control" 
-                                   ng-model="cart.customersSelectedRoomsQuantity" type="number" size="1" style="width: 45px;"  required>
+                                <input class="form-control" ng-model="cart.customersSelectedRoomsQuantity" type="number"
+                                    size="1" style="width: 45px;" required>
                                 <button class="btn"><i class="fa fa-plus"></i></button>
                             </div>
                         </form>
@@ -270,15 +254,17 @@
                 </div>
             </div>
             <div class="modal-footer">
-
-                <button type="button" class="btn" data-dismiss="modal" 
-                1ng-disabled="!customersSelectedRooms.rooms.length || !customersSelectedRooms.rooms[0].customersSelectedRoomsQuantity"
-                 ng-click="rooomsAdded()" >Add</button>
+                <button type="button" class="btn" data-dismiss="modal"
+                    1ng-disabled="!customersSelectedRooms.rooms.length || !customersSelectedRooms.rooms[0].customersSelectedRoomsQuantity"
+                    ng-click="rooomsAdded()">Add</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
+</div>
+
+<div id="repsonse" >
+
 </div>
 
 

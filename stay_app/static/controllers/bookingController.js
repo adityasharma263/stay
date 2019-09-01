@@ -133,7 +133,87 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
     };
 
 
+    $scope.bookingData = {
+        
+		"business_contact_no": null, 
+		"gst_no": null, 
+        "office_address": null, 
+        "business_email": null, 
+        "company_name": null, 
+        "contact_no": null, 
+        "deals": [
+          {
+            "base_booking_price": null, 
+            "base_price": null, 
+            "ci_date": null, 
+            "co_date": null, 
+            "commission_in_percentage": null, 
+            "contact_no": null, 
+            "current_deal_amount": null, 
+            "email": null, 
+            "final_price": null, 
+            "guest_fist_name": null, 
+            "guest_last_name": null, 
+            "margin_price": null, 
+            "partner_id": 2, //jis partner se kri h 
+            "room_id": 1, 
+            "ts_exclusive": null
+          }
+        ], 
+        "partner_id": 1, //jis partner ne kri h jo login h partner
+        "total_booking_amount": null
+      };
 
+
+$scope.finalAmount;
+
+
+$scope.qunatityChange = function() {
+    $scope.finalAmount = $scope.finalQunatity * $scope.cartDetails[0].cart_deals[0].deal.price;
+}
+
+
+
+
+$scope.processBook = function() {
+
+    $scope.bookingData.business_email 
+    = $scope.bookingData.deals[0].email =
+    $scope.customerDetails[0].email;
+
+    $scope.bookingData.deals[0].guest_fist_name =
+    $scope.customerDetails[0].guest_fist_name;
+
+    $scope.bookingData.deals[0].guest_last_name =
+    $scope.customerDetails[0].guest_last_name;
+
+    $scope.bookingData.contact_no 
+    = $scope.bookingData.deals[0].contact_no
+    = $scope.customerDetails[0].contact_no;
+
+    $scope.bookingData.company_name = $scope.customerDetails[0].guest_fist_name +" "+ $scope.customerDetails[0].guest_last_name;
+    
+    
+    $scope.bookingData.deals[0].room_id;
+
+    $scope.bookingData.total_booking_amount = $scope.finalAmount;
+
+
+    console.log($scope.bookingData);
+
+    return;
+    $http.post("/api/v1/booking", $scope.bookingData)
+    .then(function(response) {
+        console.log(response.data);
+
+        $("#repsonse").html(response.data);
+
+
+    })
+    .catch(function(err) {
+        console.log("err = ", err);
+    })
+}
 
 
 
