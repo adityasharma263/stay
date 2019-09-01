@@ -185,6 +185,7 @@ class DealB2BSchema(ma.ModelSchema):
                    "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal", "room_id", "website_id")
 
 
+
 class RoomB2BListSchema(ma.ModelSchema):
     meal_plan = EnumField(MealPlan, by_value=True)
     deals = ma.Nested(DealB2BSchema, many=True)
