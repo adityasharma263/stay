@@ -526,7 +526,8 @@ def deal_api():
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         deal = request.json
-        price_calendar = deal.get("price_calendar", None)
+        print("deal = ", deal)
+        price_calendar = deal.get("price_calendar", [])
         deal.pop('price_calendar', None)
         deal_post = Deal(**deal)
         deal_post.save()
@@ -542,6 +543,7 @@ def deal_api():
 @app.route('/api/v1/deal/<int:id>', methods=['PUT', 'DELETE'])
 def deal_id(id):
     if request.method == 'PUT':
+        print(request.json)
         put = Deal.query.filter_by(id=id).update(request.json)
         if put:
             Deal.update_db()

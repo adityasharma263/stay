@@ -5,7 +5,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
     $scope.roomPriceStructureB2B = {};
 
 
-    $http.get("/api/v1/hotel")
+    $http.get("/api/v1/hotel/terminal")
         .then(function (response) {
 
             $scope.hotelDetails = response.data.result.hotel;
