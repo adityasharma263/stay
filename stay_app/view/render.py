@@ -46,6 +46,7 @@ def login_required(f):
 
 
 #================= Admin hotels ==========================
+
 @app.route('/admin/hotel', methods=['GET'])
 def admin():
     # if request.cookies.get("hash2"):
@@ -68,9 +69,11 @@ def admin():
     # else:
     #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
+
 @app.route('/admin/home', methods=["GET"])
 def admin_home():
     return render_template("hotel/admin/dashboard.html")
+
 
 @app.route('/admin/update', methods=['GET'])
 def admin_hotel_update():
@@ -92,12 +95,11 @@ def admin_hotel_search():
 
 @app.route("/admin/hotel/deal", methods=["GET"])
 def admin_deal_id():
-
     hotel_id = request.args.get('id')
 
     args = request.args.to_dict()
-    if(not hotel_id):
-        args = {"id" : 1}
+    if not hotel_id:
+        args = {"id": 1}
     hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel/b2b", params=args)
     hotel_data = hotel_data.json()["result"]
     return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
@@ -107,69 +109,31 @@ def admin_deal_id():
 
 @app.route("/admin/hotel/terminal", methods=["GET"])
 def admin_terminal():
-
     return render_template("hotel/admin/admin_hotel_terminal.html")
-
-
-#================= Index Pages ==========================
-
-
-@app.route('/agent/rishabh', methods=['GET'])
-def rishabh():
-    return render_template('hotel/b2b_hotels/partners-review-rishabh-jain-the-travel-square.html')
-
-@app.route('/agent/abhinav', methods=['GET'])
-def abhinav():
-    return render_template('hotel/b2b_hotels/partners-review-abhinav-patil-the-travel-square.html')
-
-@app.route('/suppliers', methods=['GET'])
-def suppliers():
-    return render_template('hotel/b2b_hotels/top-suppliers.html')
-
-@app.route('/work', methods=['GET'])
-def work():
-    return render_template('hotel/b2b_hotels/how-do-we-work.html')
-
-@app.route('/contact', methods=['GET'])
-def contact():
-    return render_template('hotel/b2b_hotels/partner-care.html')
-
-@app.route('/testimonials')
-def testimonials():
-    return render_template('hotel/b2b_hotels/testimonials.html')
-
-@app.route('/coming-soon')
-def coming_soon():
-    return render_template('hotel/b2b_hotels/coming-soon.html')
-
-@app.route('/join')
-def join():
-    return render_template('hotel/b2b_hotels/signup.html')
-
-@app.route('/group')
-def group():
-    return render_template('hotel/b2b_hotels/join-chat-forum.html')
-
-@app.route('/onetimeverification')
-def verification():
-    return render_template('hotel/b2b_hotels/otp-chat-forum.html')
 
 
 #================= Booking hotels ==========================
 
 
-@app.route('/hotel/booking', methods=['GET'])
+@app.route('/hotel/booking', methods=['GET', 'POST'])
 @login_required
 def booking():
-    if 'partner_data' in session:
-        partner_data = session["partner_data"]
-        if partner_data["status"] == 'Approved':
-            return render_template('hotel/booking/booking.html', partner_data=partner_data)
+    if request.method == 'GET':
+        if 'partner_data' in session or True:
+            partner_data = session["partner_data"] if "" else ""
+            if True or partner_data["status"] == 'Approved':
+                return render_template('hotel/booking/booking.html', partner_data=partner_data)
+            else:
+                return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
+               "click here  FOR THE APPROVAL </b></a>"
         else:
-            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
-           "click here  FOR THE APPROVAL </b></a>"
+            return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
     else:
-        return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+        booking_details = request.json
+        response1 = requests.post('/api/v1/booking', data=booking_details)
+        print(response1)
+        response = requests.post('/payment', data=booking_details)
+        return response
 
 
 #================= B2B hotels ==========================
@@ -233,3 +197,45 @@ def business_hotel_detail(slug):
     #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
 
 
+#================= Index Pages ==========================
+
+
+@app.route('/agent/rishabh', methods=['GET'])
+def rishabh():
+    return render_template('hotel/b2b_hotels/partners-review-rishabh-jain-the-travel-square.html')
+
+@app.route('/agent/abhinav', methods=['GET'])
+def abhinav():
+    return render_template('hotel/b2b_hotels/partners-review-abhinav-patil-the-travel-square.html')
+
+@app.route('/suppliers', methods=['GET'])
+def suppliers():
+    return render_template('hotel/b2b_hotels/top-suppliers.html')
+
+@app.route('/work', methods=['GET'])
+def work():
+    return render_template('hotel/b2b_hotels/how-do-we-work.html')
+
+@app.route('/contact', methods=['GET'])
+def contact():
+    return render_template('hotel/b2b_hotels/partner-care.html')
+
+@app.route('/testimonials')
+def testimonials():
+    return render_template('hotel/b2b_hotels/testimonials.html')
+
+@app.route('/coming-soon')
+def coming_soon():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
+@app.route('/join')
+def join():
+    return render_template('hotel/b2b_hotels/signup.html')
+
+@app.route('/group')
+def group():
+    return render_template('hotel/b2b_hotels/join-chat-forum.html')
+
+@app.route('/onetimeverification')
+def verification():
+    return render_template('hotel/b2b_hotels/otp-chat-forum.html')

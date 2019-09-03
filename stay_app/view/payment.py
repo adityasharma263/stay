@@ -48,7 +48,7 @@ def generate_hash(txnid, booking_details):
 # create hash string using all the fields
 def get_hash_string(txnid, booking_details):
     hash_string = str(app.config["KEY"])+"|"+txnid + "|" + str(
-        float(1)) + "|" + "Message showing product details." + "|"
+        float(booking_details["total_booking_amount"])) + "|" + "Message showing product details." + "|"
     hash_string += str(booking_details["company_name"]) + "|" + str(booking_details["business_email"]) + "|"
     hash_string += "||||||||||" + str(app.config["SALT"])
     return hash_string
@@ -71,7 +71,7 @@ def payment_success():
 
 
 # no csrf token require to go to Failure page. This page displays the message and reason of failure.
-@app.route('hotel/payment/fail', methods=['GET'])
+@app.route('/hotel/payment/fail', methods=['GET'])
 def payment_failure():
     data = {}
     return render_template("hotel/payment/failure.html", data=data)
