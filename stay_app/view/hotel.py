@@ -133,7 +133,7 @@ def hotel_b2b_list_api():
             check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
         args.pop('ci', None)
         args.pop('co', None)
-        q = db.session.query(Hotel).join(Room).outerjoin(Deal)
+        q = db.session.query(Hotel).join(Room).join(Deal)
         q_room = db.session.query(Room)
         q_deal = db.session.query(Deal)
         q_price = db.session.query(PriceCalendar)

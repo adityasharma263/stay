@@ -72,7 +72,7 @@ def payment_success():
 
 
 # no csrf token require to go to Failure page. This page displays the message and reason of failure.
-@app.route('/payment/fail', methods=['GET'])
+@app.route('/hotel/payment/fail', methods=['GET'])
 def payment_failure():
     data = {}
     return render_template("hotel/payment/failure.html", data=data)
