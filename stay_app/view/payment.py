@@ -12,7 +12,7 @@ from random import randint
 def payment():
     if request.method == 'POST':
         booking_details = request.json
-        print("\n\n\n\n================",booking_details,"\n\n===========")
+        print(booking_details, "paytm")
         data = {}
         txnid = get_transaction_id()
         hash_ = generate_hash(txnid, booking_details)

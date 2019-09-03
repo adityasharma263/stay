@@ -586,13 +586,14 @@ def booking_api():
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
     else:
         booking = request.json
+        print(booking, "booking")
         deals = booking.get("deals", None)
         booking.pop('deals', None)
         booking_post = Booking(**booking)
         booking_post.save()
         for deal in deals:
             deal["booking_id"] = booking_post.id
-            deal_post = Deal(**deal)
+            deal_post = BookingDeal(**deal)
             booking_post.deals.append(deal_post)
             deal_post.save()
         result = BookingSchema().dump(booking_post)

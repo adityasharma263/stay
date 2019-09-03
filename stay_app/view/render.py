@@ -130,10 +130,10 @@ def booking():
             return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
     else:
         booking_details = request.json
-        response1 = requests.post('/api/v1/booking', data=booking_details)
-        print(response1)
-        response = requests.post('/payment', data=booking_details)
-        return response
+        print(booking_details, "booking deal")
+        response1 = requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
+        response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_details)
+        return response1
 
 
 #================= B2B hotels ==========================
