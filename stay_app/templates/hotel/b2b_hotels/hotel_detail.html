@@ -486,7 +486,7 @@
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
                                         </ul>
-
+                                       =
                                     </div>
                                     <div class="tab-pane fade" id="hotel-Booking" >
                                         <h3>Call Hotel</h3>
@@ -507,24 +507,20 @@
                             </div>
                         </div>
                         <div class="sidebar col-md-3">
-                            <div class="amenities" style="float:left">
-                                <span class="price" ></span>
-                            </div>
-                            <div class="hotel-list">
-                                <div  class="row image-box hotel listing-style1">
-                                    <div class="col-sm-6 col-md-12">
-                                        <article class="box">
-                                                <figure class="col-sm-5 col-md-4" style="padding: 15px;">
-                                                        <img data-toggle="modal"  style="height:250px; width:160px; cursor: pointer" src="[[room.image_url]]" alt="Travel Square">
-                                                </figure>
-                                            <div class="details">
-                                                <h4 ng-cloak class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure"></i>{{hotel_data.city}}</small></h4>
-                                                <p><a class="button sky-blue1 full-width uppercase btn-small" >Book Now</a> </p>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                            </div>
+                                <article class="detailed-logo">
+                                                                <figure>
+                                                                    <img   src="{{hotel_data.rooms.image_url}}" alt="">
+                                                                </figure>
+                                                                <div class="details">
+                                                                    <h2 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">{{hotel_data.city}}</span></small></h2>
+                                                                    <span class="price clearfix">
+                                                                        <!-- <small class="pull-left">Mni. avg/night</small>
+                                                                        <span class="pull-right">₹ </span> -->
+                                                                    </span>
+                                                                    
+                                                                    <a href="/hotel/booking" class="button yellow full-width uppercase btn-small">Book Now</a>
+                                                                </div>
+                                                            </article>
                             <div class="travelo-box">
                                 <h4>Similar Listings</h4>
                                 <div class="image-box style14">
@@ -544,8 +540,8 @@
                                 </div>
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
-                                <div ng-repeat="room in hotel_data.rooms">
-                                    <div ng-repeat="image_url.room'">
+                                <div ng-repeat="room in {{hotel_data.rooms}}">
+                                    <div>
                                         <article class="box" ng-if="[[room.basic_room]]">
                                             <figure class="col-sm-5 col-md-4">
                                                 <img data-toggle="modal"  ng-click="showBusinessDetail(hotel.id)" style="height:160px; cursor: pointer" src="http://[[hotel.images[0].image_url]]" alt="Travel Square">
