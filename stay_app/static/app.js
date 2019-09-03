@@ -159,7 +159,7 @@ var app = angular.module('stay', ['angular.filter'])
 
             if (!cb) $scope.hotel.page = 1;
 
-            let searchURL = api_url + '/api/v1/hotel/b2b' + document.location.search
+            let searchURL = api_url + '/api/v1/hotel/search' + document.location.search
 
 
             Object.keys($scope.hotel).forEach(function (param) {
