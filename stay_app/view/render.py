@@ -130,10 +130,9 @@ def booking():
             return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
     else:
         booking_details = request.json
-        print(booking_details, "booking deal")
-        response1 = requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
+        requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
         response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_details)
-        return response1
+        return response.text
 
 
 #================= B2B hotels ==========================
@@ -160,9 +159,7 @@ def business_hotel_list():
     partner_data = "adnan"
     args = request.args.to_dict()
     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/list/b2b"
-    print(hotel_api_url, args)
     hotel_data = requests.get(url=hotel_api_url, params=args)
-    print(hotel_data, hotel_data.status_code)
     hotel_data = hotel_data.json()
     if len(hotel_data["result"]["hotel"]) > 0:
         hotel_data = hotel_data["result"]["hotel"]

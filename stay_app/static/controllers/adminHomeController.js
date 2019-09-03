@@ -6,9 +6,6 @@ app.controller("adminHomeController", function($scope, $http) {
     $scope.searchHotelOnChange = function(){
 
         if($scope.searchHotel){
-
-            console.log($scope.searchHotel);
-
             $http.post("/admin/hotel/search", {search : $scope.searchHotel})
             .then(function(respsonse){
                 console.log(respsonse);

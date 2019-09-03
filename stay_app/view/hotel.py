@@ -447,7 +447,6 @@ def facility_api():
 @app.route('/api/v1/facility/<int:id>', methods=['PUT', 'DELETE'])
 def facility_id(id):
     if request.method == 'PUT':
-        print(request.json)
         put = Facility.query.filter_by(id=id).update(request.json)
         if put:
             Facility.update_db()
@@ -588,7 +587,6 @@ def booking_api():
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
     else:
         booking = request.json
-        print(booking, "booking")
         deals = booking.get("deals", None)
         booking.pop('deals', None)
         booking_post = Booking(**booking)
