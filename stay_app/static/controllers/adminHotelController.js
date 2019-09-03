@@ -1,4 +1,4 @@
-app.controller('adminHotelController', ["$scope", "$http", "$filter", function ($scope, $http, $filter) {
+app.controller('adminHotelController', ["$scope", "$http", function ($scope, $http) {
     $scope.hotel = {}; // main hotel model
     $scope.hotelImg = []; //for all images array
     $scope.images = {}; //object of image
@@ -72,7 +72,7 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
             max_no_of_guest: "",
             meal_plan : "",
             facilities : {},
-            balcony : ""
+            balcony : false
 
           }
       ];
@@ -89,7 +89,7 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
                 max_no_of_guest: "",
                 meal_plan : "",
                 facilities : {},
-                balcony : ""
+                balcony : false
     
               }
         );
@@ -99,6 +99,8 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
 
         $scope.hotel.rooms = $scope.roomDetailsArray;
         $scope.hotel.images = $scope.hotelImg;
+
+
 
         console.log("scope.hotel = ",$scope.hotel);
   
