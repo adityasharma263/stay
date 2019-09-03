@@ -4,12 +4,9 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
 
     $scope.roomPriceStructureB2B = {};
 
-
-<<<<<<< HEAD
     $http.get("/api/v1/hotel")
-=======
     $http.get("/api/v1/hotel/terminal")
->>>>>>> e3cccb8d081d02ceaff0963bb1d3625070c07668
+    $http.get("/api/v1/hotel/terminal")
         .then(function (response) {
 
             $scope.hotelDetails = response.data.result.hotel;

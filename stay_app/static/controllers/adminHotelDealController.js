@@ -25,9 +25,9 @@ app.controller("adminHotelDealController", function ($scope, $http) {
         }
     };
 
-    console.log("hotelDetails = ", hotelDetails.hotel[0]);
+    console.log("hotelDetails = ", hotelDetails.hotel);
 
-    $scope.hotelDetails = hotelDetails.hotel[0];
+    $scope.hotelDetails = hotelDetails.hotel;
 
 
     $scope.onHotelSelect = function (item) {
@@ -35,7 +35,7 @@ app.controller("adminHotelDealController", function ($scope, $http) {
         $http.get(API_BASE_URL + "/api/v1/hotel", { params: { id: item.id } })
             .then(function (response) {
                 console.log(response.data.result);
-                $scope.hotelDetails = response.data.result.hotel[0];
+                $scope.hotelDetails = response.data.result.hotel;
             })
             .catch(function (err) {
                 console.log(err);
@@ -44,13 +44,18 @@ app.controller("adminHotelDealController", function ($scope, $http) {
     };
 
     $scope.listPartnerType = function (partnerType) {
-        var partner_api_url = "http://localhost:8001/api/v1";
+        $scope.dealsData = {};
+
         var hotel_partner_url = `${partner_api_url}/partners_hotel.php?hotel_id=${$scope.hotelDetails.id}&type=${partnerType}`;
 
         $http.get(hotel_partner_url)
             .then(function (response) {
                 console.log(response.data);
                 $scope.partners[partnerType] = response.data;
+                if(partnerType == $scope.partnerType.DIRECT){
+                    $scope.selectedPartner = response.data[0].id;
+                    $scope.loadDealByPartnerID($scope.selectedPartner);
+                }
 
             })
             .catch(function (err) {
@@ -65,21 +70,24 @@ app.controller("adminHotelDealController", function ($scope, $http) {
         $http.get("/api/v1/deal", { params: { hotel_id: $scope.hotelDetails.id, partner_id: selectedPartnerID } })
             .then(function (response) {
 
-                var dealsDataResponse = response.data.result.deal; 
+                var dealsDataResponse = response.data.result.deal;
                 console.log(dealsDataResponse);
-                
+
                 // we may need to create data structure like hotel_id => partner_id => room_id => (deals data)
                 // it will help in ng-repeat of rooms to show deals according to partner_id
 
-                for(i=0; i< dealsDataResponse.length; i++){
+                for (i = 0; i < dealsDataResponse.length; i++) {
+                    if (!$scope.dealsData[$scope.hotelDetails.id])
+                        $scope.dealsData[$scope.hotelDetails.id] = {};
+
+                    if (!$scope.dealsData[$scope.hotelDetails.id][selectedPartnerID])
+                        $scope.dealsData[$scope.hotelDetails.id][selectedPartnerID] = {};
+
+
                     $scope.dealsData[$scope.hotelDetails.id][selectedPartnerID][dealsDataResponse[i].room] = dealsDataResponse[i];
                 }
 
-                console.log($scope.dealsData);
-
-                
-
-
+                console.log("$scope.dealsData = ", $scope.dealsData);
 
             })
             .catch(function (err) {
@@ -88,5 +96,40 @@ app.controller("adminHotelDealController", function ($scope, $http) {
 
 
 
+    };
+
+
+    $scope.updateRoomDeal = function () {
+
     }
+
+    $scope.updateDeal = function (deal, roomID) {
+
+        console.log("dealID = ", deal);
+        var dealdata = JSON.parse(JSON.stringify(deal));
+        var dealID = dealdata.id;
+        delete dealdata.id;
+        delete dealdata.price_calendar;
+        delete dealdata.website;
+        dealdata.room_id = roomID;
+        delete dealdata.room;
+        console.log("dealdata = ",dealdata);
+        var request;
+        if (dealID) {
+            request = $http.put("/api/v1/deal/" + dealID, dealdata);
+        } else {
+
+            dealdata.partner_id = $scope.selectedPartner;
+
+            request = $http.post("/api/v1/deal", dealdata);
+        }
+        request
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    };
+
 });

@@ -73,6 +73,19 @@
             display: flex;
             align-items: center;
         }
+
+        .mt-5{
+            margin-top:25px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
     </style>
 
 
@@ -151,7 +164,7 @@
                                         class="input-text full-width dropdown-input"
                                         placeholder="Where Do You Wish To Travel ? .... ">
                                 </div>
-                                <span ng-init="searchHotel = '{{hotel_data['hotel'][0]['name']}}'"></span>
+                                <span ng-init="searchHotel = '{{hotel_data['hotel']['name']}}'"></span>
                                 <div class="col-sm-2 form-group">
                                     <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
                                 </div>
@@ -170,9 +183,8 @@
             <div id="main">
                 <div class="tab-container full-width-style arrow-left dashboard">
                     <ul class="tabs">
-                        <li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Update
-                                Property</a></li>
-                        <li class=""><a data-toggle="tab" href="#b2b" ng-click="listPartnerType(partnerType.DIRECT)"><i class="fa fa-list"></i>Direct</a></li>
+                        <li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Update Property</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2b" ng-click="listPartnerType(partnerType.DIRECT);"><i class="fa fa-list"></i>Direct</a></li>
                         <li class=""><a data-toggle="tab" href="#b2c" ng-click="listPartnerType(partnerType.SUPPLIER)"><i class="fa fa-list"></i>Suppliers</a></li>
 
                         <li class=""><a data-toggle="tab" href="#booking" ng-click="listPartnerType(partnerType.PARTNER)"><i
@@ -184,8 +196,6 @@
                             <form class="booking-form" ng-submit="createHotel()">
                                 <div class="person-information" ng-show="hotelDetail">
                                     <center>
-
-
                                         <h2>[[hotelDetails.name]]</h2>
                                     </center>
                                     <hr>
@@ -518,7 +528,7 @@
                         </div>
 
 
-
+                        <!-- DIRECT -->
                         <div id="b2b" class="tab-pane  fade in">
 
                             <div class="col-sm-4 col-md-3">
@@ -564,36 +574,63 @@
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
                                                     <div>
                                                         <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            ng-model="akshay" placeholder="" />
+                                                        <input type="number" class="input-text full-width" value=""
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price" placeholder="" />
                                                     </div>
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
 
                                                     <label>%</label>
-                                                    <input type="text" class="input-text full-width" value=""
+                                                    <input type="text" class="input-text full-width" 
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
                                                         placeholder="" />
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
 
-                                                    <label>% Amt</label>
+                                                    <label>B2B Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
                                                         placeholder="" />
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
 
                                                     <label>B2B Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
                                                         placeholder="" />
+                                                </div>
+
+                                                
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
+                                                </div>
+
+                                                
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+                                                
+                                                <div class="col-sm-1">
+
+                                                    <button class="btn button mt-5" ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)" >Update</button>
                                                 </div>
 
                                             </div>
@@ -615,6 +652,7 @@
                         </div>
 
 
+                        <!-- Suppliers -->
                         <div id="b2c" class="tab-pane fade in">
 
                             <div class="col-sm-4 col-md-3">
@@ -664,536 +702,79 @@
                                     </div><br />
                                     <div class="group-details">
                                         <center>
-                                            <div class="form-group row">
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
+                                            <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
+                                                <div class="col-sm-2">
 
-                                                    <h4>Premier Room Only</h4>
+                                                    <div>
+                                                        <h4>[[room.room_type]]</h4>
+                                                        <small>([[room.meal_plan]]<span ng-if="room.balcony"> with
+                                                                Balcony</span>)</small>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
                                                     <div>
                                                         <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
+                                                        <input type="number" class="input-text full-width" 
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price" placeholder="" />
                                                     </div>
-
-
-
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
+                                                    <label>%</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room With Breakfast</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
+                                                <div class="col-sm-1">
 
-
-
+                                                    <label>B2B Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
-
+                                                    <label>B2B Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
+                                                <div class="col-sm-1">
 
-
-
-
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
+                                                
+                                                <div class="col-sm-1">
 
-
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
+                                                
+                                                <div class="col-sm-1">
 
-
-
-
+                                                    <button class="btn button mt-5" ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)" >Update</button>
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
 
 
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
                                             </div>
+                                        </center>
                                     </div>
 
 
@@ -1210,6 +791,9 @@
                                 </form>
                             </div>
                         </div>
+
+
+                        <!-- Partners -->
 
                         <div id="booking" class="tab-pane fade">
 
@@ -1255,536 +839,78 @@
                                     </div><br />
                                     <div class="group-details">
                                         <center>
-                                            <div class="form-group row">
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
+                                            <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
+                                                <div class="col-sm-2">
 
-                                                    <h4>Premier Room Only</h4>
+                                                    <div>
+                                                        <h4>[[room.room_type]]</h4>
+                                                        <small>([[room.meal_plan]]<span ng-if="room.balcony"> with
+                                                                Balcony</span>)</small>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
                                                     <div>
                                                         <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
+                                                        <input type="number" class="input-text full-width" value=""
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price" placeholder="" />
                                                     </div>
-
-
-
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
+                                                    <label>%</label>
+                                                    <input type="text" class="input-text full-width" 
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room With Breakfast</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
+                                                <div class="col-sm-1">
 
-
-
+                                                    <label>B2B Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
-
+                                                    <label>B2B Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
+                                                
+                                                <div class="col-sm-1">
 
-
-
-
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
+                                                
+                                                <div class="col-sm-1">
 
-
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
+                                                
+                                                <div class="col-sm-1">
 
-
-
-
+                                                    <button class="btn button mt-5" ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)" >Update</button>
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
 
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder=""/>
-                                                    </div>
-
-
-
-                                                </div>
                                             </div>
+                                        </center>
                                     </div>
 
 
@@ -1961,13 +1087,11 @@
     <script>
         var hotelDetails = {{ hotel_data| tojson}};
         var API_BASE_URL = '{{config.API_URL}}';
+        var partner_api_url = '{{config.PARTNER_API_URL}}' +"/api/v1"
     </script>
 
     <script type="text/javascript" src="/app.js"></script>
     <script type="text/javascript" src="/controllers/adminHotelDealController.js"></script>
-
-
-
 
 </body>
 

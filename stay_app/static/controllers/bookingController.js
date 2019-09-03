@@ -174,7 +174,7 @@ $scope.processBook = function() {
     console.log($scope.bookingData);
 
     // return;
-    $http.post("/payment", $scope.bookingData)
+    $http.post("/hotel/booking", $scope.bookingData)
     .then(function(response) {
         console.log(response.data);
 
