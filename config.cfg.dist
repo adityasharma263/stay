@@ -6,19 +6,13 @@ SERVER_DEBUG = True
 SERVER_RELOAD = True
 SERVER_TIMEZONE = 'Etc/UTC'
 
-# postgreSQL
-
-NAME = 'test'
-USER = 'postgres'
-PASSWORD = 'root'
-PORT = 5432
-
+#postgreSQL
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:admin@127.0.0.1:5432/stay'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 #url
-
-DOMAIN_URL = 'http://business.thetravelsquare.in'
+DOMAIN_URL = 'http://thetravelsquare.in'
+BUSINESS_DOMAIN_URL = 'http://business.thetravelsquare.in'
 ADMIN_DOMAIN_URL = 'http://admin.thetravelsquare.in'
 PARTNER_DOMAIN_URL = 'http://partner.thetravelsquare.in'
 API_URL = 'http://127.0.0.1:8000'
@@ -27,7 +21,6 @@ ADMIN_API_URL = 'http://127.0.0.1:9000'
 
 
 #payment
-
 KEY = '5d8pimBA'
 SALT = 'KoIgy9LgK0'
 AUTH = 'H88dI2ioUTxaPKh1s2uOpVPSWevcs59HcFnb7bfdk0Y='

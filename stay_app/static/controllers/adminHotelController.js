@@ -99,16 +99,12 @@ app.controller('adminHotelController', ["$scope", "$http", "$filter", function (
 
         $scope.hotel.rooms = $scope.roomDetailsArray;
         $scope.hotel.images = $scope.hotelImg;
-
-        console.log("scope.hotel = ",$scope.hotel);
   
         $http.post(api_base_url+"/hotel", $scope.hotel)
         .then(function(response){
-            console.log("response = ",response);
 
         })
         .catch(function(err){
-            console.log("err = ", err);
         });
     };
 
