@@ -1086,8 +1086,8 @@
 
     <script>
         var hotelDetails = {{ hotel_data| tojson}};
-        var API_BASE_URL = '{{config.API_URL}}';
-        var partner_api_url = '{{config.PARTNER_API_URL}}' +"/api/v1"
+        var API_BASE_URL = '{{config.BUSINESS_DOMAIN_URL}}';
+        var partner_api_url = '{{config.PARTNER_DOMAIN_URL}}' +"/api/v1"
     </script>
 
     <script type="text/javascript" src="/app.js"></script>
