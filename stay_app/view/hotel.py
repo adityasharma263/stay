@@ -506,6 +506,8 @@ def deal_api():
         args.pop('b2b_selected_deal', None)
         b2c_selected_deal = request.args.get('b2c_selected_deal', None)
         args.pop('b2c_selected_deal', None)
+        room_id = request.args.get('room_id', None)
+        args.pop('room_id', None)
         hotel_id = request.args.get('hotel_id', None)
         args.pop('hotel_id', None)
         page = request.args.get('page', 1)
@@ -515,12 +517,12 @@ def deal_api():
         room_list = []
         q_deal = db.session.query(Deal)
         if b2b_selected_deal:
-            b2b_deal = Deal.query.filter(Deal.b2b_selected_deal).all()
+            b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).all()
             if len(b2b_deal) == 0:
                 q = Deal.query.order_by(getattr(Deal, "base_price").asc()).first()
                 q.b2b_selected_deal = True
         if b2c_selected_deal:
-            b2c_deal = Deal.query.filter(Deal.b2c_selected_deal).all()
+            b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).all()
             if len(b2c_deal) == 0:
                 q = Deal.query.order_by(getattr(Deal, "base_price").asc()).first()
                 q.b2c_selected_deal = True
@@ -533,7 +535,7 @@ def deal_api():
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if order_by:
             q_deal = q_deal.order_by(getattr(Deal, order_by).asc())
-        deals = q_deal.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        deals = q_deal.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = DealSchema(many=True).dump(deals)
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:

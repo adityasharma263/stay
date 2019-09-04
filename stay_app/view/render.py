@@ -130,7 +130,11 @@ def booking():
             return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
     else:
         booking_details = request.json
+        for deal in booking_details["deals"]:
+            deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal.deal_id})
+            deal_data = deal_data.json()
         requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
+        booking_details.pop("deals")
         response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_details)
         return response.text
 

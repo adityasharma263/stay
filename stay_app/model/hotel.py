@@ -10,12 +10,16 @@ class MealPlan(enum.Enum):
     EP = "European Plan"
     AP = "American Plan"
 
-
 class BedType(enum.Enum):
     Single = "Single"
     Double = "Double"
     Queen = "Queen"
     King = "King"
+
+class Status(enum.Enum):
+    p = "Pending"
+    F = "Failure"
+    S = "Success"
 
 
 class HotelCollection(Base):
@@ -300,10 +304,10 @@ class Booking(Base):
     booking_no = db.Column(db.String, nullable=True)
     booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
     gst_no = db.Column(db.String, nullable=True)
+    status = db.Column(db.Enum(Status))
     business_email = db.Column(db.String, nullable=True)
     office_address = db.Column(db.String, nullable=True)
     business_contact_no = db.Column(db.String, nullable=True)
-    contact_no = db.Column(db.String, nullable=True)
     company_name = db.Column(db.String, nullable=True)
     partner_id = db.Column(db.Integer, nullable=False)
     total_booking_amount = db.Column(db.Integer, nullable=True)
