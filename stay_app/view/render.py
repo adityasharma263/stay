@@ -131,8 +131,15 @@ def booking():
     else:
         booking_details = request.json
         for deal in booking_details["deals"]:
-            deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal.deal_id})
-            deal_data = deal_data.json()
+            deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal['deal_id']})
+            deal_data = deal_data.json()["result"]["deal"][0]
+            deal['base_price'] = deal_data['base_price']
+            deal['commission_in_percentage'] = deal_data['commission_in_percentage']
+            deal['final_price'] = deal_data['final_price']
+            deal['margin_price'] = deal_data['margin_price']
+            deal['partner_id'] = deal_data['partner_id']
+            deal['ts_exclusive'] = deal_data['ts_exclusive']
+            deal['room_id'] = deal_data['room_id']
         requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
         booking_details.pop("deals")
         response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_details)
