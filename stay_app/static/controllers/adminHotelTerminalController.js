@@ -3,7 +3,8 @@
 
 // add dependency module DYNAMICALLY
 app.requires.push('ui.bootstrap');
-app.controller("adminHotelTerminalController", function ($scope, $http) {
+app.requires.push('toaster');
+app.controller("adminHotelTerminalController", function ($scope, $http, toaster) {
 
     $scope.roomPriceStructureB2B = {};
 
@@ -70,6 +71,8 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
 
         console.log("hotelId = ", roomID);
 
+        $scope.selectedRoom = roomID; 
+
         // $http.get("/api/v1/deal",
         //     { params: { room_id: roomID, order_by : loadRoomPriceFor} })
         //     .then(function(response) {
@@ -91,6 +94,12 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
 
         }
     };
+
+    setTimeout(function(){
+        console.log("Toast");
+        toaster.pop('success', "Deal Updated", "Deal for this hotel is updated!");    
+    }, 1000);
+    
 
 
 });

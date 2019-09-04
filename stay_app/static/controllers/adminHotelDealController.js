@@ -1,6 +1,7 @@
 // add dependency module DYNAMICALLY
 app.requires.push('ui.bootstrap');
-app.controller("adminHotelDealController", function ($scope, $http) {
+app.requires.push('toaster');
+app.controller("adminHotelDealController", function ($scope, $http, toaster) {
 
     $scope.partnerType = {
         DIRECT: 1,
@@ -116,17 +117,21 @@ app.controller("adminHotelDealController", function ($scope, $http) {
         delete dealdata.room;
         console.log("dealdata = ",dealdata);
         var request;
+        var toastMsg;
         if (dealID) {
             request = $http.put("/api/v1/deal/" + dealID, dealdata);
+            toastMsg = "Deal Updated!!";
         } else {
 
             dealdata.partner_id = $scope.selectedPartner;
 
             request = $http.post("/api/v1/deal", dealdata);
+            toastMsg = "Deal Created!!";
         }
         request
             .then(function (response) {
                 console.log(response);
+                toaster.pop('success', toastMsg);
             })
             .catch(function (err) {
                 console.log(err);

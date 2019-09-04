@@ -98,6 +98,8 @@
     <script type="text/javascript" src="/js/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
     <script src="/js/angular-filter.js"></script>
+    <link rel="stylesheet" href="/js/toaster.css">
+    <script src="/js/toaster.js"></script>
 
 
     
@@ -687,7 +689,7 @@
                             <br />
                             <br />
                             <hr/>
-                            
+
 
                             <div class="container shortcode">
                                 <form class="booking-form">
@@ -1085,6 +1087,8 @@
 
         </div>
     </div>
+
+    <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
 
     <script>
         var hotelDetails = {{ hotel_data| tojson}};

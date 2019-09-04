@@ -199,6 +199,8 @@
     <script type="text/javascript" src="/js/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
     <script src="/js/angular-filter.js"></script>
+    <link rel="stylesheet" href="/js/toaster.css">
+    <script src="/js/toaster.js"></script>
 
 
     <!-- Main Style -->
@@ -302,7 +304,21 @@
                         <h4 class="modal-title">Modal Header</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the modal.</p>
+
+                        <div>
+                            <div class="row" ng-repeat="roomPrices in roomPriceStructureB2B[selectedRoom]">
+
+                                <div>
+                                    [[ roomPrices.base_price ]]
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -333,6 +349,8 @@
 
 
     </div>
+
+    <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
 
 
 
