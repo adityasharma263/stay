@@ -237,3 +237,73 @@ def group():
 @app.route('/onetimeverification')
 def verification():
     return render_template('hotel/b2b_hotels/otp-chat-forum.html')
+
+
+############################# Destination Pages ########################
+
+
+@app.route('/destinations/bali')
+def bali():
+    return render_template('hotel/b2b_hotels/destinations/bali.html')
+
+@app.route('/destinations/bangkok')
+def bangkok():
+    return render_template('hotel/b2b_hotels/destinations/bangkok.html')
+
+@app.route('/destinations/dubai')
+def dubai():
+    return render_template('hotel/b2b_hotels/destinations/dubai.html')
+
+@app.route('/destinations/goa')
+def goa():
+    return render_template('hotel/b2b_hotels/destinations/goa.html')
+
+@app.route('/destinations/krabi')
+def krabi():
+    return render_template('hotel/b2b_hotels/destinations/krabi.html')
+
+@app.route('/destinations/ladakh')
+def ladakh():
+    return render_template('hotel/b2b_hotels/destinations/ladakh.html')
+
+@app.route('/destinations/london')
+def london():
+    return render_template('hotel/b2b_hotels/destinations/london.html')
+
+@app.route('/destinations/maldives')
+def maldives():
+    return render_template('hotel/b2b_hotels/destinations/maldives.html')
+
+@app.route('/destinations/new-york')
+def new_york():
+    return render_template('hotel/b2b_hotels/destinations/new-york.html')
+
+@app.route('/destinations/pattaya')
+def pattaya():
+    return render_template('hotel/b2b_hotels/destinations/pattaya.html')
+
+@app.route('/destinations/singapore')
+def singapore():
+    return render_template('hotel/b2b_hotels/destinations/singapore.html')
+
+@app.route('/destinations/switzerland')
+def switzerland():
+    return render_template('hotel/b2b_hotels/destinations/switzerland.html')
+
+@app.route('/destinations')
+def destinations():
+    return render_template('hotel/b2b_hotels/destinations.html')
+
+############################## Site Map ###############################
+
+@app.route('/site-map')
+def site_map():
+    return render_template('hotel/b2b_hotels/site-map.html')
+
+@app.route('/partner-care')
+def partner_care():
+    return render_template('hotel/b2b_hotels/partner-care.html')
+
+@app.route('/terms-and-conditions')
+def terms_and_conditions():
+    return render_template('hotel/b2b_hotels/terms-and-conditions.html')
