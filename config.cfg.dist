@@ -6,9 +6,11 @@ SERVER_DEBUG = True
 SERVER_RELOAD = True
 SERVER_TIMEZONE = 'Etc/UTC'
 
+
 #postgreSQL
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:admin@127.0.0.1:5432/stay'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+
 
 #url
 DOMAIN_URL = 'http://thetravelsquare.in'
@@ -24,3 +26,4 @@ ADMIN_API_URL = 'http://127.0.0.1:9000'
 KEY = '5d8pimBA'
 SALT = 'KoIgy9LgK0'
 AUTH = 'H88dI2ioUTxaPKh1s2uOpVPSWevcs59HcFnb7bfdk0Y='
+PayU_API_URL = 'https://sandboxsecure.payu.in/_payment'

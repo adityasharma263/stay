@@ -35,20 +35,37 @@ app.json_encoder = MyJSONEncoder
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        q = db.session.query(Hotel).outerjoin(Amenity).outerjoin(Room).outerjoin(Facility).outerjoin(Deal).outerjoin(PriceCalendar)
-        for key in args:
-            if key in Hotel.__dict__:
-                q = q.filter(getattr(Hotel, key) == args[key])
-            elif key in Amenity.__dict__:
-                q = q.filter(getattr(Amenity, key) == args[key])
-            elif key in Room.__dict__:
-                q = q.filter(getattr(Room, key) == args[key])
-            elif key in Facility.__dict__:
-                q = q.filter(getattr(Facility, key) == args[key])
-            elif key in Deal.__dict__:
-                q = q.filter(getattr(Deal, key) == args[key])
-            elif key in PriceCalendar.__dict__:
-                q = q.filter(getattr(PriceCalendar, key) == args[key])
+        slug = request.args.get('slug')
+        args.pop('slug', None)
+        check_in = request.args.get('ci')
+        check_out = request.args.get('co')
+        if check_out and check_out:
+            check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
+            check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
+            args.pop('ci', None)
+            args.pop('co', None)
+        q = db.session.query(Hotel).join(Room).join(Deal).filter(Hotel.slug == slug)
+        price_list = []
+        total_days = 1
+        for hotel in q:
+            deals = db.session.query(Deal).join(Room).join(Hotel).filter(Hotel.id == hotel.id).all()
+            price = 0
+            for deal in deals:
+                if check_in and check_out:
+                    delta = check_out - check_in
+                    total_days = delta.days
+                    price_list = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
+                                                                        PriceCalendar.date >= check_in,
+                                                                        PriceCalendar.date < check_out).all()
+                for i in range(total_days):
+                    if i < len(price_list):
+                        price = price_list[i].b2b_final_price + price
+                    else:
+                        if deal.b2b_final_price:
+                            price = deal.b2b_final_price + price
+                price = int(price / total_days)
+                deal.price = price
+                hotel.deal_id = deal
         hotel = q.first()
         result = HotelSchema(many=False).dump(hotel)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
@@ -110,8 +127,6 @@ def hotel_b2b_list_api():
     if request.method == 'GET':
         print(type, "bgrgrbgfvnfvjvgfjbvhfkjkgr")
         args = request.args.to_dict()
-        args.pop('b2b_lowest_price', None)
-        args.pop('lowest_price', None)
         rating = request.args.get('rating')
         args.pop('rating', None)
         city = request.args.get('city')
@@ -131,38 +146,34 @@ def hotel_b2b_list_api():
         if check_out and check_out:
             check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
             check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
-        args.pop('ci', None)
-        args.pop('co', None)
-        q = db.session.query(Hotel).join(Room).join(Deal)
-        q_room = db.session.query(Room)
-        q_deal = db.session.query(Deal)
-        q_price = db.session.query(PriceCalendar)
-        room_list = []
+            args.pop('ci', None)
+            args.pop('co', None)
+        q = db.session.query(Hotel).outerjoin(Amenity).join(Room).outerjoin(Facility).join(Deal)
+        price_list = []
+        total_days = 1
         for hotel in q:
-            rooms = q_room.filter(Room.hotel_id == hotel.id).all()
-            for room in rooms:
-                room_list.append(room.id)
+            deals = db.session.query(Deal).join(Room).join(Hotel).filter(Hotel.id == hotel.id).all()
+            price = 0
+            for deal in deals:
                 if check_in and check_out:
-                    deals = q_deal.filter(Deal.room_id == room.id).all()
                     delta = check_out - check_in
-                    for deal in deals:
-                        price_list = q_price.filter(PriceCalendar.deal_id == deal.id, PriceCalendar.date >= check_in,
-                                                    PriceCalendar.date < check_out).all()
-                        price = 0
-                        if delta.days > 0:
-                            for i in range(delta.days):
-                                if type == "b2b":
-                                    if i < len(price_list):
-                                        price = price_list[i].b2b_final_price + price
-                                    else:
-                                        if deal.b2b_selling_price:
-                                            price = deal.b2b_final_price + price
-                            price = int(price / delta.days)
-                        deal.price = price
-            deal = q_deal.filter(Deal.room_id.in_(room_list)).order_by(Deal.b2b_selling_price.asc()).first()
-            if deal:
-                deal.b2b_lowest_price = True
-            hotel.rooms = rooms
+                    total_days = delta.days
+                    price_list = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
+                                                                        PriceCalendar.date >= check_in,
+                                                                        PriceCalendar.date < check_out).all()
+                for i in range(total_days):
+                    if i < len(price_list):
+                        price = price_list[i].b2b_final_price + price
+                    else:
+                        if deal.b2b_final_price:
+                            price = deal.b2b_final_price + price
+                price = int(price / total_days)
+                deal.price = price
+                # deal = q_deal.filter(Deal.b2b_selected_deal == True).first()
+                # if not deal:
+                #     deal = q_deal.order_by(Deal.b2b_final_price.asc()).first()
+                #     deal.b2b_selected_deal = True
+                hotel.deal_id = deal
         for key in args:
             if key in Hotel.__dict__:
                 q = q.filter(getattr(Hotel, key) == args[key])
@@ -184,7 +195,11 @@ def hotel_b2b_list_api():
             q = q.filter(Hotel.rating >= rating)
         if price_start and price_end:
             q = q.filter(Deal.price >= price_start, Deal.price <= price_end)
-        hotels = q.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        # for x in hotels:
+        #     setattr(x[0], "rooms", x[1])
+        # ho = [{'rooms': x[1]} for x in hotels]
+        # print(ho)
         result = HotelB2BListSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
 
@@ -305,7 +320,6 @@ def room_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        args.pop('lowest_price_room', None)
         rooms = Room.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = RoomSchema(many=True).dump(rooms)
         return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
@@ -630,7 +644,7 @@ def cart_api():
         for cart in data:
             for deal in cart.cart_deals:
                 hotel = q.filter(Deal.id == deal.deal_id).first()
-            cart.hotel_id = 1
+            cart.hotel_id = hotel.id
         result = CartSchema(many=True).dump(data)
         return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
     else:

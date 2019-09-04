@@ -26,7 +26,7 @@ def payment():
         data["service_provider"] = "payu_paisa"
         data["furl"] = str(app.config["DOMAIN_URL"]) + "/payment/fail"
         data["surl"] = str(app.config["DOMAIN_URL"]) + "/payment/success"
-        data['action'] = 'https://sandboxsecure.payu.in/_payment'
+        data['action'] = str(app.config["PayU_API_URL"])
         return render_template("hotel/payment/form.html", data=data)
 
 

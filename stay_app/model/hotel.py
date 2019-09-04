@@ -95,7 +95,7 @@ class Room(Base):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<hotel_id %r>' % self.hotel_id
+        return '<room_type %r>' % self.room_type
 
 
 class Amenity(Base):
@@ -206,7 +206,6 @@ class Website(Base):
 
 
 class Deal(Base):
-
     __tablename__ = 'deal'
 
     b2b_selling_price = db.Column(db.Integer, nullable=True)
@@ -220,8 +219,6 @@ class Deal(Base):
     b2b_margin_price = db.Column(db.Integer, nullable=True)
     b2c_margin_price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
-    b2b_lowest_price = db.Column(db.Boolean, default=False, nullable=True)
-    b2c_lowest_price = db.Column(db.Boolean, default=False, nullable=True)
     b2b_selected_deal = db.Column(db.Boolean, default=False)
     b2c_selected_deal = db.Column(db.Boolean, default=False)
     ts_exclusive = db.Column(db.Boolean, default=False, nullable=True)
@@ -243,6 +240,8 @@ class PriceCalendar(Base):
     __tablename__ = 'price_calendar'
 
     commission_in_percentage = db.Column(db.Integer, nullable=True)
+    b2c_final_price = db.Column(db.Integer, nullable=True)
+    b2b_final_price = db.Column(db.Integer, nullable=True)
     sold_out = db.Column(db.Boolean, default=False, nullable=True)
     b2b_selling_price = db.Column(db.Integer, nullable=True)
     b2c_selling_price = db.Column(db.Integer, nullable=True)
@@ -320,7 +319,6 @@ class Booking(Base):
 class BookingDeal(Base):
 
     __tablename__ = 'booking_deal'
-
 
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
     room = db.relationship('Room', foreign_keys=room_id)
