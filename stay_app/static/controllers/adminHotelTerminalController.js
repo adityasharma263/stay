@@ -1,3 +1,6 @@
+// Note: b2b_selected_deal and room id - 
+// NOte: for dropdown orderby room id
+
 // add dependency module DYNAMICALLY
 app.requires.push('ui.bootstrap');
 app.controller("adminHotelTerminalController", function ($scope, $http) {
@@ -20,9 +23,9 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
         $scope.getRoomPriceByID  = function(roomID){
 
             $http.get("/api/v1/deal",
-            { params: { room_id: roomID, b2b_selected_price: true}})
+            { params: { room_id: roomID, b2b_selected_deal: true}})
             .then(function(response) {
-                roomPriceStructureB2B[roomID] = response.data;
+                $scope.roomPriceStructureB2B[roomID] = response.data;
             }).catch(function(err) {
                 console.log(err);
             });
