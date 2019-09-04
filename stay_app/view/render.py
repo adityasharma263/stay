@@ -182,11 +182,12 @@ def business_hotel_detail(slug):
     #         hotel_data = {}
     #     render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
     # else:
+    args = request.args.to_dict()
+    args["slug"] = slug
     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    hotel_data = requests.get(url=hotel_api_url, params={"slug": slug}).json()
-    # if len(hotel_data["result"]["hotel"]) > 0:
-    #     hotel_data = hotel_data["result"]["hotel"][0]
-    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"], name="adnan")
+    hotel_data = requests.get(url=hotel_api_url, params=args).json()
+    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
+                           name="adnan", params=args)
     # hotel_data = {}
     # print("in the last = ", hotel_id)
     # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
