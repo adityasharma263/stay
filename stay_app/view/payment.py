@@ -17,7 +17,7 @@ def payment():
         txnid = get_transaction_id()
         hash_ = generate_hash(txnid, booking_details)
         data["amount"] = float(booking_details["total_booking_amount"])
-        data["productinfo"] = "Message showing product details."
+        data["productinfo"] = booking_details["product_info"]
         data["key"] = str(app.config["KEY"])
         data["txnid"] = txnid
         data["hash"] = hash_
@@ -25,8 +25,8 @@ def payment():
         data["email"] = booking_details["business_email"]
         data["phone"] = booking_details["business_contact_no"]
         data["service_provider"] = "payu_paisa"
-        data["furl"] = str(app.config["DOMAIN_URL"]) + "/payment/fail"
-        data["surl"] = str(app.config["DOMAIN_URL"]) + "/payment/success"
+        data["furl"] = str(app.config["DOMAIN_URL"]) + "/payment/fail/" + str(booking_details["booking_no"])
+        data["surl"] = str(app.config["DOMAIN_URL"]) + "/payment/success/" + str(booking_details["booking_no"])
         data['action'] = str(app.config["PayU_API_URL"])
         return render_template("hotel/payment/form.html", data=data)
 
@@ -64,14 +64,14 @@ def get_transaction_id():
 
 # no csrf token require to go to Success page.
 # This page displays the success/confirmation message to user indicating the completion of transaction.
-@app.route('/payment/success', methods=['GET'])
-def payment_success():
-    data = {}
-    return render_template("hotel/payment/success.html", data=data)
+@app.route('/payment/success/<string:booking_no>', methods=['GET'])
+def payment_success(booking_no):
+    req = requests.put(str(app.config["API_URL"]) + '/api/v1/booking/' + str(booking_no), json={"status": "S"})
+    return render_template("hotel/payment/success.html", data=req.json())
 
 
 # no csrf token require to go to Failure page. This page displays the message and reason of failure.
-@app.route('/hotel/payment/fail', methods=['GET'])
-def payment_failure():
-    data = {}
-    return render_template("hotel/payment/failure.html", data=data)
+@app.route('/payment/fail/<string:booking_no>', methods=['GET'])
+def payment_failure(booking_no):
+    req = requests.put(str(app.config["API_URL"]) + '/api/v1/booking/' + str(booking_no), json={"status": "F"})
+    return render_template("hotel/payment/failure.html", data=req.json())
