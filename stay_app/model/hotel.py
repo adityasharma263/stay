@@ -302,7 +302,7 @@ class Booking(Base):
     __tablename__ = 'booking'
 
     booking_no = db.Column(db.String, nullable=True)
-    booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    booking_date = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp())
     gst_no = db.Column(db.String, nullable=True)
     status = db.Column(db.Enum(Status))
     business_email = db.Column(db.String, nullable=True)
