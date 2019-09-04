@@ -98,8 +98,14 @@ def admin_deal_id():
     hotel_id = request.args.get('id')
 
     args = request.args.to_dict()
+    if not hotel_id:
+        args = {"id": 1}
+    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel/terminal", params=args)
+    hotel_data = hotel_data.json()["result"]
+    return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
     # else:
     #     return render_template("hotel/admin/deals-dashboard.html")
+
 
 @app.route("/admin/hotel/terminal", methods=["GET"])
 def admin_terminal():

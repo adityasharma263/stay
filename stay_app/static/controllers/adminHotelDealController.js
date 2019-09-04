@@ -27,15 +27,15 @@ app.controller("adminHotelDealController", function ($scope, $http) {
 
     console.log("hotelDetails = ", hotelDetails.hotel);
 
-    $scope.hotelDetails = hotelDetails.hotel;
+    $scope.hotelDetails = hotelDetails.hotel[0];
 
 
     $scope.onHotelSelect = function (item) {
         console.log(item);
-        $http.get(API_BASE_URL + "/api/v1/hotel", { params: { id: item.id } })
+        $http.get(API_BASE_URL + "/api/v1/hotel/terminal", { params: { id: item.id } })
             .then(function (response) {
                 console.log(response.data.result);
-                $scope.hotelDetails = response.data.result.hotel;
+                $scope.hotelDetails = response.data.result.hotel[0];
             })
             .catch(function (err) {
                 console.log(err);
@@ -72,6 +72,7 @@ app.controller("adminHotelDealController", function ($scope, $http) {
 
                 var dealsDataResponse = response.data.result.deal;
                 console.log(dealsDataResponse);
+                console.log("response.data = ",response.data);
 
                 // we may need to create data structure like hotel_id => partner_id => room_id => (deals data)
                 // it will help in ng-repeat of rooms to show deals according to partner_id
