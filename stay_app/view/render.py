@@ -307,3 +307,5 @@ def partner_care():
 @app.route('/terms-and-conditions')
 def terms_and_conditions():
     return render_template('hotel/b2b_hotels/terms-and-conditions.html')
+
+

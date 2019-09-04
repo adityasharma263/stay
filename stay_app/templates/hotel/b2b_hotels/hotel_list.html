@@ -176,7 +176,7 @@
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
                                 <div ng-repeat="room in hotel.rooms">
                                     <div class="ng-cloak" ng-repeat="deal in room.deals">
-                                        <article class="box"  ng-if="deal.b2b_lowest_price">
+                                        <article class="box"  ng-if="deal.b2b_selected_deal">
                                             <div ng-repeat = "deal in room.deals" ng-if="deal.ts_exclusive" >
                                                 <a href="/hotel/[[hotel.slug]]">
                                                 <figure class="col-sm-5 col-md-4" style="padding: 15px;">
