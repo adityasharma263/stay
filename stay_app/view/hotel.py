@@ -528,12 +528,12 @@ def deal_api():
         if order_by:
             q_deal = q_deal.order_by(getattr(Deal, order_by).asc())
         if b2b_selected_deal:
-            b2b_deal = Deal.query.filter(Deal.b2b_selected_deal).all()
+            b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).all()
             if len(b2b_deal) == 0:
                 q = Deal.query.order_by(getattr(Deal, "base_price").asc()).first()
                 q.b2b_selected_deal = True
         if b2c_selected_deal:
-            b2c_deal = Deal.query.filter(Deal.b2c_selected_deal).all()
+            b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).all()
             if len(b2c_deal) == 0:
                 q = Deal.query.order_by(getattr(Deal, "base_price").asc()).first()
                 q.b2c_selected_deal = True
