@@ -518,9 +518,9 @@ def deal_api():
         room_list = []
         q_deal = db.session.query(Deal)
         if room_id:
-            q_deal = q_deal.filter(Deal.room_id == room_id).all()
+            q_deal = q_deal.filter(Deal.room_id == room_id)
         if hotel_id:
-            rooms = Room.query.filter(Room.hotel_id == hotel_id).all()
+            rooms = Room.query.filter(Room.hotel_id == hotel_id)
             for room_obj in rooms:
                 room_list.append(room_obj.id)
             q_deal = q_deal.filter(Deal.room_id.in_(room_list))

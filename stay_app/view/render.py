@@ -133,6 +133,10 @@ def booking():
         for deal in booking_details["deals"]:
             deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal['deal_id']})
             deal_data = deal_data.json()["result"]["deal"][0]
+            for key, value in deal_data.items():
+                if key in ['base_price', 'commission_in_percentage', 'final_price', 'margin_price', 'partner_id']:
+                    deal[key] = value
+
             deal['base_price'] = deal_data['base_price']
             deal['commission_in_percentage'] = deal_data['commission_in_percentage']
             deal['final_price'] = deal_data['final_price']
