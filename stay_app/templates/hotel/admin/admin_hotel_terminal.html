@@ -278,7 +278,7 @@
                                 <strong>[[room.room_type]]</strong>
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
-                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 'b2b_selling_price')">Low Price B2B</div>
+                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 'b2b_selling_price')" >[[ roomPriceStructureB2B[room.id][0].base_price ]]</div>
                             <div class="col-sm-3 border-right border-bottom">
                                 <input type="text" value="1550" class="form-control small-text"
                                     ng-keydown="changeSitePrice($event, 'b2b')" />

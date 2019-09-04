@@ -7,6 +7,9 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
 
     $scope.roomPriceStructureB2B = {};
 
+    // room_id=9&b2b_selected_deal=true&order_by=base_price
+    // this above filter is use for selected price and sorted deal
+
 
     $http.get("/api/v1/hotel/terminal")
         .then(function (response) {
@@ -23,9 +26,10 @@ app.controller("adminHotelTerminalController", function ($scope, $http) {
         $scope.getRoomPriceByID  = function(roomID){
 
             $http.get("/api/v1/deal",
-            { params: { room_id: roomID, b2b_selected_deal: true}})
+            { params: { room_id: roomID, b2b_selected_deal: true, "order_by": "base_price"}})
             .then(function(response) {
-                $scope.roomPriceStructureB2B[roomID] = response.data;
+                $scope.roomPriceStructureB2B[roomID] = response.data.result.deal;
+                console.log($scope.roomPriceStructureB2B);
             }).catch(function(err) {
                 console.log(err);
             });

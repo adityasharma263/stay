@@ -106,11 +106,9 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
   
         $http.post(api_base_url+"/hotel", $scope.hotel)
         .then(function(response){
-            console.log("response = ",response);
 
         })
         .catch(function(err){
-            console.log("err = ", err);
         });
     };
 

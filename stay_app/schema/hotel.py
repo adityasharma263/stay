@@ -105,7 +105,8 @@ class HotelCollectionSchema(ma.ModelSchema):
         model = HotelCollection
         exclude = ('updated_at', 'created_at', 'hotel')
 
-#-------------------------------------------------------cart--------------------------------------------
+
+#-------------------------------------------------------Cart--------------------------------------------
 
 
 class CartHotelSchema(ma.ModelSchema):
@@ -113,7 +114,7 @@ class CartHotelSchema(ma.ModelSchema):
         model = Hotel
         exclude = ('updated_at', 'created_at', "star", "rating", "phone", "desc", "address",
                    "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
-                   "longitude", "longitude", "country", "category")
+                   "longitude", "longitude", "country", "category", "rooms")
 
 
 class CartRoomSchema(ma.ModelSchema):
@@ -130,7 +131,10 @@ class CartDealSchema(ma.ModelSchema):
 
     class Meta:
         model = Deal
-        exclude = ('updated_at', 'created_at')
+        exclude = ('updated_at', 'created_at', "price_calendar", "b2c_selling_price", "b2b_final_price",
+                   "b2b_selected_deal", "b2c_final_price", "base_price", "commission_in_percentage", "b2b_margin_price",
+                   "b2b_selling_price", "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal",
+                   "b2b_lowest_price")
 
 
 class CartItemSchema(ma.ModelSchema):
@@ -180,7 +184,7 @@ class DealB2BListSchema(ma.ModelSchema):
 
     class Meta:
         model = Deal
-        exclude = ('updated_at', 'created_at', "website", "price_calendar" "b2c_selling_price",
+        exclude = ('updated_at', 'created_at', "website", "price_calendar", "b2c_selling_price", "b2b_final_price",
                    "b2c_final_price", "base_price", "commission_in_percentage", "b2b_margin_price", "b2b_selling_price",
                    "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal", "room", "website_id")
 

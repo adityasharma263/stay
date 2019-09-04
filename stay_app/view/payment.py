@@ -23,11 +23,11 @@ def payment():
         data["hash"] = hash_
         data["firstname"] = booking_details["company_name"]
         data["email"] = booking_details["business_email"]
-        data["phone"] = booking_details["contact_no"]
+        data["phone"] = booking_details["business_contact_no"]
         data["service_provider"] = "payu_paisa"
         data["furl"] = str(app.config["DOMAIN_URL"]) + "/payment/fail"
         data["surl"] = str(app.config["DOMAIN_URL"]) + "/payment/success"
-        data['action'] = 'https://sandboxsecure.payu.in/_payment'
+        data['action'] = str(app.config["PayU_API_URL"])
         return render_template("hotel/payment/form.html", data=data)
 
 
@@ -37,7 +37,6 @@ def generate_hash(txnid, booking_details):
         # get keys and SALT from dashboard once account is created.
         # hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10"
         hash_string = get_hash_string(txnid, booking_details)
-        print(hash_string, "hash string")
         generated_hash = hashlib.sha512(hash_string.encode('utf-8')).hexdigest().lower()
         return generated_hash
     except Exception as e:
@@ -72,7 +71,7 @@ def payment_success():
 
 
 # no csrf token require to go to Failure page. This page displays the message and reason of failure.
-@app.route('/payment/fail', methods=['GET'])
+@app.route('/hotel/payment/fail', methods=['GET'])
 def payment_failure():
     data = {}
     return render_template("hotel/payment/failure.html", data=data)

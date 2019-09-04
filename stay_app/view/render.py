@@ -46,6 +46,7 @@ def login_required(f):
 
 
 #================= Admin hotels ==========================
+
 @app.route('/admin/hotel', methods=['GET'])
 def admin():
     # if request.cookies.get("hash2"):
@@ -68,9 +69,11 @@ def admin():
     # else:
     #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
+
 @app.route('/admin/home', methods=["GET"])
 def admin_home():
     return render_template("hotel/admin/dashboard.html")
+
 
 @app.route('/admin/update', methods=['GET'])
 def admin_hotel_update():
@@ -92,23 +95,102 @@ def admin_hotel_search():
 
 @app.route("/admin/hotel/deal", methods=["GET"])
 def admin_deal_id():
-
     hotel_id = request.args.get('id')
 
     args = request.args.to_dict()
-    if(not hotel_id):
-        args = {"id" : 1}
-    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel", params=args)
-    hotel_data = hotel_data.json()["result"]
-    return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
     # else:
     #     return render_template("hotel/admin/deals-dashboard.html")
 
-
 @app.route("/admin/hotel/terminal", methods=["GET"])
 def admin_terminal():
-
     return render_template("hotel/admin/admin_hotel_terminal.html")
+
+
+#================= Booking hotels ==========================
+
+
+@app.route('/hotel/booking', methods=['GET', 'POST'])
+@login_required
+def booking():
+    if request.method == 'GET':
+        if 'partner_data' in session or True:
+            partner_data = session["partner_data"] if "" else ""
+            if True or partner_data["status"] == 'Approved':
+                return render_template('hotel/booking/booking.html', partner_data=partner_data)
+            else:
+                return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
+               "click here  FOR THE APPROVAL </b></a>"
+        else:
+            return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+    else:
+        booking_details = request.json
+        for deal in booking_details["deals"]:
+            deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal.deal_id})
+            deal_data = deal_data.json()
+        requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
+        booking_details.pop("deals")
+        response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_details)
+        return response.text
+
+
+#================= B2B hotels ==========================
+
+
+@app.route('/', methods=['GET'])
+def business():
+    # if 'hash' in session:
+    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]), code=302)
+    # else:
+    return render_template('hotel/b2b_hotels/index.html')
+
+
+@app.route('/hotel', methods=['GET'])
+@login_required
+def business_hotel():
+    partner_data = "adnan"
+    return render_template('hotel/b2b_hotels/hotel.html', name=partner_data)
+
+
+@app.route('/hotel/list', methods=['GET'])
+@login_required
+def business_hotel_list():
+    partner_data = "adnan"
+    args = request.args.to_dict()
+    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/list/b2b"
+    hotel_data = requests.get(url=hotel_api_url, params=args)
+    hotel_data = hotel_data.json()
+    if len(hotel_data["result"]["hotel"]) > 0:
+        hotel_data = hotel_data["result"]["hotel"]
+    else:
+        hotel_data = []
+
+    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
+
+
+@app.route('/hotel/<string:slug>', methods=['GET'])
+@login_required
+def business_hotel_detail(slug):
+    # if 'partner_data' in session:
+    #     partner_data = "name"
+    #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/b2b"
+    #     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
+    #     if len(hotel_data["result"]["hotel"]) > 0:
+    #         hotel_data = hotel_data["result"]["hotel"][0]
+    #     else:
+    #         hotel_data = {}
+    #     render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
+    # else:
+    args = request.args.to_dict()
+    args["slug"] = slug
+    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+    hotel_data = requests.get(url=hotel_api_url, params=args).json()
+    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
+                           name="adnan", params=args)
+    # hotel_data = {}
+    # print("in the last = ", hotel_id)
+    # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
+    # else:
+    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= Index Pages ==========================
@@ -153,83 +235,3 @@ def group():
 @app.route('/onetimeverification')
 def verification():
     return render_template('hotel/b2b_hotels/otp-chat-forum.html')
-
-
-#================= Booking hotels ==========================
-
-
-@app.route('/hotel/booking', methods=['GET'])
-@login_required
-def booking():
-    if 'partner_data' in session or True:
-        partner_data = session["partner_data"] if "" else ""
-        if True or (partner_data["status"] == 'Approved'):
-            return render_template('hotel/booking/booking.html', partner_data=partner_data)
-        else:
-            return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
-           "click here  FOR THE APPROVAL </b></a>"
-    else:
-        return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
-
-
-#================= B2B hotels ==========================
-
-
-@app.route('/', methods=['GET'])
-def business():
-    # if 'hash' in session:
-    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]), code=302)
-    # else:
-    return render_template('hotel/b2b_hotels/index.html')
-
-
-@app.route('/hotel', methods=['GET'])
-@login_required
-def business_hotel():
-    partner_data = "adnan"
-    return render_template('hotel/b2b_hotels/hotel.html', name=partner_data)
-
-
-@app.route('/hotel/list', methods=['GET'])
-@login_required
-def business_hotel_list():
-    partner_data = "adnan"
-    args = request.args.to_dict()
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/list/b2b"
-    print(hotel_api_url, args)
-    hotel_data = requests.get(url=hotel_api_url, params=args)
-    print(hotel_data, hotel_data.status_code)
-    hotel_data = hotel_data.json()
-    if len(hotel_data["result"]["hotel"]) > 0:
-        hotel_data = hotel_data["result"]["hotel"]
-    else:
-        hotel_data = []
-
-    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
-
-
-@app.route('/hotel/<string:slug>', methods=['GET'])
-@login_required
-def business_hotel_detail(slug):
-    # if 'partner_data' in session:
-    #     partner_data = "name"
-    #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/b2b"
-    #     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
-    #     if len(hotel_data["result"]["hotel"]) > 0:
-    #         hotel_data = hotel_data["result"]["hotel"][0]
-    #     else:
-    #         hotel_data = {}
-    #     render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
-    # else:
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    hotel_data = requests.get(url=hotel_api_url, params={"slug": slug}).json()
-    # if len(hotel_data["result"]["hotel"]) > 0:
-    #     hotel_data = hotel_data["result"]["hotel"][0]
-    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"], name="adnan")
-    # hotel_data = {}
-    # print("in the last = ", hotel_id)
-    # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
-    # else:
-    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
-
-
