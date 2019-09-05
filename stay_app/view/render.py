@@ -309,4 +309,8 @@ def partner_care():
 def terms_and_conditions():
     return render_template('hotel/b2b_hotels/terms-and-conditions.html')
 
+@app.route('/privacy-policy')
+def privacy_policy():
+    return render_template('hotel/b2b_hotels/privacy-policy.html')
+
 
