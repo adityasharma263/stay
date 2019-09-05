@@ -157,7 +157,7 @@
         }
 
 
-        
+
         /* Custom Scroll */
 
         /* width */
@@ -181,7 +181,7 @@
             background: #555;
         }
 
-        .p10{
+        .p10 {
             padding: 10px;
         }
     </style>
@@ -280,13 +280,15 @@
                                 <strong>[[room.room_type]]</strong>
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
-                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 'b2b_selling_price')" >[[ roomPriceStructureB2B[room.id][0].base_price ]]</div>
+                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 1)">
+                                [[roomPriceStructureB2B[room.id][0].base_price ]]</div>
                             <div class="col-sm-3 border-right border-bottom">
                                 <input type="text" value="1550" class="form-control small-text"
                                     ng-keydown="changeSitePrice($event, 'b2b')" />
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
-                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 'b2c_selling_price')">Low Price B2C</div>
+                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 0)">Low Price
+                                B2C</div>
                             <div class="col-sm-3 border-right border-bottom">
                                 <input type="text" value="2000" class="small-text form-control"
                                     ng-keydown="changeSitePrice($event, 'b2c')" />
@@ -305,20 +307,81 @@
                     </div>
                     <div class="modal-body">
 
-                        <div>
+                        <center>
+
+                            <div class="row">
+
+                                <div class="col-sm-1">
+                                    <span>Select Partner</span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <span>Base Price</span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    Commission (%)
+                                </div>
+
+                                <div class="col-sm-2" ng-if="selectedDealType == 1">
+                                    B2B Margin Price
+                                </div>
+
+                                <div class="col-sm-2" ng-if="selectedDealType == 1">
+                                    <span> B2B Selling Price</span>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="selectedDealType == 0">
+                                    <span>B2C Margin Price</span>
+
+                                </div>
+                                <div class="col-sm-1" ng-if="selectedDealType == 0">
+                                    <span>B2C Selling Price</span>
+
+                                </div>
+
+                            </div>
+
                             <div class="row" ng-repeat="roomPrices in roomPriceStructureB2B[selectedRoom]">
 
-                                <div>
+                                <div class="col-sm-1">
+                                    <input type="radio" name="b2b_selected_deal" ng-model="roomPrices.b2b_selected_deal"/>
+                                </div>
+
+                                <div class="col-sm-2">
                                     [[ roomPrices.base_price ]]
                                 </div>
+
+                                <div class="col-sm-2">
+                                    [[ roomPrices.commission_in_percentage ]]
+                                </div>
+
+                                <div class="col-sm-2" ng-if="selectedDealType == 1">
+                                    [[roomPrices.b2b_margin_price]]
+                                </div>
+
+                                <div class="col-sm-2" ng-if="selectedDealType == 1">
+                                    [[roomPrices.b2b_selling_price]]
+                                </div>
+
+                                <div class="col-sm-2" ng-if="selectedDealType == 0">
+                                    [[roomPrices.b2c_margin_price]]
+                                </div>
+                                <div class="col-sm-2" ng-if="selectedDealType == 0">
+                                    [[roomPrices.b2c_selling_price]]
+                                </div>
+
 
 
 
                             </div>
 
+                            <center>
+                                <input type="number" ng-model="roomPrices.b2b_final_price" />
+                                <button class="btn" ng-click="addPrice()">Add Price for B2B Site</button>
+                            </center>
+                        </center>
 
-                        </div>
-                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

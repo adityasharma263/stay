@@ -73,6 +73,8 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
         $scope.selectedRoom = roomID; 
 
+        $scope.selectedDealType = loadRoomPriceFor;
+
         // $http.get("/api/v1/deal",
         //     { params: { room_id: roomID, order_by : loadRoomPriceFor} })
         //     .then(function(response) {
