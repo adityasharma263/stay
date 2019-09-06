@@ -573,7 +573,16 @@ def deal_api():
 @app.route('/api/v1/deal/<int:id>', methods=['PUT', 'DELETE'])
 def deal_id(id):
     if request.method == 'PUT':
-        put = Deal.query.filter_by(id=id).update(request.json)
+        deal = request.json
+        room_id = deal.get("room_id", None)
+        deal.pop('room_id', None)
+        b2b_selected_deal = deal.get("b2b_selected_deal", None)
+        b2c_selected_deal = deal.get("b2c_selected_deal", None)
+        if b2b_selected_deal:
+            Deal.query.filter_by(room_id=room_id).update({"b2b_selected_deal": False})
+        if b2c_selected_deal:
+            Deal.query.filter_by(room_id=room_id).update({"b2c_selected_deal": False})
+        put = Deal.query.filter_by(id=id).update(deal)
         if put:
             Deal.update_db()
             data = Deal.query.filter_by(id=id).first()
