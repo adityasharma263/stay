@@ -10,11 +10,13 @@ class MealPlan(enum.Enum):
     EP = "European Plan"
     AP = "American Plan"
 
+
 class BedType(enum.Enum):
     Single = "Single"
     Double = "Double"
     Queen = "Queen"
     King = "King"
+
 
 class Status(enum.Enum):
     p = "Pending"
@@ -212,6 +214,8 @@ class Website(Base):
 class Deal(Base):
     __tablename__ = 'deal'
 
+    b2b_lowest_price = db.Column(db.Boolean, default=False)
+    b2c_lowest_price = db.Column(db.Boolean, default=False)
     b2b_selling_price = db.Column(db.Integer, nullable=True)
     sold_out = db.Column(db.Boolean, default=False, nullable=True)
     b2c_selling_price = db.Column(db.Integer, nullable=True)
@@ -329,7 +333,6 @@ class BookingDeal(Base):
     current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
-    # base_booking_price = db.Column(db.Integer, nullable=True)
     final_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     commission_in_percentage = db.Column(db.Integer, nullable=True)
