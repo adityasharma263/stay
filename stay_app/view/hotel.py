@@ -520,6 +520,16 @@ def deal_api():
         q_deal = db.session.query(Deal)
         if room_id:
             q_deal = q_deal.filter(Deal.room_id == room_id)
+            if b2b_selected_deal:
+                b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).all()
+                if len(b2b_deal) == 0:
+                    q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
+                    q.b2b_selected_deal = True
+            if b2c_selected_deal:
+                b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).all()
+                if len(b2c_deal) == 0:
+                    q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
+                    q.b2c_selected_deal = True
         if hotel_id:
             rooms = Room.query.filter(Room.hotel_id == hotel_id)
             for room_obj in rooms:
@@ -529,16 +539,6 @@ def deal_api():
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if order_by:
             q_deal = q_deal.order_by(getattr(Deal, order_by).asc())
-        if b2b_selected_deal:
-            b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).all()
-            if len(b2b_deal) == 0:
-                q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                q.b2b_selected_deal = True
-        if b2c_selected_deal:
-            b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).all()
-            if len(b2c_deal) == 0:
-                q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                q.b2c_selected_deal = True
         deals = q_deal.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = DealSchema(many=True).dump(deals)
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
