@@ -524,12 +524,14 @@ def deal_api():
                 b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).all()
                 if len(b2b_deal) == 0:
                     q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                    q.b2b_selected_deal = True
+                    if q:
+                        q.b2c_selected_deal = True
             if b2c_selected_deal:
                 b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).all()
                 if len(b2c_deal) == 0:
                     q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                    q.b2c_selected_deal = True
+                    if q:
+                        q.b2c_selected_deal = True
         if hotel_id:
             rooms = Room.query.filter(Room.hotel_id == hotel_id)
             for room_obj in rooms:
