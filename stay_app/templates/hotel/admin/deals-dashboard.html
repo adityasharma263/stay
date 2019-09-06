@@ -545,13 +545,14 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-                                <div class="selector">
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
 
                             <br />
@@ -671,14 +672,14 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-
-                                <div class="selector">
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT SUPPLIER</label>
@@ -819,14 +820,14 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-
-                                <div class="selector">
+                                <input type="text" name="daterange"  class="form-control"/>
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT PARTNER</label>
@@ -1114,6 +1115,10 @@
         var hotelDetails = {{ hotel_data| tojson}};
         var API_BASE_URL = '{{config.API_URL}}';
         var partner_api_url = '{{config.PARTNER_API_URL}}' + "/api/v1"
+    </script>
+
+    <script>
+        $('input[name="daterange"]').daterangepicker();
     </script>
 
     <script type="text/javascript" src="/app.js"></script>

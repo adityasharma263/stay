@@ -12,6 +12,9 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
     // this above filter is use for selected price and sorted deal
 
 
+
+    $scope.updateSitePriceValues = {};
+
     $http.get("/api/v1/hotel/terminal")
         .then(function (response) {
 
@@ -97,11 +100,41 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
         }
     };
 
-    setTimeout(function(){
-        console.log("Toast");
-        toaster.pop('success', "Deal Updated", "Deal for this hotel is updated!");    
-    }, 1000);
+    // setTimeout(function(){
+    //     console.log("Toast");
+    //     toaster.pop('success', "Deal Updated", "Deal for this hotel is updated!");    
+    // }, 1000);
     
+
+    $scope.addPrice = function() {
+
+        console.log("$scope.updateSitePriceValues = ",$scope.updateSitePriceValues);
+
+        if(typeof $scope.updateSitePriceValues.selectedPartnerPrice != "object")
+            $scope.updateSitePriceValues.selectedPartnerPrice = JSON.parse($scope.updateSitePriceValues.selectedPartnerPrice);
+        
+        
+        var dealID = $scope.updateSitePriceValues.selectedPartnerPrice.id;
+        var room_id = $scope.updateSitePriceValues.selectedPartnerPrice.room;
+
+        $http.put(`/api/v1/deal/${dealID}`,
+        {
+            "b2b_final_price": $scope.updateSitePriceValues.final_price,
+            "b2b_selected_deal" : true,
+            "room_id": room_id
+        })
+        .then(function(response) {
+            console.log("response : ",response);
+            
+        })
+        .catch(function(err) {
+            console.log(err);
+
+        })
+        ;
+
+
+    };
 
 
 });

@@ -268,7 +268,7 @@
                 <div class="row">
 
                     <div class="col-sm-3 border-right border-bottom">
-                        <h3 class="hotel-name">
+                        <h3 class="hotel-name" title="[[hotelName]]">
                             [[hotelName]]
                         </h3>
 
@@ -345,7 +345,12 @@
                             <div class="row" ng-repeat="roomPrices in roomPriceStructureB2B[selectedRoom]">
 
                                 <div class="col-sm-1">
-                                    <input type="radio" name="b2b_selected_deal" ng-model="roomPrices.b2b_selected_deal"/>
+                                    <input type="radio" name="b2b_selected_deal"
+                                        ng-model="updateSitePriceValues.a"
+                                        ng-change="updateSitePriceValues.final_price = roomPrices.b2b_selling_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;"
+                                        value="[[roomPrices]]" 
+                                        ng-checked="roomPrices.b2b_selected_deal"
+                                        />
                                 </div>
 
                                 <div class="col-sm-2">
@@ -372,13 +377,17 @@
                                 </div>
 
 
+                                <span ng-if="roomPrices.b2b_selected_deal"><span ng-init="updateSitePriceValues.final_price = roomPrices.b2b_final_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;">Called</span></span>
 
 
                             </div>
 
                             <center>
-                                <input type="number" ng-model="roomPrices.b2b_final_price" />
-                                <button class="btn" ng-click="addPrice()">Add Price for B2B Site</button>
+                                <div class="form-inline">
+                                    <input type="text" ng-model="updateSitePriceValues.final_price"
+                                        class="form-control" />
+                                    <button class="btn" ng-click="addPrice()">Set Price for B2B</button>
+                                </div>
                             </center>
                         </center>
 
