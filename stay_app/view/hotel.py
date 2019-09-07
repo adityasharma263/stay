@@ -515,10 +515,6 @@ def deal_api():
         args.pop('price_end', None)
         order_by = request.args.get('order_by', None)
         args.pop('order_by', None)
-        b2b_selected_deal = request.args.get('b2b_selected_deal', None)
-        args.pop('b2b_selected_deal', None)
-        b2c_selected_deal = request.args.get('b2c_selected_deal', None)
-        args.pop('b2c_selected_deal', None)
         room_id = request.args.get('room_id', None)
         args.pop('room_id', None)
         hotel_id = request.args.get('hotel_id', None)
@@ -531,18 +527,16 @@ def deal_api():
         q_deal = db.session.query(Deal)
         if room_id:
             q_deal = q_deal.filter(Deal.room_id == room_id)
-            if b2b_selected_deal:
-                b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).first()
-                if not b2b_deal:
-                    q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                    if q:
-                        q.b2b_selected_deal = True
-            if not b2c_selected_deal:
-                b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).first()
-                if b2c_deal:
-                    q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                    if q:
-                        q.b2c_selected_deal = True
+            b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).first()
+            if not b2b_deal:
+                q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
+                if q:
+                    q.b2b_selected_deal = True
+            b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).first()
+            if not b2c_deal:
+                q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
+                if q:
+                    q.b2c_selected_deal = True
         if hotel_id:
             rooms = Room.query.filter(Room.hotel_id == hotel_id)
             for room_obj in rooms:
