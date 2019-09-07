@@ -169,10 +169,12 @@ def hotel_b2b_list_api():
                             price = deal.b2b_final_price + price
                 price = int(price / total_days)
                 deal.price = price
-                b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).first()
+                b2b_deal = Deal.query.filter(Deal.room_id == deal.room_id, Deal.b2b_selected_deal).first()
                 if not b2b_deal:
-                    deal = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                    deal.b2b_selected_deal = True
+                    lowest_deal_for_room = Deal.query.filter(Deal.room_id == deal.room_id).order_by(Deal.base_price.asc()).first()
+                    lowest_deal_for_room.b2b_selected_deal = True
+                lowest_deal = Deal.query.order_by(Deal.base_price.asc()).first()
+                lowest_deal.b2b_lowest_price = True
                 # deal = db.session.query(Deal).join(Room).order_by(getattr(Deal, "base_price").asc()).first()
                 # deal.b2b_selected_deal = True
                 hotel.deal_id = deal
@@ -521,6 +523,18 @@ def deal_api():
         q_deal = db.session.query(Deal)
         if room_id:
             q_deal = q_deal.filter(Deal.room_id == room_id)
+            if b2b_selected_deal:
+                b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).first()
+                if b2b_deal:
+                    q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
+                    if q:
+                        q.b2c_selected_deal = True
+            if b2c_selected_deal:
+                b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).first()
+                if b2c_deal:
+                    q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
+                    if q:
+                        q.b2c_selected_deal = True
         if hotel_id:
             rooms = Room.query.filter(Room.hotel_id == hotel_id)
             for room_obj in rooms:
@@ -530,17 +544,6 @@ def deal_api():
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if order_by:
             q_deal = q_deal.order_by(getattr(Deal, order_by).asc())
-        if b2b_selected_deal:
-            b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).all()
-            if len(b2b_deal) == 0:
-                q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                q.b2b_selected_deal = True
-                print("\n\n\n==========\n I am q.\n\n",q)
-        if b2c_selected_deal:
-            b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).all()
-            if len(b2c_deal) == 0:
-                q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
-                q.b2c_selected_deal = True
         deals = q_deal.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = DealSchema(many=True).dump(deals)
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
@@ -549,6 +552,15 @@ def deal_api():
         print("deal = ", deal)
         price_calendar = deal.get("price_calendar", [])
         deal.pop('price_calendar', None)
+        room_id = deal.get("room_id", None)
+        post_b2b_selling_price = deal.get("b2b_selling_price", None)
+        lowest_deal_for_room = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal)\
+            .order_by(Deal.b2b_selling_price.asc()).first()
+        if lowest_deal_for_room.b2b_selling_price > post_b2b_selling_price:
+            deal["b2b_final_price"] = lowest_deal_for_room.b2b_selling_price
+        else:
+            deal["b2b_final_price"] = post_b2b_selling_price
+        Deal.query.filter(Deal.room_id == room_id).all()
         deal_post = Deal(**deal)
         deal_post.save()
         for price in price_calendar:
@@ -563,8 +575,16 @@ def deal_api():
 @app.route('/api/v1/deal/<int:id>', methods=['PUT', 'DELETE'])
 def deal_id(id):
     if request.method == 'PUT':
-        print(request.json)
-        put = Deal.query.filter_by(id=id).update(request.json)
+        deal = request.json
+        room_id = deal.get("room_id", None)
+        deal.pop('room_id', None)
+        b2b_selected_deal = deal.get("b2b_selected_deal", None)
+        b2c_selected_deal = deal.get("b2c_selected_deal", None)
+        if b2b_selected_deal:
+            Deal.query.filter_by(room_id=room_id).update({"b2b_selected_deal": False})
+        if b2c_selected_deal:
+            Deal.query.filter_by(room_id=room_id).update({"b2c_selected_deal": False})
+        put = Deal.query.filter_by(id=id).update(deal)
         if put:
             Deal.update_db()
             data = Deal.query.filter_by(id=id).first()
