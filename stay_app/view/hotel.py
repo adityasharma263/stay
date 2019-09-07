@@ -168,14 +168,23 @@ def hotel_b2b_list_api():
                             price = deal.b2b_final_price + price
                 price = int(price / total_days)
                 deal.price = price
-                b2b_deal = Deal.query.filter(Deal.room_id == deal.room_id, Deal.b2b_selected_deal).first()
-                if not b2b_deal:
-                    lowest_deal_for_room = Deal.query.filter(Deal.room_id == deal.room_id).order_by(Deal.base_price.asc()).first()
+                lowest_selected_deal_for_room = db.session.query(Deal).join(Room).join(Hotel).\
+                    filter(Hotel.id == hotel.id, Deal.b2b_selected_deal)\
+                    .order_by(Deal.b2b_final_price.asc()).first()
+                if lowest_selected_deal_for_room:
+                    lowest_deal_for_room = db.session.query(Deal).join(Room).join(Hotel).\
+                        filter(Hotel.id == hotel.id, Deal.b2b_selected_deal == False,
+                               Deal.room_id != lowest_selected_deal_for_room.room_id)\
+                        .order_by(Deal.b2b_final_price.asc()).first()
+                    if lowest_selected_deal_for_room.b2b_final_price > lowest_deal_for_room.b2b_final_price:
+                        lowest_deal_for_room.b2b_selected_deal = True
+                    else:
+                        lowest_selected_deal_for_room.b2b_selected_deal = True
+                else:
+                    lowest_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
+                        filter(Hotel.id == hotel.id, Deal.b2b_selected_deal == False) \
+                        .order_by(Deal.b2b_final_price.asc()).first()
                     lowest_deal_for_room.b2b_selected_deal = True
-                lowest_deal = Deal.query.order_by(Deal.base_price.asc()).first()
-                lowest_deal.b2b_lowest_price = True
-                # deal = db.session.query(Deal).join(Room).order_by(getattr(Deal, "base_price").asc()).first()
-                # deal.b2b_selected_deal = True
                 hotel.deal_id = deal
         for key in args:
             if key in Hotel.__dict__:
@@ -523,13 +532,13 @@ def deal_api():
         if room_id:
             q_deal = q_deal.filter(Deal.room_id == room_id)
             if b2b_selected_deal:
-                b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).first()
+                b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal == True).first()
                 if b2b_deal:
                     q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
                     if q:
                         q.b2c_selected_deal = True
             if b2c_selected_deal:
-                b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal).first()
+                b2c_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2c_selected_deal == True).first()
                 if b2c_deal:
                     q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
                     if q:
@@ -552,7 +561,7 @@ def deal_api():
         deal.pop('price_calendar', None)
         room_id = deal.get("room_id", None)
         post_b2b_selling_price = deal.get("b2b_selling_price", None)
-        lowest_deal_for_room = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal)\
+        lowest_deal_for_room = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal == True)\
             .order_by(Deal.b2b_selling_price.asc()).first()
         if lowest_deal_for_room.b2b_selling_price > post_b2b_selling_price:
             deal["b2b_final_price"] = lowest_deal_for_room.b2b_selling_price
@@ -578,9 +587,9 @@ def deal_id(id):
         deal.pop('room_id', None)
         b2b_selected_deal = deal.get("b2b_selected_deal", None)
         b2c_selected_deal = deal.get("b2c_selected_deal", None)
-        if b2b_selected_deal:
+        if b2b_selected_deal and room_id:
             Deal.query.filter_by(room_id=room_id).update({"b2b_selected_deal": False})
-        if b2c_selected_deal:
+        if b2c_selected_deal and room_id:
             Deal.query.filter_by(room_id=room_id).update({"b2c_selected_deal": False})
         put = Deal.query.filter_by(id=id).update(deal)
         if put:
