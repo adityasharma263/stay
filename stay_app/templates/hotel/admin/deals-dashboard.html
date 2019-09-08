@@ -74,8 +74,8 @@
             align-items: center;
         }
 
-        .mt-5{
-            margin-top:25px;
+        .mt-5 {
+            margin-top: 25px;
         }
 
         input[type=number]::-webkit-inner-spin-button,
@@ -85,7 +85,6 @@
             appearance: none;
             margin: 0;
         }
-
     </style>
 
 
@@ -98,9 +97,16 @@
     <script type="text/javascript" src="/js/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
     <script src="/js/angular-filter.js"></script>
+    <link rel="stylesheet" href="/js/toaster.css">
+    <script src="/js/toaster.js"></script>
 
 
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+
     <link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css">
     <!-- <link id="main-style" rel="stylesheet" href="/calendar_css/style-light-yellow.css"> -->
 
@@ -183,11 +189,16 @@
             <div id="main">
                 <div class="tab-container full-width-style arrow-left dashboard">
                     <ul class="tabs">
-                        <li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Update Property</a></li>
-                        <li class=""><a data-toggle="tab" href="#b2b" ng-click="listPartnerType(partnerType.DIRECT);"><i class="fa fa-list"></i>Direct</a></li>
-                        <li class=""><a data-toggle="tab" href="#b2c" ng-click="listPartnerType(partnerType.SUPPLIER)"><i class="fa fa-list"></i>Suppliers</a></li>
+                        <li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Update
+                                Property</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2b" ng-click="listPartnerType(partnerType.DIRECT);"><i
+                                    class="fa fa-list"></i>Direct</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2c"
+                                ng-click="listPartnerType(partnerType.SUPPLIER)"><i class="fa fa-list"></i>Suppliers</a>
+                        </li>
 
-                        <li class=""><a data-toggle="tab" href="#booking" ng-click="listPartnerType(partnerType.PARTNER)"><i
+                        <li class=""><a data-toggle="tab" href="#booking"
+                                ng-click="listPartnerType(partnerType.PARTNER)"><i
                                     class="soap-icon-conference circle"></i>Partners</a></li>
                     </ul>
                     <div class="tab-content">
@@ -227,8 +238,9 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5" for="name">
                                             <label>Description</label>
-                                            <textarea rows="4" type="text" class="input-text full-width" id="description"
-                                                ng-model="hotel.desc" type="textarea" required></textarea>
+                                            <textarea rows="4" type="text" class="input-text full-width"
+                                                id="description" ng-model="hotel.desc" type="textarea"
+                                                required></textarea>
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="city">
                                             <label>Category</label>
@@ -533,15 +545,16 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-                                <div class="selector">
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
-                           
+
                             <br />
                             <br />
                             <br />
@@ -578,7 +591,8 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="number" class="input-text full-width" value=""
-                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price" placeholder="" />
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
                                                     </div>
 
                                                 </div>
@@ -586,7 +600,7 @@
                                                 <div class="col-sm-1">
 
                                                     <label>%</label>
-                                                    <input type="text" class="input-text full-width" 
+                                                    <input type="text" class="input-text full-width"
                                                         ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
                                                         placeholder="" />
 
@@ -596,7 +610,7 @@
 
                                                     <label>B2B Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
                                                         placeholder="" />
 
                                                 </div>
@@ -605,32 +619,33 @@
 
                                                     <label>B2B Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
                                                     <label>B2C Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
                                                     <label>B2C Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
-                                                    <button class="btn button mt-5" ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)" >Update</button>
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
                                                 </div>
 
                                             </div>
@@ -657,22 +672,24 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-
-                                <div class="selector">
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT SUPPLIER</label>
                                 <div class="selector">
-                                    <select class="full-width" ng-model="selectedPartner" ng-change="loadDealByPartnerID(selectedPartner)">
+                                    <select class="full-width" ng-model="selectedPartner"
+                                        ng-change="loadDealByPartnerID(selectedPartner)">
                                         <option value="[[supplier.id]]"
-                                        ng-repeat="supplier in partners[partnerType.SUPPLIER]" >[[supplier.name]] ([[supplier.status]])</option>
-                                        
+                                            ng-repeat="supplier in partners[partnerType.SUPPLIER]">[[supplier.name]]
+                                            ([[supplier.status]])</option>
+
                                     </select><span class="custom-select full-width"></span>
                                 </div>
                             </div>
@@ -683,9 +700,11 @@
                                     class="button btn-success btn-medium sky-blue1 uppercase full-width">ADD NEW
                                     SUPPLIER</button>
                             </div>
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
 
-                            <br /><br /><br />
-                            <hr>
 
                             <div class="container shortcode">
                                 <form class="booking-form">
@@ -716,8 +735,9 @@
                                                 <div class="col-sm-1">
                                                     <div>
                                                         <label>Base Price</label>
-                                                        <input type="number" class="input-text full-width" 
-                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price" placeholder="" />
+                                                        <input type="number" class="input-text full-width"
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
                                                     </div>
 
                                                 </div>
@@ -726,7 +746,7 @@
 
                                                     <label>%</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
                                                         placeholder="" />
 
                                                 </div>
@@ -735,7 +755,7 @@
 
                                                     <label>B2B Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
                                                         placeholder="" />
 
                                                 </div>
@@ -744,7 +764,7 @@
 
                                                     <label>B2B Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
                                                         placeholder="" />
                                                 </div>
 
@@ -752,23 +772,24 @@
 
                                                     <label>B2C Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
                                                     <label>B2C Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
-                                                    <button class="btn button mt-5" ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)" >Update</button>
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
                                                 </div>
 
 
@@ -778,7 +799,7 @@
                                     </div>
 
 
-                                    <hr/>
+                                    <hr />
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -799,22 +820,24 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-
-                                <div class="selector">
+                                <input type="text" name="daterange"  class="form-control"/>
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT PARTNER</label>
                                 <div class="selector">
-                                    <select class="full-width" ng-model="selectedPartner" ng-change="loadDealByPartnerID(selectedPartner)">
+                                    <select class="full-width" ng-model="selectedPartner"
+                                        ng-change="loadDealByPartnerID(selectedPartner)">
                                         <option value="[[partner.id]]"
-                                        ng-repeat="partner in partners[partnerType.PARTNER]" >[[partner.name]] ([[partner.status]])</option>
-                                        
+                                            ng-repeat="partner in partners[partnerType.PARTNER]">[[partner.name]]
+                                            ([[partner.status]])</option>
+
                                     </select><span class="custom-select full-width"></span>
                                 </div>
                             </div>
@@ -854,7 +877,8 @@
                                                     <div>
                                                         <label>Base Price</label>
                                                         <input type="number" class="input-text full-width" value=""
-                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price" placeholder="" />
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
                                                     </div>
 
                                                 </div>
@@ -862,7 +886,7 @@
                                                 <div class="col-sm-1">
 
                                                     <label>%</label>
-                                                    <input type="text" class="input-text full-width" 
+                                                    <input type="text" class="input-text full-width"
                                                         ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
                                                         placeholder="" />
 
@@ -872,7 +896,7 @@
 
                                                     <label>B2B Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
                                                         placeholder="" />
 
                                                 </div>
@@ -881,32 +905,33 @@
 
                                                     <label>B2B Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
                                                     <label>B2C Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
                                                     <label>B2C Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
-                                                    ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
                                                         placeholder="" />
                                                 </div>
 
-                                                
+
                                                 <div class="col-sm-1">
 
-                                                    <button class="btn button mt-5" ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)" >Update</button>
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
                                                 </div>
 
                                             </div>
@@ -914,7 +939,7 @@
                                     </div>
 
 
-                                    <hr/>
+                                    <hr />
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -962,7 +987,7 @@
     <script type="text/javascript" src="/files/jquery-ui.1.10.4.min.js.download"></script>
 
 
-    
+
     <!-- Twitter Bootstrap -->
     <script type="text/javascript" src="/files/bootstrap.js.download"></script>
 
@@ -1084,10 +1109,16 @@
         </div>
     </div>
 
+    <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
+
     <script>
         var hotelDetails = {{ hotel_data| tojson}};
-        var API_BASE_URL = '{{config.BUSINESS_DOMAIN_URL}}';
-        var partner_api_url = '{{config.PARTNER_DOMAIN_URL}}' +"/api/v1"
+        var API_BASE_URL = '{{config.API_URL}}';
+        var partner_api_url = '{{config.PARTNER_API_URL}}' + "/api/v1"
+    </script>
+
+    <script>
+        $('input[name="daterange"]').daterangepicker();
     </script>
 
     <script type="text/javascript" src="/app.js"></script>

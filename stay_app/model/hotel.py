@@ -18,6 +18,12 @@ class BedType(enum.Enum):
     King = "King"
 
 
+class Status(enum.Enum):
+    p = "Pending"
+    F = "Failure"
+    S = "Success"
+
+
 class HotelCollection(Base):
     __tablename__ = 'hotel_collection'
 
@@ -208,6 +214,8 @@ class Website(Base):
 class Deal(Base):
     __tablename__ = 'deal'
 
+    b2b_lowest_price = db.Column(db.Boolean, default=False)
+    b2c_lowest_price = db.Column(db.Boolean, default=False)
     b2b_selling_price = db.Column(db.Integer, nullable=True)
     sold_out = db.Column(db.Boolean, default=False, nullable=True)
     b2c_selling_price = db.Column(db.Integer, nullable=True)
@@ -298,12 +306,12 @@ class Booking(Base):
     __tablename__ = 'booking'
 
     booking_no = db.Column(db.String, nullable=True)
-    booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    booking_date = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp())
     gst_no = db.Column(db.String, nullable=True)
+    status = db.Column(db.Enum(Status))
     business_email = db.Column(db.String, nullable=True)
     office_address = db.Column(db.String, nullable=True)
     business_contact_no = db.Column(db.String, nullable=True)
-    contact_no = db.Column(db.String, nullable=True)
     company_name = db.Column(db.String, nullable=True)
     partner_id = db.Column(db.Integer, nullable=False)
     total_booking_amount = db.Column(db.Integer, nullable=True)
@@ -325,7 +333,6 @@ class BookingDeal(Base):
     current_deal_amount = db.Column(db.Integer, nullable=True)
     ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
     co_date = db.Column(db.DateTime(timezone=True), nullable=True)
-    # base_booking_price = db.Column(db.Integer, nullable=True)
     final_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
     commission_in_percentage = db.Column(db.Integer, nullable=True)
