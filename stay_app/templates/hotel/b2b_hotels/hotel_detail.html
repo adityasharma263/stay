@@ -394,99 +394,145 @@
                                         <br>
                                         <h2>Room Facilities</h2>
                                         <p> All of These Facilities are Confined to The Room</p>
+
+                                        {% for rooms in hotel_data %}
+                                        {% for facilities in rooms.hotel_data %}
                                         <ul class="amenities clearfix style1">
+                                        {% if rooms.facilities.wifi %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.tv %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
-
-
+                                        {% endif %}
+                                        {% if rooms.facilities.electric_kettle %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
-
-
+                                        {% endif %}
+                                        {% if rooms.facilities.ac %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.bathtub %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with bathtub</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.bathroom_with_shower  %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
                                             </li>
-
+                                        {% endif%}
+                                        {% if rooms.facilities.desk %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-minus"></i>Desk</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.hairdryer %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-horn"></i>Hairdryer</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.room_safe %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-securevault"></i>Room safe</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.phone %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.food_serve_at_room %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-food"></i>Food Serve at Room</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.bathroom_cosmetics %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-check-1"></i>Bathroom Cosmetics</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.bathroom_nightie %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-features"></i>Bathroom Nightie</div>
                                             </li>
-
+                                        {% endif%}
+                                        {% if rooms.facilities.ironing_facility %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-flexible"></i>Ironing Facility</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.weighing_machine %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-clock"></i>Weighing Machine</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.wardrobes_closet %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-trunk-2"></i>Wardrobes / Closet</div>
                                             </li>
-
+                                        {% endif%}
+                                        {% if rooms.facilities.view %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-beach"></i>View </div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.room_seating_area %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-passenger"></i>Room Seating Area</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.room_slipper %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-ski"></i>Room Slipper</div>
                                             </li>
-
+                                        {% endif %}
+                                        {% if rooms.facilities.morning_newspaper %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-magazine-1"></i>Morning Newspaper </div>
                                             </li>
-
-
+                                        {% endif %}
+                                        {% if rooms.facilities.bathroom_towels %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-shopping-2"></i>Bathroom Towels </div>
                                             </li>
-
+                                            {% endif %}
+                                            {% if rooms.facilities.free_evening_snacks %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
+                                            {% endif %}
+                                            {% if rooms.facilities.free_toiletries %}
+                                            <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Toiletries </div>
+                                                </li>
+                                            {% endif %}
+                                            {% if rooms.facilities.fan%}
+                                            <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box style1"><i class="soap-icon-juice"></i>Fan </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if rooms.facilities.heater %}
+                                            <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box style1"><i class="soap-icon-juice"></i>Heater</div>
+                                            </li>
+                                            {% endif %}
+                                            {% if rooms.facilities.jacuzzi %}
+                                            <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
+                                            </li>
+                                            {% endif %}
                                         </ul>
-                                       =
+                                        {% endfor %}
+                                        {% endfor %}
+
+
                                     </div>
                                     <div class="tab-pane fade" id="hotel-Booking" >
                                         <h3>Call Hotel</h3>
