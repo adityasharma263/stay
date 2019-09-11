@@ -175,9 +175,10 @@
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
                                 <div ng-repeat="room in hotel.rooms">
-                                    <div class="ng-cloak" ng-repeat="deal in room.deals">
-                                        <article class="box"  ng-if="deal.b2b_selected_deal">
-                                            <div ng-repeat = "deal in room.deals" ng-if="deal.ts_exclusive" >
+
+                                    <div class="ng-cloak">
+                                        <article class="box" >
+                                            <div ng-repeat = "deal in room.deals" ng-if="room.b2b_lowest_price" ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false" >
                                                 <a href="/hotel/[[hotel.slug]]">
                                                 <figure class="col-sm-5 col-md-4" style="padding: 15px;">
                                                     <img data-toggle="modal"  style="height:100%; width:100%; cursor: pointer" src="http://[[room.image_url]]" alt="Travel Square">
