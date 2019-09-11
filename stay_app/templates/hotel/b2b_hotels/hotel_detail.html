@@ -554,9 +554,9 @@
                         </div>
                         <div class="sidebar col-md-3">
                                 <article class="detailed-logo">
-                                    {% if hotel_data.rooms %}
+                                    {% if hotel_data.rooms[1] %}
                                     <figure>
-                                        <img   src="{{hotel_data.rooms[2].image_url}}" alt="">
+                                        <img   src="{{hotel_data.rooms[1].image_url}}" alt="">
                                     </figure>
                                     {% endif %}
                                     <div class="details">
