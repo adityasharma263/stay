@@ -155,10 +155,6 @@ class CartSchema(ma.ModelSchema):
 #-------------------------------------------------------Terminal-------------------------------------------
 
 
-
-
-
-
 class RoomTerminalSchema(ma.ModelSchema):
     meal_plan = EnumField(MealPlan, by_value=True)
 
