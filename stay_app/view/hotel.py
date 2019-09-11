@@ -66,7 +66,7 @@ def hotel_api():
                 price = int(price / total_days)
                 deal.price = price
                 hotel.deal_id = deal
-        hotel = q.filter_by(**args).first()
+        hotel = q.first()
         result = HotelSchema(many=False).dump(hotel)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
