@@ -278,23 +278,25 @@
                         <!-- sending api calls to get deals for a room by calling getRoomPriceByID like below -->
                         <div class="row" ng-init="getRoomPriceByID(room.id)">
                             <div class="col-sm-12 border-bottom border-right" style="text-align:center;">
-                                <strong  >[[room.room_type]]</strong>
+                                <strong>[[room.room_type]]</strong>
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
-                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 1)"
-                                > [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_selling_price || 'No Deal']]</div>
+                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 1)">
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_selling_price || 'No Deal']]</div>
                             <div class="col-sm-3 border-right border-bottom p10 small-text">
                                 <!-- <input type="text" value="1550" class="form-control small-text"
                                     ng-keydown="changeSitePrice($event, 'b2b')" /> -->
 
-                                    [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_final_price || 'No Price Set']]
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_final_price || 'No Price Set']]
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
-                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 0)"> [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2c_selling_price || 'No Deal']] </div>
-                            <div class="col-sm-3 border-right border-bottom p10 small-text" > 
+                                data-target="#myModal" ng-click="loadRoomPrice(room.id, 0)">
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2c_selling_price || 'No Deal']]
+                            </div>
+                            <div class="col-sm-3 border-right border-bottom p10 small-text">
                                 <!-- <input type="text" value="2000" class="small-text form-control"
                                     ng-keydown="changeSitePrice($event, 'b2c')" /> -->
-                                    [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2c_final_price || 'No Price Set']]
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2c_final_price || 'No Price Set']]
                             </div>
                         </div>
                     </div>
@@ -348,12 +350,14 @@
                             <div class="row" ng-repeat="roomPrices in roomPriceStructureB2B[selectedRoom]">
 
                                 <div class="col-sm-1">
-                                    <input type="radio" name="b2b_selected_deal"
-                                        ng-model="updateSitePriceValues.a"
+                                    <input type="radio" name="b2b_selected_deal" ng-if="selectedDealType == 1" ng-model="updateSitePriceValues.a"
                                         ng-change="updateSitePriceValues.final_price = roomPrices.b2b_selling_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;"
-                                        value="[[roomPrices]]" 
-                                        ng-checked="roomPrices.b2b_selected_deal"
-                                        />
+                                        value="[[roomPrices]]" ng-checked="roomPrices.b2b_selected_deal" />
+
+
+                                    <input type="radio" name="b2c_selected_deal" ng-if="selectedDealType == 0" ng-model="updateSitePriceValues.a"
+                                        ng-change="updateSitePriceValues.final_price = roomPrices.b2c_selling_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;"
+                                        value="[[roomPrices]]" ng-checked="roomPrices.b2c_selected_deal" />
                                 </div>
 
                                 <div class="col-sm-2">
@@ -380,8 +384,10 @@
                                 </div>
 
 
-                                <span ng-if="roomPrices.b2b_selected_deal && selectedDealType == 1"><span ng-init="updateSitePriceValues.final_price = roomPrices.b2b_final_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;">Called</span></span>
-                                <span ng-if="roomPrices.b2b_selected_deal && selectedDealType == 0"><span ng-init="updateSitePriceValues.final_price = roomPrices.b2b_final_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;">Called</span></span>
+                                <span ng-if="roomPrices.b2b_selected_deal && selectedDealType == 1"><span
+                                        ng-init="updateSitePriceValues.final_price = roomPrices.b2b_final_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;">Called</span></span>
+                                <span ng-if="roomPrices.b2b_selected_deal && selectedDealType == 0"><span
+                                        ng-init="updateSitePriceValues.final_price = roomPrices.b2c_final_price; updateSitePriceValues.selectedPartnerPrice = roomPrices;">Called</span></span>
 
 
                             </div>
@@ -390,7 +396,9 @@
                                 <div class="form-inline">
                                     <input type="text" ng-model="updateSitePriceValues.final_price"
                                         class="form-control" />
-                                    <button class="btn" ng-click="addPrice(selectedDealType)" ng-disable="!updateSitePriceValues.selectedPartnerPrice">Set Price for B2B</button>
+                                    <button class="btn" ng-click="addPrice(selectedDealType)"
+                                        ng-disable="!updateSitePriceValues.selectedPartnerPrice">Set Price for
+                                        [[selectedDealType == 0 ? 'B2C' : 'B2B']]</button>
                                 </div>
                             </center>
                         </center>
