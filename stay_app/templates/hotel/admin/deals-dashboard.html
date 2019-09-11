@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+<html ng-app="stay"
+    class="js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<!--<![endif]-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Page Title -->
+    <title>The Travel Square</title>
+
+    <!-- Meta Tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Travel Beans">
+    <meta name="description" content="">
+    <meta name="distribution" content="global">
+    <meta name="country" content="india">
+    <meta name="copyright" content="The Travel Square">
+    <meta name="revisit-after" content="1 hour">
+    <meta name="designer" content="The Travel Square">
+    <meta name="language" content="english">
+    <meta name="robots" content="index, follow">
+    <meta name="rating" content="general">
+    <meta name="publisher" content="The Travel Square">
+
+    <meta property="og:title" content="The Travel Square">
+    <meta property="og:description"
+        content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta property="og:image" content="">
+
+    <meta name="twitter:card"
+        content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+
+    <meta name="keywords"
+        content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta name="format-detection" content="7428558566">
+
+
+
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+    <style>
+        body {
+            margin: 2rem;
+        }
+
+        .modal-dialog {
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 0px;
+        }
+
+        .close {
+            position: absolute;
+            right: -30px;
+            top: 0;
+            z-index: 999;
+            font-size: 2rem;
+            font-weight: normal;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .vertical-align {
+            display: flex;
+            align-items: center;
+        }
+
+        .mt-5 {
+            margin-top: 25px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    </style>
+
+
+
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="/files/bootstrap.min.css">
+    <link rel="stylesheet" href="/files/font-awesome.min.css">
+    <link href="/files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/files/animate.min.css">
+    <script type="text/javascript" src="/js/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
+    <script src="/js/angular-filter.js"></script>
+    <link rel="stylesheet" href="/js/toaster.css">
+    <script src="/js/toaster.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+
+    <link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css">
+    <!-- <link id="main-style" rel="stylesheet" href="/calendar_css/style-light-yellow.css"> -->
+
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="/files/updates.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/files/custom.css">
+
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/files/responsive.css">
+
+
+
+</head>
+
+<body ng-controller="adminHotelDealController">
+    <div id="page-wrapper">
+
+        <header id="header" class="navbar-static-top">
+            <div class="topnav hidden-xs">
+                <div class="container">
+
+
+
+                    <ul class="quick-menu pull-right">
+                        <li class="ribbon">
+
+                            <font color="black"><a class="button white btn-small uppercase"
+                                    style="height: 30px; font-size: 1em; color:black">Log Out
+                                    &ensp;</a></font>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-header">
+                <div class="container">
+                    <h1 class="navbar-brand" style="height:0%">
+                        <a href="index.php" title="The Travel Square">
+                            <img src="/images/the-travel-square-india-logo.png" alt="The Travel Square">
+                        </a>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="page-title-container">
+                <div class="container">
+                    <div class="page-title pull-left">
+                        <h2 class="entry-title">Administrator | Data Management</h2>
+                    </div>
+                    <div style="margin-top: 10px;">
+
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-6 form-group">
+                                    <input typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel"
+                                        ng-change="searchHotelOnChange($event)"
+                                        uib-typeahead="state.name for state in searchResult" type="text"
+                                        class="input-text full-width dropdown-input"
+                                        placeholder="Where Do You Wish To Travel ? .... ">
+                                </div>
+                                <span ng-init="searchHotel = '{{hotel_data['hotel']['name']}}'"></span>
+                                <div class="col-sm-2 form-group">
+                                    <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </header>
+
+        <section id="content">
+
+            <div id="main">
+                <div class="tab-container full-width-style arrow-left dashboard">
+                    <ul class="tabs">
+                        <li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Update
+                                Property</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2b" ng-click="listPartnerType(partnerType.DIRECT);"><i
+                                    class="fa fa-list"></i>Direct</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2c"
+                                ng-click="listPartnerType(partnerType.SUPPLIER)"><i class="fa fa-list"></i>Suppliers</a>
+                        </li>
+
+                        <li class=""><a data-toggle="tab" href="#booking"
+                                ng-click="listPartnerType(partnerType.PARTNER)"><i
+                                    class="soap-icon-conference circle"></i>Partners</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="datadashboard" class="tab-pane fade in active">
+
+                            <form class="booking-form" ng-submit="createHotel()">
+                                <div class="person-information" ng-show="hotelDetail">
+                                    <center>
+                                        <h2>[[hotelDetails.name]]</h2>
+                                    </center>
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5" for="name">
+                                            <label>Hotel Name</label>
+                                            <input type="text" class="input-text full-width" id="name"
+                                                ng-model="hotel.name" type="text" required>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5" for="city">
+                                            <label>City Name</label>
+                                            <input type="text" class="input-text full-width" id="city"
+                                                ng-model="hotel.city" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5" for="address">
+                                            <label>Address</label>
+                                            <input type="text" class="input-text full-width" ng-model="hotel.address"
+                                                type="textarea" required>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5" for="phone no">
+                                            <label>Phone Number</label>
+                                            <input type="text" class="input-text full-width" ng-model="hotel.phone"
+                                                type="number" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5" for="name">
+                                            <label>Description</label>
+                                            <textarea rows="4" type="text" class="input-text full-width"
+                                                id="description" ng-model="hotel.desc" type="textarea"
+                                                required></textarea>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5" for="city">
+                                            <label>Category</label>
+                                            <input type="text" class="input-text full-width" id="category"
+                                                ng-model="hotel.category" type="number">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5" for="image_url">
+                                            <label>image_url: </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5" for="image_url">
+                                            <div
+                                                style="display:inline-block; background-color: #000; color: white;border-radius: 100%;text-align: center; width: 24px; margin: 12px;">
+                                                [[hotelImg.length]]
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <input type="text" class="input-text full-width" id="image_url"
+                                                ng-model="images.image_url" type="text">
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <button type="button"
+                                                class="button Sky-blue1 btn-primary btn-medium uppercase"
+                                                ng-click=addImg()>Add More Images</button>
+                                        </div>
+
+                                    </div>
+
+                                </div><br />
+                                <div class="group-details">
+                                    <h2>Maps Details</h2>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <label>Latitude</label>
+                                            <input type="text" class="input-text full-width" id="latitude"
+                                                ng-model="hotel.longitude" step="any" type="number" required>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label>Longitude</label>
+                                            <input type="text" class="input-text full-width" id="longitude"
+                                                ng-model="hotel.latitude" type="number" step="any" required>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="group-details">
+                                    <h2>Ratings & Star</h2>
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <label>Hotel Rating</label>
+                                            <input type="text" class="input-text full-width" id="rating1" type="number"
+                                                name="rating" step="any" ng-model="hotel.rating">
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label>Hotel Star</label>
+
+                                            <form>
+                                                <label class="radio-inline">1
+                                                    <input id="star1" type="radio" name="star" value="1"
+                                                        ng-model="hotel.star" />
+                                                </label>
+                                                <label class="radio-inline">2
+                                                    <input id="star2" type="radio" name="star" value="2"
+                                                        ng-model="hotel.star" />
+                                                </label>
+                                                <label class="radio-inline">3
+                                                    <input id="star3" type="radio" name="star" value="3"
+                                                        ng-model="hotel.star" />
+                                                </label>
+                                                <label class="radio-inline">4
+                                                    <input id="star4" type="radio" name="star" value="4"
+                                                        ng-model="hotel.star" />
+                                                </label>
+                                                <label class="radio-inline">5
+                                                    <input id="star5" type="radio" name="star" value="5"
+                                                        ng-model="hotel.star" />
+                                                </label>
+                                                <label class="radio-inline">6
+                                                    <input id="star6" type="radio" name="star" value="6"
+                                                        ng-model="hotel.star" />
+                                                </label>
+                                                <label class="radio-inline">7
+                                                    <input id="star7" type="radio" name="star" value="7"
+                                                        ng-model="hotel.star" />
+                                                </label>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="booking-type">
+                                    <h2>Amenities & Facility</h2>
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="Room_cleaning_service">
+                                                <input type="checkbox" value="1"
+                                                    ng-model="hotel.amenities.Room_cleaning_service" />&nbsp;&nbsp; Room
+                                                Cleaning Service
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="banquets">
+                                                <input type="checkbox" value="2"
+                                                    ng-model="hotel.amenities.banquets" />&nbsp;&nbsp; Banquets
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="bar">
+                                                <input type="checkbox" value="3"
+                                                    ng-model="hotel.amenities.bar" />&nbsp;&nbsp; Bar
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="child_baby_cot">
+                                                <input type="checkbox" value="4"
+                                                    ng-model="hotel.amenities.child_baby_cot" />&nbsp;&nbsp; Child Baby
+                                                Cot
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for=" couple_friendly">
+                                                <input type="checkbox"
+                                                    ng-model="hotel.amenities. couple_friendly" />&nbsp;&nbsp; Couple
+                                                Friendly
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="parking">
+                                                <input type="checkbox" ng-model="hotel.amenities.parking" />&nbsp;&nbsp;
+                                                Parking
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="conference_room">
+                                                <input type="checkbox" value="4"
+                                                    ng-model="hotel.amenities.conference_room" />&nbsp;&nbsp; Conference
+                                                Room
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="doorman">
+                                                <input type="checkbox" value="5"
+                                                    ng-model="hotel.amenities.doorman" />&nbsp;&nbsp; Doorman
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="express_check_in_out">
+                                                <input type="checkbox" value="6"
+                                                    ng-model="hotel.amenities.express_check_in_out" />&nbsp;&nbsp;
+                                                Express Check in Out
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="gym">
+                                                <input type="checkbox" value="7"
+                                                    ng-model="hotel.amenities.gym" />&nbsp;&nbsp; Gym
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="hairdresser">
+                                                <input type="checkbox" value="8"
+                                                    ng-model="hotel.amenities.hairdresser" />&nbsp;&nbsp; Hairdresser
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="indoor_swimming_pool">
+                                                <input type="checkbox" value="9"
+                                                    ng-model="hotel.amenities.indoor_swimming_pool" />&nbsp;&nbsp;
+                                                Indoor Swimming Pool
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="laundry_service">
+                                                <input type="checkbox" value="10"
+                                                    ng-model="hotel.amenities.laundry_service" />&nbsp;&nbsp; Laundry
+                                                Service
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="lift">
+                                                <input type="checkbox" value="11"
+                                                    ng-model="hotel.amenities.lift" />&nbsp;&nbsp; Lift
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="non_smoking_smoking_rooms">
+                                                <input type="checkbox" value="14"
+                                                    ng-model="hotel.amenities.non_smoking_smoking_rooms" />&nbsp;&nbsp;
+                                                Smoking / Non Rooms
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="outdoor_swimming_pool">
+                                                <input type="checkbox" value="13"
+                                                    ng-model="hotel.amenities.outdoor_swimming_pool" />&nbsp;&nbsp;
+                                                Outdoor Swimming Pool
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="pet_allowance">
+                                                <input type="checkbox" value="14"
+                                                    ng-model="hotel.amenities.pet_allowance" />&nbsp;&nbsp; Pet
+                                                Allowance
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="pool">
+                                                <input type="checkbox" value="15"
+                                                    ng-model="hotel.amenities.pool" />&nbsp;&nbsp; Pool
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="porter_service">
+                                                <input type="checkbox" value="16"
+                                                    ng-model="hotel.amenities.porter_service" />&nbsp;&nbsp; Porter
+                                                Service
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="restaurant">
+                                                <input type="checkbox" value="17"
+                                                    ng-model="hotel.amenities.restaurant" />&nbsp;&nbsp; Restaurant
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="spa">
+                                                <input type="checkbox" value="18"
+                                                    ng-model="hotel.amenities.spa" />&nbsp;&nbsp; SPA
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="terrace">
+                                                <input type="checkbox" value="19"
+                                                    ng-model="hotel.amenities.terrace" />&nbsp;&nbsp; Terrace
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="twenty_four_hr_reception">
+                                                <input type="checkbox" value="20"
+                                                    ng-model="hotel.amenities.twenty_four_hr_reception" />&nbsp;&nbsp;
+                                                24hr Reception
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="twenty_four_hr_room_service">
+                                                <input type="checkbox" value="21"
+                                                    ng-model="hotel.amenities.twenty_four_hr_room_service" />&nbsp;&nbsp;
+                                                24hr Room Service
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="wheelchair_accessible">
+                                                <input type="checkbox" value="22"
+                                                    ng-model="hotel.amenities.wheelchair_accessible" />&nbsp;&nbsp;
+                                                Wheelchair Accessible
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <label for="wifi_in_lobby">
+                                                <input type="checkbox" value="23"
+                                                    ng-model="hotel.amenities.wifi_in_lobby" />&nbsp;&nbsp; Wifi in
+                                                Lobby
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 col-md-5">
+                                        <button type="submit"
+                                            class="button btn-success btn-medium sky-blue1 uppercase">Add Room
+                                            +</button>
+                                    </div>
+
+                                </div>
+                            </form>
+
+
+                        </div>
+
+
+                        <!-- DIRECT -->
+                        <div id="b2b" class="tab-pane  fade in">
+
+                            <div class="col-sm-4 col-md-3">
+                                <label>CALENDER</label>
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
+                                    <select class="full-width">
+                                        <option>Date</option>
+                                        <option>Female</option>
+                                        <option>Unspecified</option>
+                                    </select><span class="custom-select full-width"></span>
+                                </div> -->
+                            </div>
+
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
+
+                            <div class="container shortcode">
+                                <form class="booking-form">
+
+                                    <div class="person-information">
+                                        <center>
+
+
+                                            <h2>[[hotelDetails.name]]</h2>
+                                            <hr />
+
+
+                                        </center>
+                                    </div>
+                                    <br />
+                                    <div class="group-details">
+                                        <center>
+                                            <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
+                                                <div class="col-sm-2">
+
+                                                    <div>
+                                                        <h4>[[room.room_type]]</h4>
+                                                        <small>([[room.meal_plan]]<span ng-if="room.balcony"> with
+                                                                Balcony</span>)</small>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div>
+                                                        <label>Base Price</label>
+                                                        <input type="number" class="input-text full-width" value=""
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>%</label>
+                                                    <input type="text" class="input-text full-width"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        placeholder="" />
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2B Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        placeholder="" />
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2B Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
+                                                </div>
+
+                                            </div>
+                                        </center>
+                                    </div>
+
+
+                                    <hr />
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <button type="submit"
+                                                class="button btn-success btn-medium sky-blue1 uppercase full-width">Submit
+                                                Form</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- Suppliers -->
+                        <div id="b2c" class="tab-pane fade in">
+
+                            <div class="col-sm-4 col-md-3">
+                                <label>CALENDER</label>
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
+                                    <select class="full-width">
+                                        <option>Date</option>
+                                        <option>Female</option>
+                                        <option>Unspecified</option>
+                                    </select><span class="custom-select full-width"></span>
+                                </div> -->
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label>SELECT SUPPLIER</label>
+                                <div class="selector">
+                                    <select class="full-width" ng-model="selectedPartner"
+                                        ng-change="loadDealByPartnerID(selectedPartner)">
+                                        <option value="[[supplier.id]]"
+                                            ng-repeat="supplier in partners[partnerType.SUPPLIER]">[[supplier.name]]
+                                            ([[supplier.status]])</option>
+
+                                    </select><span class="custom-select full-width"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-md-3">
+                                <label>ADD NEW SUPPLIER</label>
+                                <button type="submit"
+                                    class="button btn-success btn-medium sky-blue1 uppercase full-width">ADD NEW
+                                    SUPPLIER</button>
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
+
+
+                            <div class="container shortcode">
+                                <form class="booking-form">
+
+                                    <div class="person-information">
+                                        <center>
+
+
+                                            <h2>[[hotelDetails.name]]</h2>
+                                            <hr>
+
+
+
+                                    </div><br />
+                                    <div class="group-details">
+                                        <center>
+                                            <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
+                                                <div class="col-sm-2">
+
+                                                    <div>
+                                                        <h4>[[room.room_type]]</h4>
+                                                        <small>([[room.meal_plan]]<span ng-if="room.balcony"> with
+                                                                Balcony</span>)</small>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div>
+                                                        <label>Base Price</label>
+                                                        <input type="number" class="input-text full-width"
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>%</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        placeholder="" />
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2B Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        placeholder="" />
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2B Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
+                                                </div>
+
+
+
+                                            </div>
+                                        </center>
+                                    </div>
+
+
+                                    <hr />
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <button type="submit"
+                                                class="button btn-success btn-medium sky-blue1 uppercase full-width">Submit
+                                                Form</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- Partners -->
+
+                        <div id="booking" class="tab-pane fade">
+
+                            <div class="col-sm-4 col-md-3">
+                                <label>CALENDER</label>
+                                <input type="text" name="daterange"  class="form-control"/>
+                                <!-- <div class="selector">
+                                    <select class="full-width">
+                                        <option>Date</option>
+                                        <option>Female</option>
+                                        <option>Unspecified</option>
+                                    </select><span class="custom-select full-width"></span>
+                                </div> -->
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label>SELECT PARTNER</label>
+                                <div class="selector">
+                                    <select class="full-width" ng-model="selectedPartner"
+                                        ng-change="loadDealByPartnerID(selectedPartner)">
+                                        <option value="[[partner.id]]"
+                                            ng-repeat="partner in partners[partnerType.PARTNER]">[[partner.name]]
+                                            ([[partner.status]])</option>
+
+                                    </select><span class="custom-select full-width"></span>
+                                </div>
+                            </div>
+
+
+
+                            <br /><br /><br />
+                            <hr>
+
+                            <div class="container shortcode">
+                                <form class="booking-form">
+
+                                    <div class="person-information">
+                                        <center>
+
+
+                                            <h2>[[hotelDetails.name]]</h2>
+                                            <hr>
+
+
+
+                                    </div><br />
+                                    <div class="group-details">
+                                        <center>
+                                            <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
+                                                <div class="col-sm-2">
+
+                                                    <div>
+                                                        <h4>[[room.room_type]]</h4>
+                                                        <small>([[room.meal_plan]]<span ng-if="room.balcony"> with
+                                                                Balcony</span>)</small>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div>
+                                                        <label>Base Price</label>
+                                                        <input type="number" class="input-text full-width" value=""
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>%</label>
+                                                    <input type="text" class="input-text full-width"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        placeholder="" />
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2B Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        placeholder="" />
+
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2B Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
+                                                </div>
+
+                                            </div>
+                                        </center>
+                                    </div>
+
+
+                                    <hr />
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <button type="submit"
+                                                class="button btn-success btn-medium sky-blue1 uppercase full-width">Submit
+                                                Form</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer" class="style5">
+
+            <div class="bottom">
+                <div class="container">
+
+                    <div class="pull-right">
+                        <a id="back-to-top" href="" class="animated bounce" data-animation-type="bounce"
+                            style="animation-duration: 1s; visibility: visible;"><i
+                                class="soap-icon-longarrow-up circle"></i></a>
+                    </div>
+                    <div class="copyright pull-left">
+                        <p>© 2019 Partners | The Travel Square</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="/files/jquery-1.11.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.noconflict.js.download"></script>
+    <script type="text/javascript" src="/files/modernizr.2.7.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery-migrate-1.2.1.min.js.download"></script>
+    <script type="text/javascript" src="/files/jquery.placeholder.js.download"></script>
+    <script type="text/javascript" src="/files/jquery-ui.1.10.4.min.js.download"></script>
+
+
+
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="/files/bootstrap.js.download"></script>
+
+    <!-- Flex Slider -->
+    <script type="text/javascript" src="/files/jquery.flexslider-min.js.download"></script>
+
+    <!-- parallax -->
+    <script type="text/javascript" src="/files/jquery.stellar.min.js.download"></script>
+
+    <!-- waypoint -->
+    <script type="text/javascript" src="/files/waypoints.min.js.download"></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src="/files/theme-scripts.js.download"></script>
+    <script type="text/javascript" src="/files/scripts.js.download"></script>
+
+    <script type="text/javascript">
+        tjq("#slideshow .flexslider").flexslider({
+            animation: "fade",
+            controlNav: false,
+            animationLoop: true,
+            directionNav: false,
+            slideshow: true,
+            slideshowSpeed: 3000
+        });
+    </script>
+
+
+
+    <div class="modal fade" id="customerlogin">
+        <div class="modal-dialog modal-lg modal-sm">
+            <div class="modal-content">
+                <div class="container">
+
+                    <div class="popup-wrapper">
+                        <div class="col-xs-12 col-sm-9 popup-content">
+                            <div class="travelo-signup-box travelo-box" style="display: block;">
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br />
+                                <br />
+                                <div class="">
+                                    <form action="" Method="POST">
+                                        <div class="form-group">
+                                            <input type="text" autocomplete="off" class="input-text full-width"
+                                                name="mobile" placeholder="Mobile" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" autocomplete="off" class="input-text full-width"
+                                                name="pass" placeholder="Password" required>
+                                        </div>
+                                        <button type="submit" name="vlogin"
+                                            class="full-width sky-blue1 btn-medium">LOGIN</button>
+                                    </form>
+                                </div>
+                                <div class="seperator"></div>
+                                <p>Don't Have an Account ? <a href="" class="goto-login" data-toggle="modal"
+                                        data-target="#customersignup">Sign Up Here</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="customersignup">
+        <div class="modal-dialog modal-lg modal-sm">
+            <div class="modal-content">
+                <div class="container">
+
+                    <div class="popup-wrapper">
+                        <div class="col-xs-12 col-sm-9 popup-content">
+                            <div class="travelo-signup-box travelo-box" style="display: block;">
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br />
+                                <br />
+                                <div class="">
+                                    <form action="" Method="POST">
+                                        <div class="form-group">
+                                            <input type="text" autocomplete="off" class="input-text full-width"
+                                                name="mobile" placeholder="Mobile" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" autocomplete="off" class="input-text full-width"
+                                                name="pass" placeholder="Password" required>
+                                        </div>
+                                        <button type="submit" name="vlogin"
+                                            class="full-width sky-blue1 btn-medium">LOGIN</button>
+                                    </form>
+                                </div>
+                                <div class="seperator"></div>
+                                <p>Don't Have an Account ? <a href="signup.php" class="goto-login">Sign Up Here</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="offer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+        </div>
+    </div>
+
+    <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
+
+    <script>
+        var hotelDetails = {{ hotel_data| tojson}};
+        var API_BASE_URL = '{{config.API_URL}}';
+        var partner_api_url = '{{config.PARTNER_API_URL}}' + "/api/v1"
+    </script>
+
+    <script>
+        $('input[name="daterange"]').daterangepicker();
+    </script>
+
+    <script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/controllers/adminHotelDealController.js"></script>
+
+</body>
+
+</html>

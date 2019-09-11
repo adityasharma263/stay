@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from stay_app import db
 from stay_app.model.base import Base
-
 import enum
 
 
@@ -10,6 +9,19 @@ class MealPlan(enum.Enum):
     MAP = "Modified American Plan"
     EP = "European Plan"
     AP = "American Plan"
+
+
+class BedType(enum.Enum):
+    Single = "Single"
+    Double = "Double"
+    Queen = "Queen"
+    King = "King"
+
+
+class Status(enum.Enum):
+    p = "Pending"
+    F = "Failure"
+    S = "Success"
 
 
 class HotelCollection(Base):
@@ -30,13 +42,12 @@ class HotelCollection(Base):
 
 
 class Hotel(Base):
-
     __tablename__ = 'hotel'
 
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
-    is_partner = db.Column(db.Boolean, default=False, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
+    slug = db.Column(db.String(255))
     phone = db.Column(db.String, nullable=True)
     city = db.Column(db.String, nullable=True)
     country = db.Column(db.String, nullable=True)
@@ -75,27 +86,22 @@ class CollectionProduct(Base):
 
 
 class Room(Base):
+
     __tablename__ = 'room'
 
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
-    status = db.Column(db.Boolean, default=False, nullable=True)
-    lowest_price_room = db.Column(db.Boolean, default=False, nullable=True)
-    b2b_lowest_price_room = db.Column(db.Boolean, default=False, nullable=True)
-    room_type = db.Column(db.Integer, nullable=True)
+    max_no_of_guest = db.Column(db.Integer, nullable=True)
+    room_type = db.Column(db.String, nullable=True)
     image_url = db.Column(db.String, nullable=True)
-    other_room_type = db.Column(db.String, nullable=True)
-    balcony = db.Column(db.Boolean, default=False, nullable=True)
-    member = db.relationship('Member', uselist=False, backref='room')
+    meal_plan = db.Column(db.Enum(MealPlan))
     facilities = db.relationship('Facility', uselist=False, backref='room')
     deals = db.relationship('Deal', backref='room')
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<hotel_id %r>' % self.hotel_id
-
+        return '<room_type %r>' % self.room_type
 
 
 class Amenity(Base):
@@ -130,7 +136,6 @@ class Amenity(Base):
     twenty_four_hr_reception = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_room_service = db.Column(db.Boolean, default=False, nullable=True)
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -151,32 +156,14 @@ class Image(Base):
         return '<image_url %r>' % self.image_url
 
 
-
-class Member(Base):
-
-    __tablename__ = 'member'
-
-    no_of_adults = db.Column(db.Integer, nullable=True)
-    children = db.Column(db.Integer, nullable=True)
-    age_of_child_1 = db.Column(db.Integer, nullable=True)
-    age_of_child_2 = db.Column(db.Integer, nullable=True)
-    total_members = db.Column(db.Integer, nullable=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True, nullable=False)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<total_members %r>' % self.total_members
-
-
 class Facility(Base):
 
     __tablename__ = 'facility'
 
-    bed_type = db.Column(db.Integer, nullable=True)
+    bed_type = db.Column(db.Enum(BedType))
     no_of_bed = db.Column(db.Integer, nullable=True)
-    jacuzzi = db.Column(db.Integer, nullable=True)
+    balcony = db.Column(db.Boolean, default=False, nullable=True)
+    jacuzzi = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
     wardrobes_closet = db.Column(db.Boolean, default=False, nullable=True)
@@ -217,7 +204,6 @@ class Website(Base):
     website = db.Column(db.String)
     logo_image = db.Column(db.String, nullable=True)
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -226,19 +212,26 @@ class Website(Base):
 
 
 class Deal(Base):
-
     __tablename__ = 'deal'
 
+    b2b_lowest_price = db.Column(db.Boolean, default=False)
+    b2c_lowest_price = db.Column(db.Boolean, default=False)
+    b2b_selling_price = db.Column(db.Integer, nullable=True)
+    sold_out = db.Column(db.Boolean, default=False, nullable=True)
+    b2c_selling_price = db.Column(db.Integer, nullable=True)
     price = db.Column(db.Integer, nullable=True)
-    selling_price = db.Column(db.Integer, nullable=True)
+    b2c_final_price = db.Column(db.Integer, nullable=True)
+    b2b_final_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
-    meal_plan = db.Column(db.Enum(MealPlan))
     commission_in_percentage = db.Column(db.Integer, nullable=True)
-    margin_price = db.Column(db.Integer, nullable=True)
+    b2b_margin_price = db.Column(db.Integer, nullable=True)
+    b2c_margin_price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
-    weekend = db.Column(db.Boolean, default=False, nullable=True)
-    business_deal = db.Column(db.Boolean, default=False, nullable=True)
-    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
+    b2b_selected_deal = db.Column(db.Boolean, default=False)
+    b2c_selected_deal = db.Column(db.Boolean, default=False)
+    ts_exclusive = db.Column(db.Boolean, default=False, nullable=True)
+    partner_id = db.Column(db.Integer, nullable=True)
+    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)
     price_calendar = db.relationship('PriceCalendar', backref='deal')
@@ -255,9 +248,15 @@ class PriceCalendar(Base):
     __tablename__ = 'price_calendar'
 
     commission_in_percentage = db.Column(db.Integer, nullable=True)
-    selling_price = db.Column(db.Integer, nullable=True)
-    margin_price = db.Column(db.Integer, nullable=True)
+    b2c_final_price = db.Column(db.Integer, nullable=True)
+    b2b_final_price = db.Column(db.Integer, nullable=True)
+    sold_out = db.Column(db.Boolean, default=False, nullable=True)
+    b2b_selling_price = db.Column(db.Integer, nullable=True)
+    b2c_selling_price = db.Column(db.Integer, nullable=True)
+    b2b_margin_price = db.Column(db.Integer, nullable=True)
+    b2c_margin_price = db.Column(db.Integer, nullable=True)
     base_price = db.Column(db.Integer, nullable=True)
+    weekend = db.Column(db.Boolean, default=False, nullable=True)
     date = db.Column(db.DateTime(timezone=True), nullable=True)
     deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
 
@@ -268,17 +267,55 @@ class PriceCalendar(Base):
         return '<deal_id %r>' % self.deal_id
 
 
+class Cart(Base):
+    __tablename__ = 'cart'
+
+    partner_id = db.Column(db.Integer, nullable=False)
+    total_no_of_deals = db.Column(db.Integer, nullable=False)
+    total_booking_amount = db.Column(db.Integer, nullable=True)
+    cart_deals = db.relationship('CartDeal', backref='cart')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<partner_id %r>' % self.partner_id
+
+
+class CartDeal(Base):
+
+    __tablename__ = 'cart_deal'
+
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), unique=False)
+    current_deal_amount = db.Column(db.Integer, nullable=True)
+    ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    co_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'), unique=False, nullable=False)
+    deal = db.relationship('Deal', foreign_keys=deal_id)
+    no_of_deals = db.Column(db.Integer, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<booking_id %r>' % self.booking_id
+
+
 class Booking(Base):
 
     __tablename__ = 'booking'
 
     booking_no = db.Column(db.String, nullable=True)
-    booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
-    guest_name = db.Column(db.String, nullable=True)
-    contact_no = db.Column(db.String, nullable=True)
-    email = db.Column(db.String(120), nullable=True)
+    booking_date = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp())
+    gst_no = db.Column(db.String, nullable=True)
+    status = db.Column(db.Enum(Status))
+    business_email = db.Column(db.String, nullable=True)
+    office_address = db.Column(db.String, nullable=True)
+    business_contact_no = db.Column(db.String, nullable=True)
+    company_name = db.Column(db.String, nullable=True)
     partner_id = db.Column(db.Integer, nullable=False)
-    deals = db.relationship('Deal', secondary='booking_deal')
+    total_booking_amount = db.Column(db.Integer, nullable=True)
+    deals = db.relationship('BookingDeal', backref='booking')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -291,8 +328,23 @@ class BookingDeal(Base):
 
     __tablename__ = 'booking_deal'
 
-    deal_id = db.Column(db.Integer, db.ForeignKey('deal.id'))
-    booking_id = db.Column(db.Integer, db.ForeignKey('booking.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
+    room = db.relationship('Room', foreign_keys=room_id)
+    current_deal_amount = db.Column(db.Integer, nullable=True)
+    ci_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    co_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    final_price = db.Column(db.Integer, nullable=True)
+    base_price = db.Column(db.Integer, nullable=True)
+    commission_in_percentage = db.Column(db.Integer, nullable=True)
+    margin_price = db.Column(db.Integer, nullable=True)
+    ts_exclusive = db.Column(db.Boolean, default=False, nullable=True)
+    partner_id = db.Column(db.Integer, nullable=True)
+    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
+    booking_id = db.Column(db.Integer, db.ForeignKey('booking.id'), unique=False)
+    guest_fist_name = db.Column(db.String, nullable=True)
+    guest_last_name = db.Column(db.String, nullable=True)
+    contact_no = db.Column(db.String, nullable=True)
+    email = db.Column(db.String(120), nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
