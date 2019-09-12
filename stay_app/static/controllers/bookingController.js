@@ -177,6 +177,13 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
 
     $scope.processBook = function () {
 
+        var finalBookingData = {};
+        // var partner_id = $scope.cartDetails[0].partner_id;
+
+        finalBookingData.partner_id = partner_id;
+        finalBookingData.deals = [];
+        finalBookingData.total_booking_amount = 0;
+
 
         console.log("$scope.customer = ", $scope.customerDetails);
         console.log("$scope.customersSelectedRooms = ", $scope.customersSelectedRooms);
@@ -193,40 +200,27 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
 
                     console.log(`bookingDeal ${j} = `, bookingDeal);
 
+                    finalBookingData.deals.push({
+                        ci_date: Math.ceil(new Date(bookingDeal.ci_date).getTime()/1000),
+                        co_date: Math.ceil(new Date(bookingDeal.co_date).getTime()/1000),
+                        contact_no: customer.contact_no,
+                        current_deal_amount: bookingDeal.deal.price,
+                        deal_id: bookingDeal.deal.id,
+                        email: customer.email,
+                        guest_fist_name: customer.guest_fist_name,
+                        guest_last_name: customer.guest_last_name
+                    });
+
+                    finalBookingData.total_booking_amount += (bookingDeal.customersSelectedRoomsQuantity * bookingDeal.deal.price);
+
+
 
                 }
         }
 
 
-
-        return;
-
-        $scope.bookingData.business_email
-            = $scope.bookingData.deals[0].email =
-            $scope.customerDetails[0].email;
-
-        $scope.bookingData.deals[0].guest_fist_name =
-            $scope.customerDetails[0].guest_fist_name;
-
-        $scope.bookingData.deals[0].guest_last_name =
-            $scope.customerDetails[0].guest_last_name;
-
-        $scope.bookingData.contact_no
-            = $scope.bookingData.deals[0].contact_no
-            = $scope.customerDetails[0].contact_no;
-
-        $scope.bookingData.company_name = $scope.customerDetails[0].guest_fist_name + " " + $scope.customerDetails[0].guest_last_name;
-
-
-        $scope.bookingData.deals[0].room_id;
-
-        $scope.bookingData.total_booking_amount = $scope.finalAmount;
-
-
-        console.log($scope.bookingData);
-
-        // return;
-        $http.post("/hotel/booking", $scope.bookingData)
+        console.log(finalBookingData);
+        $http.post("/hotel/booking", finalBookingData)
             .then(function (response) {
                 console.log(response.data);
 

@@ -204,7 +204,7 @@
                     <div class="tab-content">
                         <div id="datadashboard" class="tab-pane fade in active">
 
-                            <form class="booking-form" ng-submit="createHotel()">
+                            <form class="booking-form">
                                 <div class="person-information" ng-show="hotelDetail">
                                     <center>
                                         <h2>[[hotelDetails.name]]</h2>
@@ -215,42 +215,79 @@
                                         <div class="col-sm-6 col-md-5" for="name">
                                             <label>Hotel Name</label>
                                             <input type="text" class="input-text full-width" id="name"
-                                                ng-model="hotel.name" type="text" required>
+                                                ng-model="hotelDetails.name" type="text" required>
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="city">
                                             <label>City Name</label>
                                             <input type="text" class="input-text full-width" id="city"
-                                                ng-model="hotel.city" type="text" required>
+                                                ng-model="hotelDetails.city" type="text" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5" for="address">
                                             <label>Address</label>
-                                            <input type="text" class="input-text full-width" ng-model="hotel.address"
-                                                type="textarea" required>
+                                            <input type="text" class="input-text full-width"
+                                                ng-model="hotelDetails.address" type="textarea" required>
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="phone no">
                                             <label>Phone Number</label>
-                                            <input type="text" class="input-text full-width" ng-model="hotel.phone"
-                                                type="number" required>
+                                            <input type="text" class="input-text full-width"
+                                                ng-model="hotelDetails.phone" type="number" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5" for="name">
                                             <label>Description</label>
                                             <textarea rows="4" type="text" class="input-text full-width"
-                                                id="description" ng-model="hotel.desc" type="textarea"
+                                                id="description" ng-model="hotelDetails.desc" type="textarea"
                                                 required></textarea>
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="city">
                                             <label>Category</label>
                                             <input type="text" class="input-text full-width" id="category"
-                                                ng-model="hotel.category" type="number">
+                                                ng-model="hotelDetails.category" type="number">
                                         </div>
                                     </div>
 
 
                                     <div class="form-group row">
+                                        <div class="col-sm-12">
+
+                                            <div class="panel-group" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion"
+                                                                href="#collapse2">Click to see Images</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse2" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            
+                                                            <div class="row">
+
+                                                                <div class="col-sm-3 mt-5" ng-repeat="image in hotelDetails.images" >
+                                                                    <img ng-src="[[image.image_url]]" class="img-responsive" />
+
+                                                                    <input type="text" ng-model="image.image_url" class="form-control">
+
+                                                                    <button class="button btn-mini dark-blue1 mt-5" ng-click="updateImage(image)" >Update Image</button>
+
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
                                         <div class="col-sm-6 col-md-5" for="image_url">
                                             <label>image_url: </label>
                                         </div>
@@ -283,12 +320,12 @@
                                         <div class="col-sm-6 col-md-5">
                                             <label>Latitude</label>
                                             <input type="text" class="input-text full-width" id="latitude"
-                                                ng-model="hotel.longitude" step="any" type="number" required>
+                                                ng-model="hotelDetails.longitude" step="any" type="number" required>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label>Longitude</label>
                                             <input type="text" class="input-text full-width" id="longitude"
-                                                ng-model="hotel.latitude" type="number" step="any" required>
+                                                ng-model="hotelDetails.latitude" type="number" step="any" required>
                                         </div>
 
                                     </div>
@@ -302,7 +339,7 @@
                                         <div class="col-sm-6 col-md-5">
                                             <label>Hotel Rating</label>
                                             <input type="text" class="input-text full-width" id="rating1" type="number"
-                                                name="rating" step="any" ng-model="hotel.rating">
+                                                name="rating" step="any" ng-model="hotelDetails.rating">
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label>Hotel Star</label>
@@ -310,31 +347,31 @@
                                             <form>
                                                 <label class="radio-inline">1
                                                     <input id="star1" type="radio" name="star" value="1"
-                                                        ng-model="hotel.star" />
+                                                        ng-model="hotelDetails.star" />
                                                 </label>
                                                 <label class="radio-inline">2
                                                     <input id="star2" type="radio" name="star" value="2"
-                                                        ng-model="hotel.star" />
+                                                        ng-model="hotelDetails.star" />
                                                 </label>
                                                 <label class="radio-inline">3
                                                     <input id="star3" type="radio" name="star" value="3"
-                                                        ng-model="hotel.star" />
+                                                        ng-model="hotelDetails.star" />
                                                 </label>
                                                 <label class="radio-inline">4
                                                     <input id="star4" type="radio" name="star" value="4"
-                                                        ng-model="hotel.star" />
+                                                        ng-model="hotelDetails.star" />
                                                 </label>
                                                 <label class="radio-inline">5
                                                     <input id="star5" type="radio" name="star" value="5"
-                                                        ng-model="hotel.star" />
+                                                        ng-model="hotelDetails.star" />
                                                 </label>
                                                 <label class="radio-inline">6
                                                     <input id="star6" type="radio" name="star" value="6"
-                                                        ng-model="hotel.star" />
+                                                        ng-model="hotelDetails.star" />
                                                 </label>
                                                 <label class="radio-inline">7
                                                     <input id="star7" type="radio" name="star" value="7"
-                                                        ng-model="hotel.star" />
+                                                        ng-model="hotelDetails.star" />
                                                 </label>
                                             </form>
 
@@ -351,176 +388,188 @@
                                         <div class="col-sm-6 col-md-5">
                                             <label for="Room_cleaning_service">
                                                 <input type="checkbox" value="1"
-                                                    ng-model="hotel.amenities.Room_cleaning_service" />&nbsp;&nbsp; Room
+                                                    ng-model="hotelDetails.amenities.Room_cleaning_service" />&nbsp;&nbsp;
+                                                Room
                                                 Cleaning Service
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="banquets">
                                                 <input type="checkbox" value="2"
-                                                    ng-model="hotel.amenities.banquets" />&nbsp;&nbsp; Banquets
+                                                    ng-model="hotelDetails.amenities.banquets" />&nbsp;&nbsp; Banquets
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="bar">
                                                 <input type="checkbox" value="3"
-                                                    ng-model="hotel.amenities.bar" />&nbsp;&nbsp; Bar
+                                                    ng-model="hotelDetails.amenities.bar" />&nbsp;&nbsp; Bar
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="child_baby_cot">
                                                 <input type="checkbox" value="4"
-                                                    ng-model="hotel.amenities.child_baby_cot" />&nbsp;&nbsp; Child Baby
+                                                    ng-model="hotelDetails.amenities.child_baby_cot" />&nbsp;&nbsp;
+                                                Child Baby
                                                 Cot
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for=" couple_friendly">
                                                 <input type="checkbox"
-                                                    ng-model="hotel.amenities. couple_friendly" />&nbsp;&nbsp; Couple
+                                                    ng-model="hotelDetails.amenities. couple_friendly" />&nbsp;&nbsp;
+                                                Couple
                                                 Friendly
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="parking">
-                                                <input type="checkbox" ng-model="hotel.amenities.parking" />&nbsp;&nbsp;
+                                                <input type="checkbox"
+                                                    ng-model="hotelDetails.amenities.parking" />&nbsp;&nbsp;
                                                 Parking
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="conference_room">
                                                 <input type="checkbox" value="4"
-                                                    ng-model="hotel.amenities.conference_room" />&nbsp;&nbsp; Conference
+                                                    ng-model="hotelDetails.amenities.conference_room" />&nbsp;&nbsp;
+                                                Conference
                                                 Room
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="doorman">
                                                 <input type="checkbox" value="5"
-                                                    ng-model="hotel.amenities.doorman" />&nbsp;&nbsp; Doorman
+                                                    ng-model="hotelDetails.amenities.doorman" />&nbsp;&nbsp; Doorman
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="express_check_in_out">
                                                 <input type="checkbox" value="6"
-                                                    ng-model="hotel.amenities.express_check_in_out" />&nbsp;&nbsp;
+                                                    ng-model="hotelDetails.amenities.express_check_in_out" />&nbsp;&nbsp;
                                                 Express Check in Out
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="gym">
                                                 <input type="checkbox" value="7"
-                                                    ng-model="hotel.amenities.gym" />&nbsp;&nbsp; Gym
+                                                    ng-model="hotelDetails.amenities.gym" />&nbsp;&nbsp; Gym
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="hairdresser">
                                                 <input type="checkbox" value="8"
-                                                    ng-model="hotel.amenities.hairdresser" />&nbsp;&nbsp; Hairdresser
+                                                    ng-model="hotelDetails.amenities.hairdresser" />&nbsp;&nbsp;
+                                                Hairdresser
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="indoor_swimming_pool">
                                                 <input type="checkbox" value="9"
-                                                    ng-model="hotel.amenities.indoor_swimming_pool" />&nbsp;&nbsp;
+                                                    ng-model="hotelDetails.amenities.indoor_swimming_pool" />&nbsp;&nbsp;
                                                 Indoor Swimming Pool
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="laundry_service">
                                                 <input type="checkbox" value="10"
-                                                    ng-model="hotel.amenities.laundry_service" />&nbsp;&nbsp; Laundry
+                                                    ng-model="hotelDetails.amenities.laundry_service" />&nbsp;&nbsp;
+                                                Laundry
                                                 Service
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="lift">
                                                 <input type="checkbox" value="11"
-                                                    ng-model="hotel.amenities.lift" />&nbsp;&nbsp; Lift
+                                                    ng-model="hotelDetails.amenities.lift" />&nbsp;&nbsp; Lift
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="non_smoking_smoking_rooms">
                                                 <input type="checkbox" value="14"
-                                                    ng-model="hotel.amenities.non_smoking_smoking_rooms" />&nbsp;&nbsp;
+                                                    ng-model="hotelDetails.amenities.non_smoking_smoking_rooms" />&nbsp;&nbsp;
                                                 Smoking / Non Rooms
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="outdoor_swimming_pool">
                                                 <input type="checkbox" value="13"
-                                                    ng-model="hotel.amenities.outdoor_swimming_pool" />&nbsp;&nbsp;
+                                                    ng-model="hotelDetails.amenities.outdoor_swimming_pool" />&nbsp;&nbsp;
                                                 Outdoor Swimming Pool
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="pet_allowance">
                                                 <input type="checkbox" value="14"
-                                                    ng-model="hotel.amenities.pet_allowance" />&nbsp;&nbsp; Pet
+                                                    ng-model="hotelDetails.amenities.pet_allowance" />&nbsp;&nbsp; Pet
                                                 Allowance
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="pool">
                                                 <input type="checkbox" value="15"
-                                                    ng-model="hotel.amenities.pool" />&nbsp;&nbsp; Pool
+                                                    ng-model="hotelDetails.amenities.pool" />&nbsp;&nbsp; Pool
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="porter_service">
                                                 <input type="checkbox" value="16"
-                                                    ng-model="hotel.amenities.porter_service" />&nbsp;&nbsp; Porter
+                                                    ng-model="hotelDetails.amenities.porter_service" />&nbsp;&nbsp;
+                                                Porter
                                                 Service
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="restaurant">
                                                 <input type="checkbox" value="17"
-                                                    ng-model="hotel.amenities.restaurant" />&nbsp;&nbsp; Restaurant
+                                                    ng-model="hotelDetails.amenities.restaurant" />&nbsp;&nbsp;
+                                                Restaurant
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="spa">
                                                 <input type="checkbox" value="18"
-                                                    ng-model="hotel.amenities.spa" />&nbsp;&nbsp; SPA
+                                                    ng-model="hotelDetails.amenities.spa" />&nbsp;&nbsp; SPA
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="terrace">
                                                 <input type="checkbox" value="19"
-                                                    ng-model="hotel.amenities.terrace" />&nbsp;&nbsp; Terrace
+                                                    ng-model="hotelDetails.amenities.terrace" />&nbsp;&nbsp; Terrace
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="twenty_four_hr_reception">
                                                 <input type="checkbox" value="20"
-                                                    ng-model="hotel.amenities.twenty_four_hr_reception" />&nbsp;&nbsp;
+                                                    ng-model="hotelDetails.amenities.twenty_four_hr_reception" />&nbsp;&nbsp;
                                                 24hr Reception
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="twenty_four_hr_room_service">
                                                 <input type="checkbox" value="21"
-                                                    ng-model="hotel.amenities.twenty_four_hr_room_service" />&nbsp;&nbsp;
+                                                    ng-model="hotelDetails.amenities.twenty_four_hr_room_service" />&nbsp;&nbsp;
                                                 24hr Room Service
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="wheelchair_accessible">
                                                 <input type="checkbox" value="22"
-                                                    ng-model="hotel.amenities.wheelchair_accessible" />&nbsp;&nbsp;
+                                                    ng-model="hotelDetails.amenities.wheelchair_accessible" />&nbsp;&nbsp;
                                                 Wheelchair Accessible
                                             </label>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label for="wifi_in_lobby">
                                                 <input type="checkbox" value="23"
-                                                    ng-model="hotel.amenities.wifi_in_lobby" />&nbsp;&nbsp; Wifi in
+                                                    ng-model="hotelDetails.amenities.wifi_in_lobby" />&nbsp;&nbsp; Wifi
+                                                in
                                                 Lobby
                                             </label>
                                         </div>
 
                                     </div>
+
+                                    <button ng-click="updateAmenity(hotelDetails.amenities)">Update Amenity</button>
 
                                 </div>
 
@@ -528,13 +577,179 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 col-md-5">
-                                        <button type="submit"
-                                            class="button btn-success btn-medium sky-blue1 uppercase">Add Room
-                                            +</button>
+                                        <button type="submit" class="button btn-success btn-medium sky-blue1 uppercase"
+                                            ng-click="updateHotel(hotelDetails)">Update Hotel</button>
                                     </div>
 
                                 </div>
                             </form>
+
+
+
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion"
+                                                href="#collapse1">Rooms</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+
+
+                                            <div ng-repeat="roomDetails in hotelDetails.rooms">
+                                                <h3>Room #[[$index+1]]</h3>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="default">Room
+                                                        Type:</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="room_type4" class="form-control" type="text"
+                                                            ng-model="roomDetails.room_type" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="image">Room Image Url:
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" id="room_image-[[$index]]"
+                                                            type="text" ng-model="roomDetails.image_url" required />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="total_members">Max No. of
+                                                        Guest :
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" id="total_members"
+                                                            ng-model="roomDetails.max_no_of_guest" type="number"
+                                                            required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="balcony">Balcony:
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="" id="balcony"
+                                                            ng-model="roomDetails.facilities.balcony"
+                                                            ng-true-value="true" ng-false-value="false" type="checkbox"
+                                                            required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="total_members">Meal Plan:
+                                                    </label>
+                                                    <div class="radioqwe" ng-repeat="(key, value) in mealPlanEnum"
+                                                        style="margin-left: 215px;">
+
+                                                        <label for="mealplan-[[key]]" class="">
+                                                            <input id="mealplan-[[key]]" type="radio" name="MEAL_PLAN"
+                                                                value="[[value]]"
+                                                                ng-checked="$parent.roomDetails.meal_plan == value"
+                                                                ng-model="roomDetails.meal_plan" />[[value]]
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <h3>Room Facilities</h3>
+
+                                                <div class="row">
+                                                    <div class="form-group col-sm-6">
+                                                        <label class=" col-sm-4" for="no_of_bed">No. of Bed:
+                                                        </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" id="no_of_bed"
+                                                                ng-model="roomDetails.facilities.no_of_bed"
+                                                                type="number" required />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-6">
+                                                        <label class=" col-sm-2" for="total_members">Bed Type:
+                                                        </label>
+
+
+
+                                                        <div class="radio" ng-repeat="(key, value) in bedTypeEnum"
+                                                            style="margin-left:100px;">
+                                                            <label>
+                                                                <input id="bed_type1" type="radio" name="bed_type"
+                                                                    value="[[key]]"
+                                                                    ng-model="roomDetails.facilities.bed_type" />[[value]]
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-6" ng-repeat="(key, value) in facilities">
+
+                                                        <label>
+                                                            <input type="checkbox" ng-true-value="true"
+                                                                ng-false-value="false"
+                                                                ng-model="roomDetails.facilities[key]" />
+                                                            [[key]]
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <center>
+                                                            <button
+                                                                ng-click="updateFacility(roomDetails.facilities)">Update
+                                                                Facility</button>
+                                                        </center>
+                                                    </div>
+                                                </div>
+
+                                                <button class="btn" ng-click="updateRoom(roomDetails)">Update
+                                                    Room</button>
+                                                <hr style="border-color: #54545429;" />
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion"
+                                                href="#collapse2">Collapsible Group 2</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse2" class="panel-collapse collapse">
+                                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                            elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                            ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.</div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion"
+                                                href="#collapse3">Collapsible Group 3</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse3" class="panel-collapse collapse">
+                                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                            elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                            ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.</div>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         </div>
@@ -545,7 +760,7 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-                                <input type="text" name="daterange" class="form-control" />
+                                <input type="text" name="daterange" class="form-control" ng-model="directDealDateRange" ng-change="specificDateDealPicker(directDealDateRange)"/>
                                 <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
@@ -820,7 +1035,7 @@
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-                                <input type="text" name="daterange"  class="form-control"/>
+                                <input type="text" name="daterange" class="form-control" />
                                 <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
@@ -1118,7 +1333,15 @@
     </script>
 
     <script>
-        $('input[name="daterange"]').daterangepicker();
+        $('input[name="daterange"]').daterangepicker({
+          
+            locale: {
+                cancelLabel: 'Reset'
+            }
+        });
+        $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
     </script>
 
     <script type="text/javascript" src="/app.js"></script>
