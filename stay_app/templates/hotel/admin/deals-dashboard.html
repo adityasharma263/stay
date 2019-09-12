@@ -39,38 +39,9 @@
 
 
     <link rel="shortcut icon" href="" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-    <script>
-
-        $(document).ready(function () {
-            // Gets the video src from the data-src on each button
-
-            var $videoSrc;
-            $(".video-btn").click(function () {
-                $videoSrc = $(this).data("src");
-            });
-            console.log($videoSrc);
-
-            // when the modal is opened autoplay it
-            $("#myModal").on("shown.bs.modal", function (e) {
-                // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
-                $("#video").attr(
-                    "src",
-                    $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0"
-                );
-            });
-
-            // stop playing the youtube video when I close the modal
-            $("#myModal").on("hide.bs.modal", function (e) {
-                // a poor man's stop video
-                $("#video").attr("src", $videoSrc);
-            });
-
-            // document ready
-        });
-
-
-    </script>
 
     <style>
         body {
@@ -102,6 +73,18 @@
             display: flex;
             align-items: center;
         }
+
+        .mt-5 {
+            margin-top: 25px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
     </style>
 
 
@@ -114,20 +97,16 @@
     <script type="text/javascript" src="/js/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap-tpls.min.js"></script>
     <script src="/js/angular-filter.js"></script>
+    <link rel="stylesheet" href="/js/toaster.css">
+    <script src="/js/toaster.js"></script>
 
 
-    <!-- Main Style -->
-    <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
-    <script type="text/javascript">
-        var mainStyle = "style.css";
-        if (typeof localStorage != "undefined") {
-            var colorSkin = localStorage.getItem("colorSkin");
-            if (colorSkin != null) {
-                mainStyle = "style-" + colorSkin + ".css";
-            }
-        }
-        document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '">');
-    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+
     <link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css">
     <!-- <link id="main-style" rel="stylesheet" href="/calendar_css/style-light-yellow.css"> -->
 
@@ -141,8 +120,7 @@
     <link rel="stylesheet" href="/files/responsive.css">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
 </head>
 
 <body ng-controller="adminHotelDealController">
@@ -160,39 +138,27 @@
                             <font color="black"><a class="button white btn-small uppercase"
                                     style="height: 30px; font-size: 1em; color:black">Log Out
                                     &ensp;</a></font>
+                        </li>
 
                     </ul>
                 </div>
             </div>
 
             <div class="main-header">
-
-
                 <div class="container">
                     <h1 class="navbar-brand" style="height:0%">
                         <a href="index.php" title="The Travel Square">
                             <img src="/images/the-travel-square-india-logo.png" alt="The Travel Square">
                         </a>
                     </h1>
-
-
-
-
                 </div>
-
-
-
             </div>
 
             <div class="page-title-container">
                 <div class="container">
                     <div class="page-title pull-left">
                         <h2 class="entry-title">Administrator | Data Management</h2>
-
-
                     </div>
-
-
                     <div style="margin-top: 10px;">
 
                         <form>
@@ -204,7 +170,7 @@
                                         class="input-text full-width dropdown-input"
                                         placeholder="Where Do You Wish To Travel ? .... ">
                                 </div>
-                                <span ng-init="searchHotel = '{{hotel_data['hotel'][0]['name']}}'"></span>
+                                <span ng-init="searchHotel = '{{hotel_data['hotel']['name']}}'"></span>
                                 <div class="col-sm-2 form-group">
                                     <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
                                 </div>
@@ -225,10 +191,14 @@
                     <ul class="tabs">
                         <li class="active"><a data-toggle="tab" href="#datadashboard"><i class="fa fa-circle"></i>Update
                                 Property</a></li>
-                        <li class=""><a data-toggle="tab" href="#b2b"><i class="fa fa-list"></i>Direct</a></li>
-                        <li class=""><a data-toggle="tab" href="#b2c"><i class="fa fa-list"></i>Suppliers</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2b" ng-click="listPartnerType(partnerType.DIRECT);"><i
+                                    class="fa fa-list"></i>Direct</a></li>
+                        <li class=""><a data-toggle="tab" href="#b2c"
+                                ng-click="listPartnerType(partnerType.SUPPLIER)"><i class="fa fa-list"></i>Suppliers</a>
+                        </li>
 
-                        <li class=""><a data-toggle="tab" href="#booking"><i
+                        <li class=""><a data-toggle="tab" href="#booking"
+                                ng-click="listPartnerType(partnerType.PARTNER)"><i
                                     class="soap-icon-conference circle"></i>Partners</a></li>
                     </ul>
                     <div class="tab-content">
@@ -237,8 +207,6 @@
                             <form class="booking-form" ng-submit="createHotel()">
                                 <div class="person-information" ng-show="hotelDetail">
                                     <center>
-
-
                                         <h2>[[hotelDetails.name]]</h2>
                                     </center>
                                     <hr>
@@ -251,7 +219,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="city">
                                             <label>City Name</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="city"
                                                 ng-model="hotel.city" type="text" required>
                                         </div>
                                     </div>
@@ -270,12 +238,13 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5" for="name">
                                             <label>Description</label>
-                                            <textarea rows="4" type="text" class="input-text full-width" id="name"
-                                                ng-model="hotel.desc" type="textarea" required></textarea>
+                                            <textarea rows="4" type="text" class="input-text full-width"
+                                                id="description" ng-model="hotel.desc" type="textarea"
+                                                required></textarea>
                                         </div>
                                         <div class="col-sm-6 col-md-5" for="city">
                                             <label>Category</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="category"
                                                 ng-model="hotel.category" type="number">
                                         </div>
                                     </div>
@@ -295,7 +264,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="image_url"
                                                 ng-model="images.image_url" type="text">
                                         </div>
                                         <div class="col-sm-6 col-md-5">
@@ -306,19 +275,19 @@
 
                                     </div>
 
-                                </div><br/>
+                                </div><br />
                                 <div class="group-details">
                                     <h2>Maps Details</h2>
                                     <hr>
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
                                             <label>Latitude</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="latitude"
                                                 ng-model="hotel.longitude" step="any" type="number" required>
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <label>Longitude</label>
-                                            <input type="text" class="input-text full-width" id="name"
+                                            <input type="text" class="input-text full-width" id="longitude"
                                                 ng-model="hotel.latitude" type="number" step="any" required>
                                         </div>
 
@@ -373,7 +342,7 @@
 
                                     </div>
                                 </div>
-                                <br/>
+                                <br />
                                 <div class="booking-type">
                                     <h2>Amenities & Facility</h2>
                                     <hr>
@@ -571,130 +540,25 @@
                         </div>
 
 
-
+                        <!-- DIRECT -->
                         <div id="b2b" class="tab-pane  fade in">
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-                                <div class="selector">
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
-                            <!-- <div id="hotel-main-content">
-                                <div id="calendar-tab" class="tab-pane fade active in">
-                                    <label>SELECT MONTH</label>
-                                    <div class="col-sm-6 col-md-4 no-float no-padding">
-                                        <div class="selector">
-                                            <select class="full-width" id="select-month">
-                                                <option value="2014-6">June 2014</option>
-                                                <option value="2014-7">July 2014</option>
-                                                <option value="2014-8">August 2014</option>
-                                                <option value="2014-9">September 2014</option>
-                                                <option value="2014-10">October 2014</option>
-                                                <option value="2014-11">November 2014</option>
-                                                <option value="2014-12">December 2014</option>
-                                            </select><span class="custom-select full-width">June 2014</span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <div class="calendar">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <td>sunday</td>
-                                                            <td>monday</td>
-                                                            <td>tuesday</td>
-                                                            <td>wednesday</td>
-                                                            <td>thursday</td>
-                                                            <td>friday</td>
-                                                            <td>saturday</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="prev-month"></td>
-                                                            <td class="prev-month"></td>
-                                                            <td class="prev-month"></td>
-                                                            <td class="prev-month"></td>
-                                                            <td class=" date-passed"><span>1</span></td>
-                                                            <td class=" date-passed"><span>2</span></td>
-                                                            <td class=" date-passed"><span>3</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class=" date-passed"><span>4</span></td>
-                                                            <td class=" date-passed"><span>5</span></td>
-                                                            <td class=" date-passed"><span>6</span></td>
-                                                            <td class=" date-passed"><span>7</span></td>
-                                                            <td class=" date-passed"><span>8</span></td>
-                                                            <td class=" date-passed"><span>9</span></td>
-                                                            <td class=" date-passed"><span>10</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class=" date-passed"><span>11</span></td>
-                                                            <td class=" date-passed"><span>12</span></td>
-                                                            <td class=" date-passed"><span>13</span></td>
-                                                            <td class=" date-passed"><span>14</span></td>
-                                                            <td class=" date-passed"><span>15</span></td>
-                                                            <td class=" date-passed"><span>16</span></td>
-                                                            <td class=" date-passed"><span>17</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class=" date-passed"><span>18</span></td>
-                                                            <td class=" date-passed"><span>19</span></td>
-                                                            <td class=" date-passed"><span>20</span></td>
-                                                            <td class=" date-passed"><span>21</span></td>
-                                                            <td class=" date-passed"><span>22</span></td>
-                                                            <td class=" date-passed"><span>23</span></td>
-                                                            <td class=" date-passed"><span>24</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class=" date-passed"><span>25</span></td>
-                                                            <td class=" date-passed"><span>26</span></td>
-                                                            <td class=" date-passed"><span>27</span></td>
-                                                            <td class=" today unavailable"><span>28</span></td>
-                                                            <td class=" unavailable"><span>29</span></td>
-                                                            <td class=" unavailable"><span>30</span></td>
-                                                            <td class=" unavailable"><span>31</span></td>
-                                                        </tr>
-                                                        <tr></tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="calendar-legend">
-                                                <label class="available">available</label>
-                                                <label class="unavailable">unavailable</label>
-                                                <label class="past">past</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <p class="description">
-                                                The calendar is updated every five minutes and is only an approximation
-                                                of
-                                                availability.
-                                                <br/><br/>
-                                                Some hosts set custom pricing for certain days on their calendar, like
-                                                weekends or holidays. The rates listed are per day and do not include
-                                                any
-                                                cleaning fee or rates for extra people the host may have for this
-                                                listing.
-                                                Please refer to the listing's Description tab for more details.
-                                                <br/><br/>
-                                                We suggest that you contact the host to confirm availability and rates
-                                                before submitting a reservation request.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <br/>
-                            <br/>
-                            <br/>
-                            <hr/>
+
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
 
                             <div class="container shortcode">
                                 <form class="booking-form">
@@ -704,12 +568,12 @@
 
 
                                             <h2>[[hotelDetails.name]]</h2>
-                                            <hr/>
+                                            <hr />
 
 
                                         </center>
                                     </div>
-                                    <br/>
+                                    <br />
                                     <div class="group-details">
                                         <center>
                                             <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
@@ -723,36 +587,65 @@
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
                                                     <div>
                                                         <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            ng-model="akshay" placeholder="" />
+                                                        <input type="number" class="input-text full-width" value=""
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
                                                     </div>
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
 
                                                     <label>%</label>
-                                                    <input type="text" class="input-text full-width" value=""
+                                                    <input type="text" class="input-text full-width"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
                                                         placeholder="" />
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
 
-                                                    <label>% Amt</label>
+                                                    <label>B2B Margin</label>
                                                     <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
                                                         placeholder="" />
 
                                                 </div>
 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
 
                                                     <label>B2B Rate</label>
                                                     <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
                                                         placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
+                                                </div>
+
+
+                                                <div class="col-sm-1">
+
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
                                                 </div>
 
                                             </div>
@@ -760,7 +653,7 @@
                                     </div>
 
 
-                                    <hr/>
+                                    <hr />
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -774,26 +667,29 @@
                         </div>
 
 
+                        <!-- Suppliers -->
                         <div id="b2c" class="tab-pane fade in">
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-
-                                <div class="selector">
+                                <input type="text" name="daterange" class="form-control" />
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT SUPPLIER</label>
                                 <div class="selector">
-                                    <select class="full-width">
-                                        <option>Date</option>
-                                        <option>Female</option>
-                                        <option>Unspecified</option>
+                                    <select class="full-width" ng-model="selectedPartner"
+                                        ng-change="loadDealByPartnerID(selectedPartner)">
+                                        <option value="[[supplier.id]]"
+                                            ng-repeat="supplier in partners[partnerType.SUPPLIER]">[[supplier.name]]
+                                            ([[supplier.status]])</option>
+
                                     </select><span class="custom-select full-width"></span>
                                 </div>
                             </div>
@@ -804,9 +700,11 @@
                                     class="button btn-success btn-medium sky-blue1 uppercase full-width">ADD NEW
                                     SUPPLIER</button>
                             </div>
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
 
-                            <br/><br/><br/>
-                            <hr>
 
                             <div class="container shortcode">
                                 <form class="booking-form">
@@ -815,548 +713,93 @@
                                         <center>
 
 
-                                            <h2>The Leela Ambience Convention Hotel</h2>
+                                            <h2>[[hotelDetails.name]]</h2>
                                             <hr>
 
 
 
-                                    </div><br/>
+                                    </div><br />
                                     <div class="group-details">
                                         <center>
-                                            <div class="form-group row">
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
+                                            <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
+                                                <div class="col-sm-2">
 
-                                                    <h4>Premier Room Only</h4>
+                                                    <div>
+                                                        <h4>[[room.room_type]]</h4>
+                                                        <small>([[room.meal_plan]]<span ng-if="room.balcony"> with
+                                                                Balcony</span>)</small>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
                                                     <div>
                                                         <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                        <input type="number" class="input-text full-width"
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
                                                     </div>
-
-
-
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
+                                                    <label>%</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room With Breakfast</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
+                                                <div class="col-sm-1">
 
-
-
+                                                    <label>B2B Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
-
+                                                    <label>B2B Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
+                                                <div class="col-sm-1">
 
-
-
-
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
 
+                                                <div class="col-sm-1">
 
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
 
+                                                <div class="col-sm-1">
 
-
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
 
 
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
                                             </div>
+                                        </center>
                                     </div>
 
 
-                                    <hr>
+                                    <hr />
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -1367,49 +810,41 @@
 
                                     </div>
                                 </form>
-
                             </div>
-
                         </div>
 
 
-
-
-
-
-
-
-
-
-
+                        <!-- Partners -->
 
                         <div id="booking" class="tab-pane fade">
 
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
-
-                                <div class="selector">
+                                <input type="text" name="daterange"  class="form-control"/>
+                                <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
                                         <option>Female</option>
                                         <option>Unspecified</option>
                                     </select><span class="custom-select full-width"></span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-4 col-md-3">
                                 <label>SELECT PARTNER</label>
                                 <div class="selector">
-                                    <select class="full-width">
-                                        <option>Date</option>
-                                        <option>Female</option>
-                                        <option>Unspecified</option>
+                                    <select class="full-width" ng-model="selectedPartner"
+                                        ng-change="loadDealByPartnerID(selectedPartner)">
+                                        <option value="[[partner.id]]"
+                                            ng-repeat="partner in partners[partnerType.PARTNER]">[[partner.name]]
+                                            ([[partner.status]])</option>
+
                                     </select><span class="custom-select full-width"></span>
                                 </div>
                             </div>
 
 
 
-                            <br/><br/><br/>
+                            <br /><br /><br />
                             <hr>
 
                             <div class="container shortcode">
@@ -1419,548 +854,92 @@
                                         <center>
 
 
-                                            <h2>The Leela Ambience Convention Hotel</h2>
+                                            <h2>[[hotelDetails.name]]</h2>
                                             <hr>
 
 
 
-                                    </div><br/>
+                                    </div><br />
                                     <div class="group-details">
                                         <center>
-                                            <div class="form-group row">
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
+                                            <div class="form-group row" ng-repeat="room in hotelDetails.rooms">
+                                                <div class="col-sm-2">
 
-                                                    <h4>Premier Room Only</h4>
+                                                    <div>
+                                                        <h4>[[room.room_type]]</h4>
+                                                        <small>([[room.meal_plan]]<span ng-if="room.balcony"> with
+                                                                Balcony</span>)</small>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-1">
                                                     <div>
                                                         <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
+                                                        <input type="number" class="input-text full-width" value=""
+                                                            ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].base_price"
+                                                            placeholder="" />
                                                     </div>
-
-
-
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
+                                                    <label>%</label>
+                                                    <input type="text" class="input-text full-width"
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].commission_in_percentage"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
 
-                                                    <h4>Premier Room With Breakfast</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
+                                                <div class="col-sm-1">
 
-
-
+                                                    <label>B2B Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_margin_price"
+                                                        placeholder="" />
 
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
+                                                <div class="col-sm-1">
 
-
+                                                    <label>B2B Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2b_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
 
+                                                <div class="col-sm-1">
 
-
+                                                    <label>B2C Margin</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_margin_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
 
+                                                <div class="col-sm-1">
 
+                                                    <label>B2C Rate</label>
+                                                    <input type="text" class="input-text full-width" value=""
+                                                        ng-model="dealsData[hotelDetails.id][selectedPartner][room.id].b2c_selling_price"
+                                                        placeholder="" />
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
 
+                                                <div class="col-sm-1">
 
-
+                                                    <button class="btn button mt-5"
+                                                        ng-click="updateDeal(dealsData[hotelDetails.id][selectedPartner][room.id], room.id)">Update</button>
                                                 </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
 
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-2">
-
-                                                    <h4>Premier Room Only</h4>
-                                                    <div>
-                                                        <label>Base Price</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="col-xs-12 col-md-5 constant-column-3">
-                                                    <div>
-                                                        <label>%</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>% Amt</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-                                                    <div>
-                                                        <label>B2B Rate</label>
-                                                        <input type="text" class="input-text full-width" value=""
-                                                            placeholder="">
-                                                    </div>
-
-
-
-                                                </div>
                                             </div>
+                                        </center>
                                     </div>
 
 
-                                    <hr>
+                                    <hr />
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
@@ -1973,572 +952,6 @@
                                 </form>
 
                             </div>
-                        </div>
-
-
-
-
-
-
-                        <div id="offers" class="tab-pane fade">
-                            <h2>Your Wish List</h2>
-                            <div class="row image-box listing-style2">
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/1.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Savona to Italy</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$170</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/17.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Hotel Hilton</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$620</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/7.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Forte Do Vale</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$120</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/18.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Roosevelt Hotel</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$170</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/2.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Miami to Florida</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$620</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/5.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Forte Do Vale</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$120</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/3.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">New York to Paris</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$170</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/8.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Hotel Hilton</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$620</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/6.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Forte Do Vale</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$120</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/16.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">Roosevelt Hotel</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$170</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" title="" href=""><img width="300" height="161"
-                                                    alt="" src="./index_files/4.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <a class="pull-right button uppercase"
-                                                href="http://www.soaptheme.net/html/travelo/dashboard1.html"
-                                                title="View all">select</a>
-                                            <h4 class="box-title">England to Asia</h4>
-                                            <label class="price-wrapper">
-                                                <span class="price-per-unit">$620</span>avg/night
-                                            </label>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="b2bleads" class="tab-pane fade">
-
-
-                            <div class="row image-box style3 cruise listing-style1">
-                                <div class="col-sm-6 col-md-3">
-                                    <article class="box">
-                                        <div class="details">
-                                            <span class="price"><small>Cost</small>₹120</span>
-                                            <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
-                                            <div class="feedback">
-                                                <div data-placement="bottom" data-toggle="tooltip"
-                                                    class="five-stars-container" title="" data-original-title="3 stars">
-                                                    <span style="width: 60%;" class="five-stars"></span></div>
-                                                <span class="review">2 PAX</span>
-                                            </div>
-                                            <div class="row time">
-                                                <div class="date col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
-                                                    </div>
-                                                </div>
-                                                <div class="departure col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Bali</span><br/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <center>
-                                                <h5><b>BUDGET : </b>₹ 1,40,000</h5>
-                                            </center>
-                                            <div class="action">
-                                                <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <article class="box">
-                                        <div class="details">
-                                            <span class="price"><small>Cost</small>₹120</span>
-                                            <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
-                                            <div class="feedback">
-                                                <div data-placement="bottom" data-toggle="tooltip"
-                                                    class="five-stars-container" title="" data-original-title="3 stars">
-                                                    <span style="width: 60%;" class="five-stars"></span></div>
-                                                <span class="review">2 PAX</span>
-                                            </div>
-                                            <div class="row time">
-                                                <div class="date col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
-                                                    </div>
-                                                </div>
-                                                <div class="departure col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Bali</span><br/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <center>
-                                                <h5><b>BUDGET : </b>₹ 1,40,000</h5>
-                                            </center>
-                                            <div class="action">
-                                                <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <article class="box">
-                                        <div class="details">
-                                            <span class="price"><small>Cost</small>₹120</span>
-                                            <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
-                                            <div class="feedback">
-                                                <div data-placement="bottom" data-toggle="tooltip"
-                                                    class="five-stars-container" title="" data-original-title="3 stars">
-                                                    <span style="width: 60%;" class="five-stars"></span></div>
-                                                <span class="review">2 PAX</span>
-                                            </div>
-                                            <div class="row time">
-                                                <div class="date col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
-                                                    </div>
-                                                </div>
-                                                <div class="departure col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Bali</span><br/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <center>
-                                                <h5><b>BUDGET : </b>₹ 1,40,000</h5>
-                                            </center>
-                                            <div class="action">
-                                                <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <article class="box">
-                                        <div class="details">
-                                            <span class="price"><small>Cost</small>₹120</span>
-                                            <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
-                                            <div class="feedback">
-                                                <div data-placement="bottom" data-toggle="tooltip"
-                                                    class="five-stars-container" title="" data-original-title="3 stars">
-                                                    <span style="width: 60%;" class="five-stars"></span></div>
-                                                <span class="review">2 PAX</span>
-                                            </div>
-                                            <div class="row time">
-                                                <div class="date col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
-                                                    </div>
-                                                </div>
-                                                <div class="departure col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Bali</span><br/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <center>
-                                                <h5><b>BUDGET : </b>₹ 1,40,000</h5>
-                                            </center>
-                                            <div class="action">
-                                                <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <article class="box">
-                                        <div class="details">
-                                            <span class="price"><small>Cost</small>₹120</span>
-                                            <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
-                                            <div class="feedback">
-                                                <div data-placement="bottom" data-toggle="tooltip"
-                                                    class="five-stars-container" title="" data-original-title="3 stars">
-                                                    <span style="width: 60%;" class="five-stars"></span></div>
-                                                <span class="review">2 PAX</span>
-                                            </div>
-                                            <div class="row time">
-                                                <div class="date col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
-                                                    </div>
-                                                </div>
-                                                <div class="departure col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Bali</span><br/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <center>
-                                                <h5><b>BUDGET : </b>₹ 1,40,000</h5>
-                                            </center>
-                                            <div class="action">
-                                                <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <article class="box">
-                                        <div class="details">
-                                            <span class="price"><small>Cost</small>₹120</span>
-                                            <h4 class="box-title">Amit Gupta<small>4N 5D</small></h4>
-                                            <div class="feedback">
-                                                <div data-placement="bottom" data-toggle="tooltip"
-                                                    class="five-stars-container" title="" data-original-title="3 stars">
-                                                    <span style="width: 60%;" class="five-stars"></span></div>
-                                                <span class="review">2 PAX</span>
-                                            </div>
-                                            <div class="row time">
-                                                <div class="date col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Delhi</span><br/>Jan 26, 2014
-                                                    </div>
-                                                </div>
-                                                <div class="departure col-xs-6">
-
-                                                    <div>
-                                                        <span class="skin-color">Bali</span><br/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <center>
-                                                <h5><b>BUDGET : </b>₹ 1,40,000</h5>
-                                            </center>
-                                            <div class="action">
-                                                <a class="button btn-small sky-blue1 full-width" href="">ADD TO CART</a>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-
-                        <div id="travel-stories" class="tab-pane fade">
-                            <h2>Share Your Story</h2>
-                            <div class="col-sm-9 no-float no-padding">
-                                <form>
-                                    <div class="row form-group">
-                                        <div class="col-sms-6 col-sm-6">
-                                            <label>Story Title</label>
-                                            <input type="text" class="input-text full-width">
-                                        </div>
-                                        <div class="col-sms-6 col-sm-6">
-                                            <label>Name</label>
-                                            <input type="text" class="input-text full-width">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sms-6 col-sm-6">
-                                            <label>Select Miles</label>
-                                            <div class="selector full-width">
-                                                <select>
-                                                    <option>4,528 Miles</option>
-                                                    <option>5,218 Miles</option>
-                                                </select><span class="custom-select">4,528 Miles</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sms-6 col-sm-6">
-                                            <label>Email Address</label>
-                                            <input type="text" class="input-text full-width">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sms-6 col-sm-6">
-                                            <label>Select Category</label>
-                                            <div class="selector full-width">
-                                                <select>
-                                                    <option value="">Adventure, Romance, Beach</option>
-                                                </select><span class="custom-select">Adventure, Romance, Beach</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Type Your Story</label>
-                                        <textarea rows="6" class="input-text full-width"
-                                            placeholder="please tell us about you"></textarea>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <h4>Do you have photos to share? <small>(Optional)</small> </h4>
-                                        <div class="fileinput col-sm-6 no-float no-padding" style="line-height: 34px;">
-                                            <input type="file" class="input-text"
-                                                data-placeholder="select image/s"><input type="text"
-                                                class="custom-fileinput input-text" placeholder="select image/s">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h4>Share with friends <small>(Optional)</small></h4>
-                                        <p>Share your review with your friends on different social media networks.</p>
-                                        <ul class="social-icons icon-circle clearfix">
-                                            <li class="twitter"><a title="" href="" data-toggle="tooltip"
-                                                    data-original-title="Twitter"><i class="soap-icon-twitter"></i></a>
-                                            </li>
-                                            <li class="facebook"><a title="" href="" data-toggle="tooltip"
-                                                    data-original-title="Facebook"><i
-                                                        class="soap-icon-facebook"></i></a></li>
-                                            <li class="googleplus"><a title="" href="" data-toggle="tooltip"
-                                                    data-original-title="GooglePlus"><i
-                                                        class="soap-icon-googleplus"></i></a></li>
-                                            <li class="pinterest"><a title="" href="" data-toggle="tooltip"
-                                                    data-original-title="Pinterest"><i
-                                                        class="soap-icon-pinterest"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <br/>
-                                    <div class="form-group col-sm-5 col-md-4 no-float no-padding no-margin">
-                                        <button type="submit" class="btn-medium full-width">SUBMIT REVIEW</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div id="settings" class="tab-pane fade">
-                            <h2>Account Settings</h2>
-                            <h5 class="skin-color">Change Your Password</h5>
-                            <form>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <label>Old Password</label>
-                                        <input type="text" class="input-text full-width">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <label>Enter New Password</label>
-                                        <input type="text" class="input-text full-width">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <label>Confirm New password</label>
-                                        <input type="text" class="input-text full-width">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn-medium">UPDATE PASSWORD</button>
-                                </div>
-                            </form>
-                            <hr>
-                            <h5 class="skin-color">Change Your Email</h5>
-                            <form>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <label>Old email</label>
-                                        <input type="text" class="input-text full-width">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <label>Enter New Email</label>
-                                        <input type="text" class="input-text full-width">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <label>Confirm New Email</label>
-                                        <input type="text" class="input-text full-width">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn-medium">UPDATE EMAIL ADDRESS</button>
-                                </div>
-                            </form>
-                            <hr>
-                            <h5 class="skin-color">Send Me Emails When</h5>
-                            <form>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Travelo has periodic offers and deals on really cool
-                                        destinations.
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Travelo has fun company news, as well as periodic
-                                        emails.
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> I have an upcoming reservation.
-                                    </label>
-                                </div>
-                                <button class="btn-medium uppercase">Update All Settings</button>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -2574,9 +987,6 @@
     <script type="text/javascript" src="/files/jquery-ui.1.10.4.min.js.download"></script>
 
 
-    <script type="text/javascript" src="js/js"></script>
-    <script type="text/javascript" src="js/gmap3.min.js.download"></script>
-    <script type="text/javascript" src="js/theme-scripts.js.download"></script>
 
     <!-- Twitter Bootstrap -->
     <script type="text/javascript" src="/files/bootstrap.js.download"></script>
@@ -2615,8 +1025,8 @@
                     <div class="popup-wrapper">
                         <div class="col-xs-12 col-sm-9 popup-content">
                             <div class="travelo-signup-box travelo-box" style="display: block;">
-                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br/>
-                                <br/>
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br />
+                                <br />
                                 <div class="">
                                     <form action="" Method="POST">
                                         <div class="form-group">
@@ -2651,8 +1061,8 @@
                     <div class="popup-wrapper">
                         <div class="col-xs-12 col-sm-9 popup-content">
                             <div class="travelo-signup-box travelo-box" style="display: block;">
-                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br/>
-                                <br/>
+                                <center><img src="/images/the-travel-square-logo-200x200.png"></center><br />
+                                <br />
                                 <div class="">
                                     <form action="" Method="POST">
                                         <div class="form-group">
@@ -2685,10 +1095,6 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <!-- 16:9 aspect ratio -->
-            <a href="car-campaign-offer.html"><img src="/images/the-travel-square-campaign-offer.jfif" width="950"
-                    height="400"></a>
-
         </div>
     </div>
 
@@ -2703,16 +1109,20 @@
         </div>
     </div>
 
+    <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
+
     <script>
         var hotelDetails = {{ hotel_data| tojson}};
         var API_BASE_URL = '{{config.API_URL}}';
+        var partner_api_url = '{{config.PARTNER_API_URL}}' + "/api/v1"
+    </script>
+
+    <script>
+        $('input[name="daterange"]').daterangepicker();
     </script>
 
     <script type="text/javascript" src="/app.js"></script>
     <script type="text/javascript" src="/controllers/adminHotelDealController.js"></script>
-
-
-
 
 </body>
 

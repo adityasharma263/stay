@@ -1,35 +1,24 @@
 var app = angular.module('stay', ['angular.filter'])
-    .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
+    .config(['$interpolateProvider',"$locationProvider", function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');
-        // $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({
+          enabled: true,
+          requireBase: false
+        });
     }])
-
-    .controller('bookingController', ["$scope", "$http", function ($scope, $http) {
-
-        $scope.firstName = {};
-        $scope.lastName = {};
-        $scope.phoneNumber = {};
-        $scope.address = {};
-        $scope.emailAddress = {};
-
-        $scope.submitBooking = function () {
-            window.open('/hotel/booking/payment', '_self');
-
-        }
-    }])
-
-
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
         $scope.hotel = {};
         $scope.showSearchResult = false;
-        //        default searchkey 
+        $scope.resp = false;
         var searchKey = 'city';
         $scope.hotel.ci = new Date();
         $scope.hotel.co = new Date();
         $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
 
+
+        
 
         $scope.result = function (data, status) {
             $scope.hotel.search = data;
@@ -89,6 +78,9 @@ var app = angular.module('stay', ['angular.filter'])
                 if ($scope.cities.length != 0 && $scope.names.length == 0) {
                     searchKey = 'city';
                 }
+                if ($scope.cities.length != 0 && $scope.names.length != 0) {
+                    searchKey = 'city';
+                }
             })
 
         }
@@ -112,9 +104,8 @@ var app = angular.module('stay', ['angular.filter'])
         //  }
     }])
 
-    .controller('stayListController', ["$scope", "$window", "$http", function ($scope, $window, $http ) {
-
-
+    .controller('stayListController', ["$scope", "$window", "$http","$location", function ($scope, $window, $http, $location) {
+        
         $scope.hotelid = {};
         $scope.room = {};
         $scope.id = [];
@@ -144,10 +135,13 @@ var app = angular.module('stay', ['angular.filter'])
         var span = document.getElementsByClassName("close")[0];
 
 
-        var str = document.location.search;
-        var key = str.split("?");
-        var key1 = key[1].split("=");
+        //________________________________________________________________________//
 
+        
+
+        //________________________________________________________________________//
+        var urlParams = $location.search()
+        console.log(urlParams);
         $scope.loadmoredeals = function () {
             $scope.loadMoreLimit = $scope.loadMoreLimit + 5;
         }
@@ -158,7 +152,7 @@ var app = angular.module('stay', ['angular.filter'])
 
             if (!cb) $scope.hotel.page = 1;
 
-            let searchURL = api_url + '/api/v1/hotel/b2b' + document.location.search
+            let searchURL = api_url + '/api/v1/hotel/search' + document.location.search
 
 
             Object.keys($scope.hotel).forEach(function (param) {
@@ -168,13 +162,15 @@ var app = angular.module('stay', ['angular.filter'])
 
             $http({
                 method: 'GET',
-                url: searchURL
+                url: api_url + '/api/v1/hotel/list/b2b',
+                params: urlParams
             }).then(function (res) {
 
                 if (cb) {
                     cb(res);
                 } else {
                     $scope.hotelData = res.data.result.hotel;
+                    console.log($scope.hotelData);
                 }
             })
         }
@@ -203,6 +199,7 @@ var app = angular.module('stay', ['angular.filter'])
             $scope.curDate = new Date();
 
             var check_in = $scope.hotel.check_in;
+            console.log("check in",check_in); 
             if ($scope.hotel.check_in == undefined) {
                 $scope.hotel.check_in = check_in;
             }
@@ -235,7 +232,7 @@ var app = angular.module('stay', ['angular.filter'])
 
         $http({
             method: 'GET',
-            url: api_url + '/api/v1/hotel/b2b'
+            url: api_url + '/api/v1/hotel/list/b2b'
         }).then(function successCallback(response) {
             $scope.hotels = response.data.result.hotel;
             for (var j = 0; j < $scope.hotels.length; j++) {
@@ -251,61 +248,61 @@ var app = angular.module('stay', ['angular.filter'])
 
     }])
 
-//    .controller('hotelController', ["$scope", "$http", "$filter", function ($scope, $http, $filter) {
-//        $scope.roomData = {};
-//        $scope.room = {};
-//        $scope.id = [];
-//
-//        $scope.hotel = {};
-//        $scope.hotels = {};
-//
-//        $scope.hotelobj = {};
-//        $scope.deals = [];
-//        $scope.imagesData = {};
-//        $scope.similarhotels = [];
-//        $scope.limit = 10;
-//        $scope.roomPrice = {};
-//        $scope.deallimit = 1;
+   .controller('hotelController', ["$scope", "$http", "$filter", function ($scope, $http, $filter) {
+       $scope.roomData = {};
+       $scope.room = {};
+       $scope.id = [];
+
+       $scope.hotel = {};
+       $scope.hotels = {};
+
+       $scope.hotelobj = {};
+       $scope.deals = [];
+       $scope.imagesData = {};
+       $scope.similarhotels = [];
+       $scope.limit = 10;
+       $scope.roomPrice = {};
+       $scope.deallimit = 1;
 
 
-//        var path = document.location.pathname;
-//        var key1 = path.split("/");
-//        if (key1[2] == 'hotel')
-//            var id = key1[3];
-//        else
-//            var id = key1[2];
-//        $http({
-//            method: 'GET',
-//            url: api_url + '/api/v1/hotel?id=' + id
-//        }).then(function successCallback(response) {
-//            $scope.hotel = response.data.result.hotel;
-//            getSimilarHotels();
-//        }, function errorCallback(response) {
-//            // called asynchronously if an error occurs
-//            // or server returns response with an error status.
-//        })
+       var path = document.location.pathname;
+       var key1 = path.split("/");
+       if (key1[2] == 'hotel')
+           var id = key1[3];
+       else
+           var id = key1[2];
+       $http({
+           method: 'GET',
+           url: api_url + '/api/v1/hotel/b2b?name=' + name
+       }).then(function successCallback(response) {
+           $scope.hotel = response.data.result.hotel;
+           getSimilarHotels();
+       }, function errorCallback(response) {
+           // called asynchronously if an error occurs
+           // or server returns response with an error status.
+       })
 
 
-//        var getSimilarHotels = function () {
-//            $http({
-//                method: 'GET',
-//                url: api_url + '/api/v1/hotel?city=' + $scope.hotel[0].city
-//            }).then(function successCallback(response) {
-//
-//                for (var i = 0; i < response.data.result.hotel.length; i++) {
-//                    if (response.data.result.hotel[i].id == $scope.hotel[0].id) {
-//                        response.data.result.hotel.splice(1, i); //to remove current showing hotel data
-//                    }
-//                    else {
-//                        $scope.similarhotels.push(response.data.result.hotel[i])
-//                    }
-//                }
-//
-//            }, function errorCallback(response) {
-//                // called asynchronously if an error occurs
-//                // or server returns response with an error status.
-//            })
-//
-//        }
+       var getSimilarHotels = function () {
+           $http({
+               method: 'GET',
+               url: api_url + '/api/v1/hotel/b2b?city=' + $scope.hotel[0].city
+           }).then(function successCallback(response) {
 
-//    }]);
+               for (var i = 0; i < response.data.result.hotel.length; i++) {
+                   if (response.data.result.hotel[i].id == $scope.hotel[0].id) {
+                       response.data.result.hotel.splice(1, i); //to remove current showing hotel data
+                   }
+                   else {
+                       $scope.similarhotels.push(response.data.result.hotel[i])
+                   }
+               }
+
+           }, function errorCallback(response) {
+               // called asynchronously if an error occurs
+               // or server returns response with an error status.
+           })
+
+       }
+
+   }]);

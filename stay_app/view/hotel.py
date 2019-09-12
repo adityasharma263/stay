@@ -559,7 +559,7 @@ def deal_api():
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         deal = request.json
-        price_calendar = deal.get("price_calendar", None)
+        price_calendar = deal.get("price_calendar", [])
         deal.pop('price_calendar', None)
         room_id = deal.get("room_id", None)
         post_b2b_selling_price = deal.get("b2b_selling_price", None)
@@ -653,17 +653,17 @@ def booking_api():
         return jsonify({'result': {'booking': result.data}, 'message': "Success", 'error': False})
 
 
-@app.route('/api/v1/booking/<string:booking_no>', methods=['PUT', 'DELETE'])
-def booking_id(booking_no):
+@app.route('/api/v1/booking/<int:id>', methods=['PUT', 'DELETE'])
+def booking_id(id):
     if request.method == 'PUT':
-        put = Booking.query.filter_by(booking_no=booking_no).update(request.json)
+        put = Booking.query.filter_by(id=id).update(request.json)
         if put:
             Booking.update_db()
-            s = Booking.query.filter_by(booking_no=booking_no).first()
+            s = Booking.query.filter_by(id=id).first()
             result = BookingSchema(many=False).dump(s)
             return jsonify({'result': result.data, "status": "Success", 'error': False})
     else:
-        bookings = Booking.query.filter_by(booking_no=booking_no).first()
+        bookings = Booking.query.filter_by(id=id).first()
         if not bookings:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Booking.delete_db(bookings)
