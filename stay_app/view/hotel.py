@@ -563,11 +563,15 @@ def deal_api():
             # deal_for_dates = []
             start_date = datetime.datetime.fromtimestamp(int(start_date)).date()
             end_date = datetime.datetime.fromtimestamp(int(end_date)).date()
+            print(start_date)
+            print(type(q_deal))
             for deal in q_deal:
+                print(deal)
                 deal_for_dates = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
                                                                     PriceCalendar.date >= start_date,
-                                                                    PriceCalendar.date < end_date).all()
-                deal.price_calendar = deal_for_dates
+                                                                    PriceCalendar.date <= end_date).all()
+                if deal_for_dates:
+                    deal.price_calendar = deal_for_dates
         if price_start and price_end:
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if order_by:
