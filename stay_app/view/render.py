@@ -118,37 +118,36 @@ def admin_terminal():
 @app.route('/hotel/booking', methods=['GET', 'POST'])
 @login_required
 def booking():
-    if request.method == 'GET':
-        if 'partner_data' in session or True:
-            partner_data = session["partner_data"] if "" else ""
+    if 'partner_data' in session or True:
+        partner_data = session["partner_data"] if "" else ""
+        if request.method == 'GET':
             if True or partner_data["status"] == 'Approved':
                 return render_template('hotel/booking/booking.html', partner_data=partner_data)
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
                "click here  FOR THE APPROVAL </b></a>"
         else:
-            return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+            booking_details = request.json
+            booking_details['status'] = 'P'
+            for deal in booking_details["deals"]:
+                deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal['deal_id']})
+                deal_data = deal_data.json()["result"]["deal"][0]
+                for key, value in deal_data.items():
+                    if key in ['base_price', 'commission_in_percentage', 'final_price', 'margin_price',
+                               'partner_id', 'ts_exclusive', 'room_id']:
+                        deal[key] = value
+            booking_details["partner_id"] = partner_data['id']
+            booking_details["booking_no"] = "ts"
+            booking_details["product_info"] = "rooms"
+            booking_details["gst_no"] = partner_data['gst_no']
+            booking_details["business_email"] = partner_data['business_email']
+            booking_details["office_address"] = partner_data['office_address']
+            booking_details["company_name"] = partner_data['company_name']
+            booking_response = requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
+            response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_response.json())
+            return response.text
     else:
-        booking_details = request.json
-        booking_details['status'] = 'P'
-        for deal in booking_details["deals"]:
-            deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal['deal_id']})
-            deal_data = deal_data.json()["result"]["deal"][0]
-            for key, value in deal_data.items():
-                if key in ['base_price', 'commission_in_percentage', 'final_price', 'margin_price',
-                           'partner_id', 'ts_exclusive', 'room_id']:
-                    deal[key] = value
-            # deal['base_price'] = deal_data['base_price']
-            # deal['commission_in_percentage'] = deal_data['commission_in_percentage']
-            # deal['final_price'] = deal_data['final_price']
-            # deal['margin_price'] = deal_data['margin_price']
-            # deal['partner_id'] = deal_data['partner_id']
-            # deal['ts_exclusive'] = deal_data['ts_exclusive']
-            # deal['room_id'] = deal_data['room_id']
-        requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
-        booking_details.pop("deals")
-        response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_details)
-        return response.text
+        return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= B2B hotels ==========================
