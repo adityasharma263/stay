@@ -154,7 +154,7 @@ def booking():
 
 @app.route('/hotel/cart', methods=['POST'])
 @login_required
-def booking():
+def cart():
     if 'partner_data' in session or True:
         partner_data = session["partner_data"] if "" else ""
         if request.method == 'post':
