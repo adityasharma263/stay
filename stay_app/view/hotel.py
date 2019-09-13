@@ -11,6 +11,7 @@ from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealS
     RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema, HotelTerminalSchema,\
     CartDealSchema, CartSchema, HotelB2BListSchema
 import datetime
+import requests
 import time
 from itertools import cycle
 # import simplejson as json
@@ -703,9 +704,21 @@ def cart_api():
         per_page = int(request.args.get('per_page', 10))
         q = db.session.query(Hotel).outerjoin(Room).outerjoin(Deal)
         data = Cart.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        total_amount = 0
+        total_deals = 0
         for cart in data:
             for deal in cart.cart_deals:
-                hotel = q.filter(Deal.id == deal.deal_id).first()
+                if deal:
+                    total_deals = total_deals + deal.no_of_deals
+                    deal_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/deal", params={"id": deal.deal_id,
+                                                                                                      "ci": deal.ci,
+                                                                                                      "c0": deal.co})
+                    deal.current_deal_amount = int(deal_data.json()["result"]["deal"][0]["price"]) * deal.no_of_deals
+                    total_amount = total_amount + deal.current_deal_amount
+
+                    hotel = q.filter(Deal.id == deal.deal_id).first()
+            cart.total_booking_amount = total_amount
+            cart.total_no_of_deals = total_deals
             cart.hotel_id = hotel.id
         result = CartSchema(many=True).dump(data)
         return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
@@ -753,9 +766,9 @@ def cart_deal_api():
         result = CartDealSchema(many=True).dump(data)
         return jsonify({'result': {'cart_deal': result.data}, 'message': "Success", 'error': False})
     else:
-        post = CartDeal(**request.json)
-        post.save()
-        result = CartDealSchema().dump(post)
+        cart_deal_post = CartDeal(**request.json)
+        cart_deal_post.save()
+        result = CartDealSchema().dump(cart_deal_post)
         return jsonify({'result': {'cart_deal': result.data}, 'message': "Success", 'error': False})
 
 
