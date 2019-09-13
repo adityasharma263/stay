@@ -135,16 +135,11 @@ var app = angular.module('stay', ['angular.filter'])
         var span = document.getElementsByClassName("close")[0];
 
 
-        //________________________________________________________________________//
-
-        
-
-        //________________________________________________________________________//
-        var urlParams = $location.search()
-        console.log(urlParams);
+        var urlParams = $location.search();
+        console.log("urlParams ", urlParams);
         $scope.loadmoredeals = function () {
             $scope.loadMoreLimit = $scope.loadMoreLimit + 5;
-        }
+        };
 
         $scope.hotelData = [];
 
@@ -246,8 +241,42 @@ var app = angular.module('stay', ['angular.filter'])
         });
 
 
-        $scope.addToCart = function(roomDetails) {
+        $scope.addToCart = function(dealDetails) {
             
+            console.log(dealDetails);
+
+            $scope.noOfDeal = 1;
+
+            console.log("urlParams.ci = ",urlParams.ci);
+            console.log("urlParams.co = ",urlParams.co);
+
+           var finalCartData =  {
+                "ci_date": urlParams.ci,
+                "co_date": urlParams.co,
+                "deal_id": dealDetails.id,
+                "no_of_deals": $scope.noOfDeal
+            };
+
+
+            $http.post("/api/v1/cart/deal", finalCartData)
+            .then(function(response) {
+
+                console.log(response.data);
+
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+        };
+
+
+        $scope.addOneToCart= function(){
+            $scope.noOfDeal =  $scope.noOfDeal + 1; 
+
+        };
+
+        $scope.subOneToCart= function(){
+            $scope.noOfDeal =  $scope.noOfDeal - 1;
         };
 
 

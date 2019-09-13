@@ -742,7 +742,7 @@ def cart_id(id):
 
 
 @app.route('/api/v1/cart/deal', methods=['GET', 'POST'])
-def cart_api():
+def cart_deal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         args.pop('page', None)
