@@ -245,7 +245,7 @@ var app = angular.module('stay', ['angular.filter'])
             
             console.log(dealDetails);
 
-            $scope.noOfDeal = 1;
+            dealDetails.noOfDeal = 1;
 
             console.log("urlParams.ci = ",urlParams.ci);
             console.log("urlParams.co = ",urlParams.co);
@@ -254,14 +254,15 @@ var app = angular.module('stay', ['angular.filter'])
                 "ci_date": urlParams.ci,
                 "co_date": urlParams.co,
                 "deal_id": dealDetails.id,
-                "no_of_deals": $scope.noOfDeal
+                "no_of_deals": dealDetails.noOfDeal
             };
 
 
-            $http.post("/api/v1/cart/deal", finalCartData)
+            $http.post("/hotel/cart", finalCartData)
             .then(function(response) {
 
                 console.log(response.data);
+                dealDetails.cart_id = response.data.result.cart_deal.id;
 
             })
             .catch(function(err) {
@@ -270,13 +271,67 @@ var app = angular.module('stay', ['angular.filter'])
         };
 
 
-        $scope.addOneToCart= function(){
-            $scope.noOfDeal =  $scope.noOfDeal + 1; 
+        $scope.addOneToCart= function(dealDetails){
+            dealDetails.noOfDeal =  dealDetails.noOfDeal + 1; 
+
+
+            var finalCartData =  {
+            
+                "no_of_deals": dealDetails.noOfDeal
+            };
+
+            $http.put("/api/v1/cart/deal/"+dealDetails.cart_id, finalCartData)
+            .then(function(response) {
+
+                console.log(response.data);
+               
+
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
 
         };
 
-        $scope.subOneToCart= function(){
-            $scope.noOfDeal =  $scope.noOfDeal - 1;
+        $scope.subOneToCart= function(dealDetails){
+            dealDetails.noOfDeal =  dealDetails.noOfDeal - 1;
+
+
+            if(dealDetails.noOfDeal != 0){
+                var finalCartData =  {
+                
+                    "no_of_deals": dealDetails.noOfDeal
+                };
+    
+                console.log(finalCartData);
+
+                $http.put("/api/v1/cart/deal/"+dealDetails.cart_id, finalCartData)
+                .then(function(response) {
+    
+                    console.log(response.data);
+                    // dealDetails.cart_id = response.data.result.cart_deal.id;
+    
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+            }else{
+
+                $http.delete("/api/v1/cart/deal/"+dealDetails.cart_id)
+                .then(function(response) {
+    
+                    console.log(response.data);
+                    // dealDetails.cart_id = response.data.result.cart_deal.id;
+    
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+
+            }
+
+
+
         };
 
 
