@@ -193,6 +193,8 @@ def hotel_b2b_list_api():
                         lowest_deal_for_room.b2b_lowest_price = True
                     else:
                         lowest_selected_deal_for_room.b2b_selected_deal = True
+                else:
+                    lowest_selected_deal_for_room.b2b_selected_deal = True
             else:
                 # get the lowest deal for the hotel except from the selected deal's
                 lowest_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
