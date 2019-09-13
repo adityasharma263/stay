@@ -188,16 +188,18 @@ def hotel_b2b_list_api():
                     filter(Hotel.id == hotel.id, Deal.b2b_selected_deal == False,
                            Deal.room_id != lowest_selected_deal_for_room.room_id) \
                     .order_by(Deal.b2b_final_price.asc()).first()
-                if lowest_selected_deal_for_room.b2b_final_price > lowest_deal_for_room.b2b_final_price:
-                    lowest_deal_for_room.b2b_lowest_price = True
-                else:
-                    lowest_selected_deal_for_room.b2b_selected_deal = True
+                if lowest_deal_for_room:
+                    if lowest_selected_deal_for_room.b2b_final_price > lowest_deal_for_room.b2b_final_price:
+                        lowest_deal_for_room.b2b_lowest_price = True
+                    else:
+                        lowest_selected_deal_for_room.b2b_selected_deal = True
             else:
                 # get the lowest deal for the hotel except from the selected deal's
                 lowest_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
                     filter(Hotel.id == hotel.id, Deal.b2b_selected_deal == False) \
                     .order_by(Deal.b2b_final_price.asc()).first()
-                lowest_deal_for_room.b2b_lowest_price = True
+                if lowest_deal_for_room:
+                    lowest_deal_for_room.b2b_lowest_price = True
         for key in args:
             if key in Hotel.__dict__:
                 q = q.filter(getattr(Hotel, key) == args[key])
@@ -563,10 +565,7 @@ def deal_api():
             # deal_for_dates = []
             start_date = datetime.datetime.fromtimestamp(int(start_date)).date()
             end_date = datetime.datetime.fromtimestamp(int(end_date)).date()
-            print(start_date)
-            print(type(q_deal))
             for deal in q_deal:
-                print(deal)
                 deal_for_dates = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
                                                                     PriceCalendar.date >= start_date,
                                                                     PriceCalendar.date <= end_date).all()
