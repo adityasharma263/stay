@@ -722,3 +722,57 @@ def cart_api():
             deal_post.save()
         result = CartSchema().dump(cart_post)
         return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cart/<int:id>', methods=['PUT', 'DELETE'])
+def cart_id(id):
+    if request.method == 'PUT':
+        put = Cart.query.filter_by(id=id).update(request.json)
+        if put:
+            Cart.update_db()
+            s = Cart.query.filter_by(id=id).first()
+            result = CartSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        data = Cart.query.filter_by(id=id).first()
+        if not data:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Cart.delete_db(data)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cart/deal', methods=['GET', 'POST'])
+def cart_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        data = CartDeal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = CartDealSchema(many=True).dump(data)
+        return jsonify({'result': {'cart_deal': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = CartDeal(**request.json)
+        post.save()
+        result = CartDealSchema().dump(post)
+        return jsonify({'result': {'cart_deal': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cart/deal/<int:id>', methods=['PUT', 'DELETE'])
+def cart_deal_id(id):
+    if request.method == 'PUT':
+        put = CartDeal.query.filter_by(id=id).update(request.json)
+        if put:
+            CartDeal.update_db()
+            s = CartDeal.query.filter_by(id=id).first()
+            result = CartDealSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        data = CartDeal.query.filter_by(id=id).first()
+        if not data:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        CartDeal.delete_db(data)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
+
