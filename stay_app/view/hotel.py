@@ -188,6 +188,8 @@ def hotel_b2b_list_api():
                     filter(Hotel.id == hotel.id, Deal.b2b_selected_deal == False,
                            Deal.room_id != lowest_selected_deal_for_room.room_id) \
                     .order_by(Deal.b2b_final_price.asc()).first()
+                print(lowest_selected_deal_for_room.b2b_final_price)
+                print(lowest_deal_for_room.b2b_final_price)
                 if lowest_selected_deal_for_room.b2b_final_price > lowest_deal_for_room.b2b_final_price:
                     lowest_deal_for_room.b2b_lowest_price = True
                 else:

@@ -95,8 +95,7 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
             })
             .catch(function (err) {
                 console.log(err);
-            })
-            ;
+            });
     };
 
     $scope.listPartnerType = function (partnerType) {
@@ -334,6 +333,7 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
     $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
         $(this).val('');
         $scope.directDealDateRange = "";
+        console.log("called!!");
     });
 
 
