@@ -761,6 +761,7 @@
                             <div class="col-sm-4 col-md-3">
                                 <label>CALENDER</label>
                                 <input type="text" name="daterange" class="form-control" ng-model="directDealDateRange" ng-change="specificDateDealPicker(directDealDateRange)"/>
+                                <div class="bg-danger" ng-if="directDealDateRange" > Data Show for this Date <br/> [[directDealDateRange]]</div>
                                 <!-- <div class="selector">
                                     <select class="full-width">
                                         <option>Date</option>
@@ -1334,14 +1335,11 @@
 
     <script>
         $('input[name="daterange"]').daterangepicker({
-          
             locale: {
                 cancelLabel: 'Reset'
             }
         });
-        $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
-            $(this).val('');
-        });
+       
     </script>
 
     <script type="text/javascript" src="/app.js"></script>

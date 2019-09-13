@@ -351,3 +351,18 @@ class BookingDeal(Base):
 
     def __repr__(self):
         return '<booking_id %r>' % self.booking_id
+
+
+# class Invoice(Base):
+#
+#     __tablename__ = 'invoice'
+#
+#     booking_id = db.Column(db.Integer, db.ForeignKey('booking.id'), unique=False)
+#     total_booking_amount = db.Column(db.Integer, nullable=True)
+#     no_of_deals = db.Column(db.Integer, nullable=True)
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#
+#     def __repr__(self):
+#         return '<booking_id %r>' % self.booking_id

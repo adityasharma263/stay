@@ -155,10 +155,6 @@ class CartSchema(ma.ModelSchema):
 #-------------------------------------------------------Terminal-------------------------------------------
 
 
-
-
-
-
 class RoomTerminalSchema(ma.ModelSchema):
     meal_plan = EnumField(MealPlan, by_value=True)
 
@@ -173,7 +169,7 @@ class HotelTerminalSchema(ma.ModelSchema):
     class Meta:
         model = Hotel
         exclude = ('updated_at', "city", 'created_at', "star", "rating", "phone", "desc", "address",
-                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
+                   "images", "latitude", "amenities", "collection_id", "hotel_collection",
                    "longitude", "longitude", "country", "category")
 
 
@@ -187,6 +183,7 @@ class DealB2BListSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at', "website", "price_calendar", "b2c_selling_price", "b2b_final_price",
                    "b2c_final_price", "base_price", "commission_in_percentage", "b2b_margin_price", "b2b_selling_price",
                    "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal", "room", "website_id")
+
 
 
 class RoomB2BListSchema(ma.ModelSchema):

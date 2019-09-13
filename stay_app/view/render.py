@@ -118,37 +118,36 @@ def admin_terminal():
 @app.route('/hotel/booking', methods=['GET', 'POST'])
 @login_required
 def booking():
-    if request.method == 'GET':
-        if 'partner_data' in session or True:
-            partner_data = session["partner_data"] if "" else ""
+    if 'partner_data' in session or True:
+        partner_data = session["partner_data"] if "" else ""
+        if request.method == 'GET':
             if True or partner_data["status"] == 'Approved':
                 return render_template('hotel/booking/booking.html', partner_data=partner_data)
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
                "click here  FOR THE APPROVAL </b></a>"
         else:
-            return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+            booking_details = request.json
+            booking_details['status'] = 'P'
+            for deal in booking_details["deals"]:
+                deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal['deal_id']})
+                deal_data = deal_data.json()["result"]["deal"][0]
+                for key, value in deal_data.items():
+                    if key in ['base_price', 'commission_in_percentage', 'final_price', 'margin_price',
+                               'partner_id', 'ts_exclusive', 'room_id']:
+                        deal[key] = value
+            booking_details["partner_id"] = partner_data['id']
+            booking_details["booking_no"] = "ts"
+            booking_details["product_info"] = "rooms"
+            booking_details["gst_no"] = partner_data['gst_no']
+            booking_details["business_email"] = partner_data['business_email']
+            booking_details["office_address"] = partner_data['office_address']
+            booking_details["company_name"] = partner_data['company_name']
+            booking_response = requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
+            response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_response.json())
+            return response.text
     else:
-        booking_details = request.json
-        booking_details['status'] = 'P'
-        for deal in booking_details["deals"]:
-            deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/deal', params={"id": deal['deal_id']})
-            deal_data = deal_data.json()["result"]["deal"][0]
-            for key, value in deal_data.items():
-                if key in ['base_price', 'commission_in_percentage', 'final_price', 'margin_price',
-                           'partner_id', 'ts_exclusive', 'room_id']:
-                    deal[key] = value
-            # deal['base_price'] = deal_data['base_price']
-            # deal['commission_in_percentage'] = deal_data['commission_in_percentage']
-            # deal['final_price'] = deal_data['final_price']
-            # deal['margin_price'] = deal_data['margin_price']
-            # deal['partner_id'] = deal_data['partner_id']
-            # deal['ts_exclusive'] = deal_data['ts_exclusive']
-            # deal['room_id'] = deal_data['room_id']
-        requests.post(str(app.config["API_URL"]) + '/api/v1/booking', json=booking_details)
-        booking_details.pop("deals")
-        response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_details)
-        return response.text
+        return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= B2B hotels ==========================
@@ -173,14 +172,14 @@ def business_hotel():
 @login_required
 def business_hotel_list():
     partner_data = "adnan"
-    args = request.args.to_dict()
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/list/b2b"
-    hotel_data = requests.get(url=hotel_api_url, params=args)
-    hotel_data = hotel_data.json()
-    if len(hotel_data["result"]["hotel"]) > 0:
-        hotel_data = hotel_data["result"]["hotel"]
-    else:
-        hotel_data = []
+    # args = request.args.to_dict()
+    # hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/list/b2b"
+    # hotel_data = requests.get(url=hotel_api_url, params=args)
+    # hotel_data = hotel_data.json()
+    # if len(hotel_data["result"]["hotel"]) > 0:
+    #     hotel_data = hotel_data["result"]["hotel"]
+    # else:
+    hotel_data = []
 
     return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
 
@@ -253,3 +252,81 @@ def group():
 @app.route('/onetimeverification')
 def verification():
     return render_template('hotel/b2b_hotels/otp-chat-forum.html')
+
+
+############################# Destination Pages ########################
+
+
+@app.route('/destinations/bali')
+def bali():
+    return render_template('hotel/b2b_hotels/destinations/bali.html')
+
+@app.route('/destinations/bangkok')
+def bangkok():
+    return render_template('hotel/b2b_hotels/destinations/bangkok.html')
+
+@app.route('/destinations/dubai')
+def dubai():
+    return render_template('hotel/b2b_hotels/destinations/dubai.html')
+
+@app.route('/destinations/goa')
+def goa():
+    return render_template('hotel/b2b_hotels/destinations/goa.html')
+
+@app.route('/destinations/krabi')
+def krabi():
+    return render_template('hotel/b2b_hotels/destinations/krabi.html')
+
+@app.route('/destinations/ladakh')
+def ladakh():
+    return render_template('hotel/b2b_hotels/destinations/ladakh.html')
+
+@app.route('/destinations/london')
+def london():
+    return render_template('hotel/b2b_hotels/destinations/london.html')
+
+@app.route('/destinations/maldives')
+def maldives():
+    return render_template('hotel/b2b_hotels/destinations/maldives.html')
+
+@app.route('/destinations/new-york')
+def new_york():
+    return render_template('hotel/b2b_hotels/destinations/new-york.html')
+
+@app.route('/destinations/pattaya')
+def pattaya():
+    return render_template('hotel/b2b_hotels/destinations/pattaya.html')
+
+@app.route('/destinations/singapore')
+def singapore():
+    return render_template('hotel/b2b_hotels/destinations/singapore.html')
+
+@app.route('/destinations/switzerland')
+def switzerland():
+    return render_template('hotel/b2b_hotels/destinations/switzerland.html')
+
+@app.route('/destinations')
+def destinations():
+    return render_template('hotel/b2b_hotels/destinations.html')
+
+
+############################## Site Map ###############################
+
+
+@app.route('/site-map')
+def site_map():
+    return render_template('hotel/b2b_hotels/site-map.html')
+
+@app.route('/partner-care')
+def partner_care():
+    return render_template('hotel/b2b_hotels/partner-care.html')
+
+@app.route('/terms-and-conditions')
+def terms_and_conditions():
+    return render_template('hotel/b2b_hotels/terms-and-conditions.html')
+
+@app.route('/privacy-policy')
+def privacy_policy():
+    return render_template('hotel/b2b_hotels/privacy-policy.html')
+
+

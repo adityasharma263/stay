@@ -166,7 +166,7 @@
                             </div>
                         </div>
 
-<!-----------------------------------------------------list view start----------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------list view start----------------------------------------------------------------------------------->
 
                         <div class="col-sm-8 col-md-9">     
                             <div class="sort-by-section clearfix">
@@ -174,10 +174,11 @@
                                 <p><input class="input-text full-width" type="text"  placeholder="SEARCH BY KEYWORD"></p>
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
+                                [[hotel.name]]
                                 <div ng-repeat="room in hotel.rooms">
                                     <div class="ng-cloak">
                                         <article class="box" >
-                                            <div ng-repeat = "deal in room.deals" ng-if="room.b2b_lowest_price" ng-if="room.b2b_selected_deal" ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false" >
+                                            <div ng-repeat = "deal in room.deals" ng-if="deal.b2b_lowest_price" ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false" >
                                                 <a href="/hotel/[[hotel.slug]]">
                                                 <figure class="col-sm-5 col-md-4" style="padding: 15px;">
                                                     <img data-toggle="modal"  style="height:100%; width:100%; cursor: pointer" src="http://[[room.image_url]]" alt="Travel Square">

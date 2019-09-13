@@ -324,11 +324,17 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
         console.log({startDateEpoch,endDateEpoch});
 
 
-        
+
 
         
         
     };
+
+
+    $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+        $scope.directDealDateRange = "";
+    });
 
 
 

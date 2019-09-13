@@ -1,15 +1,17 @@
 var app = angular.module('stay', ['angular.filter'])
-    .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
+    .config(['$interpolateProvider',"$locationProvider", function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');
-        // $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({
+          enabled: true,
+          requireBase: false
+        });
     }])
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
         $scope.hotel = {};
         $scope.showSearchResult = false;
         $scope.resp = false;
-        //        default searchkey 
         var searchKey = 'city';
         $scope.hotel.ci = new Date();
         $scope.hotel.co = new Date();
@@ -102,7 +104,7 @@ var app = angular.module('stay', ['angular.filter'])
         //  }
     }])
 
-    .controller('stayListController', ["$scope", "$window", "$http", function ($scope, $window, $http ) {
+    .controller('stayListController', ["$scope", "$window", "$http","$location", function ($scope, $window, $http, $location) {
         
         $scope.hotelid = {};
         $scope.room = {};
@@ -123,11 +125,6 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.min = 0;
         $scope.max = 200000;
 
-        $scope.showBusinessDetail=function(hotel_id){
-            window.open('/business/hotel/'+hotel_id,'_self');
-            console.log("hotel id",hotel_id);
-            
-          }
 //       get array for the particular num  used to show amenities dynamically
          $scope.getNumber = function(num) {
          return new Array(num);
@@ -143,15 +140,11 @@ var app = angular.module('stay', ['angular.filter'])
         
 
         //________________________________________________________________________//
-
-        var str = document.location.search;
-        var key = str.split("?");
-        var key1 = key[1].split("=");
-
+        var urlParams = $location.search()
+        console.log(urlParams);
         $scope.loadmoredeals = function () {
             $scope.loadMoreLimit = $scope.loadMoreLimit + 5;
         }
-
 
         $scope.hotelData = [];
 
@@ -159,7 +152,7 @@ var app = angular.module('stay', ['angular.filter'])
 
             if (!cb) $scope.hotel.page = 1;
 
-            let searchURL = api_url + '/api/v1/hotel/b2b' + document.location.search
+            let searchURL = api_url + '/api/v1/hotel/search' + document.location.search
 
 
             Object.keys($scope.hotel).forEach(function (param) {
@@ -169,13 +162,15 @@ var app = angular.module('stay', ['angular.filter'])
 
             $http({
                 method: 'GET',
-                url: searchURL
+                url: api_url + '/api/v1/hotel/list/b2b',
+                params: urlParams
             }).then(function (res) {
 
                 if (cb) {
                     cb(res);
                 } else {
                     $scope.hotelData = res.data.result.hotel;
+                    console.log($scope.hotelData);
                 }
             })
         }
@@ -237,7 +232,7 @@ var app = angular.module('stay', ['angular.filter'])
 
         $http({
             method: 'GET',
-            url: api_url + '/api/v1/hotel/b2b'
+            url: api_url + '/api/v1/hotel/list/b2b'
         }).then(function successCallback(response) {
             $scope.hotels = response.data.result.hotel;
             for (var j = 0; j < $scope.hotels.length; j++) {

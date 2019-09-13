@@ -34,7 +34,6 @@ app.json_encoder = MyJSONEncoder
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
 def hotel_api():
     if request.method == 'GET':
-        print(type, "bgrgrbgfvnfvjvgfjbvhfkjkgr")
         args = request.args.to_dict()
         slug = request.args.get('slug')
         args.pop('slug', None)
@@ -67,7 +66,7 @@ def hotel_api():
                 price = int(price / total_days)
                 deal.price = price
                 hotel.deal_id = deal
-        hotel = q.filter_by(**args).first()
+        hotel = q.first()
         result = HotelSchema(many=False).dump(hotel)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -522,18 +521,24 @@ def deal_api():
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
         args.pop('price_end', None)
+        start_date = request.args.get('start_date', None)
+        end_date = request.args.get('end_date', None)
+        args.pop('start_date', None)
+        args.pop('end_date', None)
         order_by = request.args.get('order_by', None)
         args.pop('order_by', None)
         room_id = request.args.get('room_id', None)
         args.pop('room_id', None)
         hotel_id = request.args.get('hotel_id', None)
         args.pop('hotel_id', None)
+        partner_id = request.args.get('partner_id', None)
+        args.pop('partner_id', None)
         page = request.args.get('page', 1)
         per_page = request.args.get('per_page', 10)
         args.pop('page', None)
         args.pop('per_page', None)
         room_list = []
-        q_deal = db.session.query(Deal)
+        q_deal = db.session.query(Deal).outerjoin(PriceCalendar)
         if room_id:
             q_deal = q_deal.filter(Deal.room_id == room_id)
             b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).first()
@@ -546,11 +551,23 @@ def deal_api():
                 q = Deal.query.filter(Deal.room_id == room_id).order_by(getattr(Deal, "base_price").asc()).first()
                 if q:
                     q.b2c_selected_deal = True
+        if partner_id:
+            q_deal = q_deal.filter(Deal.partner_id == partner_id)
         if hotel_id:
             rooms = Room.query.filter(Room.hotel_id == hotel_id)
             for room_obj in rooms:
                 room_list.append(room_obj.id)
             q_deal = q_deal.filter(Deal.room_id.in_(room_list))
+
+        if start_date and end_date:
+            # deal_for_dates = []
+            start_date = datetime.datetime.fromtimestamp(int(start_date)).date()
+            end_date = datetime.datetime.fromtimestamp(int(end_date)).date()
+            for deal in q_deal:
+                deal_for_dates = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
+                                                                    PriceCalendar.date >= start_date,
+                                                                    PriceCalendar.date < end_date).all()
+                deal.price_calendar = deal_for_dates
         if price_start and price_end:
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if order_by:
@@ -560,7 +577,6 @@ def deal_api():
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         deal = request.json
-        print("deal = ", deal)
         price_calendar = deal.get("price_calendar", [])
         deal.pop('price_calendar', None)
         room_id = deal.get("room_id", None)
@@ -655,17 +671,17 @@ def booking_api():
         return jsonify({'result': {'booking': result.data}, 'message': "Success", 'error': False})
 
 
-@app.route('/api/v1/booking/<string:booking_no>', methods=['PUT', 'DELETE'])
-def booking_id(booking_no):
+@app.route('/api/v1/booking/<int:id>', methods=['PUT', 'DELETE'])
+def booking_id(id):
     if request.method == 'PUT':
-        put = Booking.query.filter_by(booking_no=booking_no).update(request.json)
+        put = Booking.query.filter_by(id=id).update(request.json)
         if put:
             Booking.update_db()
-            s = Booking.query.filter_by(booking_no=booking_no).first()
+            s = Booking.query.filter_by(id=id).first()
             result = BookingSchema(many=False).dump(s)
             return jsonify({'result': result.data, "status": "Success", 'error': False})
     else:
-        bookings = Booking.query.filter_by(booking_no=booking_no).first()
+        bookings = Booking.query.filter_by(id=id).first()
         if not bookings:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Booking.delete_db(bookings)
