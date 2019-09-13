@@ -9,7 +9,7 @@ from slugify import slugify
 from flask import jsonify, request
 from stay_app.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema,\
     RoomSchema, HotelCollectionSchema, CollectionProductSchema, BookingSchema, PriceCalendarSchema, HotelTerminalSchema,\
-    CartDealSchema, CartSchema, HotelB2BListSchema
+    CartItemSchema, CartSchema, HotelB2BListSchema
 import datetime
 import requests
 import time
@@ -763,12 +763,12 @@ def cart_api():
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
         data = CartDeal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = CartDealSchema(many=True).dump(data)
+        result = CartItemSchema(many=True).dump(data)
         return jsonify({'result': {'cart_deal': result.data}, 'message': "Success", 'error': False})
     else:
         cart_deal_post = CartDeal(**request.json)
         cart_deal_post.save()
-        result = CartDealSchema().dump(cart_deal_post)
+        result = CartItemSchema().dump(cart_deal_post)
         return jsonify({'result': {'cart_deal': result.data}, 'message': "Success", 'error': False})
 
 
@@ -779,7 +779,7 @@ def cart_deal_id(id):
         if put:
             CartDeal.update_db()
             s = CartDeal.query.filter_by(id=id).first()
-            result = CartDealSchema(many=False).dump(s)
+            result = CartItemSchema(many=False).dump(s)
             return jsonify({'result': result.data, "status": "Success", 'error': False})
     else:
         data = CartDeal.query.filter_by(id=id).first()
