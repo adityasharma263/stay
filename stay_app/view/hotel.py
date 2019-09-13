@@ -601,6 +601,8 @@ def deal_api():
         deal_post.save()
         for price in price_calendar:
             price["deal_id"] = deal_post.id
+            price['date'] = datetime.datetime.fromtimestamp(
+                int(price['date'])).strftime('%Y-%m-%d %H:%M:%S')
             price_post = PriceCalendar(**price)
             deal_post.price_calendar.append(price_post)
             price_post.save()
