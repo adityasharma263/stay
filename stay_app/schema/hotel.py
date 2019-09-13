@@ -139,6 +139,14 @@ class CartDealSchema(ma.ModelSchema):
 
 class CartItemSchema(ma.ModelSchema):
     deal = ma.Nested(CartDealSchema, many=False)
+    ci_date = ma.Method('ci_date')
+    co_date = ma.Method('co_date')
+
+    def ci_date(self, obj):
+        return safe_execute(None, ValueError, obj.ci_date)
+
+    def co_date(self, obj):
+        return safe_execute(None, ValueError, obj.co_date)
 
     class Meta:
         model = CartDeal
