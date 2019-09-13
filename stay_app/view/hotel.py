@@ -755,7 +755,7 @@ def cart_id(id):
 
 
 @app.route('/api/v1/cart/deal', methods=['GET', 'POST'])
-def cart_api():
+def cart_deal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         args.pop('page', None)
@@ -766,6 +766,10 @@ def cart_api():
         result = CartItemSchema(many=True).dump(data)
         return jsonify({'result': {'cart_deal': result.data}, 'message': "Success", 'error': False})
     else:
+        request.json['ci_date'] = datetime.datetime.fromtimestamp(
+            int(request.json['ci_date'])).strftime('%Y-%m-%d %H:%M:%S')
+        request.json['co_date'] = datetime.datetime.fromtimestamp(
+            int(request.json['co_date'])).strftime('%Y-%m-%d %H:%M:%S')
         cart_deal_post = CartDeal(**request.json)
         cart_deal_post.save()
         result = CartItemSchema().dump(cart_deal_post)
