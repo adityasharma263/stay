@@ -139,13 +139,13 @@ class CartDealSchema(ma.ModelSchema):
 
 class CartItemSchema(ma.ModelSchema):
     deal = ma.Nested(CartDealSchema, many=False)
-    ci_date = ma.Method('ci_date')
-    co_date = ma.Method('co_date')
+    ci_date = ma.Method('ci_date_epoch')
+    co_date = ma.Method('co_date_epoch')
 
-    def ci_date(self, obj):
+    def ci_date_epoch(self, obj):
         return safe_execute(None, ValueError, obj.ci_date)
 
-    def co_date(self, obj):
+    def co_date_epoch(self, obj):
         return safe_execute(None, ValueError, obj.co_date)
 
     class Meta:
