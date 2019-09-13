@@ -243,7 +243,17 @@ var app = angular.module('stay', ['angular.filter'])
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-        })
+        });
+
+
+        $scope.addToCart = function(roomDetails) {
+            
+        };
+
+
+
+
+
 
 
     }])
