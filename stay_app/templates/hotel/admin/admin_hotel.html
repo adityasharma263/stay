@@ -453,13 +453,13 @@
 
                             <hr>
 
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="col-sm-6 col-md-5">
                                     <button class="button btn-success btn-medium sky-blue1 uppercase">Add Room
                                         +</button>
                                 </div>
 
-                            </div>
+                            </div> -->
                         </form>
                     </div>
 
@@ -476,6 +476,10 @@
 
                             <div ng-repeat="roomDetails in roomDetailsArray">
                                 <h3>Room #[[$index+1]]</h3>
+
+                                <span class="pull-right bg-danger" style="padding: 7px;font-weight: bolder;"
+                            ng-if="roomDetailsArray.length > 1" ng-click="roomDetailsArray.splice($index, 1);"
+                            role="button">&times;</span>
 
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="default">Room Type:</label>
@@ -516,7 +520,7 @@
                                     <div class="radioqwe" ng-repeat="(key, value) in mealPlanEnum" style="margin-left: 215px;">
 
                                         <label for="mealplan-[[key]]" class="">
-                                            <input id="mealplan-[[key]]" class="" type="radio" name="MEAL_PLAN"
+                                            <input id="mealplan-[[key]]" class="" type="radio" name="MEAL_PLAN-[[$index]]"
                                                 value="[[key]]" ng-model="roomDetails.meal_plan" />[[value]]
                                         </label>
                                     </div>
@@ -542,7 +546,7 @@
 
 
 
-                                        <div class="radio" ng-repeat="(key, value) in bedTypeEnum"
+                                        <div class="" ng-repeat="(key, value) in bedTypeEnum"
                                             style="margin-left:100px;">
                                             <label>
                                                 <input id="bed_type1" type="radio" name="bed_type" value="[[key]]"
@@ -584,6 +588,7 @@
 
 
     </div>
+    <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
     </section>
     <footer id="footer" class="style5">
 

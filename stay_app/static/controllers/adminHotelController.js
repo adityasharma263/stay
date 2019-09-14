@@ -1,4 +1,5 @@
-app.controller('adminHotelController', ["$scope", "$http", function ($scope, $http) {
+app.requires.push('toaster');
+app.controller('adminHotelController', function ($scope, $http, toaster) {
     $scope.hotel = {}; // main hotel model
     $scope.hotelImg = []; //for all images array
     $scope.images = {}; //object of image
@@ -106,6 +107,8 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
   
         $http.post(api_base_url+"/hotel", $scope.hotel)
         .then(function(response){
+
+            toaster.pop('success', "Hotel Added Successfull!!");
 
         })
         .catch(function(err){
@@ -607,4 +610,4 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
         // sendPostHotel('/api/v1/hotel', $scope.hotel);
 
     };
-}]);
+});
