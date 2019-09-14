@@ -47,7 +47,7 @@ var app = angular.module('stay', ['angular.filter'])
                         return '';
                     }
                 }).join('&');
-        }
+        };
 
 
         $scope.getHotel = function () {

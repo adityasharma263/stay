@@ -85,6 +85,8 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
         }];
 
 
+        $http.get("")
+
 
     $scope.addMoreCustomer = function () {
         $scope.customerDetails.push({
