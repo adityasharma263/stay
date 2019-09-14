@@ -121,7 +121,7 @@
 
             <section id="content">
                 <div class="container">
-                    
+
 
                     <!-- Create Hotel  -->
 
@@ -132,41 +132,41 @@
                                     <!-- <button class="button btn-defalut btn-medium sky-blue1">
                                         <font color="white"><a href="/admin/update"> Update Hotel</a></font>
                                     </button> -->
-                                    
-                                    <br/><br/>
+
+                                    <br /><br />
                                     <h2>Hotel Details</h2>
                                 </center>
-                                <hr/>
+                                <hr />
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 col-md-5" for="name">
                                         <label>Hotel Name</label>
                                         <input type="text" class="input-text full-width" id="name" ng-model="hotel.name"
-                                            type="text" required/>
+                                            type="text" required />
                                     </div>
                                     <div class="col-sm-6 col-md-5" for="city">
                                         <label>City Name</label>
                                         <input type="text" class="input-text full-width" id="name" ng-model="hotel.city"
-                                            type="text" required/>
+                                            type="text" required />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 col-md-5" for="address">
                                         <label>Address</label>
                                         <input type="text" class="input-text full-width" ng-model="hotel.address"
-                                            type="textarea" required/>
+                                            type="textarea" required />
                                     </div>
                                     <div class="col-sm-6 col-md-5" for="phone no">
                                         <label>Phone Number</label>
                                         <input type="text" class="input-text full-width" ng-model="hotel.phone"
-                                            type="number" required/>
+                                            type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 col-md-5" for="name">
                                         <label>Description</label>
                                         <textarea rows="4" type="text" class="input-text full-width" id="name"
-                                            ng-model="hotel.desc" type="textarea" required/></textarea>
+                                            ng-model="hotel.desc" type="textarea" required /></textarea>
                                     </div>
                                     <div class="col-sm-6 col-md-5" for="city">
                                         <label>Category</label>
@@ -209,12 +209,12 @@
                                     <div class="col-sm-6 col-md-5">
                                         <label>Latitude</label>
                                         <input type="text" class="input-text full-width" id="name"
-                                            ng-model="hotel.longitude" step="any" type="number" required/>
+                                            ng-model="hotel.longitude" step="any" type="number" required />
                                     </div>
                                     <div class="col-sm-6 col-md-5">
                                         <label>Longitude</label>
                                         <input type="text" class="input-text full-width" id="name"
-                                            ng-model="hotel.latitude" type="number" step="any" required/>
+                                            ng-model="hotel.latitude" type="number" step="any" required />
                                     </div>
 
                                 </div>
@@ -475,11 +475,12 @@
                             <br>
 
                             <div ng-repeat="roomDetails in roomDetailsArray">
+                                <span class="pull-right bg-danger" style="padding: 7px;font-weight: bolder;"
+                                    ng-if="roomDetailsArray.length > 1" ng-click="roomDetailsArray.splice($index, 1);"
+                                    role="button">&times;</span>
                                 <h3>Room #[[$index+1]]</h3>
 
-                                <span class="pull-right bg-danger" style="padding: 7px;font-weight: bolder;"
-                            ng-if="roomDetailsArray.length > 1" ng-click="roomDetailsArray.splice($index, 1);"
-                            role="button">&times;</span>
+
 
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="default">Room Type:</label>
@@ -493,7 +494,7 @@
                                     <label class="control-label col-sm-2" for="image">Room Image Url: </label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="name" type="text"
-                                            ng-model="roomDetails.image_url" required/>
+                                            ng-model="roomDetails.image_url" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -501,7 +502,7 @@
                                     </label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="total_members"
-                                            ng-model="roomDetails.max_no_of_guest" type="number" required/>
+                                            ng-model="roomDetails.max_no_of_guest" type="number" required />
                                     </div>
                                 </div>
 
@@ -509,19 +510,21 @@
                                     <label class="control-label col-sm-2" for="balcony">Balcony:
                                     </label>
                                     <div class="col-sm-10">
-                                        <input class="" id="balcony" ng-model="roomDetails.facilities.balcony" ng-true-value="true"
-                                            ng-false-value="false" type="checkbox" required/>
+                                        <input class="" id="balcony" ng-model="roomDetails.facilities.balcony"
+                                            ng-true-value="true" ng-false-value="false" type="checkbox" required />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="total_members">Meal Plan:
                                     </label>
-                                    <div class="radioqwe" ng-repeat="(key, value) in mealPlanEnum" style="margin-left: 215px;">
+                                    <div class="radioqwe" ng-repeat="(key, value) in mealPlanEnum"
+                                        style="margin-left: 215px;">
 
                                         <label for="mealplan-[[key]]" class="">
-                                            <input id="mealplan-[[key]]" class="" type="radio" name="MEAL_PLAN-[[$index]]"
-                                                value="[[key]]" ng-model="roomDetails.meal_plan" />[[value]]
+                                            <input id="mealplan-[[key]]" class="" type="radio"
+                                                name="MEAL_PLAN-[[$index]]" value="[[key]]"
+                                                ng-model="roomDetails.meal_plan" />[[value]]
                                         </label>
                                     </div>
                                 </div>
@@ -536,7 +539,7 @@
                                         </label>
                                         <div class="col-sm-6">
                                             <input class="form-control" id="name"
-                                                ng-model="roomDetails.facilities.no_of_bed" type="number" required/>
+                                                ng-model="roomDetails.facilities.no_of_bed" type="number" required />
                                         </div>
                                     </div>
 
@@ -567,7 +570,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <hr style="border-color: #54545429;"/>
+                                <hr style="border-color: #54545429;" />
                             </div>
                         </div>
                     </div>
@@ -609,10 +612,10 @@
 
 
 
-    
 
 
-  
+
+
     <script type="text/javascript" src="/files/jquery-1.11.1.min.js.download"></script>
     <script type="text/javascript" src="/files/jquery.noconflict.js.download"></script>
     <script type="text/javascript" src="/files/modernizr.2.7.1.min.js.download"></script>
@@ -620,7 +623,7 @@
     <script type="text/javascript" src="/files/jquery.placeholder.js.download"></script>
     <script type="text/javascript" src="/files/jquery-ui.1.10.4.min.js.download"></script>
 
-   
+
     <script type="text/javascript" src="/files/bootstrap.js.download"></script>
 
     <script type="text/javascript" src="/files/jquery.stellar.min.js.download"></script>
