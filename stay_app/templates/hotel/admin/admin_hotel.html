@@ -552,7 +552,7 @@
                                         <div class="" ng-repeat="(key, value) in bedTypeEnum"
                                             style="margin-left:100px;">
                                             <label>
-                                                <input id="bed_type1" type="radio" name="bed_type" value="[[key]]"
+                                                <input id="bed_type1" type="radio" name="bed_type-[[$parent.$index]]" value="[[key]]"
                                                     ng-model="roomDetails.facilities.bed_type" />[[value]]
                                             </label>
                                         </div>
