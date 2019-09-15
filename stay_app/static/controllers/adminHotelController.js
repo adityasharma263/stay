@@ -112,7 +112,7 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
 
         })
         .catch(function(err){
-
+            console.log(err);
             toaster.pop('danger', "Failed to add hotel!");
         });
     };
