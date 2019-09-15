@@ -1,7 +1,7 @@
 // add dependency module DYNAMICALLY
 app.requires.push('ui.bootstrap');
 app.requires.push('toaster');
-app.controller("adminHotelDealController", function ($scope, $http, toaster) {
+app.controller("adminHotelDealController", function ($scope, $http, toaster, $q) {
 
     $scope.showLoader = true;
 
@@ -34,13 +34,13 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
 
     };
 
+
     $scope.facilities = {
         "ac": null,
         "bathroom_cosmetics": null,
         "bathroom_nightie": null,
         "bathroom_towels": null,
         "bathroom_with_shower": false,
-        "bed_type": null,
         "desk": null,
         "electric_kettle": null,
         "fan": null,
@@ -52,7 +52,6 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
         "ironing_facility": null,
         "jacuzzi": null,
         "morning_newspaper": null,
-        "no_of_bed": null,
         "phone": null,
         "room_safe": null,
         "room_seating_area": null,
@@ -70,8 +69,7 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
             image_url : "",
             max_no_of_guest: "",
             meal_plan : "",
-            facilities : {},
-            balcony : false
+            facilities : {}
 
           }
       ];
@@ -97,7 +95,7 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
 
     console.log("hotelDetails = ", hotelDetails.hotel);
 
-    $scope.hotelDetails = hotelDetails.hotel[0];
+    // $scope.hotelDetails = hotelDetails.hotel[0];
 
 
     $scope.onHotelSelect = function (item) {
@@ -207,6 +205,8 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
             })
             .catch(function (err) {
                 console.log(err);
+
+                toaster.pop('danger', "Failed to Update!");
             });
     };
 
@@ -230,9 +230,12 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
         $http.put("/api/v1/room/" + roomDeatils.id, roomUpdatedData)
             .then(function (response) {
                 console.log(response.data);
+                toaster.pop("success", "Room Updated!!");
             }).catch(function (err) {
+                toaster.pop("error", "Room Failed to Update!!");
+
                 console.log(err);
-            })
+            });
 
 
     };
@@ -277,8 +280,12 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
         $http.put("/api/v1/hotel/" + hotelDetail.id, hotelData)
             .then(function (response) {
                 console.log(response.data);
+
+                toaster.pop("success", "Hotel Updated!");
+
             }).catch(function (err) {
                 console.log(err);
+                toaster.pop("success", "Failed to Update!");
             });
     };
 
@@ -289,13 +296,24 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
 
         var amenitiesData = JSON.parse(JSON.stringify(amenityData));
 
-        delete amenitiesData.id;
+        var request;
 
+        if(amenitiesData.id){
+            delete amenitiesData.id;
 
-        $http.put("/api/v1/amenity/" + amenityData.id, amenitiesData)
-            .then(function (response) {
+            request = $http.put("/api/v1/amenity/" + amenityData.id, amenitiesData);
+
+        }else{
+
+            amenitiesData.hotel_id = $scope.hotelDetails.id;
+            request = $http.post("/api/v1/amenity/", amenitiesData);
+        }
+        request.then(function (response) {
                 console.log(response.data);
+                toaster.pop("success", "Amenity Updated!");
             }).catch(function (err) {
+                toaster.pop("error", "Failed to Update!");
+
                 console.log(err);
             });
 
@@ -305,19 +323,39 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
 
 
 
-    $scope.updateFacility = function (facilityData) {
+    $scope.updateFacility = function (facilityData, roomDeatils) {
 
         console.log("facilityData = ", facilityData);
 
         var facilitiesData = JSON.parse(JSON.stringify(facilityData));
 
-        delete facilitiesData.id;
+        var request;
+
+        if(facilitiesData.id){
+            delete facilitiesData.id;
+            request = $http.put("/api/v1/facility/" + facilityData.id, facilitiesData);
+            
+        }else{
+
+            facilitiesData.room_id = roomDeatils.id;
+            request = $http.post("/api/v1/facility/", facilitiesData);
+
+        }
 
 
-        $http.put("/api/v1/facility/" + facilityData.id, facilitiesData)
+
+        
+
+
+        request
             .then(function (response) {
                 console.log(response.data);
+
+                toaster.pop("success", "Facility updated!");
+
             }).catch(function (err) {
+                toaster.pop("error", "Facility failed to update!");
+
                 console.log(err);
             });
     };
@@ -335,8 +373,10 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
         $http.put("/api/v1/image/" + imageData.id, imageObj)
             .then(function (response) {
                 console.log(response.data);
+                toaster.pop("success", "Image Updated");
             }).catch(function (err) {
                 console.log(err);
+                toaster.pop("error", "Failed to Update!");
             });
     };
 
@@ -366,6 +406,87 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
         
         
     };
+
+    $scope.addMoreRoom = function(){
+        $scope.roomDetailsArray.push(
+            {
+                room_type : "",
+                image_url : "",
+                max_no_of_guest: "",
+                meal_plan : "",
+                facilities : {},
+              }
+        );
+    };
+
+
+
+    $scope.addNewRoomsToHotel = function() {
+    
+
+        var roomDetails = JSON.parse(JSON.stringify($scope.roomDetailsArray));
+
+        var roomRequestList = [];
+
+
+        for (let i = 0; i < roomDetails.length; i++) {
+            const singleRoomData = roomDetails[i];
+
+            singleRoomData.hotel_id = $scope.hotelDetails.id;
+            singleRoomData.deals = [];
+
+            roomRequestList.push($http.post("/api/v1/room", singleRoomData));
+            
+        }
+
+        $q.all(roomRequestList)
+        .then(function(response) {
+
+            console.log(response);
+            toaster.pop('success', "Room(s) Added!!");
+        })
+        .catch(function(err) {
+            console.log(err);
+            toaster.pop('danger', "Failed To Add!!");
+        })
+
+        ;
+
+
+
+
+
+    };
+
+
+    $scope.addImg = function() {
+
+
+        var imgData = {
+
+            image_url : $scope.hotelNewImage,
+            hotel_id  : $scope.hotelDetails.id
+
+        };
+
+        $http.post("/api/v1/image", imgData)
+        .then(function(response) {
+            
+            toaster.pop("success", "Image Added");
+            console.log(response.data);
+
+            $scope.hotelDetails.images.push(response.data.result.image);
+
+        })
+        .catch(function(err) {
+            console.log(err);
+
+            toaster.pop("error", "Failed to add Image!");
+        });
+
+        
+    };
+
 
 
     $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
