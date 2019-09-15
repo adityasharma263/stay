@@ -20,6 +20,10 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
     $scope.hotelData = {}; // hotel data for update 
     $scope.amenitiesData = {}; // hotel amenities for update
 
+
+    // show initial loading on the loading of the page
+    $scope.showLoader = true;
+
     $scope.mealPlanEnum = {
         CP : "Continental Plan",
         MAP : "Modified American Plan",
@@ -73,7 +77,7 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
             max_no_of_guest: "",
             meal_plan : "",
             facilities : {},
-            balcony : false
+            
 
           }
       ];
@@ -86,7 +90,7 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
                 max_no_of_guest: "",
                 meal_plan : "",
                 facilities : {},
-                balcony : false
+                
     
               }
         );
@@ -608,4 +612,6 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
         // sendPostHotel('/api/v1/hotel', $scope.hotel);
 
     };
+    
+    // $scope.showLoader123 = false;
 });
