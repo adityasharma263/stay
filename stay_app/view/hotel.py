@@ -36,8 +36,8 @@ app.json_encoder = MyJSONEncoder
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        slug = request.args.get('slug')
-        args.pop('slug', None)
+        # slug = request.args.get('slug')
+        # args.pop('slug', None)
         check_in = request.args.get('ci')
         check_out = request.args.get('co')
         if check_out and check_out:
@@ -46,8 +46,9 @@ def hotel_api():
             args.pop('ci', None)
             args.pop('co', None)
         q = db.session.query(Hotel).outerjoin(Room).outerjoin(Deal)
-        if slug:
-            q = q.filter(Hotel.slug == slug)
+        for key in args:
+            if key in Hotel.__dict__:
+                q = q.filter(getattr(Hotel, key) == args[key])
         price_list = []
         total_days = 1
         for hotel in q:
@@ -69,7 +70,7 @@ def hotel_api():
                 price = int(price / total_days)
                 deal.price = price
                 hotel.deal_id = deal
-        hotel = q.filter_by(**args).first()
+        hotel = q.first()
         result = HotelSchema(many=False).dump(hotel)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
