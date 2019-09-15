@@ -613,5 +613,5 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
 
     };
     
-    // $scope.showLoader123 = false;
+    $scope.showLoader = false;
 });
