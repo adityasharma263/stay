@@ -708,6 +708,7 @@ def cart_api():
         data = Cart.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         total_amount = 0
         total_deals = 0
+        hotel = None
         for cart in data:
             for deal in cart.cart_deals:
                 if deal:
@@ -721,7 +722,8 @@ def cart_api():
                     hotel = q.filter(Deal.id == deal.deal_id).first()
             cart.total_booking_amount = total_amount
             cart.total_no_of_deals = total_deals
-            cart.hotel_id = hotel.id
+            if hotel:
+                cart.hotel_id = hotel.id
         result = CartSchema(many=True).dump(data)
         return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
     else:

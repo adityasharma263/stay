@@ -3,6 +3,8 @@ app.requires.push('ui.bootstrap');
 app.requires.push('toaster');
 app.controller("adminHotelDealController", function ($scope, $http, toaster) {
 
+    $scope.showLoader = true;
+
     $scope.partnerType = {
         DIRECT: 1,
         SUPPLIER: 2,
@@ -62,6 +64,18 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
         "wifi": null
     };
 
+    $scope.roomDetailsArray =[
+        {
+            room_type : "",
+            image_url : "",
+            max_no_of_guest: "",
+            meal_plan : "",
+            facilities : {},
+            balcony : false
+
+          }
+      ];
+
     $scope.partners = {};
     $scope.dealsData = {};
 
@@ -87,14 +101,18 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
 
 
     $scope.onHotelSelect = function (item) {
+        $scope.showLoader = true;
         console.log(item);
         $http.get(API_BASE_URL + "/api/v1/hotel", { params: { slug: item.slug } })
             .then(function (response) {
                 console.log(response.data.result);
                 $scope.hotelDetails = response.data.result.hotel;
+                $scope.showLoader = false;
             })
             .catch(function (err) {
                 console.log(err);
+                toaster.pop('danger', "Failed to fetch hotel!");
+                $scope.showLoader = false;
             });
     };
 
@@ -193,7 +211,7 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
     };
 
 
-    $scope.updateRoom = function (hotelData) {
+    $scope.updateRoom = function (roomDeatils) {
 
         console.log("roomDeatils = ", roomDeatils);
 
@@ -217,6 +235,26 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
             })
 
 
+    };
+
+
+    $scope.deleteRoom = function(roomDetails) {
+
+        $scope.showLoader = true;
+      
+        $http.delete("/api/v1/room/" + roomDetails.id)
+        .then(function(response) {
+            console.log(response.data);
+            toaster.pop('success', "Room Deleted!!");
+            $scope.showLoader = false;
+        })
+        .catch(function(err) {
+            console.log(err);
+            toaster.pop('danger', "Failed to delete room!!");
+            $scope.showLoader = false;
+        })
+        ;
+        
     };
 
 
@@ -337,5 +375,5 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster) {
     });
 
 
-
+    $scope.showLoader = false;
 });

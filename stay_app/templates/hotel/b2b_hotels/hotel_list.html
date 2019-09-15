@@ -102,7 +102,7 @@
                                     <div id="price-range" class="form-group">
                                         <div class="ng-cloak">
                                             <label>Max Price:</label>
-                                            <input type="range" min="[[min]]" max="[[max]]" value="[[max]]"
+                                            <input type="range" min="0" max="2000" value="2000"
                                                 ng-model="hotel.price_end">
                                             <p>Value: <span>[[hotel.end_price]]</span></p>
 
@@ -114,6 +114,28 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="panel style1 arrow-right">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#amenities-filter" class="collapsed">Amenities</a>
+                                </h4>
+                                <div id="amenities-filter" class="panel-collapse collapse filters-container"
+                                    style="height: 0px;">
+                                    <div class="panel-content">
+    
+                                        <div id="amenities-range" class="form-group">
+                                            <div class="ng-cloak">
+                                               
+                                                
+    
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <button class="btn-medium icon-check uppercase full-width"
+                                            ng-click="">search again</button>
+                                    </div>
+                                </div>
+                            </div>
 
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">

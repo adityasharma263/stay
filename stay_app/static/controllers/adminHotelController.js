@@ -77,10 +77,6 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
 
           }
       ];
-    
-
-    var api_url = 'http://localhost:8000';
-    var api_base_url = 'http://localhost:8000/api/v1';
 
     $scope.addMoreRoom = function(){
         $scope.roomDetailsArray.push(
@@ -105,13 +101,15 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
 
         console.log("scope.hotel = ",$scope.hotel);
   
-        $http.post(api_base_url+"/hotel", $scope.hotel)
+        $http.post("/api/v1/hotel", $scope.hotel)
         .then(function(response){
 
             toaster.pop('success', "Hotel Added Successfull!!");
 
         })
         .catch(function(err){
+
+            toaster.pop('danger', "Failed to add hotel!");
         });
     };
 

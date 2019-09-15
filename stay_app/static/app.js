@@ -125,6 +125,11 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.min = 0;
         $scope.max = 200000;
 
+
+        $scope.amenities = {
+            
+        }
+
 //       get array for the particular num  used to show amenities dynamically
          $scope.getNumber = function(num) {
          return new Array(num);
@@ -267,6 +272,7 @@ var app = angular.module('stay', ['angular.filter'])
             })
             .catch(function(err) {
                 console.log(err);
+                dealDetails.noOfDeal = 0;
             });
         };
 
