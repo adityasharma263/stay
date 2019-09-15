@@ -45,7 +45,9 @@ def hotel_api():
             check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
             args.pop('ci', None)
             args.pop('co', None)
-        q = db.session.query(Hotel).join(Room).join(Deal).filter(Hotel.slug == slug)
+        q = db.session.query(Hotel).outerjoin(Room).outerjoin(Deal)
+        if slug:
+            q = q.filter(Hotel.slug == slug)
         price_list = []
         total_days = 1
         for hotel in q:
@@ -67,7 +69,7 @@ def hotel_api():
                 price = int(price / total_days)
                 deal.price = price
                 hotel.deal_id = deal
-        hotel = q.first()
+        hotel = q.filter_by(**args).first()
         result = HotelSchema(many=False).dump(hotel)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
