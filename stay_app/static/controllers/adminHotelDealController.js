@@ -306,7 +306,7 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster, $q)
         }else{
 
             amenitiesData.hotel_id = $scope.hotelDetails.id;
-            request = $http.post("/api/v1/amenity/", amenitiesData);
+            request = $http.post("/api/v1/amenity", amenitiesData);
         }
         request.then(function (response) {
                 console.log(response.data);
@@ -338,7 +338,7 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster, $q)
         }else{
 
             facilitiesData.room_id = roomDeatils.id;
-            request = $http.post("/api/v1/facility/", facilitiesData);
+            request = $http.post("/api/v1/facility", facilitiesData);
 
         }
 
