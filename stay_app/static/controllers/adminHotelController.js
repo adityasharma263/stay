@@ -107,6 +107,21 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
         .then(function(response){
 
             toaster.pop('success', "Hotel Added Successfull!!");
+            $scope.hotel = {};
+            $scope.hotelImg = [];
+            $scope.roomDetailsArray =[
+                {
+                    room_type : "",
+                    image_url : "",
+                    max_no_of_guest: "",
+                    meal_plan : "",
+                    facilities : {},
+                    
+        
+                  }
+              ];
+
+
 
         })
         .catch(function(err){
@@ -610,6 +625,8 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
         // sendPostHotel('/api/v1/hotel', $scope.hotel);
 
     };
+
+
     
     $scope.showLoader = false;
 });

@@ -159,27 +159,29 @@
                     <div class="page-title pull-left">
                         <h2 class="entry-title">Administrator | Data Management</h2>
                     </div>
-                    <div style="margin-top: 10px;">
-
-                        <form>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-6 form-group">
-                                    <input typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel"
-                                        ng-change="searchHotelOnChange($event)"
-                                        uib-typeahead="state.name for state in searchResult" type="text"
-                                        class="input-text full-width dropdown-input"
-                                        placeholder="Where Do You Wish To Travel ? .... ">
-                                </div>
-                                <span ng-init="searchHotel = '{{hotel_data['hotel']['name']}}'"></span>
-                                <div class="col-sm-2 form-group">
-                                    <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
+                    
 
                 </div>
+            </div>
+
+            <div style="margin-top: 10px;" class="text-center ">
+
+                <form>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-6 form-group col-md-offset-1">
+                            <input typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel"
+                                ng-change="searchHotelOnChange($event)"
+                                uib-typeahead="state.name for state in searchResult" type="text"
+                                class="input-text full-width dropdown-input"
+                                placeholder="Where Do You Wish To Travel ? .... ">
+                        </div>
+                        <span ng-init="searchHotel = '{{hotel_data['hotel']['name']}}'"></span>
+                        <div class="col-sm-2 form-group">
+                            <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
 
         </header>
@@ -258,7 +260,8 @@
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
                                                             <a data-toggle="collapse" data-parent="#accordion"
-                                                                href="#collapse2">Click to see Images ([[hotelDetails.images.length]])</a>
+                                                                href="#collapse2">Click to see Images
+                                                                ([[hotelDetails.images.length]])</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapse2" class="panel-collapse collapse">
@@ -584,6 +587,10 @@
                                     <div class="col-sm-6 col-md-5">
                                         <button type="submit" class="button btn-success btn-medium sky-blue1 uppercase"
                                             ng-click="updateHotel(hotelDetails)">Update Hotel</button>
+
+                                        <button type="submit" class="button btn-success btn-medium sky-blue1 uppercase"
+                                            ng-click="deleteHotel(hotelDetails)">Delete Hotel</button>
+
                                     </div>
 
                                 </div>
@@ -595,8 +602,8 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse1">Rooms ([[hotelDetails.rooms.length]])</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Rooms
+                                                ([[hotelDetails.rooms.length]])</a>
                                         </h4>
                                     </div>
                                     <div id="collapse1" class="panel-collapse collapse">
@@ -610,7 +617,7 @@
                                                     <label class="control-label col-sm-2" for="default">Room
                                                         Type:</label>
                                                     <div class="col-sm-10">
-                                                        <input id="room_type4" class="form-control" type="text"
+                                                        <input class="form-control" type="text"
                                                             ng-model="roomDetails.room_type" required />
                                                     </div>
                                                 </div>
@@ -733,7 +740,8 @@
 
                                                 <button class="btn" ng-click="updateRoom(roomDetails)">Update
                                                     Room</button>
-                                                <button class="btn" ng-click="deleteRoom(roomDetails);hotelDetails.rooms.splice($index, 1)">Delete
+                                                <button class="btn"
+                                                    ng-click="deleteRoom(roomDetails);hotelDetails.rooms.splice($index, 1)">Delete
                                                     Room</button>
                                                 <hr style="border-color: #54545429;" />
                                             </div>
@@ -745,7 +753,8 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#addnewroom">Add New Room</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#addnewroom">Add
+                                                New Room</a>
                                         </h4>
                                     </div>
                                     <div id="addnewroom" class="panel-collapse collapse">
@@ -811,7 +820,8 @@
 
                                                         <label for="mealplan-[[key]]" class="">
                                                             <input id="mealplan-[[key]]" class="" type="radio"
-                                                                name="new_room_MEAL_PLAN-[[$parent.$index]]" value="[[key]]"
+                                                                name="new_room_MEAL_PLAN-[[$parent.$index]]"
+                                                                value="[[key]]"
                                                                 ng-model="roomDetails.meal_plan" />[[value]]
                                                         </label>
                                                     </div>
@@ -842,7 +852,8 @@
                                                             style="margin-left:100px;">
                                                             <label>
                                                                 <input id="bed_type1" type="radio"
-                                                                    name="new_room_bed_type-[[$parent.$index]]" value="[[key]]"
+                                                                    name="new_room_bed_type-[[$parent.$index]]"
+                                                                    value="[[key]]"
                                                                     ng-model="roomDetails.facilities.bed_type" />[[value]]
                                                             </label>
                                                         </div>
@@ -867,10 +878,9 @@
                                             <div class="form-group">
                                                 <div class="col-sm-offset-8 col-sm-8">
 
-                                                        <button  class="btn"
-                                                        ng-click="addMoreRoom()">Add more room</button>
+                                                    <button class="btn" ng-click="addMoreRoom()">Add more room</button>
 
-                                                    <button  class="btn btn-success"
+                                                    <button class="btn btn-success"
                                                         ng-click="addNewRoomsToHotel()">Submit</button>
                                                 </div>
                                             </div>

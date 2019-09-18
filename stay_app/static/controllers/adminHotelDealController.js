@@ -290,6 +290,32 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster, $q)
     };
 
 
+    $scope.deleteHotel = function(hotelDetails) {
+
+      if(hotelDetails && hotelDetails.id)
+        $http.delete("/api/v1/hotel/"+hotelDetails.id)
+        .then(function(response) {
+
+            console.log(response.data);
+            toaster.pop("success", "Hotel Deleted!");
+
+            $scope.hotelDetails = null;
+
+
+        })
+        .catch(function(err) {
+            console.log(err);
+        })
+        ;
+        else{
+            console.log(hotelDetails);
+            toaster.pop("error", "Hotel not find!");
+        }
+            
+        
+    };
+
+
     $scope.updateAmenity = function (amenityData) {
 
         console.log("amenityData = ", amenityData);

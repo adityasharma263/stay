@@ -68,14 +68,14 @@
                     <div class="container">
                         <h1 class="logo navbar-brand">
                             <a href="http://www.thetravelsqaure.com" title="The Travel Sqaure">
-                                <img src="images/.png" alt="The Travel Sqaure by Travel Beans">
+                                <img src="images/.png" alt="The Travel Sqaure by Travel Beans"/>
                             </a>
                         </h1>
 
                         <nav id="main-menu" role="navigation">
                             <ul class="menu">
                                 <li class="menu-item-has-children">
-                                    <a href="update-hotel.html">Update Hotel</font></button></a>
+                                    <a href="/admin/hotel/deal">Update Hotels</a>
 
                                 </li>
 
@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-5" for="city">
                                         <label>Category</label>
-                                        <input type="text" class="input-text full-width" id="name"
+                                        <input type="number" placeholder="write category number" class="input-text full-width" id="name"
                                             ng-model="hotel.category" type="number">
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-5">
                                         <button type="button" class="button Sky-blue1 btn-primary btn-medium uppercase"
-                                            ng-click=addImg()>Add More Images</button>
+                                            ng-click="addImg()">Add More Images</button>
                                     </div>
 
                                 </div>
