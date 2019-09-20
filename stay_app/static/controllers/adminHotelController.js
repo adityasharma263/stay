@@ -1,4 +1,5 @@
-app.controller('adminHotelController', ["$scope", "$http", function ($scope, $http) {
+app.requires.push('toaster');
+app.controller('adminHotelController', function ($scope, $http, toaster) {
     $scope.hotel = {}; // main hotel model
     $scope.hotelImg = []; //for all images array
     $scope.images = {}; //object of image
@@ -18,6 +19,10 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
     $scope.UpdateImages = {}; //image data for update
     $scope.hotelData = {}; // hotel data for update 
     $scope.amenitiesData = {}; // hotel amenities for update
+
+
+    // show initial loading on the loading of the page
+    $scope.showLoader = true;
 
     $scope.mealPlanEnum = {
         CP : "Continental Plan",
@@ -72,14 +77,10 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
             max_no_of_guest: "",
             meal_plan : "",
             facilities : {},
-            balcony : false
+            
 
           }
       ];
-    
-
-    var api_url = 'http://localhost:8000';
-    var api_base_url = 'http://localhost:8000/api/v1';
 
     $scope.addMoreRoom = function(){
         $scope.roomDetailsArray.push(
@@ -89,7 +90,7 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
                 max_no_of_guest: "",
                 meal_plan : "",
                 facilities : {},
-                balcony : false
+                
     
               }
         );
@@ -104,11 +105,15 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
 
         console.log("scope.hotel = ",$scope.hotel);
   
-        $http.post(api_base_url+"/hotel", $scope.hotel)
+        $http.post("/api/v1/hotel", $scope.hotel)
         .then(function(response){
+
+            toaster.pop('success', "Hotel Added Successfull!!");
 
         })
         .catch(function(err){
+            console.log(err);
+            toaster.pop('danger', "Failed to add hotel!");
         });
     };
 
@@ -607,4 +612,6 @@ app.controller('adminHotelController', ["$scope", "$http", function ($scope, $ht
         // sendPostHotel('/api/v1/hotel', $scope.hotel);
 
     };
-}]);
+    
+    // $scope.showLoader123 = false;
+});

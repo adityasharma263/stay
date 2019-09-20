@@ -1,15 +1,17 @@
 var app = angular.module('stay', ['angular.filter'])
-    .config(['$interpolateProvider', function ($interpolateProvider, $locationProvider) {
+    .config(['$interpolateProvider',"$locationProvider", function ($interpolateProvider, $locationProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');
-        // $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({
+          enabled: true,
+          requireBase: false
+        });
     }])
 
     .controller('stayController', ["$scope", "$http", "$filter", "$location", function ($scope, $http, $filter, $location) {
         $scope.hotel = {};
         $scope.showSearchResult = false;
         $scope.resp = false;
-        //        default searchkey 
         var searchKey = 'city';
         $scope.hotel.ci = new Date();
         $scope.hotel.co = new Date();
@@ -45,7 +47,7 @@ var app = angular.module('stay', ['angular.filter'])
                         return '';
                     }
                 }).join('&');
-        }
+        };
 
 
         $scope.getHotel = function () {
@@ -102,7 +104,7 @@ var app = angular.module('stay', ['angular.filter'])
         //  }
     }])
 
-    .controller('stayListController', ["$scope", "$window", "$http", function ($scope, $window, $http ) {
+    .controller('stayListController', ["$scope", "$window", "$http","$location", function ($scope, $window, $http, $location) {
         
         $scope.hotelid = {};
         $scope.room = {};
@@ -122,12 +124,12 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.imagesData = {};
         $scope.min = 0;
         $scope.max = 200000;
-        
-        $scope.showBusinessDetail=function(hotel_id){
-            window.open('/business/hotel/'+hotel_id,'_self');
-            console.log("hotel id",hotel_id);
+
+
+        $scope.amenities = {
             
-          }
+        }
+
 //       get array for the particular num  used to show amenities dynamically
          $scope.getNumber = function(num) {
          return new Array(num);
@@ -138,20 +140,11 @@ var app = angular.module('stay', ['angular.filter'])
         var span = document.getElementsByClassName("close")[0];
 
 
-        //________________________________________________________________________//
-
-        
-
-        //________________________________________________________________________//
-
-        var str = document.location.search;
-        var key = str.split("?");
-        var key1 = key[1].split("=");
-
+        var urlParams = $location.search();
+        console.log("urlParams ", urlParams);
         $scope.loadmoredeals = function () {
             $scope.loadMoreLimit = $scope.loadMoreLimit + 5;
-        }
-
+        };
 
         $scope.hotelData = [];
 
@@ -169,13 +162,15 @@ var app = angular.module('stay', ['angular.filter'])
 
             $http({
                 method: 'GET',
-                url: api_url + '/api/v1/hotel/list/b2b'
+                url: api_url + '/api/v1/hotel/list/b2b',
+                params: urlParams
             }).then(function (res) {
 
                 if (cb) {
                     cb(res);
                 } else {
                     $scope.hotelData = res.data.result.hotel;
+                    console.log($scope.hotelData);
                 }
             })
         }
@@ -237,7 +232,7 @@ var app = angular.module('stay', ['angular.filter'])
 
         $http({
             method: 'GET',
-            url: api_url + '/api/v1/hotel/b2b'
+            url: api_url + '/api/v1/hotel/list/b2b'
         }).then(function successCallback(response) {
             $scope.hotels = response.data.result.hotel;
             for (var j = 0; j < $scope.hotels.length; j++) {
@@ -248,7 +243,107 @@ var app = angular.module('stay', ['angular.filter'])
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-        })
+        });
+
+
+        $scope.addToCart = function(dealDetails) {
+            
+            console.log(dealDetails);
+
+            dealDetails.noOfDeal = 1;
+
+            console.log("urlParams.ci = ",urlParams.ci);
+            console.log("urlParams.co = ",urlParams.co);
+
+           var finalCartData =  {
+                "ci_date": urlParams.ci,
+                "co_date": urlParams.co,
+                "deal_id": dealDetails.id,
+                "no_of_deals": dealDetails.noOfDeal
+            };
+
+
+            $http.post("/hotel/cart", finalCartData)
+            .then(function(response) {
+
+                console.log(response.data);
+                dealDetails.cart_id = response.data.result.cart_deal.id;
+
+            })
+            .catch(function(err) {
+                console.log(err);
+                dealDetails.noOfDeal = 0;
+            });
+        };
+
+
+        $scope.addOneToCart= function(dealDetails){
+            dealDetails.noOfDeal =  dealDetails.noOfDeal + 1; 
+
+
+            var finalCartData =  {
+            
+                "no_of_deals": dealDetails.noOfDeal
+            };
+
+            $http.put("/api/v1/cart/deal/"+dealDetails.cart_id, finalCartData)
+            .then(function(response) {
+
+                console.log(response.data);
+               
+
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+
+        };
+
+        $scope.subOneToCart= function(dealDetails){
+            dealDetails.noOfDeal =  dealDetails.noOfDeal - 1;
+
+
+            if(dealDetails.noOfDeal != 0){
+                var finalCartData =  {
+                
+                    "no_of_deals": dealDetails.noOfDeal
+                };
+    
+                console.log(finalCartData);
+
+                $http.put("/api/v1/cart/deal/"+dealDetails.cart_id, finalCartData)
+                .then(function(response) {
+    
+                    console.log(response.data);
+                    // dealDetails.cart_id = response.data.result.cart_deal.id;
+    
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+            }else{
+
+                $http.delete("/api/v1/cart/deal/"+dealDetails.cart_id)
+                .then(function(response) {
+    
+                    console.log(response.data);
+                    // dealDetails.cart_id = response.data.result.cart_deal.id;
+    
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+
+            }
+
+
+
+        };
+
+
+
+
+
 
 
     }])

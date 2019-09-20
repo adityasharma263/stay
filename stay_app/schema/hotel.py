@@ -51,7 +51,7 @@ class DealSchema(ma.ModelSchema):
 
 
 class AmenitySchema(ma.ModelSchema):
-
+    
     class Meta:
         model = Amenity
         exclude = ('updated_at', 'created_at', 'hotel')
@@ -139,6 +139,14 @@ class CartDealSchema(ma.ModelSchema):
 
 class CartItemSchema(ma.ModelSchema):
     deal = ma.Nested(CartDealSchema, many=False)
+    ci_date = ma.Method('ci_date_epoch')
+    co_date = ma.Method('co_date_epoch')
+
+    def ci_date_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.ci_date)
+
+    def co_date_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.co_date)
 
     class Meta:
         model = CartDeal
@@ -155,10 +163,6 @@ class CartSchema(ma.ModelSchema):
 #-------------------------------------------------------Terminal-------------------------------------------
 
 
-
-
-
-
 class RoomTerminalSchema(ma.ModelSchema):
     meal_plan = EnumField(MealPlan, by_value=True)
 
@@ -173,7 +177,7 @@ class HotelTerminalSchema(ma.ModelSchema):
     class Meta:
         model = Hotel
         exclude = ('updated_at', "city", 'created_at', "star", "rating", "phone", "desc", "address",
-                   "images", "slug", "latitude", "amenities", "collection_id", "hotel_collection",
+                   "images", "latitude", "amenities", "collection_id", "hotel_collection",
                    "longitude", "longitude", "country", "category")
 
 

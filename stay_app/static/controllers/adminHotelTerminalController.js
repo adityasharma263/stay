@@ -30,7 +30,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
     $scope.getRoomPriceByID = function (roomID) {
 
         $http.get("/api/v1/deal",
-            { params: { room_id: roomID, b2b_selected_deal: true, "order_by": "base_price" } })
+            { params: { room_id: roomID, "order_by": "base_price" } })
             .then(function (response) {
                 $scope.roomPriceStructureB2B[roomID] = response.data.result.deal;
                 console.log($scope.roomPriceStructureB2B);
@@ -138,6 +138,30 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
                 });
         } else {
+
+            console.log("in the selectedDealType == 0");
+            if (typeof $scope.updateSitePriceValues.selectedPartnerPrice != "object")
+                $scope.updateSitePriceValues.selectedPartnerPrice = JSON.parse($scope.updateSitePriceValues.selectedPartnerPrice);
+
+
+            var dealID = $scope.updateSitePriceValues.selectedPartnerPrice.id;
+            var room_id = $scope.updateSitePriceValues.selectedPartnerPrice.room;
+
+            $http.put(`/api/v1/deal/${dealID}`,
+                {
+                    "b2c_final_price": $scope.updateSitePriceValues.final_price,
+                    "b2b_selected_deal": true,
+                    "room_id": room_id
+                })
+                .then(function (response) {
+                    console.log("response : ", response);
+                    toaster.pop('success', "Deal Updated.");
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    toaster.pop('danger', "Deal Update Failed.");
+
+                });
             
 
         }
@@ -146,7 +170,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
     };
 
     $scope.getSelectedDeal = function (dealsArray) {
-        console.log("dealsArray= ", dealsArray);
+        // console.log("dealsArray= ", dealsArray);
         var selectedDeal = dealsArray.filter(function (deal) {
             return deal.b2b_selected_deal;
         });
@@ -159,5 +183,10 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
             "b2c_final_price": selectedDeal[0].b2c_final_price,
         } : undefined;
     };
+
+
+  
+
+
 
 });

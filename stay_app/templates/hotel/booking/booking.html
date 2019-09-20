@@ -17,9 +17,6 @@
         appearance: none;
         margin: 0;
     }
-
-    
-
 </style>
 
 <script src="/js/checklist-model.js"></script>
@@ -62,16 +59,16 @@
                                                 <div class="icon"><i class="soap-icon-plane-right yellow-color"></i>
                                                 </div>
                                                 <div>
-                                                    <span class="skin-color">Check In</span><br />Wed Nov 13, 2013 7:50
-                                                    Am
+                                                    <span class="skin-color">Check In</span><br />[[cart.ci_date | date
+                                                    : 'EEE MMM d, y h:mm a']]
                                                 </div>
                                             </div>
                                             <div class="landing col-sm-4">
                                                 <div class="icon"><i class="soap-icon-plane-right yellow-color"></i>
                                                 </div>
                                                 <div>
-                                                    <span class="skin-color">Check Out</span><br />Wed Nov 13, 2013 9:20
-                                                    am
+                                                    <span class="skin-color">Check Out</span><br />[[cart.co_date | date
+                                                    : 'EEE MMM d, y h:mm a']]
                                                 </div>
                                             </div>
                                             <div class="total-time col-sm-4">
@@ -100,7 +97,7 @@
                             role="button">&times;</span>
 
                         <form>
-                           
+
                             <div class="form-group row">
                                 <div class="col-sm-6 col-md-5">
                                     <label for="firstName">First Name</label>
@@ -127,7 +124,7 @@
                             </div>
                         </form>
 
-                        <div class="row" ng-if="false">
+                        <div class="row">
 
                             <div class="col-sm-6">
                                 <h4>Rooms</h4>
@@ -138,40 +135,57 @@
                             </div>
                         </div>
 
-                        <div class="row" ng-if="customersSelectedRooms.rooms[$index]"
-                            ng-repeat="rooms in customersSelectedRooms.rooms[$index]">
+                        <div ng-if="customersSelectedRooms[$index][0]">
+                            <div class="row mt-5 " ng-repeat="rooms in customersSelectedRooms[$index]"
+                                ng-init="log(customersSelectedRooms[$index])">
 
 
-                            <div class="col-sm-1 checkbox-container">
-                                <input type="checkbox" checklist-model="customersSelectedRooms.rooms"
-                                    checklist-value="cart" />
+                                <div class="col-sm-3 room-image-container">
+                                    <img class="img-responsive" ng-src="[[rooms.deal.room.image_url]]" alt=""
+                                        srcset="" />
+
+                                </div>
+                                <div class="col-sm-5">
+                                    [[rooms.deal.room.hotel.name]]
+                                    <br />
+                                    [[rooms.deal.room.hotel.city]]
+                                    <br />
+                                    [[rooms.ci_date | date : 'EEE MMM d, y h:mm a']] - [[rooms.co_date | date : 'EEE MMM
+                                    d, y h:mm a']]
+                                    <br />
+                                    No. of Rooms: [[rooms.customersSelectedRoomsQuantity]]
+
+                                </div>
+
+                                <div class="col-sm-">
+                                    <div class="pull-right">
+                                        Amount : [[rooms.customersSelectedRoomsQuantity * rooms.deal.price]]
+                                    </div>
+                                    
+                                </div>
+
                             </div>
-                            <div class="col-sm-3 room-image-container">
-                                <img class="img-responsive" ng-src="[[cart.deal.room.image_url]]" alt="" srcset="">
-
-                            </div>
-                            <div class="col-sm-4">
-                                [[cart.deal.room.hotel.name]]
-                            </div>
-
-
-
-
+                            <!-- <div>Total Amout for this Customer is: <span class="pull-right" ></span> </div> -->
                         </div>
 
 
 
-                        <div class="col-sm-12">
-                            <hr style="border-color:#cacaca;" />
 
-                            <center>
-                                <button class="button sky-blue1 full-width uppercase btn-small" ng-click="processBook()">Process Payment</button>
-                            </center>
-                        </div>
-
+                        <hr style="border-color:#cacaca;" />
                     </div>
 
-                    <button class="" ng-click="addMoreCustomer()" ng-if="false">Add Customer</button>
+
+                    
+                    <button class="mt-5" ng-click="addMoreCustomer()">Add Customer</button>
+
+                    <div class="col-sm-12 mt-5">
+                        <hr style="border-color:#cacaca;" />
+
+                        <center>
+                            <button class="button sky-blue1 full-width uppercase btn-small" ng-click="processBook()"
+                              ng-disabled="!customersSelectedRooms[0][0]" >Process Payment</button>
+                        </center>
+                    </div>
 
                 </div>
 
@@ -187,12 +201,14 @@
                         </h4>
                         <p ng-bind="cartDetails[0].cart_deals[0].deal.room.room_type">Room Type</p>
                         <p>Book room for: <input type="number" class=" form-control"
-                                style="width: 40px;display: inline-block;padding: 8px;" ng-model="finalQunatity" 
-                                 ng-change="qunatityChange()" /></p>
+                                style="width: 40px;display: inline-block;padding: 8px;" ng-model="finalQunatity"
+                                ng-change="qunatityChange()" /></p>
                         <hr />
-                        <p ng-init="finalAmount = finalQunatity * cartDetails[0].cart_deals[0].deal.price;;" >Total Amount: ₹[[finalAmount]]</p>
+                        <p ng-init="finalAmount = finalQunatity * cartDetails[0].cart_deals[0].deal.price;;">Total
+                            Amount: ₹[[finalAmount]]</p>
                     </center>
-                    <button class="button sky-blue1 full-width uppercase btn-small" ng-click="processBook()" >Process Payment</button>
+                    <button class="button sky-blue1 full-width uppercase btn-small" ng-disabled="!customersSelectedRooms[0][0]" ng-click="processBook()">Process
+                        Payment</button>
                 </div>
                 <div class="travelo-box book-with-us-box">
                     <center>
@@ -241,6 +257,16 @@
                     </div>
                     <div class="col-sm-4">
                         [[cart.deal.room.hotel.name]]
+                        <br />
+                        <small>
+                            [[cart.ci_date | date: 'EEE MMM d, y h:mm a']]
+                        </small>
+                        <br/>
+                        <small>
+                            [[cart.co_date | date: 'EEE MMM d, y h:mm a']]
+                        </small>
+
+
                     </div>
 
                     <div class="col-sm-4">
@@ -259,16 +285,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn" data-dismiss="modal"
                     1ng-disabled="!customersSelectedRooms.rooms.length || !customersSelectedRooms.rooms[0].customersSelectedRoomsQuantity"
-                    ng-click="rooomsAdded()">Add</button>
+                    ng-click="rooomsAdded()">Done</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<div id="repsonse" >
-
-</div>
+<div id="repsonse"></div>
 
 
 
