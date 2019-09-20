@@ -15,6 +15,11 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     $scope.updateSitePriceValues = {};
 
+
+    var page = 1;
+    $scope.hasMoreResults = true;
+
+
     $http.get("/api/v1/hotel/terminal")
         .then(function (response) {
 
@@ -184,6 +189,27 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
         } : undefined;
     };
 
+
+    $scope.loadMore = function() {
+
+        page++;
+
+        $http.get("/api/v1/hotel/terminal",{params : {page}})
+        .then(function (response) {
+
+            var result = response.data.result.hotel;
+            $scope.hotelDetails = $scope.hotelDetails.concat(result);
+            console.log($scope.hotelDetails);
+            if(!result.length){
+                $scope.hasMoreResults = false;
+                toaster.pop("error", "No more results");
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+        
+    }
 
   
 

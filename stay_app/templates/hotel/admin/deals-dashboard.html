@@ -159,27 +159,29 @@
                     <div class="page-title pull-left">
                         <h2 class="entry-title">Administrator | Data Management</h2>
                     </div>
-                    <div style="margin-top: 10px;">
-
-                        <form>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-6 form-group">
-                                    <input typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel"
-                                        ng-change="searchHotelOnChange($event)"
-                                        uib-typeahead="state.name for state in searchResult" type="text"
-                                        class="input-text full-width dropdown-input"
-                                        placeholder="Where Do You Wish To Travel ? .... ">
-                                </div>
-                                <span ng-init="searchHotel = '{{hotel_data['hotel']['name']}}'"></span>
-                                <div class="col-sm-2 form-group">
-                                    <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
+                    
 
                 </div>
+            </div>
+
+            <div style="margin-top: 10px;" class="text-center ">
+
+                <form>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-6 form-group col-md-offset-1">
+                            <input typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel"
+                                ng-change="searchHotelOnChange($event)"
+                                uib-typeahead="state.name for state in searchResult" type="text"
+                                class="input-text full-width dropdown-input"
+                                placeholder="Where Do You Wish To Travel ? .... ">
+                        </div>
+                        <span ng-init="searchHotel = '{{hotel_data['hotel']['name']}}'"></span>
+                        <div class="col-sm-2 form-group">
+                            <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
 
         </header>
@@ -207,7 +209,7 @@
                             <form class="booking-form">
                                 <div class="person-information" ng-show="hotelDetail">
                                     <center>
-                                        <h2>[[hotelDetails.name]]</h2>
+                                        <h2>[[hotelDetails.name || "Search hotel from above"]]</h2>
                                     </center>
                                     <hr>
 
@@ -258,7 +260,8 @@
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
                                                             <a data-toggle="collapse" data-parent="#accordion"
-                                                                href="#collapse2">Click to see Images</a>
+                                                                href="#collapse2">Click to see Images
+                                                                ([[hotelDetails.images.length]])</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapse2" class="panel-collapse collapse">
@@ -307,7 +310,7 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
                                             <input type="text" class="input-text full-width" id="image_url"
-                                                ng-model="images.image_url" type="text">
+                                                ng-model="hotelNewImage" type="text">
                                         </div>
                                         <div class="col-sm-6 col-md-5">
                                             <button type="button"
@@ -386,7 +389,7 @@
                                 </div>
                                 <br />
                                 <div class="booking-type">
-                                    <h2>Amenities & Facility</h2>
+                                    <h2>Amenities</h2>
                                     <hr>
 
                                     <div class="form-group row">
@@ -584,6 +587,10 @@
                                     <div class="col-sm-6 col-md-5">
                                         <button type="submit" class="button btn-success btn-medium sky-blue1 uppercase"
                                             ng-click="updateHotel(hotelDetails)">Update Hotel</button>
+
+                                        <button type="submit" class="button btn-success btn-medium sky-blue1 uppercase"
+                                            ng-click="deleteHotel(hotelDetails)">Delete Hotel</button>
+
                                     </div>
 
                                 </div>
@@ -595,11 +602,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse1">Rooms</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Rooms
+                                                ([[hotelDetails.rooms.length]])</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse1" class="panel-collapse collapse in">
+                                    <div id="collapse1" class="panel-collapse collapse">
                                         <div class="panel-body">
 
 
@@ -610,7 +617,7 @@
                                                     <label class="control-label col-sm-2" for="default">Room
                                                         Type:</label>
                                                     <div class="col-sm-10">
-                                                        <input id="room_type4" class="form-control" type="text"
+                                                        <input class="form-control" type="text"
                                                             ng-model="roomDetails.room_type" required />
                                                     </div>
                                                 </div>
@@ -725,7 +732,7 @@
                                                     <div class="col-sm-12">
                                                         <center>
                                                             <button
-                                                                ng-click="updateFacility(roomDetails.facilities)">Update
+                                                                ng-click="updateFacility(roomDetails.facilities , roomDetails)">Update
                                                                 Facility</button>
                                                         </center>
                                                     </div>
@@ -733,135 +740,163 @@
 
                                                 <button class="btn" ng-click="updateRoom(roomDetails)">Update
                                                     Room</button>
-                                                    <button class="btn" ng-click="deleteRoom(roomDetails)">Delete
-                                                            Room</button>
+                                                <button class="btn"
+                                                    ng-click="deleteRoom(roomDetails);hotelDetails.rooms.splice($index, 1)">Delete
+                                                    Room</button>
                                                 <hr style="border-color: #54545429;" />
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#addnewroom">Add
+                                                New Room</a>
+                                        </h4>
+                                    </div>
+                                    <div id="addnewroom" class="panel-collapse collapse">
+                                        <div class="panel-body">
+
+
+
+
+                                            <div ng-repeat="roomDetails in roomDetailsArray">
+                                                <span class="pull-right bg-danger"
+                                                    style="padding: 7px;font-weight: bolder;"
+                                                    ng-if="roomDetailsArray.length > 1"
+                                                    ng-click="roomDetailsArray.splice($index, 1);"
+                                                    role="button">&times;</span>
+                                                <h3>Room #[[$index+1]]</h3>
+
+
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="default">Room
+                                                        Type:</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="room_type4" class="form-control" type="text"
+                                                            ng-model="roomDetails.room_type" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="image">Room Image Url:
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" id="room_image" type="text"
+                                                            ng-model="roomDetails.image_url" required />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="total_members">Max No. of
+                                                        Guest :
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" id="total_members"
+                                                            ng-model="roomDetails.max_no_of_guest" type="number"
+                                                            required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="balcony">Balcony:
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="" id="balcony"
+                                                            ng-model="roomDetails.facilities.balcony"
+                                                            ng-true-value="true" ng-false-value="false" type="checkbox"
+                                                            required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="total_members">Meal Plan:
+                                                    </label>
+                                                    <div class="radioqwe" ng-repeat="(key, value) in mealPlanEnum"
+                                                        style="margin-left: 215px;">
+
+                                                        <label for="mealplan-[[key]]" class="">
+                                                            <input id="mealplan-[[key]]" class="" type="radio"
+                                                                name="new_room_MEAL_PLAN-[[$parent.$index]]"
+                                                                value="[[key]]"
+                                                                ng-model="roomDetails.meal_plan" />[[value]]
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <h3>Room Facilities</h3>
+
+                                                <div class="row">
+                                                    <div class="form-group col-sm-6">
+                                                        <label class=" col-sm-4" for="no_of_bed">No. of Bed:
+                                                        </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" id="no_of_bed"
+                                                                ng-model="roomDetails.facilities.no_of_bed"
+                                                                type="number" required />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-6">
+                                                        <label class=" col-sm-2" for="total_members">Bed Type:
+                                                        </label>
+
+
+
+                                                        <div class="" ng-repeat="(key, value) in bedTypeEnum"
+                                                            style="margin-left:100px;">
+                                                            <label>
+                                                                <input id="bed_type1" type="radio"
+                                                                    name="new_room_bed_type-[[$parent.$index]]"
+                                                                    value="[[key]]"
+                                                                    ng-model="roomDetails.facilities.bed_type" />[[value]]
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-6" ng-repeat="(key, value) in facilities">
+
+                                                        <label>
+                                                            <input type="checkbox" ng-true-value="true"
+                                                                ng-false-value="false"
+                                                                ng-model="roomDetails.facilities[key]" />
+                                                            [[key]]
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <hr style="border-color: #54545429;" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-8 col-sm-8">
+
+                                                    <button class="btn" ng-click="addMoreRoom()">Add more room</button>
+
+                                                    <button class="btn btn-success"
+                                                        ng-click="addNewRoomsToHotel()">Submit</button>
+                                                </div>
+                                            </div>
+
+
+
 
 
 
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse2">Add New Room</a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse2" class="panel-collapse collapse">
 
-                                            <div class="form-horizontal travelo-box booking-section">
-                                                    <div ng-show1="roomDetail">
-                                                        <h2>Room Details(For: [[hotelDetails.name]]) </h2>
-                                                        <hr>
-                                                        <br>
-                            
-                                                        <div ng-repeat="roomDetails in roomDetailsArray">
-                                                            <span class="pull-right bg-danger" style="padding: 7px;font-weight: bolder;"
-                                                                ng-if="roomDetailsArray.length > 1" ng-click="roomDetailsArray.splice($index, 1);"
-                                                                role="button">&times;</span>
-                                                            <h3>Room #[[$index+1]]</h3>
-                            
-                            
-                            
-                                                            <div class="form-group">
-                                                                <label class="control-label col-sm-2" for="default">Room Type:</label>
-                                                                <div class="col-sm-10">
-                                                                    <input id="room_type4" class="form-control" type="text"
-                                                                        ng-model="roomDetails.room_type" required />
-                                                                </div>
-                                                            </div>
-                            
-                                                            <div class="form-group">
-                                                                <label class="control-label col-sm-2" for="image">Room Image Url: </label>
-                                                                <div class="col-sm-10">
-                                                                    <input class="form-control" id="name" type="text"
-                                                                        ng-model="roomDetails.image_url" required />
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label col-sm-2" for="total_members">Max No. of Guest :
-                                                                </label>
-                                                                <div class="col-sm-10">
-                                                                    <input class="form-control" id="total_members"
-                                                                        ng-model="roomDetails.max_no_of_guest" type="number" required />
-                                                                </div>
-                                                            </div>
-                            
-                                                            <div class="form-group">
-                                                                <label class="control-label col-sm-2" for="balcony">Balcony:
-                                                                </label>
-                                                                <div class="col-sm-10">
-                                                                    <input class="" id="balcony" ng-model="roomDetails.facilities.balcony"
-                                                                        ng-true-value="true" ng-false-value="false" type="checkbox" required />
-                                                                </div>
-                                                            </div>
-                            
-                                                            <div class="form-group">
-                                                                <label class="control-label col-sm-2" for="total_members">Meal Plan:
-                                                                </label>
-                                                                <div class="radioqwe" ng-repeat="(key, value) in mealPlanEnum"
-                                                                    style="margin-left: 215px;">
-                            
-                                                                    <label for="mealplan-[[key]]" class="">
-                                                                        <input id="mealplan-[[key]]" class="" type="radio"
-                                                                            name="MEAL_PLAN-[[$parent.$index]]" value="[[key]]"
-                                                                            ng-model="roomDetails.meal_plan" />[[value]]
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                            
-                            
-                            
-                                                            <h3>Room Facilities</h3>
-                            
-                                                            <div class="row">
-                                                                <div class="form-group col-sm-6">
-                                                                    <label class=" col-sm-4" for="no_of_bed">No. of Bed:
-                                                                    </label>
-                                                                    <div class="col-sm-6">
-                                                                        <input class="form-control" id="name"
-                                                                            ng-model="roomDetails.facilities.no_of_bed" type="number" required />
-                                                                    </div>
-                                                                </div>
-                            
-                                                                <div class="form-group col-sm-6">
-                                                                    <label class=" col-sm-2" for="total_members">Bed Type:
-                                                                    </label>
-                            
-                            
-                            
-                                                                    <div class="" ng-repeat="(key, value) in bedTypeEnum"
-                                                                        style="margin-left:100px;">
-                                                                        <label>
-                                                                            <input id="bed_type1" type="radio" name="bed_type-[[$parent.$index]]" value="[[key]]"
-                                                                                ng-model="roomDetails.facilities.bed_type" />[[value]]
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br>
-                                                            <div class="form-group row">
-                            
-                                                                <div class="col-sm-6" ng-repeat="(key, value) in facilities">
-                            
-                                                                    <label>
-                                                                        <input type="checkbox" ng-true-value="true" ng-false-value="false"
-                                                                            ng-model="roomDetails.facilities[key]" />
-                                                                        [[key]]
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <hr style="border-color: #54545429;" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                       
-                                    </div>
-                                </div>
-                               
+
+
+
                             </div>
 
 
@@ -877,7 +912,7 @@
                                     ng-change="specificDateDealPicker(directDealDateRange)" />
                                 <div class="bg-danger" ng-if="directDealDateRange"> Data Show for this Date <br />
                                     [[directDealDateRange]]</div>
-                                
+
                             </div>
 
                             <br />
