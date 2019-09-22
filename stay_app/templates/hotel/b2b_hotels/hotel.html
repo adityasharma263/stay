@@ -30,7 +30,7 @@
                     <div class="table-wrapper full-width">
                         <div class="table-cell">
                             <div class="heading box">
-                                <h1 class="title">#TB Hotels</h1>
+                                <h1 class="title">   </h1>
                                 <h3 class="sub-title"><font color="white">We Have More Than Just Hotels Explore More Unique Places !</font></h3>
                             </div>
 
@@ -72,12 +72,12 @@
                                
                                 
 
-                                <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
+                                <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9;  text-transform: capitalize; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
                                         <tbody id="search" class="input-text full-width"" >
-                                          <tr class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
-                                            <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
-                                                <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
+                                          <tr class="ng-cloak" ng-repeat="obj in cities | limitTo:2" >
+                                            <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[obj.city]],'city')">
+                                                <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[obj.city]]</td>
 
                                           </tr>
                                           <tr class="ng-cloak" ng-repeat="obj in names | limitTo:2">
