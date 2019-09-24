@@ -60,7 +60,7 @@ var app = angular.module('stay', ['angular.filter'])
             }
 
             window.open($scope.location + "/list?" + searchKey + "=" + $scope.hotel.search + '&' + 'ci' + '=' + $scope.hotel.ci + '&' + 'co' + '=' + $scope.hotel.co, '_self');
-        }
+        };
 
         $scope.search = function () {
             $scope.hotel.search = $scope.hotel.search.toLowerCase();
@@ -83,7 +83,7 @@ var app = angular.module('stay', ['angular.filter'])
                 }
             })
 
-        }
+        };
 
         $http({
             method: 'GET',
@@ -126,15 +126,13 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.max = 200000;
 
 
-        $scope.amenities = {
-            
-        }
+        $scope.amenities = {};
 
 //       get array for the particular num  used to show amenities dynamically
          $scope.getNumber = function(num) {
          return new Array(num);
 
-        }
+        };
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
@@ -160,6 +158,7 @@ var app = angular.module('stay', ['angular.filter'])
                     searchURL += `&${param}=${$scope.hotel[param]}`;
             });
 
+            console.log("I am in the getHotelsData, ",urlParams);
             $http({
                 method: 'GET',
                 url: api_url + '/api/v1/hotel/list/b2b',
@@ -173,6 +172,15 @@ var app = angular.module('stay', ['angular.filter'])
                     console.log($scope.hotelData);
                 }
             })
+        }
+
+
+        $scope.amenityFilter = function() {
+
+            // using spread operator(... (3 dots)) to concat two json objects
+            urlParams = {...urlParams , ...$scope.amenities};
+            $scope.getHotelsData();
+            
         }
 
         $scope.loadMoreHotelsData = function () {
@@ -226,7 +234,7 @@ var app = angular.module('stay', ['angular.filter'])
             $scope.hotel.co = Date.parse($scope.hotel.co) / 1000;
 
             window.open($scope.location + "/list?" + searchKey + "=" + $scope.hotel.search + '&' + 'ci' + '=' + $scope.hotel.ci + '&' + 'co' + '=' + $scope.hotel.co, '_self');
-        }
+        };
 
 
 
