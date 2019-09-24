@@ -19,70 +19,70 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
     // especially when user remove from in between from the array
     $scope.customersSelectedRooms = [[]];
 
+    $scope.cartDetails = [];
+    // $scope.cartDetails =
+    //     [{
+    //         "cart_deals": [
+    //             {
+    //                 "cart": 1,
+    //                 "ci_date": "2019-08-30T10:50:49.783203+00:00",
+    //                 "co_date": "2019-08-30T10:50:49.783203+00:00",
+    //                 "current_deal_amount": 300,
+    //                 "id": 1,
+    //                 "no_of_deals": 2,
+    //                 "deal": {
+    //                     "id": 1,
+    //                     "partner_id": 1,
+    //                     "price": 7000,
+    //                     "room": {
+    //                         "hotel": {
+    //                             "city": "delhi",
+    //                             "id": 1,
+    //                             "name": "leela"
+    //                         },
+    //                         "id": 1,
+    //                         "image_url": "https://www.theleela.com/new-delhi-hotel-images/rooms-and-suites/premiere-room.jpg",
+    //                         "max_no_of_guest": null,
+    //                         "meal_plan": "Continental Plan",
+    //                         "room_type": null
+    //                     },
+    //                     "sold_out": false,
+    //                 },
 
-    $scope.cartDetails =
-        [{
-            "cart_deals": [
-                {
-                    "cart": 1,
-                    "ci_date": "2019-08-30T10:50:49.783203+00:00",
-                    "co_date": "2019-08-30T10:50:49.783203+00:00",
-                    "current_deal_amount": 300,
-                    "id": 1,
-                    "no_of_deals": 2,
-                    "deal": {
-                        "id": 1,
-                        "partner_id": 1,
-                        "price": 7000,
-                        "room": {
-                            "hotel": {
-                                "city": "delhi",
-                                "id": 1,
-                                "name": "leela"
-                            },
-                            "id": 1,
-                            "image_url": "https://www.theleela.com/new-delhi-hotel-images/rooms-and-suites/premiere-room.jpg",
-                            "max_no_of_guest": null,
-                            "meal_plan": "Continental Plan",
-                            "room_type": null
-                        },
-                        "sold_out": false,
-                    },
+    //             },
+    //             {
+    //                 "cart": 1,
+    //                 "ci_date": "2019-08-30T10:50:49.783203+00:00",
+    //                 "co_date": "2019-08-30T10:50:49.783203+00:00",
+    //                 "current_deal_amount": 300,
+    //                 "id": 1,
+    //                 "no_of_deals": 2,
+    //                 "deal": {
+    //                     "id": 1,
+    //                     "partner_id": 1,
+    //                     "price": 7000,
+    //                     "room": {
+    //                         "hotel": {
+    //                             "city": "delhi",
+    //                             "id": 1,
+    //                             "name": "lalee"
+    //                         },
+    //                         "id": 1,
+    //                         "image_url": "https://seoimgak.mmtcdn.com/blog/sites/default/files/images/hotels-in-mahabaleshwar-saj%20resort.jpg",
+    //                         "max_no_of_guest": null,
+    //                         "meal_plan": "Continental Plan",
+    //                         "room_type": null
+    //                     },
+    //                     "sold_out": false,
+    //                 },
 
-                },
-                {
-                    "cart": 1,
-                    "ci_date": "2019-08-30T10:50:49.783203+00:00",
-                    "co_date": "2019-08-30T10:50:49.783203+00:00",
-                    "current_deal_amount": 300,
-                    "id": 1,
-                    "no_of_deals": 2,
-                    "deal": {
-                        "id": 1,
-                        "partner_id": 1,
-                        "price": 7000,
-                        "room": {
-                            "hotel": {
-                                "city": "delhi",
-                                "id": 1,
-                                "name": "lalee"
-                            },
-                            "id": 1,
-                            "image_url": "https://seoimgak.mmtcdn.com/blog/sites/default/files/images/hotels-in-mahabaleshwar-saj%20resort.jpg",
-                            "max_no_of_guest": null,
-                            "meal_plan": "Continental Plan",
-                            "room_type": null
-                        },
-                        "sold_out": false,
-                    },
-
-                }
-            ],
-            "id": 1,
-            "partner_id": 1,
-            "total_booking_amount": 500,
-            "total_no_of_deals": 2
-        }];
+    //             }
+    //         ],
+    //         "id": 1,
+    //         "partner_id": 1,
+    //         "total_booking_amount": 500,
+    //         "total_no_of_deals": 2
+    //     }];
 
 
         // $http.get("")

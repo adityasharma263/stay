@@ -259,6 +259,26 @@
                     </div>
                 </div>
             </div>
+
+            <div style="margin-top: 10px;" class=" ">
+
+                <form>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-6 form-group col-md-offset-1">
+                            <input typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel"
+                                ng-change="searchHotelOnChange($event)"
+                                uib-typeahead="state.name for state in searchResult" type="text"
+                                class="input-text full-width dropdown-input"
+                                placeholder="Where Do You Wish To Travel ? .... "/>
+                        </div>
+                        
+                        <div class="col-sm-2 form-group">
+                            <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
         </header>
 
         <section>

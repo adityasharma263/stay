@@ -2,7 +2,7 @@
 // NOte: for dropdown orderby room id
 
 // add dependency module DYNAMICALLY
-app.requires.push('ui.bootstrap');
+app.requires.push('ui.bootstrap'); // dependency for dropdown suggestion
 app.requires.push('toaster');
 app.controller("adminHotelTerminalController", function ($scope, $http, toaster) {
 
@@ -53,7 +53,15 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
             $http.post("/admin/hotel/search", { search: $scope.searchHotel })
                 .then(function (respsonse) {
                     console.log(respsonse);
+                    
                     $scope.searchResult = respsonse.data.result.names;
+                    var cityArrayObj = [];
+                    respsonse.data.result.cities.forEach(city => {
+                        $scope.searchResult.push({name : city, is_city:true});
+                    });
+            
+                    console.log(cityArrayObj , $scope.searchResult);
+                    
                 })
                 .catch(function (err) {
                     console.log("err ", err);
@@ -64,15 +72,30 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     $scope.onHotelSelect = function (item) {
         console.log(item);
-        $http.get(API_BASE_URL + "/api/v1/hotel", { params: { id: item.id } })
+        // $http.get("/api/v1/hotel", { params: { id: item.id } })
+        //     .then(function (response) {
+        //         console.log(response.data.result);
+        //         $scope.hotelDetails = response.data.result.hotel[0];
+        //     })
+        //     .catch(function (err) {
+        //         console.log(err);
+        //     })
+        //     ;
+
+            var HotelFilter = {};
+            if (item.is_city)
+                HotelFilter.city = item.name;
+            else
+                HotelFilter.id = item.id;
+            $http.get("/api/v1/hotel/terminal" , {params : HotelFilter})
             .then(function (response) {
-                console.log(response.data.result);
-                $scope.hotelDetails = response.data.result.hotel[0];
+                $scope.hotelDetails = response.data.result.hotel;
+                console.log($scope.hotelDetails);
+    
             })
             .catch(function (err) {
                 console.log(err);
-            })
-            ;
+            });
     };
 
     $scope.loadRoomPrice = function (roomID, loadRoomPriceFor) {
