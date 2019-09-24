@@ -117,7 +117,7 @@ def hotel_terminal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         page = request.args.get('page', 1)
-        per_page = request.args.get('per_page', 10)
+        per_page = request.args.get('per_page', 50)
         args.pop('page', None)
         args.pop('per_page', None)
         city = request.args.get('city')
