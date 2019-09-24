@@ -130,7 +130,7 @@ def admin_hotel_search():
 
 
 @app.route("/admin/hotel/deal", methods=["GET"])
-@admin_login_required
+# @admin_login_required
 def admin_deal_id():
     if True or 'admin_data' in session:
         # admin_data = session["admin_data"]
@@ -147,7 +147,7 @@ def admin_deal_id():
 
 
 @app.route("/admin/hotel/terminal", methods=["GET"])
-@admin_login_required
+# @admin_login_required
 def admin_terminal():
     if True or 'admin_data' in session:
         # admin_data = session["admin_data"]
@@ -171,7 +171,7 @@ def booking():
                 return render_template('hotel/booking/booking.html')
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
-               "Click here  FOR THE APPROVAL </b></a>"
+               "click here  FOR THE APPROVAL </b></a>"
         else:
             booking_details = request.json
             booking_details['status'] = 'P'
@@ -199,7 +199,7 @@ def booking():
 #================= Cart hotels ==========================
 
 @app.route('/hotel/cart', methods=['POST'])
-# @login_required
+@login_required
 def cart():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
@@ -227,7 +227,7 @@ def business():
 
 
 @app.route('/hotel', methods=['GET'])
-# @login_required
+@login_required
 def business_hotel():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
@@ -248,7 +248,7 @@ def business_hotel_list():
 
 
 @app.route('/hotel/<string:slug>', methods=['GET'])
-# @login_required
+@login_required
 def business_hotel_detail(slug):
     if 'partner_data' in session:
         partner_data = session["partner_data"]
