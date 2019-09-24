@@ -373,7 +373,7 @@ var app = angular.module('stay', ['angular.filter'])
            var id = key1[2];
        $http({
            method: 'GET',
-           url: api_url + '/api/v1/hotel/b2b?name=' + name
+           url: api_url + '/api/v1/hotel?name=' + name
        }).then(function successCallback(response) {
            $scope.hotel = response.data.result.hotel;
            getSimilarHotels();
@@ -386,7 +386,7 @@ var app = angular.module('stay', ['angular.filter'])
        var getSimilarHotels = function () {
            $http({
                method: 'GET',
-               url: api_url + '/api/v1/hotel/b2b?city=' + $scope.hotel[0].city
+               url: api_url + '/api/v1/hotel?city=' + $scope.hotel[0].city
            }).then(function successCallback(response) {
 
                for (var i = 0; i < response.data.result.hotel.length; i++) {
