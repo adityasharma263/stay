@@ -647,7 +647,7 @@ def hotel_search():
     names = []
     hotel_cities = Hotel.query.distinct(Hotel.city).filter(Hotel.city.ilike('%' + search + '%')).order_by(Hotel.city).limit(5).all()
     for hotel_city in hotel_cities:
-        cities.append({"city": hotel_city.city.lower()})
+        cities.append(hotel_city.city.lower())
     hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name).limit(5).all()
     for hotel_name in hotel_names:
         names.append({"name": hotel_name.name.lower(),
