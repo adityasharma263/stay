@@ -320,134 +320,138 @@
                                         <h2>Room Facilities</h2>
                                         <p> All of These Facilities are Confined to The Room</p>
 
-                                       {% for facilities in hotel_data.facilities %}
+                                        {% for room in hotel_data.rooms %}
+                                        {% for deal in room.deals %}
+                                        {% if deal.ts_exclusive %}
                                         <ul class="amenities clearfix style1">
-                                        {% if hotel_data.rooms.facilities.tv %}
+                                        {% if room.facilities.tv %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.electric_kettle %}
+                                        {% if room.facilities.electric_kettle %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.ac %}
+                                        {% if room.facilities.ac %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.bathtub %}
+                                        {% if room.facilities.bathtub %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with bathtub</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.bathroom_with_shower  %}
+                                        {% if room.facilities.bathroom_with_shower  %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
                                             </li>
                                         {% endif%}
-                                        {% if hotel_data.rooms.facilities.desk %}
+                                        {% if room.facilities.desk %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-minus"></i>Desk</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.hairdryer %}
+                                        {% if room.facilities.hairdryer %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-horn"></i>Hairdryer</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.room_safe %}
+                                        {% if room.facilities.room_safe %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-securevault"></i>Room safe</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.phone %}
+                                        {% if room.facilities.phone %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.food_serve_at_room %}
+                                        {% if room.facilities.food_serve_at_room %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-food"></i>Food Serve at Room</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.bathroom_cosmetics %}
+                                        {% if room.facilities.bathroom_cosmetics %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-check-1"></i>Bathroom Cosmetics</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.bathroom_nightie %}
+                                        {% if room.facilities.bathroom_nightie %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-features"></i>Bathroom Nightie</div>
                                             </li>
                                         {% endif%}
-                                        {% if hotel_data.rooms.facilities.ironing_facility %}
+                                        {% if room.facilities.ironing_facility %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-flexible"></i>Ironing Facility</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.weighing_machine %}
+                                        {% if room.facilities.weighing_machine %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-clock"></i>Weighing Machine</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.wardrobes_closet %}
+                                        {% if room.facilities.wardrobes_closet %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-trunk-2"></i>Wardrobes / Closet</div>
                                             </li>
                                         {% endif%}
-                                        {% if hotel_data.rooms.facilities.view %}
+                                        {% if room.facilities.view %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-beach"></i>View </div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.room_seating_area %}
+                                        {% if room.facilities.room_seating_area %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-passenger"></i>Room Seating Area</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.room_slipper %}
+                                        {% if room.facilities.room_slipper %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-ski"></i>Room Slipper</div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.morning_newspaper %}
+                                        {% if room.facilities.morning_newspaper %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-magazine-1"></i>Morning Newspaper </div>
                                             </li>
                                         {% endif %}
-                                        {% if hotel_data.rooms.facilities.bathroom_towels %}
+                                        {% if room.facilities.bathroom_towels %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-shopping-2"></i>Bathroom Towels </div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel_data.rooms.facilities.free_evening_snacks %}
+                                            {% if room.facilities.free_evening_snacks %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel_data.rooms.facilities.free_toiletries %}
+                                            {% if room.facilities.free_toiletries %}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Toiletries </div>
                                                 </li>
                                             {% endif %}
-                                            {% if hotel_data.rooms.facilities.fan%}
+                                            {% if room.facilities.fan%}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Fan </div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel_data.rooms.facilities.heater %}
+                                            {% if room.facilities.heater %}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Heater</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel_data.rooms.facilities.jacuzzi %}
+                                            {% if room.facilities.jacuzzi %}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
                                             {% endif %}
                                         </ul>
+                                        {% endif %}
+                                        {% endfor %}
                                         {% endfor %}
 
                                     </div>

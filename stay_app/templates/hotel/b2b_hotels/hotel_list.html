@@ -27,7 +27,7 @@
                         </div>
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#modify-search-panel" class="">Modify Search</a>
+                                <a data-toggle="collapse" target="_self" href="#modify-search-panel" class="">Modify Search</a>
                             </h4>
                             <div id="modify-search-panel" class="panel-collapse collapse in">
                                 <div class="panel-content">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>
+                                <a data-toggle="collapse" target="_self" href="#price-filter" class="collapsed">Price</a>
                             </h4>
                             <div id="price-filter" class="panel-collapse collapse">
                                 <div class="panel-content">
@@ -84,7 +84,7 @@
 
                         <div class="panel style1 arrow-right">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#amenities-filter" class="collapsed">Amenities</a>
+                                    <a data-toggle="collapse" target="_self" href="#amenities-filter" class="collapsed">Amenities</a>
                                 </h4>
                                 <div id="amenities-filter" class="panel-collapse collapse"
                                     style="height: 0px;">
@@ -106,7 +106,7 @@
 
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#tour-type-filter" class="collapsed">Tour Type</a>
+                                <a data-toggle="collapse" target="_self" href="#tour-type-filter" class="collapsed">Tour Type</a>
                             </h4>
                             <div id="tour-type-filter"
                                 data-url-notour_type="/wordpress/travelo/?post_type=tour&amp;s&amp;view=list"
@@ -130,7 +130,7 @@
 
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#star-filter" class="collapsed">Star</a>
+                                <a data-toggle="collapse" target="_self" href="#star-filter" class="collapsed">Star</a>
                             </h4>
 
                             <div id="star-filter" class="panel-collapse collapse">
@@ -191,7 +191,7 @@
                                 <article class="box">
                                     <div ng-repeat="deal in room.deals" ng-if="deal.b2b_lowest_price"
                                         ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false">
-                                        <a zhref="/hotel/[[hotel.slug]]">
+                                        <a target="_self" href="/hotel/[[hotel.slug]]">
                                             <figure style="height: 170px;" class="col-sm-5 col-md-4" style="padding: 15px;">
                                                 <img data-toggle="modal"
                                                     style="height:100%; width: 100%; margin-left: -15px; cursor: pointer"
@@ -200,7 +200,7 @@
                                         </a>
                                         <div class="details col-sm-7 col-md-8">
                                             <div>
-                                                <a href="/hotel/[[hotel.slug]]">
+                                                <a target="_self" href="/hotel/[[hotel.slug]]">
                                                     <div class="ng-cloak" style="margin-top: 5px;">
                                                         <h3 style="cursor: pointer; text-transform: capitalize;" class="box-title">[[hotel.name]]
                                                             <small>
@@ -269,7 +269,7 @@
                             <h3>No Result found</h3>
                         </article>
                     </div>
-                    <a href="" class="uppercase full-width button btn-large" ng-click='loadMoreHotelsData()'>load more
+                    <a target="_self" href="" class="uppercase full-width button btn-large" ng-click='loadMoreHotelsData()'>load more
                         listing</a>
                 </div>
             </div>
