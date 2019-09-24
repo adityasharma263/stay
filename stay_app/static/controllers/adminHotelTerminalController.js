@@ -18,6 +18,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     var page = 1;
     $scope.hasMoreResults = true;
+    var HotelFilter = {};
 
 
     $http.get("/api/v1/hotel/terminal")
@@ -72,15 +73,20 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     $scope.onHotelSelect = function (item) {
         console.log(item);
-        var HotelFilter = {};
-        if (item.is_city)
+        HotelFilter = {};
+        if (item.is_city){
             HotelFilter.city = item.name;
-        else
+            $scope.hasMoreResults = true;
+        }
+        else{
             HotelFilter.id = item.id;
+            $scope.hasMoreResults = false;
+        }
         $http.get("/api/v1/hotel/terminal", { params: HotelFilter })
             .then(function (response) {
                 $scope.hotelDetails = response.data.result.hotel;
                 console.log($scope.hotelDetails);
+                
 
             })
             .catch(function (err) {
@@ -205,9 +211,11 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     $scope.loadMore = function () {
 
-        page++;
+        HotelFilter.page = page++;
 
-        $http.get("/api/v1/hotel/terminal", { params: { page } })
+        // page++;
+
+        $http.get("/api/v1/hotel/terminal", { params: HotelFilter })
             .then(function (response) {
 
                 var result = response.data.result.hotel;
