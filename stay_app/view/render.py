@@ -17,99 +17,142 @@ app.secret_key = "partner data session secret key"
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        # if request.cookies.get("hash"):
-        #     if 'hash' in session:
-        #         if session["hash"] != request.cookies.get("hash"):
-        #             session.clear()
-        #             return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
-        #     else:
-        #         php_url = str(app.config["PARTNER_API_URL"]) + "/api/v1/partner.php"
-        #         AES.key_size = 128
-        #         iv = "DEFGHTABCIESPQXO"
-        #         key = "pqrstuvwxyz$abcdefghijAB12345678"
-        #         crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
-        #         decoded = binascii.unhexlify(
-        #             str(request.cookies["hash"]))  # your ecrypted and encoded text goes here
-        #         decrypted = crypt_object.decrypt(decoded)
-        #         unpad = lambda s: s[:-ord(s[len(s) - 1:])]
-        #         mobile = unpad(decrypted).decode('utf-8')
-        #         partner_data = requests.get(url=php_url, params={"mobile": mobile}).json()
-        #         if partner_data.get("error"):
-        #             return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
-        #         else:
-        #             session["partner_data"] = partner_data
-        #             session["hash"] = str(request.cookies["hash"])
-        # else:
-        #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+        if request.cookies.get("hash"):
+            if 'hash' in session:
+                if session["hash"] != request.cookies.get("hash"):
+                    session.clear()
+                    return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+            else:
+                php_url = str(app.config["PARTNER_API_URL"]) + "/api/v1/partner.php"
+                AES.key_size = 128
+                iv = "DEFGHTABCIESPQXO"
+                key = "pqrstuvwxyz$abcdefghijAB12345678"
+                crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
+                decoded = binascii.unhexlify(
+                    str(request.cookies["hash"]))  # your ecrypted and encoded text goes here
+                decrypted = crypt_object.decrypt(decoded)
+                unpad = lambda s: s[:-ord(s[len(s) - 1:])]
+                mobile = unpad(decrypted).decode('utf-8')
+                partner_data = requests.get(url=php_url, params={"mobile": mobile}).json()
+                if partner_data.get("error"):
+                    return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+                else:
+                    session["partner_data"] = partner_data
+                    session["hash"] = str(request.cookies["hash"])
+        else:
+            return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
         return f(*args, **kwargs)
     return decorated_function
+
+
+def admin_login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if request.cookies.get("hash2"):
+            if 'hash2' in session:
+                if session["hash2"] != request.cookies.get("hash2"):
+                    session.clear()
+                    return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+            else:
+                php_url = str(app.config["ADMIN_API_URL"]) + "/api/v1/admin.php"
+                AES.key_size = 128
+                iv = "DEFGHTABCIESPQXO"
+                key = "pqrstuvwxyz$abcdefghijAB12345678"
+                crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
+                decoded = binascii.unhexlify(str(request.cookies["hash2"]))  # your ecrypted and encoded text goes here
+                decrypted = crypt_object.decrypt(decoded)
+                unpad = lambda s: s[:-ord(s[len(s) - 1:])]
+                username = unpad(decrypted).decode('utf-8')
+                admin_data = requests.get(url=php_url, params={"username": username}).json()
+                if admin_data.get("error"):
+                    return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+                else:
+                    session["admin_data"] = admin_data
+                    session["hash2"] = str(request.cookies["hash2"])
+        else:
+            return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+
+
 
 
 #================= Admin hotels ==========================
 
 @app.route('/admin/hotel', methods=['GET'])
+@admin_login_required
 def admin():
-    # if request.cookies.get("hash2"):
-    #     php_url = str(app.config["ADMIN_API_URL"]) + "/api/v1/admin.php"
-    #     AES.key_size = 128
-    #     iv = "DEFGHTABCIESPQXO"
-    #     key = "pqrstuvwxyz$abcdefghijAB12345678"
-    #     crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
-    #     decoded = binascii.unhexlify(str(request.cookies["hash2"]))  # your ecrypted and encoded text goes here
-    #     decrypted = crypt_object.decrypt(decoded)
-    #     unpad = lambda s: s[:-ord(s[len(s) - 1:])]
-    #     username = unpad(decrypted).decode('utf-8')
-    #     admin_data = requests.get(url=php_url, params={"username": username}).json()
-    #     if admin_data.get("error"):
-    #         return redirect(str(app.config["ADMIN_BUSINESS_DOMAIN_URL"]), code=302)
-    #     else:
-    #         session["partner_data"] = admin_data
-    # return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
-    return render_template('hotel/admin/admin_hotel.html')
-    # else:
-    #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/home', methods=["GET"])
+@admin_login_required
 def admin_home():
-    return render_template("hotel/admin/dashboard.html")
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        return render_template("hotel/admin/dashboard.html", name=admin_data["name"])
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/update', methods=['GET'])
+@admin_login_required
 def admin_hotel_update():
-    return render_template('hotel/admin/hotel_update.html')
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        return render_template("hotel/admin/hotel_update.html", name=admin_data["name"])
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/deals', methods=['GET'])
+@admin_login_required
 def admin_hotel_deals():
-    return render_template('hotel/admin/deals.html')
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        return render_template("hotel/admin/deals.html", name=admin_data["name"])
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/hotel/search', methods=["POST"])
 def admin_hotel_search():
-    HOTEL_SEARCH_API_ROUTE = str(app.config["API_URL"]) + "/api/v1/hotel/search"
+    hotel_search_api = str(app.config["API_URL"]) + "/api/v1/hotel/search"
     search = request.json
-    search_data = requests.post(HOTEL_SEARCH_API_ROUTE, json=search)
+    search_data = requests.post(hotel_search_api, json=search)
     return jsonify(search_data.json())
 
 
 @app.route("/admin/hotel/deal", methods=["GET"])
+@admin_login_required
 def admin_deal_id():
-    hotel_id = request.args.get('id')
-
-    args = request.args.to_dict()
-    if not hotel_id:
-        args = {"id": 1}
-    hotel_data = requests.get(url=str(app.config["API_URL"])+"/api/v1/hotel/terminal", params=args)
-    hotel_data = hotel_data.json()["result"]
-    return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
-    # else:
-    #     return render_template("hotel/admin/deals-dashboard.html")
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        hotel_id = request.args.get('id')
+        args = request.args.to_dict()
+        if not hotel_id:
+            args = {"id": 1}
+        hotel_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/hotel/terminal", params=args)
+        hotel_data = hotel_data.json()["result"]
+        return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data, name=admin_data["name"])
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route("/admin/hotel/terminal", methods=["GET"])
+@admin_login_required
 def admin_terminal():
-    return render_template("hotel/admin/admin_hotel_terminal.html")
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        return render_template("hotel/admin/admin_hotel_terminal.html", name=admin_data["name"])
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 #================= Booking hotels ==========================
@@ -118,10 +161,10 @@ def admin_terminal():
 @app.route('/hotel/booking', methods=['GET', 'POST'])
 @login_required
 def booking():
-    if 'partner_data' in session or True:
-        partner_data = session["partner_data"] if "" else ""
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
         if request.method == 'GET':
-            if True or partner_data["status"] == 'Approved':
+            if partner_data["status"] == 'Approved':
                 return render_template('hotel/booking/booking.html', partner_data=partner_data)
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
@@ -147,7 +190,7 @@ def booking():
             response = requests.post(str(app.config["API_URL"]) + '/payment', json=booking_response.json())
             return response.text
     else:
-        return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= Cart hotels ==========================
@@ -155,8 +198,8 @@ def booking():
 @app.route('/hotel/cart', methods=['POST'])
 @login_required
 def cart():
-    if 'partner_data' in session or True:
-        partner_data = session["partner_data"] if "" else ""
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
         if request.method == 'post':
             cart = request.json
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
@@ -170,66 +213,49 @@ def cart():
                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
             return response.json()
     else:
-        return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 #================= B2B hotels ==========================
 
 
 @app.route('/', methods=['GET'])
 def business():
-    # if 'hash' in session:
-    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]), code=302)
-    # else:
     return render_template('hotel/b2b_hotels/index.html')
 
 
 @app.route('/hotel', methods=['GET'])
 @login_required
 def business_hotel():
-    partner_data = "adnan"
-    return render_template('hotel/b2b_hotels/hotel.html', name=partner_data)
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        return render_template('hotel/b2b_hotels/hotel.html', name=partner_data["name"])
+    else:
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 @app.route('/hotel/list', methods=['GET'])
 @login_required
 def business_hotel_list():
-    partner_data = "adnan"
-    # args = request.args.to_dict()
-    # hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/list/b2b"
-    # hotel_data = requests.get(url=hotel_api_url, params=args)
-    # hotel_data = hotel_data.json()
-    # if len(hotel_data["result"]["hotel"]) > 0:
-    #     hotel_data = hotel_data["result"]["hotel"]
-    # else:
-    hotel_data = []
-
-    return render_template('hotel/b2b_hotels/hotel_list.html', hotel_data=hotel_data, name=partner_data)
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        return render_template('hotel/b2b_hotels/hotel_list.html', name=partner_data["name"])
+    else:
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 @app.route('/hotel/<string:slug>', methods=['GET'])
 @login_required
 def business_hotel_detail(slug):
-    # if 'partner_data' in session:
-    #     partner_data = "name"
-    #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel/b2b"
-    #     hotel_data = requests.get(url=hotel_api_url, params={"id": hotel_id}).json()
-    #     if len(hotel_data["result"]["hotel"]) > 0:
-    #         hotel_data = hotel_data["result"]["hotel"][0]
-    #     else:
-    #         hotel_data = {}
-    #     render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data, name=partner_data)
-    # else:
-    args = request.args.to_dict()
-    args["slug"] = slug
-    hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    hotel_data = requests.get(url=hotel_api_url, params=args).json()
-    return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
-                           name="adnan", params=args)
-    # hotel_data = {}
-    # print("in the last = ", hotel_id)
-    # return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data)
-    # else:
-    #     return redirect(str(app.config["PARTNER_BUSINESS_DOMAIN_URL"]) + '/login.php', code=302)
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        args = request.args.to_dict()
+        args["slug"] = slug
+        hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+        hotel_data = requests.get(url=hotel_api_url, params=args).json()
+        return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
+                               name=partner_data['name'], params=args)
+    else:
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= Index Pages ==========================
