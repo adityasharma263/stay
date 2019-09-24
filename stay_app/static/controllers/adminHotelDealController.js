@@ -406,6 +406,22 @@ app.controller("adminHotelDealController", function ($scope, $http, toaster, $q)
             });
     };
 
+
+    $scope.deleteImage = function(imageData, index) {
+
+        $http.delete("/api/v1/image/" + imageData.id)
+            .then(function (response) {
+                console.log(response.data);
+                toaster.pop("success", "Image Deleted");
+                $scope.hotelDetails.images.splice(index, 1);
+            }).catch(function (err) {
+                console.log(err);
+                toaster.pop("error", "Failed to Delete!");
+            });
+      
+        
+    };
+
     $scope.log = function(message) {
         console.log(message);
     };
