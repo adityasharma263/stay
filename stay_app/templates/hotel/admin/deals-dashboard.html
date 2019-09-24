@@ -270,15 +270,19 @@
                                                             <div class="row">
 
                                                                 <div class="col-sm-3 mt-5"
-                                                                    ng-repeat="image in hotelDetails.images">
+                                                                    ng-repeat="image in hotelDetails.images" >
                                                                     <img ng-src="[[image.image_url]]"
-                                                                        class="img-responsive" />
+                                                                        class="img-responsive"  style="height: 250px;object-fit: cover;"/>
 
                                                                     <input type="text" ng-model="image.image_url"
                                                                         class="form-control">
 
                                                                     <button class="button btn-mini dark-blue1 mt-5"
                                                                         ng-click="updateImage(image)">Update
+                                                                        Image</button>
+
+                                                                        <button class="button btn-mini dark-blue1 mt-5"
+                                                                        ng-click="deleteImage(image, $index)">Delete
                                                                         Image</button>
 
 
