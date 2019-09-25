@@ -239,7 +239,7 @@ def business_hotel():
 @app.route('/hotel/list', methods=['GET'])
 @login_required
 def business_hotel_list():
-    if True or 'partner_data' in session:
+    if 'partner_data' in session:
         partner_data = session["partner_data"]
         return render_template('hotel/b2b_hotels/hotel_list.html', name=partner_data["name"])
         # return render_template('hotel/b2b_hotels/hotel_list.html')
