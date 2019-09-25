@@ -242,7 +242,7 @@ def business_hotel_list():
     if True or 'partner_data' in session:
         partner_data = session["partner_data"]
         return render_template('hotel/b2b_hotels/hotel_list.html', name=partner_data["name"])
-        return render_template('hotel/b2b_hotels/hotel_list.html')
+        # return render_template('hotel/b2b_hotels/hotel_list.html')
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
