@@ -122,8 +122,8 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.result = false;
         $scope.deals = [];
         $scope.imagesData = {};
-        $scope.min = 0;
-        $scope.max = 200000;
+        $scope.min = 200;
+        $scope.max = 100000;
 
 
         $scope.amenities = {};
