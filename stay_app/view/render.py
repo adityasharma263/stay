@@ -248,19 +248,18 @@ def business_hotel_list():
 
 
 @app.route('/hotel/<string:slug>', methods=['GET'])
-# @login_required
+@login_required
 def business_hotel_detail(slug):
-    # if 'partner_data' in session:
-    #     partner_data = session["partner_data"]
-    #     args = request.args.to_dict()
-    #     args["slug"] = slug
-    #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    #     hotel_data = requests.get(url=hotel_api_url, params=args).json()
-    return render_template('hotel/b2b_hotels/hotel_detail.html')
-        # , hotel_data=hotel_data["result"]["hotel"],
-                            #    name=partner_data['name'], params=args)
-    # else:
-    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        args = request.args.to_dict()
+        args["slug"] = slug
+        hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+        hotel_data = requests.get(url=hotel_api_url, params=args).json()
+        return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
+                               name=partner_data['name'], params=args)
+    else:
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= Index Pages ==========================
