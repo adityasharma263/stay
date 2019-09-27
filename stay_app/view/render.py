@@ -82,13 +82,14 @@ def admin_login_required(f):
 #================= Admin hotels ==========================
 
 @app.route('/admin/hotel', methods=['GET'])
-@admin_login_required
+# @admin_login_required
 def admin():
-    if 'admin_data' in session:
-        admin_data = session["admin_data"]
-        return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
-    else:
-        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+    # if 'admin_data' in session:
+    #     admin_data = session["admin_data"]
+        return render_template('hotel/admin/admin_hotel.html')
+        # , name=admin_data["name"])
+    # else:
+    #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/home', methods=["GET"])
