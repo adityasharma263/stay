@@ -724,8 +724,8 @@ def cart_api():
                 if deal:
                     total_deals = total_deals + deal.no_of_deals
                     deal_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/deal", params={"id": deal.deal_id,
-                                                                                                      "ci": deal.ci,
-                                                                                                      "c0": deal.co})
+                                                                                                      "ci": deal.ci_date,
+                                                                                                      "co": deal.co_date})
                     deal.current_deal_amount = int(deal_data.json()["result"]["deal"][0]["price"]) * deal.no_of_deals
                     total_amount = total_amount + deal.current_deal_amount
 
