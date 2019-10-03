@@ -738,7 +738,7 @@ def cart_api():
         return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
     else:
         cart = request.json
-        cart_deals = cart.get("cart_deals", None)
+        cart_deals = cart.get("", None)
         cart.pop('cart_deals', None)
         cart_post = Cart(**cart)
         cart_post.save()
