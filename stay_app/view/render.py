@@ -82,14 +82,13 @@ def admin_login_required(f):
 #================= Admin hotels ==========================
 
 @app.route('/admin/hotel', methods=['GET'])
-# @admin_login_required
+@admin_login_required
 def admin():
-    # if 'admin_data' in session:
-    #     admin_data = session["admin_data"]
-        return render_template('hotel/admin/admin_hotel.html')
-        # , name=admin_data["name"])
-    # else:
-    #     return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        return render_template('hotel/admin/admin_hotel.html', name=admin_data["name"])
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route('/admin/home', methods=["GET"])
@@ -131,28 +130,28 @@ def admin_hotel_search():
 
 
 @app.route("/admin/hotel/deal", methods=["GET"])
-# @admin_login_required
+@admin_login_required
 def admin_deal_id():
     if True or 'admin_data' in session:
-        # admin_data = session["admin_data"]
+        admin_data = session["admin_data"]
         hotel_id = request.args.get('id')
         args = request.args.to_dict()
         if not hotel_id:
             args = {"id": 1}
         hotel_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/hotel/terminal", params=args)
         hotel_data = hotel_data.json()["result"]
-        # return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data, name=admin_data["name"])
+        return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data, name=admin_data["name"])
         return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route("/admin/hotel/terminal", methods=["GET"])
-# @admin_login_required
+@admin_login_required
 def admin_terminal():
     if True or 'admin_data' in session:
-        # admin_data = session["admin_data"]
-        # return render_template("hotel/admin/admin_hotel_terminal.html", name=admin_data["name"])
+        admin_data = session["admin_data"]
+        return render_template("hotel/admin/admin_hotel_terminal.html", name=admin_data["name"])
         return render_template("hotel/admin/admin_hotel_terminal.html")
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
