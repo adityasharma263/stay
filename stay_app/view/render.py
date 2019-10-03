@@ -81,6 +81,7 @@ def admin_login_required(f):
 
 #================= Admin hotels ==========================
 
+
 @app.route('/admin/hotel', methods=['GET'])
 @admin_login_required
 def admin():
