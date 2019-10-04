@@ -573,7 +573,8 @@ def deal_api():
             for room_obj in rooms:
                 room_list.append(room_obj.id)
             q_deal = q_deal.filter(Deal.room_id.in_(room_list))
-
+        price_list = []
+        total_days = 1
         price = 0
         for deal in q_deal:
             if check_in and check_out:
@@ -738,8 +739,8 @@ def cart_api():
             for deal in cart.cart_deals:
                 if deal:
                     deal_args = {"id": deal.deal_id,
-                     "start_date": deal.ci_date,
-                     "end_date": deal.co_date}
+                     "start_date": int(time.mktime(time.strptime(str(deal.ci_date)[:19], "%Y-%m-%d %H:%M:%S"))),
+                     "end_date": int(time.mktime(time.strptime(str(deal.co_date)[:19], "%Y-%m-%d %H:%M:%S")))}
                     print(deal_args)
                     total_deals = total_deals + deal.no_of_deals
                     deal_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/deal",
