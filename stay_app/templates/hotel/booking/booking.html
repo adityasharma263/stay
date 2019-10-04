@@ -312,6 +312,7 @@
 
         var scope = $('[ng-controller="bookingController"]').scope();
         scope.cartDetails = {{cart_data | tojson}}
+        scope.cartDetails = scope.cartDetails.cart;
 
     })
 </script>
