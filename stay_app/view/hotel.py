@@ -536,8 +536,8 @@ def deal_api():
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
         args.pop('price_end', None)
-        start_date = request.args.get('start_date', None)
-        end_date = request.args.get('end_date', None)
+        check_in = request.args.get('start_date', None)
+        check_out = request.args.get('end_date', None)
         args.pop('start_date', None)
         args.pop('end_date', None)
         order_by = request.args.get('order_by', None)
@@ -574,16 +574,31 @@ def deal_api():
                 room_list.append(room_obj.id)
             q_deal = q_deal.filter(Deal.room_id.in_(room_list))
 
-        if start_date and end_date:
-            # deal_for_dates = []
-            start_date = datetime.datetime.fromtimestamp(int(start_date)).date()
-            end_date = datetime.datetime.fromtimestamp(int(end_date)).date()
-            for deal in q_deal:
-                deal_for_dates = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
-                                                                    PriceCalendar.date >= start_date,
-                                                                    PriceCalendar.date <= end_date).all()
-                if deal_for_dates:
-                    deal.price_calendar = deal_for_dates
+        price = 0
+        for deal in q_deal:
+            if check_in and check_out:
+                delta = check_out - check_in
+                total_days = delta.days
+                price_list = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
+                                                                    PriceCalendar.date >= check_in,
+                                                                    PriceCalendar.date < check_out).all()
+            for i in range(total_days):
+                if i < len(price_list):
+                    price = price_list[i].b2b_final_price + price
+                else:
+                    if deal.b2b_final_price:
+                        price = deal.b2b_final_price + price
+            price = int(price / total_days)
+            deal.price = price
+        # if start_date and end_date:
+        #     start_date = datetime.datetime.fromtimestamp(int(start_date)).date()
+        #     end_date = datetime.datetime.fromtimestamp(int(end_date)).date()
+        #     for deal in q_deal:
+        #         deal_for_dates = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
+        #                                                             PriceCalendar.date >= start_date,
+        #                                                             PriceCalendar.date <= end_date).all()
+        #         if deal_for_dates:
+        #             deal.price_calendar = deal_for_dates
         if price_start and price_end:
             q_deal = q_deal.filter(Deal.price >= price_start, Deal.price <= price_end)
         if order_by:
