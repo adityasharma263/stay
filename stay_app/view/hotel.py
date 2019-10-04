@@ -772,6 +772,11 @@ def cart_id(id):
 def cart_deal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
+        ci_date = request.args.get('ci_date')
+        co_date = request.args.get('co_date')
+        if ci_date and co_date:
+            args["ci_date"] = datetime.datetime.fromtimestamp(int(ci_date)).date()
+            args["co_date"] = datetime.datetime.fromtimestamp(int(co_date)).date()
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
