@@ -215,8 +215,7 @@ def cart():
             else:
                 print("hey")
                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
-                print("sorry", response.json())
-            return response.json()
+            return jsonify(response.json())
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
