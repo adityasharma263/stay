@@ -726,9 +726,9 @@ def cart_api():
                     deal_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/deal", params={"id": deal.deal_id,
                                                                                                       "start_date":  int(time.mktime(time.strptime(str(deal.ci_date)[:19], "%Y-%m-%d %H:%M:%S"))),
                                                                                                       "end_date":  int(time.mktime(time.strptime(str(deal.co_date)[:19], "%Y-%m-%d %H:%M:%S")))})
-                    deal.current_deal_amount = int(deal_data.json()["result"]["deal"][0].get('price', 0)) * deal.no_of_deals
-                    total_amount = total_amount + deal.current_deal_amount
-
+                    if deal_data.json()["result"]["deal"]:
+                        deal.current_deal_amount = int(deal_data.json()["result"]["deal"][0].get('price', 0)) * deal.no_of_deals
+                        total_amount = total_amount + deal.current_deal_amount
                     hotel = q.filter(Deal.id == deal.deal_id).first()
             cart.total_booking_amount = total_amount
             cart.total_no_of_deals = total_deals
