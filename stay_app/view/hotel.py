@@ -590,8 +590,7 @@ def deal_api():
                 price_list = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
                                                                     PriceCalendar.date >= check_in,
                                                                     PriceCalendar.date < check_out).all()
-                if price_list:
-                    deal.price_calendar = price_list
+
             for i in range(total_days):
                 if i < len(price_list):
                     price = price_list[i].b2b_final_price + price
@@ -599,7 +598,8 @@ def deal_api():
                     if deal.b2b_final_price:
                         price = deal.b2b_final_price + price
             price = int(price / total_days)
-            print(price)
+            if price_list:
+                deal.price_calendar = price_list
             deal.price = price
         # if start_date and end_date:
         #     start_date = datetime.datetime.fromtimestamp(int(start_date)).date()
