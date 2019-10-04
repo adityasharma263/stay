@@ -737,11 +737,13 @@ def cart_api():
         for cart in data:
             for deal in cart.cart_deals:
                 if deal:
+                    deal_args = {"id": deal.deal_id,
+                     "start_date": int(time.mktime(time.strptime(str(deal.ci_date)[:19], "%Y-%m-%d %H:%M:%S"))),
+                     "end_date": int(time.mktime(time.strptime(str(deal.co_date)[:19], "%Y-%m-%d %H:%M:%S")))}
+                    print(deal_args)
                     total_deals = total_deals + deal.no_of_deals
                     deal_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/deal",
-                                             params={"id": deal.deal_id,
-                                                     "start_date":  int(time.mktime(time.strptime(str(deal.ci_date)[:19], "%Y-%m-%d %H:%M:%S"))),
-                                                     "end_date":  int(time.mktime(time.strptime(str(deal.co_date)[:19], "%Y-%m-%d %H:%M:%S")))}).json()
+                                             params=deal_args).json()
                     if deal_data["result"]["deal"]:
                         deal.current_deal_amount = int(deal_data["result"]["deal"][0].get('price', 0)) * deal.no_of_deals
                         total_amount = total_amount + deal.current_deal_amount
