@@ -81,6 +81,7 @@ def admin_login_required(f):
 
 #================= Admin hotels ==========================
 
+
 @app.route('/admin/hotel', methods=['GET'])
 @admin_login_required
 def admin():
@@ -201,25 +202,47 @@ def booking():
 
 #================= Cart hotels ==========================
 
+
 @app.route('/hotel/cart', methods=['POST'])
 @login_required
 def cart():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
-        if request.method == 'post':
+        if request.method == 'POST':
             cart = request.json
+            no_of_deal = cart.pop("no_of_deal", 0)
+            cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
+                                     params={"partner_id": partner_data["id"]}).json()
+            cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
-            if cart_deal_data["result"]["cart_deal"][0]:
-                id = cart_deal_data["result"]["cart_deal"][0]["id"]
-                no_of_deal = int(cart_deal_data["result"]["cart_deal"][0]["no_od_deal"]) + 1
-                response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(id), json={"no_of_deals": no_of_deal})
+            if cart_deal_data["result"]["cart_deal"]:
+                cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"] # always one element in array
+                response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
-                cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
-                cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
-                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
-            return response.json()
+                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
+            return jsonify(response.json())
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+
+# @app.route('/hotel/cart', methods=['POST'])
+# @login_required
+# def cart():
+#     if 'partner_data' in session:
+#         partner_data = session["partner_data"]
+#         if request.method == 'post':
+#             cart = request.json
+#             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
+#             if cart_deal_data["result"]["cart_deal"][0]:
+#                 id = cart_deal_data["result"]["cart_deal"][0]["id"]
+#                 no_of_deal = int(cart_deal_data["result"]["cart_deal"][0]["no_od_deal"]) + 1
+#                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(id), json={"no_of_deals": no_of_deal})
+#             else:
+#                 cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
+#                 cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
+#                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
+#             return response.json()
+#     else:
+#         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 #================= B2B hotels ==========================
 
