@@ -30,81 +30,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2 class="modal-title">Share Detail</h2>
                 </div>
-                <div class="modal-body">
-                        <div id="share-buttons">
-                            <!-- Buffer -->
-                            <a href="https://bufferapp.com/add?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
-                            </a>
-
-                            <!-- Digg -->
-                            <a href="http://www.digg.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/diggit.png" alt="Digg" />
-                            </a>
-
-                            <!-- Email -->
-                            <a href="mailto:?Subject=travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://travel-beans.ap-south-1.elasticbeanstalk.com/">
-                                <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
-                            </a>
-
-                            <!-- Facebook -->
-                            <a href="http://www.facebook.com/sharer.php?u=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
-                            </a>
-
-                            <!-- Google+ -->
-                            <a href="https://plus.google.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
-                            </a>
-
-                            <!-- LinkedIn -->
-                            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
-                            </a>
-
-                            <!-- Pinterest -->
-                            <!-- <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
-                                <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
-                            </a> -->
-
-                            <!-- Print -->
-                            <a href="javascript:;" onclick="window.print()">
-                                <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
-                            </a>
-
-                            <!-- Reddit -->
-                            <a href="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
-                            </a>
-
-                            <!-- StumbleUpon-->
-                            <a href="http://www.stumbleupon.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/stumbleupon.png" alt="StumbleUpon" />
-                            </a>
-
-                            <!-- Tumblr-->
-                            <a href="http://www.tumblr.com/share/link?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
-                            </a>
-
-                            <!-- Twitter -->
-                            <a href="https://twitter.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}&amp;text=travel-beans%20ap-south-1%20elasticbeanstalk.com&amp;hashtags=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
-                            </a>
-                            <br>
-                            <div></div>
-                            <div class="col-sm-6">
-                                <input class="form-control" type="text" value="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/{{hotel_data.id}}" id="myInput">
-                            </div>
-                                <!-- <div class="tooltip"> -->
-                            <button class="btn btn-default" onclick="copyUrl()">
-                                <span data-toggle="tooltip" title="Copy to clipboard!" id="myTooltip">
-                                    Copy text
-                                </span>
-                            </button>
-                            <!-- </div> -->
-                    </div>
-                </div>
+              
 <!--                <div class="modal-footer">-->
 <!--                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
 <!--                </div>-->
@@ -188,6 +114,7 @@
                                             </div>
                                         </form>
                                         <h2>Available Rooms</h2>
+                                        
                                          {% for room in hotel_data.rooms %}
                                          {% for deal in room.deals %}
                                          {% if deal.ts_exclusive %}
@@ -240,9 +167,8 @@
                                         <h2>Hotel Amenities</h2>
                                         <p>Hotel Have  All of These Amenities</p>
                                         <ul class="amenities clearfix style2">
-                                            {% for hotel in hotel_data %}
-                                            {% for amenities in hotel.hotel_data %}
-                                            {% if hotel.amenities.twenty_four_hr_room_service %}
+                                           
+                                            {%if hotel_data.amenities.twenty_four_hr_room_service %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2">
                                                     <i class="soap-icon-24-hrroomservice circle" >
@@ -267,271 +193,266 @@
                                                     24/7 Room Service</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.twenty_four_hr_reception %}
+                                            {% if hotel_data.amenities.twenty_four_hr_reception %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-user circle" ></i>24/7 reception</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.parking %}
+                                            {% if hotel_data.amenities.parking %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-parking circle"></i>Car Park</div>
                                             </li>
-                                            {% endif %}
-                                            {% if hotel.amenities.conference_room %}
+                                            {% endif %}                                            
+                                            {% if hotel_data.amenities.conference_room %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-conference circle"></i>Conference Rooms</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.express_check_in_out %}
+                                            {% if hotel_data.amenities.express_check_in_out %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Express check-in / out</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.bar %}
+                                            {% if hotel_data.amenities.bar %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-winebar circle"></i>Hotel bar</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.lift %}
+                                            {% if hotel_data.amenities.lift %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Elevator in Building</div>
                                             </li>
-                                            {% endif%}
-                                            {% if hotel.amenities.laundry_service %}
+                                            {% endif %}
+                                            {% if hotel_data.amenities.laundry_service %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-shopping-2 circle"></i>Laundry service</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.indoor_swimming_pool %}
+                                            {% if hotel_data.amenities.indoor_swimming_pool %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Indoor swimming pool</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.swimming %}
+                                            {% if hotel_data.amenities.swimming %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>Outdoor swimming pool</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.porter_service %}
+                                            {% if hotel_data.amenities.porter_service %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-baggage-5 circle"></i>Porter service</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.restaurant %}
+                                            {% if hotel_data.amenities.restaurant %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-breakfast circle"></i>Restaurant</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.Room_cleaning_service %}
+                                            {% if hotel_data.amenities.Room_cleaning_service %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-wifi circle"></i>Room Cleaning Service</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.terrace %}
+                                            {% if hotel_data.amenities.terrace %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Terrace</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.pool %}
+                                            {% if hotel_data.amenities.pool %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-beach circle"></i>Towels at the pool / beach</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.spa %}
+                                            {% if hotel_data.amenities.spa %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-key circle"></i>Wellness centre/Spa</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.wifi_in_lobby %}
+                                            {% if hotel_data.amenities.wifi_in_lobby %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-wifi circle"></i>WiFi in lobby</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.child_baby_cot %}
+                                            {% if hotel_data.amenities.child_baby_cot %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-support circle"></i>Child/Baby cot</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.wheelchair_accessible %}
+                                            {% if hotel_data.amenities.wheelchair_accessible %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-handicapaccessiable circle"></i>Wheelchair Accessible</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.doorman %}
+                                            {% if hotel_data.amenities.doorman %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-doorman circle"></i>Doorman</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.gym %}
+                                            {% if hotel_data.amenities.gym %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Gym</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.hairdresser %}
+                                            {% if hotel_data.amenities.hairdresser %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-horn circle"></i>Hairdresser</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.non_smoking_smoking_rooms %}
+                                            {% if hotel_data.amenities.non_smoking_smoking_rooms %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-smoking circle"></i>Non-Smoking / Smoking Rooms</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.pet_allowance %}
+                                            {% if hotel_data.amenities.pet_allowance %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-pets circle"></i>Pets Allowence</div>
                                             </li>
                                             {% endif %}
-                                            {% if hotel.amenities.banquets %}
+                                            {% if hotel_data.amenities.banquets %}
                                             <li class="col-md-4 col-sm-6" >
                                                 <div class="icon-box style2"><i class="soap-icon-plans circle"></i>Banquets</div>
                                             </li>
                                             {% endif %}
                                         </ul>
                                         
-                                        {% endfor %}
-                                        {% endfor %}
+                                       
                                         <br>
                                         <h2>Room Facilities</h2>
                                         <p> All of These Facilities are Confined to The Room</p>
 
-                                        {% for rooms in hotel_data %}
-                                        {% for facilities in rooms.hotel_data %}
+                                        {% for room in hotel_data.rooms %}
+                                        {% for deal in room.deals %}
+                                        {% if deal.ts_exclusive %}
                                         <ul class="amenities clearfix style1">
-                                        {% if rooms.facilities.wifi %}
-                                            <li class="col-md-4 col-sm-6">
-                                                <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
-                                            </li>
-                                        {% endif %}
-                                        {% if rooms.facilities.tv %}
+                                        {% if room.facilities.tv %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Television</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.electric_kettle %}
+                                        {% if room.facilities.electric_kettle %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.ac %}
+                                        {% if room.facilities.ac %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.bathtub %}
+                                        {% if room.facilities.bathtub %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with bathtub</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.bathroom_with_shower  %}
+                                        {% if room.facilities.bathroom_with_shower  %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-tub"></i>Bathroom with shower</div>
                                             </li>
                                         {% endif%}
-                                        {% if rooms.facilities.desk %}
+                                        {% if room.facilities.desk %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-minus"></i>Desk</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.hairdryer %}
+                                        {% if room.facilities.hairdryer %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-horn"></i>Hairdryer</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.room_safe %}
+                                        {% if room.facilities.room_safe %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-securevault"></i>Room safe</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.phone %}
+                                        {% if room.facilities.phone %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.food_serve_at_room %}
+                                        {% if room.facilities.food_serve_at_room %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-food"></i>Food Serve at Room</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.bathroom_cosmetics %}
+                                        {% if room.facilities.bathroom_cosmetics %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-check-1"></i>Bathroom Cosmetics</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.bathroom_nightie %}
+                                        {% if room.facilities.bathroom_nightie %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-features"></i>Bathroom Nightie</div>
                                             </li>
                                         {% endif%}
-                                        {% if rooms.facilities.ironing_facility %}
+                                        {% if room.facilities.ironing_facility %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-flexible"></i>Ironing Facility</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.weighing_machine %}
+                                        {% if room.facilities.weighing_machine %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-clock"></i>Weighing Machine</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.wardrobes_closet %}
+                                        {% if room.facilities.wardrobes_closet %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-trunk-2"></i>Wardrobes / Closet</div>
                                             </li>
                                         {% endif%}
-                                        {% if rooms.facilities.view %}
+                                        {% if room.facilities.view %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-beach"></i>View </div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.room_seating_area %}
+                                        {% if room.facilities.room_seating_area %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-passenger"></i>Room Seating Area</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.room_slipper %}
+                                        {% if room.facilities.room_slipper %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-ski"></i>Room Slipper</div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.morning_newspaper %}
+                                        {% if room.facilities.morning_newspaper %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-magazine-1"></i>Morning Newspaper </div>
                                             </li>
                                         {% endif %}
-                                        {% if rooms.facilities.bathroom_towels %}
+                                        {% if room.facilities.bathroom_towels %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-shopping-2"></i>Bathroom Towels </div>
                                             </li>
                                             {% endif %}
-                                            {% if rooms.facilities.free_evening_snacks %}
+                                            {% if room.facilities.free_evening_snacks %}
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
                                             {% endif %}
-                                            {% if rooms.facilities.free_toiletries %}
+                                            {% if room.facilities.free_toiletries %}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Toiletries </div>
                                                 </li>
                                             {% endif %}
-                                            {% if rooms.facilities.fan%}
+                                            {% if room.facilities.fan%}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Fan </div>
                                             </li>
                                             {% endif %}
-                                            {% if rooms.facilities.heater %}
+                                            {% if room.facilities.heater %}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Heater</div>
                                             </li>
                                             {% endif %}
-                                            {% if rooms.facilities.jacuzzi %}
+                                            {% if room.facilities.jacuzzi %}
                                             <li class="col-md-4 col-sm-6">
                                                     <div class="icon-box style1"><i class="soap-icon-juice"></i>Free Evening Snacks </div>
                                             </li>
                                             {% endif %}
                                         </ul>
+                                        {% endif %}
                                         {% endfor %}
                                         {% endfor %}
-
 
                                     </div>
                                     <div class="tab-pane fade" id="hotel-Booking" >
@@ -554,9 +475,9 @@
                         </div>
                         <div class="sidebar col-md-3">
                                 <article class="detailed-logo">
-                                    {% if hotel_data.rooms[1] %}
+                                    {% if hotel_data.rooms %}
                                     <figure>
-                                        <img   src="{{hotel_data.rooms[1].image_url}}" alt="">
+                                        <img   src="{{hotel_data.rooms.image_url}}" alt="">
                                     </figure>
                                     {% endif %}
                                     <div class="details">

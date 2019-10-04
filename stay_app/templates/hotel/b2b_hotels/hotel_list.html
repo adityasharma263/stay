@@ -22,8 +22,8 @@
         <div id="main">
             <div class="row">
                 <div class="col-sm-4 col-md-3">
-                    <div class="toggle-container filters-container">
-                        <div class="panel style1 arrow-right">
+                    <div class="toggle-container style1 filters-container">
+                        <div class="panel arrow-right">
                             <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {  rating : null ,
                                             star :  null,
                                             price_start : null,
@@ -32,11 +32,9 @@
                         </div>
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#modify-search-panel" class="collapsed"
-                                    aria-expanded="false">Modify Search</a>
+                                <a data-toggle="collapse" target="_self" href="#modify-search-panel" class="">Modify Search</a>
                             </h4>
-                            <div id="modify-search-panel" class="panel-collapse" aria-expanded="true"
-                                style="height: 200px;">
+                            <div id="modify-search-panel" class="panel-collapse collapse in">
                                 <div class="panel-content">
                                     <form>
 
@@ -66,42 +64,11 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="panel style1 arrow-right">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#modify-search-panel" class="collapsed" aria-expanded="false">Modify Search</a>
-                                    </h4>
-                                    <div id="modify-search-panel" class="panel-collapse" aria-expanded="false" style="height: 300px;">
-                                        <div class="panel-content">
-                                            <form method="post">
-                                                <div class="form-group">
-                                                    <label>destination</label>
-                                                    <input type="text" class="input-text full-width" placeholder="" value="Paris">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>check in</label>
-                                                    <div class="datepicker-wrap">
-                                                        <input type="date" name="date_from" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1562094281457"><img class="ui-datepicker-trigger" src="./Travelo - Travel, Tour Booking HTML5 Template_files/blank.png" alt="" title="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>check out</label>
-                                                    <div class="datepicker-wrap">
-                                                        <input type="date" name="date_to" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1562094281458"><img class="ui-datepicker-trigger" src="./Travelo - Travel, Tour Booking HTML5 Template_files/blank.png" alt="" title="">
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <button class="btn-medium icon-check uppercase full-width">search again</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div> -->
-
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>
+                                <a data-toggle="collapse" target="_self" href="#price-filter" class="collapsed">Price</a>
                             </h4>
-                            <div id="price-filter" class="panel-collapse collapse filters-container"
-                                style="height: 0px;">
+                            <div id="price-filter" class="panel-collapse collapse">
                                 <div class="panel-content">
 
                                     <div id="price-range" class="form-group">
@@ -334,7 +301,7 @@
 
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#tour-type-filter" class="collapsed">Tour Type</a>
+                                <a data-toggle="collapse" target="_self" href="#tour-type-filter" class="collapsed">Tour Type</a>
                             </h4>
                             <div id="tour-type-filter"
                                 data-url-notour_type="/wordpress/travelo/?post_type=tour&amp;s&amp;view=list"
@@ -358,10 +325,10 @@
 
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#star-filter" class="collapsed">Star</a>
+                                <a data-toggle="collapse" target="_self" href="#star-filter" class="collapsed">Star</a>
                             </h4>
 
-                            <div id="star-filter" class="panel-collapse collapse filters-container">
+                            <div id="star-filter" class="panel-collapse collapse">
                                 <div class="panel-content">
                                     <div class="form-group">
                                         <label>1<i class="fa fa-star" aria-hidden="true"></i>
@@ -419,18 +386,18 @@
                                 <article class="box">
                                     <div ng-repeat="deal in room.deals" ng-if="deal.b2b_lowest_price"
                                         ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false">
-                                        <a href="/hotel/[[hotel.slug]]">
-                                            <figure class="col-sm-5 col-md-4" style="padding: 15px;">
-                                                <img data-toggle="modal"
-                                                    style="height:100%; width:100%; cursor: pointer"
-                                                    src="http://[[room.image_url]]" alt="Travel Square">
+                                        <a target="_self" href="/hotel/[[hotel.slug]]">
+                                            <figure ng-repeat="hotel in hotelData" style="height: 170px;" class="col-sm-5 col-md-4" style="padding: 15px;">
+                                                <img ng-repeat="image in hotel.images" data-toggle="modal"
+                                                    style="height:100%; width: 100%; margin-left: -15px; cursor: pointer"
+                                                    src="[[image.image_url[0]]]" alt="Travel Square">
                                             </figure>
                                         </a>
                                         <div class="details col-sm-7 col-md-8">
                                             <div>
-                                                <a href="/hotel/[[hotel.slug]]">
+                                                <a target="_self" href="/hotel/[[hotel.slug]]">
                                                     <div class="ng-cloak" style="margin-top: 5px;">
-                                                        <h3 style="cursor: pointer;" class="box-title">[[hotel.name]]
+                                                        <h3 style="cursor: pointer; text-transform: capitalize;" class="box-title">[[hotel.name]]
                                                             <small>
                                                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                                                 <span id="latitude" style="cursor:pointer"
@@ -482,8 +449,13 @@
                                                         </div>
                                                     </span>
                                                 </div>
+<<<<<<< HEAD
 
                                                 <div class="amenities" style="float:left">
+=======
+                                                
+                                                <div class="amenities" style="float: center; margin-left: 15px;">
+>>>>>>> f6cf4ff1ec69cc519aa37daec6adb2d6c8e19288
                                                     <span class="price" aria-hidden="true"
                                                         style="text-align: initial; cursor: pointer;">₹[[deal.price]]</span>
                                                 </div>
@@ -501,7 +473,7 @@
                             <h3>No Result found</h3>
                         </article>
                     </div>
-                    <a href="" class="uppercase full-width button btn-large" ng-click='loadMoreHotelsData()'>load more
+                    <a target="_self" href="" class="uppercase full-width button btn-large" ng-click='loadMoreHotelsData()'>load more
                         listing</a>
                 </div>
             </div>

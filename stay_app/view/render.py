@@ -131,28 +131,28 @@ def admin_hotel_search():
 
 
 @app.route("/admin/hotel/deal", methods=["GET"])
-# @admin_login_required
+@admin_login_required
 def admin_deal_id():
     if True or 'admin_data' in session:
-        # admin_data = session["admin_data"]
+        admin_data = session["admin_data"]
         hotel_id = request.args.get('id')
         args = request.args.to_dict()
         if not hotel_id:
             args = {"id": 1}
         hotel_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/hotel/terminal", params=args)
         hotel_data = hotel_data.json()["result"]
-        # return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data, name=admin_data["name"])
+        return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data, name=admin_data["name"])
         return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route("/admin/hotel/terminal", methods=["GET"])
-# @admin_login_required
+@admin_login_required
 def admin_terminal():
     if True or 'admin_data' in session:
-        # admin_data = session["admin_data"]
-        # return render_template("hotel/admin/admin_hotel_terminal.html", name=admin_data["name"])
+        admin_data = session["admin_data"]
+        return render_template("hotel/admin/admin_hotel_terminal.html", name=admin_data["name"])
         return render_template("hotel/admin/admin_hotel_terminal.html")
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
@@ -263,12 +263,12 @@ def business_hotel():
 
 
 @app.route('/hotel/list', methods=['GET'])
-# @login_required
+@login_required
 def business_hotel_list():
-    if True or 'partner_data' in session:
-        # partner_data = session["partner_data"]
-        # return render_template('hotel/b2b_hotels/hotel_list.html', name=partner_data["name"])
-        return render_template('hotel/b2b_hotels/hotel_list.html')
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        return render_template('hotel/b2b_hotels/hotel_list.html', name=partner_data["name"])
+        # return render_template('hotel/b2b_hotels/hotel_list.html')
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
