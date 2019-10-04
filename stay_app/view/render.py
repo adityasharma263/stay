@@ -205,8 +205,8 @@ def cart():
         if request.method == 'POST':
             cart = request.json
             no_of_deal = cart.pop("no_of_deal", 0)
-            cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
-                                     params={"partner_id": partner_data["id"]}).json()
+            print(partner_data["id"])
+            cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
             cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
             if cart_deal_data["result"]["cart_deal"]:
