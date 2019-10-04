@@ -538,8 +538,11 @@ def deal_api():
         args.pop('price_end', None)
         check_in = request.args.get('start_date', None)
         check_out = request.args.get('end_date', None)
-        args.pop('start_date', None)
-        args.pop('end_date', None)
+        if check_out and check_out:
+            check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
+            check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
+            args.pop('start_date', None)
+            args.pop('end_date', None)
         order_by = request.args.get('order_by', None)
         args.pop('order_by', None)
         room_id = request.args.get('room_id', None)
