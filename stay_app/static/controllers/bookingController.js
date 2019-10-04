@@ -19,7 +19,7 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
     // especially when user remove from in between from the array
     $scope.customersSelectedRooms = [[]];
 
-    $scope.cartDetails = [];
+    $scope.cartDetails = cartDetails;
     // $scope.cartDetails =
     //     [{
     //         "cart_deals": [

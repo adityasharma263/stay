@@ -308,12 +308,12 @@
 {% block footJS %}
 <script src="/controllers/bookingController.js"> </script>
 <script>
-    $(function(){
+    
 
-        var scope = $('[ng-controller="bookingController"]').scope();
-        scope.cartDetails = {{cart_data | tojson}}
-        scope.cartDetails = scope.cartDetails.cart;
+       
+        var cartDetails = {{cart_data | tojson}}
+        cartDetails = scope.cartDetails.cart;
 
-    })
+    
 </script>
 {% endblock %}
