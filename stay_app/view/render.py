@@ -168,7 +168,10 @@ def booking():
         if request.method == 'GET':
             if True or partner_data["status"] == 'Approved':
                 # return render_template('hotel/booking/booking.html', partner_data=partner_data)
-                return render_template('hotel/booking/booking.html')
+
+                partner_id =  partner_data["id"] if 'partner_data' in locals() else 1
+                response = requests.get(str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id" : partner_id})
+                return render_template('hotel/booking/booking.html', cart_data= response.json())
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
                "click here  FOR THE APPROVAL </b></a>"
