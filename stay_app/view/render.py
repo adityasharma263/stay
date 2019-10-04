@@ -213,7 +213,7 @@ def cart():
                 cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"] # always one element in array
                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
-                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
+                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
             return response.json()
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
