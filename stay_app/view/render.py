@@ -202,7 +202,7 @@ def booking():
 def cart():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
-        if request.method == 'post':
+        if request.method == 'POST':
             cart = request.json
             no_of_deal = cart.pop("no_of_deal", 0)
             cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
