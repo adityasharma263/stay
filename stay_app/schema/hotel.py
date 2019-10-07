@@ -204,6 +204,7 @@ class RoomB2BListSchema(ma.ModelSchema):
 
 
 class HotelB2BListSchema(ma.ModelSchema):
+    images = ma.Nested(ImageSchema, many=True)
     amenities = ma.Nested(AmenitySchema, many=False)
     rooms = ma.Nested(RoomB2BListSchema, many=True)
 

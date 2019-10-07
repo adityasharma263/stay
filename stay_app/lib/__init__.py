@@ -1,1 +1,2 @@
-# http://127.0.0.1:8000/api/v1/hotel/list/b2b?name=leela&ci=1567578397&co=1567841197
+# -*- coding: utf-8 -*-
+import stay_app.lib.send_email

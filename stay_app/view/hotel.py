@@ -122,13 +122,17 @@ def hotel_terminal_api():
         args.pop('per_page', None)
         city = request.args.get('city')
         args.pop('city', None)
+        search = request.args.get('search')
+        args.pop('search', None)
         name = request.args.get('name')
         q = db.session.query(Hotel)
         if city:
-            q = q.filter(Hotel.city.ilike('%' + city + '%'))
+            q = q.filter(Hotel.city.ilike('%' + city + '%')).order_by(Hotel.city)
         if name:
-            q = q.filter(Hotel.name.ilike('%' + name + '%'))
-        hotels = q.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+            q = q.filter(Hotel.name.ilike('%' + name + '%')).order_by(Hotel.name)
+        if search:
+            q = q.filter(Hotel.city.ilike('%' + search + '%') | Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name)
+        hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelTerminalSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
 
