@@ -44,7 +44,7 @@
                                                 <div class="datepicker-wrap from-today">
                                                     <input name="date_from" type="text" autocomplete="off"
                                                         class="input-text full-width" placeholder="mm/dd/yy"
-                                                        ng-model="hotel.ci" id="dp1566640682637">
+                                                        ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'" id="dp1566640682637">
                                                     <img class="ui-datepicker-trigger" src="" alt="" title="">
                                                 </div>
                                             </div>
@@ -53,7 +53,7 @@
                                                 <div class="datepicker-wrap from-today">
                                                     <input name="date_to" type="text" autocomplete="off"
                                                         class="input-text full-width" placeholder="mm/dd/yy"
-                                                        ng-model="hotel.co" id="dp1566640682638">
+                                                        ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'" id="dp1566640682638">
                                                     <img class="ui-datepicker-trigger" src="" alt="" title="">
                                                 </div>
                                             </div>
