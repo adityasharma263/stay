@@ -291,10 +291,12 @@ def business_hotel_detail(slug):
         args["slug"] = slug
         hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
         hotel_data = requests.get(url=hotel_api_url, params=args).json()
-        return render_template('hotel/b2b_hotels/hotel_detail.html'), hotel_data=hotel_data["result"]["hotel"],
+        print("Hotel Data", hotel_data)
+        return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
                                name=partner_data['name'], params=args)
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+       
 
 
 #================= Index Pages ==========================
