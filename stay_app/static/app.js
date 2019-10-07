@@ -177,6 +177,10 @@ var app = angular.module('stay', ['angular.filter'])
 
         $scope.amenityFilter = function() {
 
+            console.log($scope.amenities);
+
+            return;
+
             // using spread operator(... (3 dots)) to concat two json objects
             urlParams = {...urlParams , ...$scope.amenities};
             $scope.getHotelsData();

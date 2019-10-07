@@ -307,4 +307,13 @@
 
 {% block footJS %}
 <script src="/controllers/bookingController.js"> </script>
+<script>
+    
+
+       
+        var cartDetails = {{cart_data | tojson}}
+        cartDetails = cartDetails.result.cart;
+
+    
+</script>
 {% endblock %}

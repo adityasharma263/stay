@@ -19,7 +19,7 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
     // especially when user remove from in between from the array
     $scope.customersSelectedRooms = [[]];
 
-    $scope.cartDetails = [];
+    $scope.cartDetails = cartDetails;
     // $scope.cartDetails =
     //     [{
     //         "cart_deals": [
@@ -120,11 +120,6 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
 
         console.log("customersIndex = ", customersIndex);
 
-
-
-
-
-
     };
 
 
@@ -172,17 +167,16 @@ app.controller('bookingController', ["$scope", "$http", function ($scope, $http)
 
     $scope.qunatityChange = function () {
         $scope.finalAmount = $scope.finalQunatity * $scope.cartDetails[0].cart_deals[0].deal.price;
-    }
+    };
 
 
 
 
-    $scope.processBook = function () {
+    $scope.processBook = function () {  
 
         var finalBookingData = {};
         // var partner_id = $scope.cartDetails[0].partner_id;
-
-        finalBookingData.partner_id = partner_id;
+        // finalBookingData.partner_id = partner_id;
         finalBookingData.deals = [];
         finalBookingData.total_booking_amount = 0;
 

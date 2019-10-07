@@ -303,7 +303,7 @@
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
                                 data-target="#myModal" ng-click="loadRoomPrice(room.id, 1)">
-                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_selling_price || 'No Deal']]</div>
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).base_price || 'No Deal']]</div>
                             <div class="col-sm-3 border-right border-bottom p10 small-text" ng-style="!getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_final_price && {'padding-left':'5px'}">
                                 <!-- <input type="text" value="1550" class="form-control small-text"
                                     ng-keydown="changeSitePrice($event, 'b2b')" /> -->
