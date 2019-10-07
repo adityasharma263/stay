@@ -532,14 +532,19 @@ def website_api():
 def deal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
+        deal_id = request.args.get('id', None)
+        args.pop('id', None)
         price_start = request.args.get('price_start', None)
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
         args.pop('price_end', None)
         check_in = request.args.get('start_date', None)
         check_out = request.args.get('end_date', None)
-        args.pop('start_date', None)
-        args.pop('end_date', None)
+        if check_out and check_out:
+            check_in = datetime.datetime.fromtimestamp(int(check_in)).date()
+            check_out = datetime.datetime.fromtimestamp(int(check_out)).date()
+            args.pop('start_date', None)
+            args.pop('end_date', None)
         order_by = request.args.get('order_by', None)
         args.pop('order_by', None)
         room_id = request.args.get('room_id', None)
@@ -554,6 +559,8 @@ def deal_api():
         args.pop('per_page', None)
         room_list = []
         q_deal = db.session.query(Deal).outerjoin(PriceCalendar)
+        if deal_id:
+            q_deal = q_deal.filter(Deal.id == deal_id)
         if room_id:
             q_deal = q_deal.filter(Deal.room_id == room_id)
             b2b_deal = Deal.query.filter(Deal.room_id == room_id, Deal.b2b_selected_deal).first()
@@ -583,6 +590,7 @@ def deal_api():
                 price_list = db.session.query(PriceCalendar).filter(PriceCalendar.deal_id == deal.id,
                                                                     PriceCalendar.date >= check_in,
                                                                     PriceCalendar.date < check_out).all()
+
             for i in range(total_days):
                 if i < len(price_list):
                     price = price_list[i].b2b_final_price + price
@@ -590,6 +598,8 @@ def deal_api():
                     if deal.b2b_final_price:
                         price = deal.b2b_final_price + price
             price = int(price / total_days)
+            if price_list:
+                deal.price_calendar = price_list
             deal.price = price
         # if start_date and end_date:
         #     start_date = datetime.datetime.fromtimestamp(int(start_date)).date()
@@ -746,6 +756,7 @@ def cart_api():
                     deal_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/deal",
                                              params=deal_args).json()
                     if deal_data["result"]["deal"]:
+                        print( int(deal_data["result"]["deal"][0].get('price', 0)))
                         deal.current_deal_amount = int(deal_data["result"]["deal"][0].get('price', 0)) * deal.no_of_deals
                         total_amount = total_amount + deal.current_deal_amount
                     hotel = q.filter(Deal.id == deal.deal_id).first()
@@ -757,17 +768,20 @@ def cart_api():
         return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
     else:
         cart = request.json
-        cart_deals = cart.get("", None)
-        cart.pop('cart_deals', None)
-        cart_post = Cart(**cart)
-        cart_post.save()
-        for deal in cart_deals:
-            deal["cart_id"] = cart_post.id
-            deal_post = CartDeal(**deal)
-            cart_post.cart_deals.append(deal_post)
-            deal_post.save()
-        result = CartSchema().dump(cart_post)
-        return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
+        if Cart.query.filter_by(partner_id=cart.get("partner_id")).first():
+            return jsonify({'result': "already exist", 'error': True})
+        else:
+            cart_deals = cart.get("", None)
+            cart.pop('cart_deals', None)
+            cart_post = Cart(**cart)
+            cart_post.save()
+            for deal in cart_deals:
+                deal["cart_id"] = cart_post.id
+                deal_post = CartDeal(**deal)
+                cart_post.cart_deals.append(deal_post)
+                deal_post.save()
+            result = CartSchema().dump(cart_post)
+            return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/cart/<int:id>', methods=['PUT', 'DELETE'])
