@@ -43,7 +43,7 @@ def login_required(f):
                     session["hash"] = str(request.cookies["hash"])
         elif dev_mode:
             php_url = str(app.config["PARTNER_DOMAIN_URL"]) + "/api/v1/partner.php"
-            partner_data = requests.get(url=php_url, params={"mobile": "9876545678"}).json()
+            partner_data = requests.get(url=php_url, params={"mobile": str(app.config["PARTNER_MOBILE"])}).json()
             if partner_data.get("error"):
                 return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
             else:
@@ -80,7 +80,7 @@ def admin_login_required(f):
                     session["hash2"] = str(request.cookies["hash2"])
         elif dev_mode:
             php_url = str(app.config["ADMIN_DOMAIN_URL"]) + "/api/v1/admin.php"
-            admin_data = requests.get(url=php_url, params={"username": "dataadmin"}).json()
+            admin_data = requests.get(url=php_url, params={"username": str(app.config["ADMIN_USERNAME"])}).json()
             if admin_data.get("error"):
                 return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
             else:
