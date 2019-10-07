@@ -205,6 +205,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
             "b2b_final_price": selectedDeal[0].b2b_final_price,
             "b2c_selling_price": selectedDeal[0].b2c_selling_price,
             "b2c_final_price": selectedDeal[0].b2c_final_price,
+            "base_price" : selectedDeal[0].base_price
         } : undefined;
     };
 
