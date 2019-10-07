@@ -66,8 +66,8 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.getHotel = function () {
             // console.log("$location.path",$location.path);
             $scope.location = document.location.href;
-            // $scope.hotel.ci = Date.parse($scope.hotel.ci) / 1000;
-            // $scope.hotel.co = Date.parse($scope.hotel.co) / 1000;
+            $scope.hotel.ci = Date.parse($scope.hotel.ci) / 1000;
+            $scope.hotel.co = Date.parse($scope.hotel.co) / 1000;
             if (searchKey == 0) {
                 $scope.message = 'enter valid location ';
             }
