@@ -11,7 +11,9 @@ import base64
 import binascii
 import datetime
 import json
+
 app.secret_key = "partner data session secret key"
+dev_mode = app.config["DEV_MODE"]
 
 
 def login_required(f):
@@ -39,6 +41,14 @@ def login_required(f):
                 else:
                     session["partner_data"] = partner_data
                     session["hash"] = str(request.cookies["hash"])
+        elif dev_mode:
+            php_url = str(app.config["PARTNER_API_URL"]) + "/api/v1/partner.php"
+            partner_data = requests.get(url=php_url, params={"mobile": "9876545678"}).json()
+            if partner_data.get("error"):
+                return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+            else:
+                session["partner_data"] = partner_data
+                session["hash"] = str(request.cookies["hash"])
         else:
             return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
         return f(*args, **kwargs)
@@ -69,6 +79,14 @@ def admin_login_required(f):
                 else:
                     session["admin_data"] = admin_data
                     session["hash2"] = str(request.cookies["hash2"])
+        elif dev_mode:
+            php_url = str(app.config["ADMIN_API_URL"]) + "/api/v1/admin.php"
+            admin_data = requests.get(url=php_url, params={"username": "dataadmin"}).json()
+            if admin_data.get("error"):
+                return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+            else:
+                session["admin_data"] = admin_data
+                session["hash2"] = str(request.cookies["hash2"])
         else:
             return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
         return f(*args, **kwargs)
@@ -218,6 +236,7 @@ def cart():
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
+
 # @app.route('/hotel/cart', methods=['POST'])
 # @login_required
 # def cart():
@@ -237,6 +256,7 @@ def cart():
 #             return response.json()
 #     else:
 #         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+
 
 #================= B2B hotels ==========================
 

@@ -12,6 +12,8 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:admin@127.0.0.1:5432/stay'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
+DEV_MODE = True
+
 #url
 DOMAIN_URL = 'http://thetravelsquare.in'
 BUSINESS_DOMAIN_URL = 'http://business.thetravelsquare.in'
