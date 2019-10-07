@@ -139,7 +139,7 @@ var app = angular.module('stay', ['angular.filter'])
 
 
         var urlParams = $location.search();
-        console.log("urlParams ", urlParams);zz
+        console.log("urlParams ", urlParams);
         $scope.loadmoredeals = function () {
             $scope.loadMoreLimit = $scope.loadMoreLimit + 5;
         };
