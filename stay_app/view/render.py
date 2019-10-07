@@ -42,13 +42,12 @@ def login_required(f):
                     session["partner_data"] = partner_data
                     session["hash"] = str(request.cookies["hash"])
         elif dev_mode:
-            php_url = str(app.config["PARTNER_API_URL"]) + "/api/v1/partner.php"
+            php_url = str(app.config["PARTNER_DOMAIN_URL"]) + "/api/v1/partner.php"
             partner_data = requests.get(url=php_url, params={"mobile": "9876545678"}).json()
             if partner_data.get("error"):
                 return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
             else:
                 session["partner_data"] = partner_data
-                session["hash"] = str(request.cookies["hash"])
         else:
             return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
         return f(*args, **kwargs)
@@ -80,13 +79,12 @@ def admin_login_required(f):
                     session["admin_data"] = admin_data
                     session["hash2"] = str(request.cookies["hash2"])
         elif dev_mode:
-            php_url = str(app.config["ADMIN_API_URL"]) + "/api/v1/admin.php"
+            php_url = str(app.config["ADMIN_DOMAIN_URL"]) + "/api/v1/admin.php"
             admin_data = requests.get(url=php_url, params={"username": "dataadmin"}).json()
             if admin_data.get("error"):
                 return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
             else:
                 session["admin_data"] = admin_data
-                session["hash2"] = str(request.cookies["hash2"])
         else:
             return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
         return f(*args, **kwargs)
