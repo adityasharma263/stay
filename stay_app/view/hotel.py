@@ -768,17 +768,20 @@ def cart_api():
         return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
     else:
         cart = request.json
-        cart_deals = cart.get("", None)
-        cart.pop('cart_deals', None)
-        cart_post = Cart(**cart)
-        cart_post.save()
-        for deal in cart_deals:
-            deal["cart_id"] = cart_post.id
-            deal_post = CartDeal(**deal)
-            cart_post.cart_deals.append(deal_post)
-            deal_post.save()
-        result = CartSchema().dump(cart_post)
-        return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
+        if Cart.query.filter_by(partner_id=cart.get("partner_id")).first():
+            return jsonify({'result': "already exist", 'error': True})
+        else:
+            cart_deals = cart.get("", None)
+            cart.pop('cart_deals', None)
+            cart_post = Cart(**cart)
+            cart_post.save()
+            for deal in cart_deals:
+                deal["cart_id"] = cart_post.id
+                deal_post = CartDeal(**deal)
+                cart_post.cart_deals.append(deal_post)
+                deal_post.save()
+            result = CartSchema().dump(cart_post)
+            return jsonify({'result': {'cart': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/cart/<int:id>', methods=['PUT', 'DELETE'])
