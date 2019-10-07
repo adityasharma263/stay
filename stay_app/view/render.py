@@ -91,10 +91,6 @@ def admin_login_required(f):
     return decorated_function
 
 
-
-
-
-
 #================= Admin hotels ==========================
 
 
