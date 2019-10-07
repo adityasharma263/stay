@@ -74,11 +74,11 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
     $scope.onHotelSelect = function (item) {
         console.log(item);
         HotelFilter = {};
-        if (item.is_city){
+        if (item.is_city) {
             HotelFilter.city = item.name;
             $scope.hasMoreResults = true;
         }
-        else{
+        else {
             HotelFilter.id = item.id;
             $scope.hasMoreResults = false;
         }
@@ -86,8 +86,6 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
             .then(function (response) {
                 $scope.hotelDetails = response.data.result.hotel;
                 console.log($scope.hotelDetails);
-                
-
             })
             .catch(function (err) {
                 console.log(err);
@@ -193,18 +191,18 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     };
 
-    $scope.getSelectedDeal = function (dealsArray) {
+    // filterFor is used for dynamic code, value either 'b2b' or 'b2c'
+    $scope.getSelectedDeal = function (dealsArray, filterFor) {
         // console.log("dealsArray= ", dealsArray);
         var selectedDeal = dealsArray.filter(function (deal) {
-            return deal.b2b_selected_deal;
+            return deal[filterFor+"_selected_deal"];
         });
 
 
         return selectedDeal[0] ? {
-            "b2b_selling_price": selectedDeal[0].b2b_selling_price,
-            "b2b_final_price": selectedDeal[0].b2b_final_price,
-            "b2c_selling_price": selectedDeal[0].b2c_selling_price,
-            "b2c_final_price": selectedDeal[0].b2c_final_price,
+            
+            "final_price": selectedDeal[0][filterFor+"_final_price"],
+            "base_price": selectedDeal[0].base_price
         } : undefined;
     };
 
