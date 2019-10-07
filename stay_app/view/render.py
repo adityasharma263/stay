@@ -11,7 +11,9 @@ import base64
 import binascii
 import datetime
 import json
+
 app.secret_key = "partner data session secret key"
+dev_mode = app.config["DEV_MODE"]
 
 
 def login_required(f):
@@ -39,6 +41,13 @@ def login_required(f):
                 else:
                     session["partner_data"] = partner_data
                     session["hash"] = str(request.cookies["hash"])
+        elif dev_mode:
+            php_url = str(app.config["PARTNER_DOMAIN_URL"]) + "/api/v1/partner.php"
+            partner_data = requests.get(url=php_url, params={"mobile": str(app.config["PARTNER_MOBILE"])}).json()
+            if partner_data.get("error"):
+                return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+            else:
+                session["partner_data"] = partner_data
         else:
             return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
         return f(*args, **kwargs)
@@ -69,14 +78,17 @@ def admin_login_required(f):
                 else:
                     session["admin_data"] = admin_data
                     session["hash2"] = str(request.cookies["hash2"])
+        elif dev_mode:
+            php_url = str(app.config["ADMIN_DOMAIN_URL"]) + "/api/v1/admin.php"
+            admin_data = requests.get(url=php_url, params={"username": str(app.config["ADMIN_USERNAME"])}).json()
+            if admin_data.get("error"):
+                return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+            else:
+                session["admin_data"] = admin_data
         else:
             return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
         return f(*args, **kwargs)
     return decorated_function
-
-
-
-
 
 
 #================= Admin hotels ==========================
@@ -219,6 +231,28 @@ def cart():
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
+
+# @app.route('/hotel/cart', methods=['POST'])
+# @login_required
+# def cart():
+#     if 'partner_data' in session:
+#         partner_data = session["partner_data"]
+#         if request.method == 'post':
+#             cart = request.json
+#             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
+#             if cart_deal_data["result"]["cart_deal"][0]:
+#                 id = cart_deal_data["result"]["cart_deal"][0]["id"]
+#                 no_of_deal = int(cart_deal_data["result"]["cart_deal"][0]["no_od_deal"]) + 1
+#                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(id), json={"no_of_deals": no_of_deal})
+#             else:
+#                 cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
+#                 cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
+#                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
+#             return response.json()
+#     else:
+#         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+
+
 #================= B2B hotels ==========================
 
 
@@ -249,19 +283,18 @@ def business_hotel_list():
 
 
 @app.route('/hotel/<string:slug>', methods=['GET'])
-# @login_required
+@login_required
 def business_hotel_detail(slug):
-    # if 'partner_data' in session:
-    #     partner_data = session["partner_data"]
-    #     args = request.args.to_dict()
-    #     args["slug"] = slug
-    #     hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
-    #     hotel_data = requests.get(url=hotel_api_url, params=args).json()
-        return render_template('hotel/b2b_hotels/hotel_detail.html')
-    #     , hotel_data=hotel_data["result"]["hotel"],
-    #                            name=partner_data['name'], params=args)
-    # else:
-    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
+        args = request.args.to_dict()
+        args["slug"] = slug
+        hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
+        hotel_data = requests.get(url=hotel_api_url, params=args).json()
+        return render_template('hotel/b2b_hotels/hotel_detail.html'), hotel_data=hotel_data["result"]["hotel"],
+                               name=partner_data['name'], params=args)
+    else:
+        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 #================= Index Pages ==========================

@@ -12,6 +12,12 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:admin@127.0.0.1:5432/stay'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
+#demo_login
+DEV_MODE = True
+PARTNER_MOBILE = '9876545678'
+ADMIN_USERNAME = 'dataadmin'
+
+
 #url
 DOMAIN_URL = 'http://thetravelsquare.in'
 BUSINESS_DOMAIN_URL = 'http://business.thetravelsquare.in'
