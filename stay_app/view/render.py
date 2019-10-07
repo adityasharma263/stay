@@ -222,7 +222,7 @@ def cart():
             cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
             if cart_deal_data["result"]["cart_deal"]:
-                cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"] # always one element in array
+                cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"]# always one element in array
                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)

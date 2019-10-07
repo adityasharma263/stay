@@ -46,6 +46,8 @@ class Hotel(Base):
 
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
+    total_rooms = db.Column(db.Integer, nullable=True)
+    total_rooms_booked = db.Column(db.Integer, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
     slug = db.Column(db.String(255))
     phone = db.Column(db.String, nullable=True)
@@ -151,6 +153,7 @@ class Image(Base):
     __tablename__ = 'image'
 
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
+    primary_image = db.Column(db.Boolean, default=False, nullable=True)
     image_url = db.Column(db.String, nullable=True)
 
     def __init__(self, *args, **kwargs):
