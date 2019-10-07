@@ -228,24 +228,26 @@ def business():
 
 
 @app.route('/hotel', methods=['GET'])
-@login_required
+# @login_required
 def business_hotel():
-    if 'partner_data' in session:
-        partner_data = session["partner_data"]
-        return render_template('hotel/b2b_hotels/hotel.html', name=partner_data["name"])
-    else:
-        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+    # if 'partner_data' in session:
+    #     partner_data = session["partner_data"]
+        return render_template('hotel/b2b_hotels/hotel.html')
+        # , name=partner_data["name"])
+    # else:
+    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 @app.route('/hotel/list', methods=['GET'])
-@login_required
+# @login_required
 def business_hotel_list():
-    if 'partner_data' in session:
-        partner_data = session["partner_data"]
-        return render_template('hotel/b2b_hotels/hotel_list.html', name=partner_data["name"])
+    # if 'partner_data' in session:
+    #     partner_data = session["partner_data"]
+        return render_template('hotel/b2b_hotels/hotel_list.html')
+        # , name=partner_data["name"])
         # return render_template('hotel/b2b_hotels/hotel_list.html')
-    else:
-        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+    # else:
+    #     return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 @app.route('/hotel/<string:slug>', methods=['GET'])
