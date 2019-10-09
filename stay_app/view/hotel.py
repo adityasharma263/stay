@@ -80,10 +80,10 @@ def hotel_api():
                 .order_by(Deal.base_price.asc()).first()
             if lowest_selected_deal_for_room:
                 # get the lowest deal for the hotel except from the rooms have selected deals
-                rooms_have_selected_deal = db.session.query(Room).join(Deal).filter(Room.hotel_id == hotel.id,
-                                                                                    Deal.b2b_selected_deal == False)
-                lowest_deal_for_non_selected_room = db.session.query(Deal).join(Room).join(Hotel) \
-                    .select_entity_from(rooms_have_selected_deal).filter(Hotel.id == hotel.id) \
+                rooms_have_selected_deal = db.session.query(Room).join(Deal).\
+                    filter(Room.hotel_id == hotel.id, Deal.b2b_selected_deal == False).subquery()
+                lowest_deal_for_non_selected_room = db.session.query(Deal).join(rooms_have_selected_deal).join(Hotel) \
+                    .filter(Hotel.id == hotel.id) \
                     .order_by(Deal.base_price.asc()).first()
                 if lowest_deal_for_non_selected_room:
                     if lowest_deal_for_non_selected_room.base_price < lowest_selected_deal_for_room.base_price:
@@ -228,10 +228,10 @@ def hotel_b2b_list_api():
                 .order_by(Deal.base_price.asc()).first()
             if lowest_selected_deal_for_room:
                 # get the lowest deal for the hotel except from the rooms have selected deals
-                rooms_have_selected_deal = db.session.query(Room).join(Deal).filter(Room.hotel_id == hotel.id,
-                                                                                    Deal.b2b_selected_deal == False)
-                lowest_deal_for_non_selected_room = db.session.query(Deal).join(Room).join(Hotel)\
-                    .select_entity_from(rooms_have_selected_deal).filter(Hotel.id == hotel.id)\
+                rooms_have_selected_deal = db.session.query(Room).join(Deal).\
+                    filter(Room.hotel_id == hotel.id, Deal.b2b_selected_deal == False).subquery()
+                lowest_deal_for_non_selected_room = db.session.query(Deal).join(rooms_have_selected_deal).join(Hotel) \
+                    .filter(Hotel.id == hotel.id) \
                     .order_by(Deal.base_price.asc()).first()
                 if lowest_deal_for_non_selected_room:
                     if lowest_deal_for_non_selected_room.base_price < lowest_selected_deal_for_room.base_price:
