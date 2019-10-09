@@ -15,17 +15,29 @@ from email.mime.base import MIMEBase
 class SendEmail():
 
     def create_message(self, sender, to, subject, msg_html, msg_plain):
-        msg = MIMEMultipart('alternative')
+        msg = MIMEMultipart()
         msg['Subject'] = subject
         msg['From'] = sender
+        # Record the MI        ME types of both parts - text/plain and text/html.
+        part1 = MIMEText(msg_plain, 'plain')
+        part2 = MIMEText(msg_html, 'html')
+        # Attach parts into message container.
+        # According to RFC 2046, the last part of a multipart message, in this case
+        # the HTML message, is best and preferred.
+        msg.attach(part1)
+        msg.attach(part2)
         msg['To'] = to
-        msg.attach(MIMEText(msg_plain, 'plain'))
-        msg.attach(MIMEText(msg_html, 'html'))
+        # msg = MIMEMultipart()
+        # msg['Subject'] = subject
+        # msg['From'] = sender
+        # msg['To'] = to
+        # msg.attach(MIMEText(msg_plain, 'plain'))
+        # msg.attach(MIMEText(msg_html, 'html'))
         return msg.as_string()
 
     def create_message_with_attachment(self, sender, to, subject, msg_html, msg_plain, attachment_file):
-        """Create a message for an email.
 
+        """Create a message for an email.
         Args:
         sender: Email address of the sender.
         to: Email address of the receiver.
@@ -75,6 +87,7 @@ class SendEmail():
         return message.as_string()
 
     def send_email(self, sender, to, subject, sender_pwd, msg_html, msg_plain, attachment_file):
+        # print(sender, to, subject, sender_pwd, msg_html, msg_plain, attachment_file)
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()

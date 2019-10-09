@@ -7,6 +7,7 @@ from flask import render_template, request, make_response, jsonify, abort, redir
 import requests
 from Crypto.Cipher import AES
 from functools import wraps
+from  stay_app.lib.send_email import SendEmail
 import base64
 import binascii
 import datetime
@@ -167,6 +168,22 @@ def admin_terminal():
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
+
+@app.route('/admin/send-email', methods=['GET', 'POST'])
+@admin_login_required
+def send_email():
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        if request.method == 'GET':
+            return render_template("hotel/admin/send_email.html", name=admin_data["name"])
+        else:
+            result = request.json
+            response = SendEmail().send_email(result['sender'], result['to'], result['subject'], result['sender_pwd'],\
+                                              result['msg_html'], result['msg_plain'], result['attachment_file'])
+            return jsonify(response)
+
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 #================= Booking hotels ==========================
 
