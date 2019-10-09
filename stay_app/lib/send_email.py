@@ -13,42 +13,26 @@ from email.mime.base import MIMEBase
 
 
 class SendEmail():
-    def __init__(self):
-        self.sender = sender
 
-    def send_email(self, sender, to, subject, sender_pwd, msgHtml, msgPlain, attachmentFile=None):
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.ehlo()
-        server.starttls()
-        server.login(sender, sender_pwd)
-        if attachmentFile:
-            message = createMessageWithAttachment(sender, to, subject, msgHtml, msgPlain, attachmentFile)
-        else:
-            message = CreateMessageHtml(sender, to, subject, msgHtml, msgPlain)
-        response = server.sendmail(sender, to, message)
-        server.quit()
-        return response
-
-    def CreateMessageHtml(self, sender, to, subject, msgHtml, msgPlain):
+    def create_message(self, sender, to, subject, msg_html, msg_plain):
         msg = MIMEMultipart('alternative')
         msg['Subject'] = subject
         msg['From'] = sender
         msg['To'] = to
-        msg.attach(MIMEText(msgPlain, 'plain'))
-        msg.attach(MIMEText(msgHtml, 'html'))
-        # return {'raw': base64.urlsafe_b64encode(msg.as_string())}
+        msg.attach(MIMEText(msg_plain, 'plain'))
+        msg.attach(MIMEText(msg_html, 'html'))
         return msg.as_string()
 
-    def createMessageWithAttachment(self, sender, to, subject, msgHtml, msgPlain, attachmentFile):
+    def create_message_with_attachment(self, sender, to, subject, msg_html, msg_plain, attachment_file):
         """Create a message for an email.
 
         Args:
         sender: Email address of the sender.
         to: Email address of the receiver.
         subject: The subject of the email message.
-        msgHtml: Html message to be sent
-        msgPlain: Alternative plain text message for older email clients
-        attachmentFile: The path to the file to be attached.
+        msg_html: Html message to be sent
+        msg_plain: Alternative plain text message for older email clients
+        attachment_file: The path to the file to be attached.
 
         Returns:
         An object containing a base64url encoded email object.
@@ -57,45 +41,51 @@ class SendEmail():
         message['to'] = to
         message['from'] = sender
         message['subject'] = subject
-
         messageA = MIMEMultipart('alternative')
         messageR = MIMEMultipart('related')
-
-        messageR.attach(MIMEText(msgHtml, 'html'))
-        messageA.attach(MIMEText(msgPlain, 'plain'))
+        messageR.attach(MIMEText(msg_html, 'html'))
+        messageA.attach(MIMEText(msg_plain, 'plain'))
         messageA.attach(messageR)
-
         message.attach(messageA)
-
-        print("create_message_with_attachment: file:", attachmentFile)
-        content_type, encoding = mimetypes.guess_type(attachmentFile)
-
+        print("create_message_with_attachment: file:", attachment_file)
+        content_type, encoding = mimetypes.guess_type(attachment_file)
         if content_type is None or encoding is not None:
             content_type = 'application/octet-stream'
         main_type, sub_type = content_type.split('/', 1)
         if main_type == 'text':
-            fp = open(attachmentFile, 'rb')
+            fp = open(attachment_file, 'rb')
             msg = MIMEText(fp.read(), _subtype=sub_type)
             fp.close()
         elif main_type == 'image':
-            fp = open(attachmentFile, 'rb')
+            fp = open(attachment_file, 'rb')
             msg = MIMEImage(fp.read(), _subtype=sub_type)
             fp.close()
         elif main_type == 'audio':
-            fp = open(attachmentFile, 'rb')
+            fp = open(attachment_file, 'rb')
             msg = MIMEAudio(fp.read(), _subtype=sub_type)
             fp.close()
         else:
-            fp = open(attachmentFile, 'rb')
+            fp = open(attachment_file, 'rb')
             msg = MIMEBase(main_type, sub_type)
             msg.set_payload(fp.read())
             fp.close()
-        filename = os.path.basename(attachmentFile)
+        filename = os.path.basename(attachment_file)
         msg.add_header('Content-Disposition', 'attachment', filename=filename)
         message.attach(msg)
-
-        # return {'raw': base64.urlsafe_b64encode(message.as_string())}
         return message.as_string()
+
+    def send_email(self, sender, to, subject, sender_pwd, msg_html, msg_plain, attachment_file):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.ehlo()
+        server.starttls()
+        server.login(sender, sender_pwd)
+        if attachment_file:
+            message = self.create_message_with_attachment(sender, to, subject, msg_html, msg_plain, attachment_file)
+        else:
+            message = self.create_message(sender, to, subject, msg_html, msg_plain)
+        response = server.sendmail(sender, to, message)
+        server.quit()
+        return response
 
 # class SendEmail():
 #     def send_email(self):
