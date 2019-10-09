@@ -13,24 +13,10 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.showSearchResult = false;
         $scope.resp = false;
         var searchKey = 'city';
-        $scope.cin == document.getElementById("cin");
-        $scope.cout == document.getElementById("cout");
         // $scope.hotel.ci = new Date();
-        if($scope.cin){
-            document.getElementById("cin") = $scope.hotel.ci;
-        }else{
             $scope.hotel.ci = new Date();
-        }
         // $scope.hotel.co = new Date();
-        if($scope.cout){
-            document.getElementById("cout") = $scope.hotel.co;
-        }else{
             $scope.hotel.co = new Date();
-        }
-        $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
-
-
-        
 
         $scope.result = function (data, status) {
             $scope.hotel.search = data;

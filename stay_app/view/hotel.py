@@ -99,6 +99,7 @@ def hotel_api():
             if lowest_deal_for_room:
                 lowest_deal_for_room.b2b_lowest_price = True
         hotel = q.first()
+        print(hotel)
         result = HotelSchema(many=False).dump(hotel)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:

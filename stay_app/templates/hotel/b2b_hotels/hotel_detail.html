@@ -475,9 +475,11 @@
                         <div class="sidebar col-md-3">
                                 <article class="detailed-logo">
                                     {% for room in hotel_data.rooms %}
+                                    {% if room.b2b_lowest_price_room %}
                                     <figure>
                                         <img src="{{room.image_url}}" alt="">
                                     </figure>
+                                    {% endif %}
                                     {% endfor %}
                                     <div class="details">
                                         <h2 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">{{hotel_data.city}}</span></small></h2>
