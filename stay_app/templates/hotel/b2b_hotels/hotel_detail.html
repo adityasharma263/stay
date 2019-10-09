@@ -474,11 +474,11 @@
                         </div>
                         <div class="sidebar col-md-3">
                                 <article class="detailed-logo">
-                                    {% if hotel_data.rooms %}
+                                    {% for room in hotel_data.rooms %}
                                     <figure>
-                                        <img   src="{{hotel_data.rooms.image_url}}" alt="">
+                                        <img src="{{room.image_url}}" alt="">
                                     </figure>
-                                    {% endif %}
+                                    {% endfor %}
                                     <div class="details">
                                         <h2 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">{{hotel_data.city}}</span></small></h2>
                                         <span class="price clearfix">

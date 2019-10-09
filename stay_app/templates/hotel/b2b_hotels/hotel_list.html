@@ -407,16 +407,16 @@
                             ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false">
                                 <article class="box">
                                     <div >
-                                        <a target="_self" href="/hotel/[[hotel.slug]]">
+                                        <a target="_self" href="/hotel/[[hotel.slug]]/[[hotel.ci]]+[[hotel.co]]">
                                             <figure style="height: 170px;" class="col-sm-5 col-md-4" style="padding: 15px;">
                                                 <img data-toggle="modal"
                                                     style="height:170px; width: 270px; margin-left: -15px; cursor: pointer"
-                                                    src="[[room.image_url]]" alt="Travel Square">
+                                                    src="[[hotel.images[0].image_url]]" alt="Travel Square">
                                             </figure>
                                         </a>
                                         <div class="details col-sm-7 col-md-8">
                                             <div>
-                                                <a target="_self" href="/hotel/[[hotel.slug]]">
+                                                <a target="_self" href="/hotel/[[hotel.slug]]?ci=hotel.ci + co=hotel.co">
                                                     <div class="ng-cloak" style="margin-top: 5px;">
                                                         <h3 style="cursor: pointer; text-transform: capitalize;" class="box-title">[[hotel.name]]
                                                             <small>
@@ -444,12 +444,10 @@
                                                     <div class="amenities" style="float:left">
                                                         <div>
                                                             <i class="soap-icon-wifi circle" aria-hidden="true"></i>
-                                                            <i class="soap-icon-breakfast circle"
-                                                                aria-hidden="true"></i>
+                                                            <i class="soap-icon-breakfast circle" aria-hidden="true"></i>
                                                             <i class="soap-icon-couples circle" aria-hidden="true"></i>
                                                             <!-- <i class="soap-icon-restaurant circle" ng-if="amenities.restaurant" aria-hidden="true"></i> -->
-                                                            <i class="soap-icon-fitnessfacility circle"
-                                                                aria-hidden="true"></i>
+                                                            <i class="soap-icon-fitnessfacility circle" aria-hidden="true"></i>
                                                             <i class="soap-icon-swimming circle" aria-hidden="true"></i>
                                                         </div>
                                                     </div>
@@ -484,7 +482,7 @@
                     </div>
 
                     <div class="hotel-list listing-style3 hotel">
-                        <article class="box" ng-if="result">
+                        <article class="box" ng-if="resp">
 
                             <h3>No Result found</h3>
                         </article>

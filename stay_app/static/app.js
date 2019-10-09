@@ -183,7 +183,7 @@ var app = angular.module('stay', ['angular.filter'])
                 $scope.message = 'enter valid location ';
             }
 
-            window.open($scope.location + "/?" + searchKey + "=" + $scope.hotel.search, '_self');
+            window.open("/hotel" + "/list?" + searchKey + "=" + $scope.hotel.search + '&' + 'ci' + '=' + $scope.hotel.ci + '&' + 'co' + '=' + $scope.hotel.co,'_self');
         };
 
         $scope.search = function () {
