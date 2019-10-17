@@ -7,7 +7,9 @@ from flask import render_template, request, make_response, jsonify, abort, redir
 import requests
 from Crypto.Cipher import AES
 from functools import wraps
-from  stay_app.lib.send_email import SendEmail
+from stay_app.lib.send_email import SendEmail
+import random
+import time
 import base64
 import binascii
 import datetime
@@ -180,12 +182,15 @@ def send_email():
             result = request.json
             response = []
             for email_to in result['to']:
-                response.append(SendEmail().send_email(result['sender'], email_to, result['subject'], result['sender_pwd'],\
-                                                  result['msg_html'], result['msg_plain'], result['attachment_file']))
+                response.append(SendEmail().send_email(result['sender'], email_to, result['subject'],
+                                                       result['sender_pwd'], result['msg_html'], result['msg_plain'],
+                                                       result['attachment_file']))
+                time.sleep(random.randint(1, 20))
             return jsonify(response)
 
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+
 
 #================= Booking hotels ==========================
 
