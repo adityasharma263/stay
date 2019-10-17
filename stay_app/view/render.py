@@ -205,10 +205,7 @@ def booking():
         if request.method == 'GET':
             if partner_data["status"] == 'Approved':
                 # return render_template('hotel/booking/booking.html', partner_data=partner_data)
-
-                partner_id =  partner_data["id"] if 'partner_data' in locals() else 1
-                response = requests.get(str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id" : partner_id})
-                return render_template('hotel/booking/booking.html', cart_data= response.json())
+                return render_template('hotel/booking/booking.html')
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
                "click here  FOR THE APPROVAL </b></a>"
@@ -238,13 +235,12 @@ def booking():
 
 #================= Cart hotels ==========================
 
-
 @app.route('/hotel/cart', methods=['POST'])
 @login_required
 def cart():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
-        if request.method == 'POST':
+        if request.method == 'post':
             cart = request.json
             no_of_deal = cart.pop("no_of_deal", 0)
             cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
@@ -256,8 +252,10 @@ def cart():
                 cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"]# always one element in array
                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
-                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
-            return jsonify(response.json())
+                cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
+                cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
+                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
+            return response.json()
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
@@ -321,10 +319,12 @@ def business_hotel_detail(slug):
         args["slug"] = slug
         hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
         hotel_data = requests.get(url=hotel_api_url, params=args).json()
+        print("Hotel Data", hotel_data)
         return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
                                name=partner_data['name'], params=args)
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+       
 
 
 #================= Index Pages ==========================

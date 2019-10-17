@@ -461,20 +461,41 @@
                 <div class="col-sm-8 col-md-9">
                     <div class="sort-by-section clearfix">
                         <h4 class="sort-by-title block-sm"></h4>
-                        <p><input class="input-text full-width" type="text" placeholder="SEARCH BY KEYWORD"></p>
+                        <p><input class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" type="text" placeholder="SEARCH BY KEYWORD"></p>
                     </div>
+
+                    <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9;  text-transform: capitalize; overflow: hidden;">
+
+                            <tbody id="search" class="input-text full-width"" >
+                              <tr class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
+                                <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
+                                    <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
+
+                              </tr>
+                              <tr class="ng-cloak" ng-repeat="obj in names | limitTo:4">
+                                <td class="ng-cloak" style="border: 0" ng-click="result([[obj.name]],'name')">
+                                    <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[obj.name]]</td>
+
+                              </tr>
+                              <tr class="ng-cloak" ng-if="resp">
+                                  <td>No result found</td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                          
                     <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
 
                         <div ng-repeat="room in hotel.rooms">
-                            <div class="ng-cloak">
+                            <div class="ng-cloak" ng-repeat="deal in room.deals" ng-if="deal.b2b_lowest_price"
+                            ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false">
                                 <article class="box">
-                                    <div ng-repeat="deal in room.deals" ng-if="deal.b2b_lowest_price"
-                                        ng-if="deal.ts_exclusive" ng-if="deal.sold_out==false">
+                                    <div >
                                         <a target="_self" href="/hotel/[[hotel.slug]]">
-                                            <figure ng-repeat="hotel in hotelData" style="height: 170px;" class="col-sm-5 col-md-4" style="padding: 15px;">
-                                                <img ng-repeat="image in hotel.images" data-toggle="modal"
-                                                    style="height:100%; width: 100%; margin-left: -15px; cursor: pointer"
-                                                    ng-src="[[image.image_url[0]]]" alt="Travel Square">
+                                            <figure style="height: 170px;" class="col-sm-5 col-md-4" style="padding: 15px;">
+                                                <img data-toggle="modal"
+                                                    style="height:170px; width: 270px; margin-left: -15px; cursor: pointer"
+                                                    src="[[room.image_url]]" alt="Travel Square">
                                             </figure>
                                         </a>
                                         <div class="details col-sm-7 col-md-8">

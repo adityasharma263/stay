@@ -13,8 +13,20 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.showSearchResult = false;
         $scope.resp = false;
         var searchKey = 'city';
-        $scope.hotel.ci = new Date();
-        $scope.hotel.co = new Date();
+        $scope.cin == document.getElementById("cin");
+        $scope.cout == document.getElementById("cout");
+        // $scope.hotel.ci = new Date();
+        if($scope.cin){
+            document.getElementById("cin") = $scope.hotel.ci;
+        }else{
+            $scope.hotel.ci = new Date();
+        }
+        // $scope.hotel.co = new Date();
+        if($scope.cout){
+            document.getElementById("cout") = $scope.hotel.co;
+        }else{
+            $scope.hotel.co = new Date();
+        }
         $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
 
         
@@ -24,7 +36,8 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.result = function (data, status) {
             $scope.hotel.search = data;
             searchKey = status;
-            $scope.getHotel();
+            // $scope.getHotel();
+            $scope.showSearchResult = false;
 
         }
 
@@ -59,7 +72,8 @@ var app = angular.module('stay', ['angular.filter'])
             if (searchKey == 0) {
                 $scope.message = 'enter valid location ';
             }
-
+            console.log("hotel CI",$scope.hotel.ci);
+            console.log("hotel CO",$scope.hotel.co);
             window.open($scope.location + "/list?" + searchKey + "=" + $scope.hotel.search + '&' + 'ci' + '=' + $scope.hotel.ci + '&' + 'co' + '=' + $scope.hotel.co, '_self');
         };
 
@@ -105,7 +119,7 @@ var app = angular.module('stay', ['angular.filter'])
         //  }
     }])
 
-    .controller('stayListController', ["$scope", "$window", "$http","$location", function ($scope, $window, $http, $location) {
+    .controller('stayListController', ["$scope", "$window", "$filter", "$http","$location", function ($scope, $window, $filter, $http, $location) {
         
         $scope.hotelid = {};
         $scope.room = {};
@@ -128,7 +142,94 @@ var app = angular.module('stay', ['angular.filter'])
 
         $scope.minimumPriceForFilter = 200;
 
+        //----------------------- List View Searching... ---------------------//
 
+        $scope.resp = false;
+        var searchKey = 'city';
+        $scope.hotel.ci = new Date();
+        $scope.hotel.co = new Date();
+        $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
+        
+        $scope.result = function (data, status) {
+            $scope.hotel.search = data;
+            searchKey = status;
+            $scope.getHotel();
+
+        }
+
+        $scope.show = function () {
+            if ($scope.showSearchResult == false) {
+                $scope.showSearchResult = true;
+            }
+            else {
+                $scope.showSearchResult = false;
+            }
+        }
+        var jsonToQueryString = function (json) {
+            return '?' +
+                Object.keys(json).map(function (key) {
+                    if (json[key]) {
+                        return encodeURIComponent(key) + '=' +
+                            encodeURIComponent(json[key]);
+                    } else {
+                        return '';
+                    }
+                }).join('&');
+        };
+
+        $scope.getHotel = function () {
+            // console.log("$location.path",$location.path);
+            $scope.location = document.location.href;
+            $scope.hotel.ci = Date.parse($scope.hotel.ci) / 1000;
+            $scope.hotel.co = Date.parse($scope.hotel.co) / 1000;
+            if (searchKey == 0) {
+                $scope.message = 'enter valid location ';
+            }
+
+            window.open($scope.location + "/?" + searchKey + "=" + $scope.hotel.search, '_self');
+        };
+
+        $scope.search = function () {
+            $scope.hotel.search = $scope.hotel.search.toLowerCase();
+            $http({
+                method: 'POST',
+                url: api_url + '/api/v1/hotel/search',
+                data: $scope.hotel
+
+            }).then(function successCallback(response) {
+                $scope.cities = response.data.result.cities;
+                $scope.names = response.data.result.names;
+                if ($scope.cities.length == 0 && $scope.names.length != 0) {
+                    searchKey = 'name';
+                }
+                if ($scope.cities.length != 0 && $scope.names.length == 0) {
+                    searchKey = 'city';
+                }
+                if ($scope.cities.length != 0 && $scope.names.length != 0) {
+                    searchKey = 'city';
+                }
+            })
+
+        };
+
+        $http({
+            method: 'GET',
+            url: api_url + '/api/v1/hotel/b2b'
+        }).then(function successCallback(response) {
+            $scope.hotels = response.data.result.hotel;
+            for (var j = 0; j < $scope.hotels.length; j++) {
+                $scope.hotelid[$scope.hotels[j].id] = $scope.hotels[j];
+            }
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        })
+
+    //------------------------End Of Searching... ------------------------//
+
+    
         $scope.amenities = {};
 
 //       get array for the particular num  used to show amenities dynamically
