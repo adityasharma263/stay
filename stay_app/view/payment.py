@@ -4,6 +4,7 @@ import requests
 import urllib
 import json
 from stay_app import app
+from  stay_app.lib.send_email import SendEmail
 from flask import render_template, request, make_response, jsonify, abort, redirect, session, url_for
 from random import randint
 
@@ -66,6 +67,7 @@ def get_transaction_id():
 @app.route('/payment/success/<int:id>', methods=['GET'])
 def payment_success(id):
     req = requests.put(str(app.config["API_URL"]) + '/api/v1/booking/' + str(id), json={"status": "S"})
+    # SendEmail().send_email(sender, to, subject, sender_pwd, msg_html, msg_plain, attachment_file)
     return render_template("hotel/payment/success.html", data=req.json())
 
 
@@ -73,4 +75,5 @@ def payment_success(id):
 @app.route('/payment/fail/<int:id>', methods=['GET'])
 def payment_failure(id):
     req = requests.put(str(app.config["API_URL"]) + '/api/v1/booking/' + str(id), json={"status": "F"})
+    # SendEmail().send_email(sender, to, subject, sender_pwd, msg_html, msg_plain, attachment_file)
     return render_template("hotel/payment/failure.html", data=req.json())

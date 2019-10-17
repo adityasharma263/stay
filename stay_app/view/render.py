@@ -7,6 +7,9 @@ from flask import render_template, request, make_response, jsonify, abort, redir
 import requests
 from Crypto.Cipher import AES
 from functools import wraps
+from stay_app.lib.send_email import SendEmail
+import random
+import time
 import base64
 import binascii
 import datetime
@@ -170,6 +173,27 @@ def admin_terminal():
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
+@app.route('/admin/send-email', methods=['GET', 'POST'])
+@admin_login_required
+def send_email():
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        if request.method == 'GET':
+            return render_template("hotel/admin/send_email.html", name=admin_data["name"])
+        else:
+            result = request.json
+            response = []
+            for email_to in result['to']:
+                response.append(SendEmail().send_email(result['sender'], email_to, result['subject'],
+                                                       result['sender_pwd'], result['msg_html'], result['msg_plain'],
+                                                       result['attachment_file']))
+                time.sleep(random.randint(1, 20))
+            return jsonify(response)
+
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+
+
 #================= Booking hotels ==========================
 
 
@@ -229,7 +253,7 @@ def cart():
             cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
             if cart_deal_data["result"]["cart_deal"]:
-                cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"] # always one element in array
+                cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"]# always one element in array
                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)

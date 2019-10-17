@@ -193,14 +193,13 @@ class DealB2BListSchema(ma.ModelSchema):
                    "b2c_margin_price", "hotel_url", "b2c_lowest_price", "b2c_selected_deal", "room", "website_id")
 
 
-
 class RoomB2BListSchema(ma.ModelSchema):
     meal_plan = EnumField(MealPlan, by_value=True)
     deals = ma.Nested(DealB2BListSchema, many=True)
 
     class Meta:
         model = Room
-        exclude = ('updated_at', 'created_at', "facilities", "hotel")
+        exclude = ('updated_at', 'created_at', "facilities", "hotel", "image_url")
 
 
 class HotelB2BListSchema(ma.ModelSchema):
@@ -211,7 +210,7 @@ class HotelB2BListSchema(ma.ModelSchema):
     class Meta:
         model = Hotel
         exclude = ('updated_at', 'created_at', "phone", "desc", "address",
-                   "images", "latitude", "collection_id", "hotel_collection",
+                    "latitude", "collection_id", "hotel_collection",
                    "longitude", "longitude", "country", "category")
 
 

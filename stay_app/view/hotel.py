@@ -36,8 +36,6 @@ app.json_encoder = MyJSONEncoder
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        # slug = request.args.get('slug')
-        # args.pop('slug', None)
         check_in = request.args.get('ci')
         check_out = request.args.get('co')
         if check_out and check_out:
@@ -54,6 +52,14 @@ def hotel_api():
         for hotel in q:
             deals = db.session.query(Deal).join(Room).join(Hotel).filter(Hotel.id == hotel.id).all()
             price = 0
+            # lowest deal in room is select if there is no other
+            for room in hotel.rooms:
+                b2b_deal = Deal.query.filter(Deal.room_id == room.id, Deal.b2b_selected_deal).first()
+                if not b2b_deal:
+                    select_deal = Deal.query.filter(Deal.room_id == room.id).order_by(
+                        getattr(Deal, "base_price").asc()).first()
+                    if select_deal:
+                        select_deal.b2b_selected_deal = True
             for deal in deals:
                 if check_in and check_out:
                     delta = check_out - check_in
@@ -69,7 +75,29 @@ def hotel_api():
                             price = deal.b2b_final_price + price
                 price = int(price / total_days)
                 deal.price = price
-                hotel.deal_id = deal
+            lowest_selected_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
+                filter(Hotel.id == hotel.id, Deal.b2b_selected_deal) \
+                .order_by(Deal.base_price.asc()).first()
+            if lowest_selected_deal_for_room:
+                # get the lowest deal for the hotel except from the rooms have selected deals
+                rooms_have_selected_deal = db.session.query(Room).join(Deal).\
+                    filter(Room.hotel_id == hotel.id, Deal.b2b_selected_deal == False).subquery()
+                lowest_deal_for_non_selected_room = db.session.query(Deal).join(rooms_have_selected_deal).join(Hotel) \
+                    .filter(Hotel.id == hotel.id) \
+                    .order_by(Deal.base_price.asc()).first()
+                if lowest_deal_for_non_selected_room:
+                    if lowest_deal_for_non_selected_room.base_price < lowest_selected_deal_for_room.base_price:
+                        lowest_deal_for_room = lowest_deal_for_non_selected_room
+                    else:
+                        lowest_deal_for_room = lowest_selected_deal_for_room
+                else:
+                    lowest_deal_for_room = lowest_selected_deal_for_room
+            else:
+                # get the lowest deal for the hotel if there is no any selected deal
+                lowest_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
+                    filter(Hotel.id == hotel.id).order_by(Deal.base_price.asc()).first()
+            if lowest_deal_for_room:
+                lowest_deal_for_room.b2b_lowest_price = True
         hotel = q.first()
         result = HotelSchema(many=False).dump(hotel)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
@@ -166,14 +194,14 @@ def hotel_b2b_list_api():
         price_list = []
         total_days = 1
         for hotel in q:
-            # lowest deal in room is select  if there is no other
-            for room in hotel.rooms:
-                b2b_deal = Deal.query.filter(Deal.room_id == room.id, Deal.b2b_selected_deal).first()
-                if not b2b_deal:
-                    select_deal = Deal.query.filter(Deal.room_id == room.id).order_by(
-                        getattr(Deal, "base_price").asc()).first()
-                    if select_deal:
-                        select_deal.b2b_selected_deal = True
+            # lowest deal in room is select if there is no other
+            # for room in hotel.rooms:
+            #     b2b_deal = Deal.query.filter(Deal.room_id == room.id, Deal.b2b_selected_deal).first()
+            #     if not b2b_deal:
+            #         select_deal = Deal.query.filter(Deal.room_id == room.id).order_by(
+            #             getattr(Deal, "base_price").asc()).first()
+            #         if select_deal:
+            #             select_deal.b2b_selected_deal = True
             # price calculation with specific date
             deals = db.session.query(Deal).join(Room).join(Hotel).filter(Hotel.id == hotel.id).all()
             price = 0
@@ -193,30 +221,31 @@ def hotel_b2b_list_api():
                             price = deal.b2b_final_price + price
                 price = int(price / total_days)
                 deal.price = price
-            # get the lowest deal for the hotel form the selected deals
+            # computing the lowest deal for the hotel form the selected deals
+            # in other words getting the room which has to be display in list view
             lowest_selected_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
                 filter(Hotel.id == hotel.id, Deal.b2b_selected_deal) \
-                .order_by(Deal.b2b_final_price.asc()).first()
+                .order_by(Deal.base_price.asc()).first()
             if lowest_selected_deal_for_room:
-                # get the lowest deal for the hotel except from the lowest selected deal's room
-                lowest_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
-                    filter(Hotel.id == hotel.id, Deal.b2b_selected_deal == False,
-                           Deal.room_id != lowest_selected_deal_for_room.room_id) \
-                    .order_by(Deal.b2b_final_price.asc()).first()
-                if lowest_deal_for_room:
-                    if lowest_selected_deal_for_room.b2b_final_price > lowest_deal_for_room.b2b_final_price:
-                        lowest_deal_for_room.b2b_lowest_price = True
+                # get the lowest deal for the hotel except from the rooms have selected deals
+                rooms_have_selected_deal = db.session.query(Room).join(Deal).\
+                    filter(Room.hotel_id == hotel.id, Deal.b2b_selected_deal == False).subquery()
+                lowest_deal_for_non_selected_room = db.session.query(Deal).join(rooms_have_selected_deal).join(Hotel) \
+                    .filter(Hotel.id == hotel.id) \
+                    .order_by(Deal.base_price.asc()).first()
+                if lowest_deal_for_non_selected_room:
+                    if lowest_deal_for_non_selected_room.base_price < lowest_selected_deal_for_room.base_price:
+                        lowest_deal_for_room = lowest_deal_for_non_selected_room
                     else:
-                        lowest_selected_deal_for_room.b2b_lowest_price = True
+                        lowest_deal_for_room = lowest_selected_deal_for_room
                 else:
-                    lowest_selected_deal_for_room.b2b_lowest_price = True
+                    lowest_deal_for_room = lowest_selected_deal_for_room
             else:
-                # get the lowest deal for the hotel except from the selected deal's
+                # get the lowest deal for the hotel if there is no any selected deal
                 lowest_deal_for_room = db.session.query(Deal).join(Room).join(Hotel). \
-                    filter(Hotel.id == hotel.id, Deal.b2b_selected_deal == False) \
-                    .order_by(Deal.b2b_final_price.asc()).first()
-                if lowest_deal_for_room:
-                    lowest_deal_for_room.b2b_lowest_price = True
+                    filter(Hotel.id == hotel.id).order_by(Deal.base_price.asc()).first()
+            if lowest_deal_for_room:
+                lowest_deal_for_room.b2b_lowest_price = True
         for key in args:
             if key in Hotel.__dict__:
                 q = q.filter(getattr(Hotel, key) == args[key])
@@ -237,7 +266,7 @@ def hotel_b2b_list_api():
         if rating:
             q = q.filter(Hotel.rating >= rating)
         if price_start and price_end:
-            q = q.filter(Deal.price >= price_start, Deal.price <= price_end)
+            q = q.filter(Deal.b2b_final_price >= price_start, Deal.b2b_final_price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelB2BListSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
