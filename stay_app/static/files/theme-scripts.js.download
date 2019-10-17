@@ -886,6 +886,15 @@ tjq(window).load(function() {
             tjq(this).parent().addClass("active");
         }
     });
+    // filters option
+    //tjq(".filters-container .filters-option a, .filters-container .filters-option span").click(function(e) {
+    //    e.preventDefault();
+    //    if (tjq(this).parent("li").hasClass("active")) {
+    //        tjq(this).parent("li").removeClass("active");
+    //    } else {
+    //        tjq(this).parent("li").addClass("active");
+    //    }
+    //});
     
     // sort of trip
     tjq(".sort-trip a").click(function(e) {

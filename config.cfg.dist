@@ -16,7 +16,9 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 DEV_MODE = True
 PARTNER_MOBILE = '9876545678'
 ADMIN_USERNAME = 'dataadmin'
-
+DEV_URL = 'http://business.thetravelsquare.in'
+ADMIN_DEV_URL = 'http://admin.thetravelsquare.in'
+PARTNER_DEV_URL = 'http://partner.thetravelsquare.in'
 
 #url
 DOMAIN_URL = 'http://thetravelsquare.in'
