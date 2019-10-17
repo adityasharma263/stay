@@ -178,8 +178,10 @@ def send_email():
             return render_template("hotel/admin/send_email.html", name=admin_data["name"])
         else:
             result = request.json
-            response = SendEmail().send_email(result['sender'], result['to'], result['subject'], result['sender_pwd'],\
-                                              result['msg_html'], result['msg_plain'], result['attachment_file'])
+            response = []
+            for email_to in result['to']:
+                response.append(SendEmail().send_email(result['sender'], email_to, result['subject'], result['sender_pwd'],\
+                                                  result['msg_html'], result['msg_plain'], result['attachment_file']))
             return jsonify(response)
 
     else:
