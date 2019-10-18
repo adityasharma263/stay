@@ -283,6 +283,7 @@ var app = angular.module('stay', ['angular.filter'])
 
             console.log($scope.amenities);
 
+
             applyFilterAndReload($scope.amenities);
 
             return;
@@ -339,9 +340,12 @@ var app = angular.module('stay', ['angular.filter'])
 
 
         function applyFilterAndReload(filterObject){
-
             var newFilter = $.extend($location.search(), filterObject);
-
+            for(var amenity in newFilter){
+                if(newFilter[amenity] == "false" || newFilter[amenity] == false){
+                    delete newFilter[amenity];
+                }
+            }
             var newUrl = window.location.href.split('?')[0] + "?"+$.param(newFilter);
             window.location.href = newUrl;
         }

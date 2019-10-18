@@ -204,8 +204,13 @@ def booking():
         partner_data = session["partner_data"]
         if request.method == 'GET':
             if partner_data["status"] == 'Approved':
+                response = requests.get(str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id" : partner_data["id"]})
+
+                cart_data = response.json()
+                 
+                
                 # return render_template('hotel/booking/booking.html', partner_data=partner_data)
-                return render_template('hotel/booking/booking.html')
+                return render_template('hotel/booking/booking.html', cart_data=cart_data)
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
                "click here  FOR THE APPROVAL </b></a>"
@@ -240,7 +245,8 @@ def booking():
 def cart():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
-        if request.method == 'post':
+        if request.method.lower() == 'post':
+            print("in the post if")
             cart = request.json
             no_of_deal = cart.pop("no_of_deal", 0)
             cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
@@ -249,15 +255,19 @@ def cart():
             cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
             if cart_deal_data["result"]["cart_deal"]:
+                print("in the if")
                 cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"]# always one element in array
-                response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
+                response = jsonify(requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal}).json())
             else:
+                print("in the else")
                 cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
                 cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
-                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
-            return response.json()
+                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
+            return jsonify(response.json())
     else:
-        return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+        print("error in /hotel/cart")
+        return jsonify(response)
+        # return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
 
 # @app.route('/hotel/cart', methods=['POST'])
