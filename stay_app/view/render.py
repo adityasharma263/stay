@@ -45,7 +45,7 @@ def login_required(f):
                     session["partner_data"] = partner_data
                     session["hash"] = str(request.cookies["hash"])
         elif dev_mode:
-            php_url = str(app.config["PARTNER_DOMAIN_URL"]) + "/api/v1/partner.php"
+            php_url = str(app.config["PARTNER_DEV_URL"]) + "/api/v1/partner.php"
             partner_data = requests.get(url=php_url, params={"mobile": str(app.config["PARTNER_MOBILE"])}).json()
             if partner_data.get("error"):
                 return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
@@ -82,7 +82,7 @@ def admin_login_required(f):
                     session["admin_data"] = admin_data
                     session["hash2"] = str(request.cookies["hash2"])
         elif dev_mode:
-            php_url = str(app.config["ADMIN_DOMAIN_URL"]) + "/api/v1/admin.php"
+            php_url = str(app.config["ADMIN_DEV_URL"]) + "/api/v1/admin.php"
             admin_data = requests.get(url=php_url, params={"username": str(app.config["ADMIN_USERNAME"])}).json()
             if admin_data.get("error"):
                 return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
@@ -148,7 +148,7 @@ def admin_hotel_search():
 @app.route("/admin/hotel/deal", methods=["GET"])
 @admin_login_required
 def admin_deal_id():
-    if 'admin_data' in session:
+    if True or 'admin_data' in session:
         admin_data = session["admin_data"]
         hotel_id = request.args.get('id')
         args = request.args.to_dict()
@@ -157,16 +157,18 @@ def admin_deal_id():
         hotel_data = requests.get(url=str(app.config["API_URL"]) + "/api/v1/hotel/terminal", params=args)
         hotel_data = hotel_data.json()["result"]
         return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data, name=admin_data["name"])
+        return render_template("hotel/admin/deals-dashboard.html", hotel_data=hotel_data)
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
 @app.route("/admin/hotel/terminal", methods=["GET"])
-@admin_login_required
+# @admin_login_required
 def admin_terminal():
-    if 'admin_data' in session:
-        admin_data = session["admin_data"]
-        return render_template("hotel/admin/admin_hotel_terminal.html", name=admin_data["name"])
+    if True or 'admin_data' in session:
+        # admin_data = session["admin_data"]
+        # return render_template("hotel/admin/admin_hotel_terminal.html", name=admin_data["name"])
+        return render_template("hotel/admin/admin_hotel_terminal.html")
     else:
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
@@ -202,7 +204,13 @@ def booking():
         partner_data = session["partner_data"]
         if request.method == 'GET':
             if partner_data["status"] == 'Approved':
-                return render_template('hotel/booking/booking.html', partner_data=partner_data)
+                response = requests.get(str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id" : partner_data["id"]})
+
+                cart_data = response.json()
+                 
+                
+                # return render_template('hotel/booking/booking.html', partner_data=partner_data)
+                return render_template('hotel/booking/booking.html', cart_data=cart_data)
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
                "click here  FOR THE APPROVAL </b></a>"
@@ -232,7 +240,6 @@ def booking():
 
 #================= Cart hotels ==========================
 
-
 @app.route('/hotel/cart', methods=['POST'])
 @login_required
 def cart():
@@ -240,19 +247,17 @@ def cart():
         partner_data = session["partner_data"]
         if request.method == 'POST':
             cart = request.json
-            print(partner_data["id"])
             no_of_deal = cart.pop("no_of_deal", 0)
             cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
                                      params={"partner_id": partner_data["id"]}).json()
-            print( cart_data["result"]["cart"])
             cart['cart_id'] = cart_data["result"]["cart"][0]["id"]# if the partner loged in the cart is exist
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
-            print(cart_deal_data, "deals of cart ")
             if cart_deal_data["result"]["cart_deal"]:
-                print("hello")
                 cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"]# always one element in array
                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal/' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
+                cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
+                cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
             return jsonify(response.json())
     else:
@@ -304,6 +309,7 @@ def business_hotel_list():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
         return render_template('hotel/b2b_hotels/hotel_list.html', name=partner_data["name"])
+        # return render_template('hotel/b2b_hotels/hotel_list.html')
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
@@ -317,10 +323,12 @@ def business_hotel_detail(slug):
         args["slug"] = slug
         hotel_api_url = str(app.config["API_URL"]) + "/api/v1/hotel"
         hotel_data = requests.get(url=hotel_api_url, params=args).json()
+        print("Hotel Data", hotel_data)
         return render_template('hotel/b2b_hotels/hotel_detail.html', hotel_data=hotel_data["result"]["hotel"],
                                name=partner_data['name'], params=args)
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
+       
 
 
 #================= Index Pages ==========================

@@ -278,7 +278,7 @@ class Cart(Base):
     __tablename__ = 'cart'
 
     partner_id = db.Column(db.Integer, nullable=False)
-    total_no_of_deals = db.Column(db.Integer, nullable=False)
+    total_no_of_deals = db.Column(db.Integer, nullable=True)
     total_booking_amount = db.Column(db.Integer, nullable=True)
     cart_deals = db.relationship('CartDeal', backref='cart')
 

@@ -30,7 +30,7 @@
                     <div class="table-wrapper full-width">
                         <div class="table-cell">
                             <div class="heading box">
-                                <h1 class="title">#TB Hotels</h1>
+                                <h1 class="title">   </h1>
                                 <h3 class="sub-title"><font color="white">We Have More Than Just Hotels Explore More Unique Places !</font></h3>
                             </div>
 
@@ -38,17 +38,17 @@
                                 <form>
                                     <div class="row">
                                         <div class="col-sm-4 col-md-5 form-group" onmouseover="myFunction(event)">
-                                            <input type="text" class="input-text full-width" style="border-radius: 5px;" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
+                                            <input type="text" class="input-text full-width" ng-change="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
                                         </div>
                                         <div class="col-xs-6 col-sm-4 col-md-2 form-group">
                                             <div class="datepicker-wrap">
-                                                    <input type="text" autocomplete="off" name="date_from" class="input-text full-width"  ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >
+                                                    <input type="text" id="cin" autocomplete="off" name="date_from" class="input-text full-width"  ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'"  placeholder= "mm/dd/yy"  >
                                                     <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title="">
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-5 col-md-2 form-group">
                                             <div class="datepicker-wrap">
-                                                    <input type="text" autocomplete="off" name="date_to" class="input-text full-width" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
+                                                    <input type="text" id="cout" autocomplete="off" name="date_to" class="input-text full-width" ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'"   placeholder="mm/dd/yy" >
                                                     <img class="ui-datepicker-trigger" src="..//blank.png" alt="" title="">
                                             </div>
                                         </div> 
@@ -58,7 +58,7 @@
                                 </form>
                             </div>
 
-                            <div class="row col-md-5" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;"  onmouseover="myFunction(event)">
+                            <div class="row col-md-5" id="demo" style="margin-left:10px; top:-19px; z-index:999; border-radius: 8px;" ng-show = "showSearchResult"  onmouseover="myFunction(event)">
                                 <div class="col-sm-12" style="position: relative; z-index: 99;"> 
                                     <div style="max-height:100px; text-align: left;
                                     margin: 0;
@@ -72,7 +72,7 @@
                                
                                 
 
-                                <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
+                                <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9;  text-transform: capitalize; overflow: hidden; border-radius: 0 0px 5px 5px; box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);">
 
                                         <tbody id="search" class="input-text full-width"" >
                                           <tr class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
@@ -80,7 +80,7 @@
                                                 <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>
 
                                           </tr>
-                                          <tr class="ng-cloak" ng-repeat="obj in names | limitTo:2">
+                                          <tr class="ng-cloak" ng-repeat="obj in names | limitTo:4">
                                             <td class="ng-cloak" style="border: 0" ng-click="result([[obj.name]],'name')">
                                                 <i class="soap-icon-address" style="color:#000; font-size: 16px;"></i> &nbsp [[obj.name]]</td>
 
@@ -315,7 +315,7 @@
                                             <input type="text" class="input-text input-large full-width active" value="" placeholder="Dream Destination">
                                         </div>
                                         <div class="col-xs-6 col-md-12">
-                                            <button class="full-width btn-large sky-blue1 animated" data-animation-type="fadeInUp" data-animation-delay="1">Holiday With Us</button>
+                                           <a href=""><button class="full-width btn-large sky-blue1 animated" data-animation-type="fadeInUp" data-animation-delay="1">Holiday With Us</button></a>
                                         </div>
                                     </div>
                                 </form>

@@ -27,11 +27,11 @@
             <div id="main" class="col-sm-6 col-md-9">
 
                 <div class="travelo-box booking-section">
-                    <h2>Rooms in the Cart</h2>
+                    <h2 ng-if="cartDetails.length">Rooms in the Cart</h2>
 
                     <div class="flight-list listing-style3 flight">
                         <article class="box" ng-repeat="cart in cartDetails[0].cart_deals">
-                            <figure class="col-xs-3 col-sm-2">
+                            <figure class="col-xs-3 col-sm-2" style="overflow:hidden;">
                                 <img width="140" height="100" ng-src="[[cart.deal.room.image_url]]">
                             </figure>
                             <div class="details col-xs-9 col-sm-10">
@@ -87,7 +87,12 @@
                                 </div>
                             </div>
                         </article>
+
+                        <h1 ng-if="!cartDetails.length" >No Rooms In The Cart.</h1>
+
                     </div>
+
+                    <div ng-if="cartDetails.length" >
 
                     <h3 class="mt-5">Customer Details</h3>
 
@@ -187,6 +192,8 @@
                         </center>
                     </div>
 
+                    </div>
+
                 </div>
 
 
@@ -194,7 +201,7 @@
 
 
             <div class="sidebar col-sm-4 col-md-3">
-                <div class="travelo-box contact-box" ng-init="finalQunatity = 1">
+                <div class="travelo-box contact-box" ng-init="finalQunatity = 1" ng-if="cartDetails.length">
                     <center>
                         <h4
                             ng-bind="cartDetails[0].cart_deals[0].deal.room.hotel.name+ ' ('+cartDetails[0].cart_deals[0].deal.room.hotel.city+')'">
@@ -300,4 +307,13 @@
 
 {% block footJS %}
 <script src="/controllers/bookingController.js"> </script>
+<script>
+    
+
+       
+        var cartDetails = {{cart_data | tojson}}
+        cartDetails = cartDetails.result.cart;
+
+    
+</script>
 {% endblock %}

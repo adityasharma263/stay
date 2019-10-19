@@ -2,7 +2,7 @@
 // NOte: for dropdown orderby room id
 
 // add dependency module DYNAMICALLY
-app.requires.push('ui.bootstrap');
+app.requires.push('ui.bootstrap'); // dependency for dropdown suggestion
 app.requires.push('toaster');
 app.controller("adminHotelTerminalController", function ($scope, $http, toaster) {
 
@@ -14,6 +14,12 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
 
     $scope.updateSitePriceValues = {};
+
+
+    var page = 1;
+    $scope.hasMoreResults = true;
+    var HotelFilter = {};
+
 
     $http.get("/api/v1/hotel/terminal")
         .then(function (response) {
@@ -48,7 +54,12 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
             $http.post("/admin/hotel/search", { search: $scope.searchHotel })
                 .then(function (respsonse) {
                     console.log(respsonse);
+
                     $scope.searchResult = respsonse.data.result.names;
+                    var cityArrayObj = [];
+                    respsonse.data.result.cities.forEach(city => {
+                        $scope.searchResult.push({ name: city, is_city: true });
+                    });
                 })
                 .catch(function (err) {
                     console.log("err ", err);
@@ -59,15 +70,26 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     $scope.onHotelSelect = function (item) {
         console.log(item);
-        $http.get(API_BASE_URL + "/api/v1/hotel", { params: { id: item.id } })
+        HotelFilter = {};
+        if (item.is_city) {
+            HotelFilter.city = item.name;
+            $scope.hasMoreResults = true;
+        }
+        else {
+            HotelFilter.id = item.id;
+            $scope.hasMoreResults = false;
+        }
+        $http.get("/api/v1/hotel/terminal", { params: HotelFilter })
             .then(function (response) {
-                console.log(response.data.result);
-                $scope.hotelDetails = response.data.result.hotel[0];
+                $scope.hotelDetails = response.data.result.hotel;
+                setTimeout(() => {
+                console.log("onHotelSelect = ",$scope.hotelDetails);
+                    
+                }, 500);
             })
             .catch(function (err) {
                 console.log(err);
-            })
-            ;
+            });
     };
 
     $scope.loadRoomPrice = function (roomID, loadRoomPriceFor) {
@@ -162,30 +184,53 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
                     toaster.pop('danger', "Deal Update Failed.");
 
                 });
-            
+
 
         }
 
 
     };
 
-    $scope.getSelectedDeal = function (dealsArray) {
+    // filterFor is used for dynamic code, value either 'b2b' or 'b2c'
+    $scope.getSelectedDeal = function (dealsArray, filterFor) {
         // console.log("dealsArray= ", dealsArray);
         var selectedDeal = dealsArray.filter(function (deal) {
-            return deal.b2b_selected_deal;
+            return deal[filterFor+"_selected_deal"];
         });
 
 
         return selectedDeal[0] ? {
-            "b2b_selling_price": selectedDeal[0].b2b_selling_price,
-            "b2b_final_price": selectedDeal[0].b2b_final_price,
-            "b2c_selling_price": selectedDeal[0].b2c_selling_price,
-            "b2c_final_price": selectedDeal[0].b2c_final_price,
+            
+            "final_price": selectedDeal[0][filterFor+"_final_price"],
+            "base_price": selectedDeal[0].base_price
         } : undefined;
     };
 
 
-  
+    $scope.loadMore = function () {
+
+        HotelFilter.page = page++;
+
+        // page++;
+
+        $http.get("/api/v1/hotel/terminal", { params: HotelFilter })
+            .then(function (response) {
+
+                var result = response.data.result.hotel;
+                $scope.hotelDetails = $scope.hotelDetails.concat(result);
+                console.log($scope.hotelDetails);
+                if (!result.length) {
+                    $scope.hasMoreResults = false;
+                    toaster.pop("error", "No more results");
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+
+    }
+
+
 
 
 

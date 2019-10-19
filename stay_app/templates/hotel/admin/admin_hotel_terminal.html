@@ -143,7 +143,8 @@
         }
 
         .small-text {
-            font-size: 85% !important;
+            font-size: 115% !important;
+            font-weight: 900;
         }
 
         .testimonial-group>.row {
@@ -259,6 +260,26 @@
                     </div>
                 </div>
             </div>
+
+            <div style="margin-top: 10px;" class=" ">
+
+                <form>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-6 form-group col-md-offset-1">
+                            <input typeahead-on-select='onHotelSelect($item)' ng-model="searchHotel"
+                                ng-change="searchHotelOnChange($event)"
+                                uib-typeahead="state.name for state in searchResult" type="text"
+                                class="input-text full-width dropdown-input"
+                                placeholder="Search for city or hotel"/>
+                        </div>
+                        
+                        <div class="col-sm-2 form-group">
+                            <button class="button btn-medium full-width uppercase sky-blue1">Search Now</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
         </header>
 
         <section>
@@ -282,27 +303,34 @@
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
                                 data-target="#myModal" ng-click="loadRoomPrice(room.id, 1)">
-                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_selling_price || 'No Deal']]</div>
-                            <div class="col-sm-3 border-right border-bottom p10 small-text">
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id], "b2b").base_price || 'No Deal']]</div>
+                            <div class="col-sm-3 border-right border-bottom p10 small-text" ng-style="!getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_final_price && {'padding-left':'5px'}">
                                 <!-- <input type="text" value="1550" class="form-control small-text"
                                     ng-keydown="changeSitePrice($event, 'b2b')" /> -->
 
-                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2b_final_price || 'No Price Set']]
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id], "b2b").final_price || 'No Price Set']]
                             </div>
                             <div class="col-sm-3 border-right border-bottom small-text p10" data-toggle="modal"
                                 data-target="#myModal" ng-click="loadRoomPrice(room.id, 0)">
-                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2c_selling_price || 'No Deal']]
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id], "b2c").base_price || 'No Deal']]
                             </div>
-                            <div class="col-sm-3 border-right border-bottom p10 small-text">
+                            <div class="col-sm-3 border-right border-bottom p10 small-text"  ng-style="!getSelectedDeal(roomPriceStructureB2B[room.id]).b2c_final_price && {'padding-left':'5px'}" >
                                 <!-- <input type="text" value="2000" class="small-text form-control"
                                     ng-keydown="changeSitePrice($event, 'b2c')" /> -->
-                                [[getSelectedDeal(roomPriceStructureB2B[room.id]).b2c_final_price || 'No Price Set']]
+                                [[getSelectedDeal(roomPriceStructureB2B[room.id], "b2c").final_price || 'No Price Set']]
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <center>
+
+                <button ng-click="loadMore()" ng-if="hasMoreResults">Load More</button>
+
+            </center>
         </section>
+
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">

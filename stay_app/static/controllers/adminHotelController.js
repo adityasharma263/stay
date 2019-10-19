@@ -46,7 +46,6 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
         "bathroom_nightie": null,
         "bathroom_towels": null,
         "bathroom_with_shower": false,
-        "bed_type": null,
         "desk": null,
         "electric_kettle": null,
         "fan": null,
@@ -58,7 +57,6 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
         "ironing_facility": null,
         "jacuzzi": null,
         "morning_newspaper": null,
-        "no_of_bed": null,
         "phone": null,
         "room_safe": null,
         "room_seating_area": null,
@@ -109,6 +107,21 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
         .then(function(response){
 
             toaster.pop('success', "Hotel Added Successfull!!");
+            $scope.hotel = {};
+            $scope.hotelImg = [];
+            $scope.roomDetailsArray =[
+                {
+                    room_type : "",
+                    image_url : "",
+                    max_no_of_guest: "",
+                    meal_plan : "",
+                    facilities : {},
+                    
+        
+                  }
+              ];
+
+
 
         })
         .catch(function(err){
@@ -612,6 +625,8 @@ app.controller('adminHotelController', function ($scope, $http, toaster) {
         // sendPostHotel('/api/v1/hotel', $scope.hotel);
 
     };
+
+
     
-    // $scope.showLoader123 = false;
+    $scope.showLoader = false;
 });
