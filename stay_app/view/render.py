@@ -240,12 +240,16 @@ def cart():
         partner_data = session["partner_data"]
         if request.method == 'POST':
             cart = request.json
+            print(partner_data["id"])
             no_of_deal = cart.pop("no_of_deal", 0)
             cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
                                      params={"partner_id": partner_data["id"]}).json()
-            cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
+            print( cart_data["result"]["cart"])
+            cart['cart_id'] = cart_data["result"]["cart"][0]["id"]# if the partner loged in the cart is exist
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
+            print(cart_deal_data, "deals of cart ")
             if cart_deal_data["result"]["cart_deal"]:
+                print("hello")
                 cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"]# always one element in array
                 response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal/' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
