@@ -258,6 +258,7 @@ def cart():
             else:
                 cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
                 cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
+                print(cart)
                 response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
             return jsonify(response.json())
     else:
