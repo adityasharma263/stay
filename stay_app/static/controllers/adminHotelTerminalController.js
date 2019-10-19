@@ -194,6 +194,8 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
     // filterFor is used for dynamic code, value either 'b2b' or 'b2c'
     $scope.getSelectedDeal = function (dealsArray, filterFor) {
         // console.log("dealsArray= ", dealsArray);
+        if(!dealsArray)
+        return;
         var selectedDeal = dealsArray.filter(function (deal) {
             return deal[filterFor+"_selected_deal"];
         });
@@ -209,7 +211,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     $scope.loadMore = function () {
 
-        HotelFilter.page = page++;
+        HotelFilter.page = ++page;
 
         // page++;
 
