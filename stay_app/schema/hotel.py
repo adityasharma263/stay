@@ -285,6 +285,14 @@ class PackageSchema(ma.ModelSchema):
     cities = ma.Nested(CitiesSchema, many=True)
     experiences = ma.Nested(ExperiencesSchema, many=True)
     inclusions = ma.Nested(InclusionsSchema, many=False)
+    valid_till = ma.Method('valid_till_epoch')
+    valid_from = ma.Method('valid_from_epoch')
+
+    def valid_till_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.valid_till)
+
+    def valid_from_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.valid_from)
 
     class Meta:
         model = Packages

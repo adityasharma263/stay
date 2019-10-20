@@ -16,7 +16,7 @@ import flask.json
 
 
 @app.route('/api/v1/package', methods=['GET', 'POST'])
-def booking_api():
+def package_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         page = request.args.get('page', 1)
@@ -28,6 +28,10 @@ def booking_api():
         return jsonify({'result': {'packages': result.data}, 'message': "Success", 'error': False})
     else:
         package = request.json
+        package['valid_from'] = datetime.datetime.fromtimestamp(
+            int(package['valid_from'])).strftime('%Y-%m-%d %H:%M:%S')
+        package['valid_till'] = datetime.datetime.fromtimestamp(
+            int(package['valid_till'])).strftime('%Y-%m-%d %H:%M:%S')
         cities = package.get("cities", None)
         experiences = package.get("experiences", None)
         inclusions = package.get("inclusions", None)
@@ -46,10 +50,11 @@ def booking_api():
             experience_post = Experiences(**experience)
             package_post.experiences.append(experience_post)
             experience_post.save()
-        inclusions["hotel_id"] = package_post.id
+        inclusions["package_id"] = package_post.id
         inclusions_post = Inclusions(**inclusions)
         package_post.amenities = inclusions_post
         inclusions_post.save()
+
         result = PackageSchema().dump(package_post)
         return jsonify({'result': {'package': result.data}, 'message': "Success", 'error': False})
 
