@@ -161,7 +161,7 @@ def hotel_terminal_api():
             q = q.filter(Hotel.name.ilike('%' + name + '%')).order_by(Hotel.name)
         if search:
             q = q.filter(Hotel.city.ilike('%' + search + '%') | Hotel.name.ilike('%' + search + '%')).order_by(Hotel.name)
-        hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        hotels = q.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelTerminalSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
 
@@ -267,7 +267,7 @@ def hotel_b2b_list_api():
         if rating:
             q = q.filter(Hotel.rating >= rating)
         if price_start and price_end:
-            q = q.filter(Deal.price >= price_start, Deal.price <= price_end)
+            q = q.filter(Deal.b2b_final_price >= price_start, Deal.b2b_final_price <= price_end)
         hotels = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = HotelB2BListSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})

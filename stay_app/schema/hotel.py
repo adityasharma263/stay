@@ -199,7 +199,7 @@ class RoomB2BListSchema(ma.ModelSchema):
 
     class Meta:
         model = Room
-        exclude = ('updated_at', 'created_at', "facilities", "hotel")
+        exclude = ('updated_at', 'created_at', "facilities", "hotel", "image_url")
 
 
 class HotelB2BListSchema(ma.ModelSchema):

@@ -17,6 +17,12 @@ var app = angular.module('stay', ['angular.filter'])
             $scope.hotel.ci = new Date();
         // $scope.hotel.co = new Date();
             $scope.hotel.co = new Date();
+        }
+        $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
+
+        
+
+        
 
         $scope.result = function (data, status) {
             $scope.hotel.search = data;
@@ -124,6 +130,8 @@ var app = angular.module('stay', ['angular.filter'])
         $scope.imagesData = {};
         $scope.min = 200;
         $scope.max = 100000;
+
+        $scope.minimumPriceForFilter = 200;
 
         //----------------------- List View Searching... ---------------------//
 
@@ -261,10 +269,13 @@ var app = angular.module('stay', ['angular.filter'])
             })
         }
 
-
+// =========== Filters ================
         $scope.amenityFilter = function() {
 
             console.log($scope.amenities);
+
+
+            applyFilterAndReload($scope.amenities);
 
             return;
 
@@ -272,7 +283,117 @@ var app = angular.module('stay', ['angular.filter'])
             urlParams = {...urlParams , ...$scope.amenities};
             $scope.getHotelsData();
             
+        };
+
+
+        $scope.checkInCheckOutFilter = function(){
+        
+            var checkinDate = $("#dp1566640682637").val();
+            var checkoutDate = $("#dp1566640682638").val();
+
+            var checkinTimestamp = new Date(checkinDate).getTime()/1000;
+
+            
+
+            var checkoutTimestamp = new Date(checkoutDate).getTime()/1000;
+
+            if(!checkinTimestamp){
+                return alert("Check-in Date is not valid!");
+            }
+
+            if(!checkoutTimestamp){
+                return alert("Check-out Date is not valid!");
+            }
+            var currentPageUrlQueryString =  $location.search();
+
+            console.log(currentPageUrlQueryString);
+
+            currentPageUrlQueryString.ci = checkinTimestamp;
+            currentPageUrlQueryString.co = checkoutTimestamp;
+
+            applyFilterAndReload(currentPageUrlQueryString);
+
+        };
+
+
+        $scope.priceFilter = function(){
+
+
+            var priceFilterObject = {};
+
+            priceFilterObject.price_start =  $scope.minimumPriceForFilter;
+
+            priceFilterObject.price_end = $scope.hotel.price_end;
+
+            applyFilterAndReload(priceFilterObject);
+
+        };
+
+
+        function applyFilterAndReload(filterObject){
+            var newFilter = $.extend($location.search(), filterObject);
+            for(var amenity in newFilter){
+                if(newFilter[amenity] == "false" || newFilter[amenity] == false){
+                    delete newFilter[amenity];
+                }
+            }
+            var newUrl = window.location.href.split('?')[0] + "?"+$.param(newFilter);
+            window.location.href = newUrl;
         }
+
+
+        $scope.fillFilterValuesInHTML = function(){
+            
+            var queryParams = JSON.parse(JSON.stringify($location.search()));
+
+            // console.log(queryParams);
+            // console.log("getFormattedDate(queryParams.ci) = ",getFormattedDate(queryParams.ci));
+            
+            if (queryParams.price_end)
+                $scope.hotel.price_end = parseInt(queryParams.price_end);
+
+            delete queryParams.price_end;
+
+            console.log(queryParams);
+            
+
+            for(var amenityFromUrl in queryParams){
+
+                if(queryParams[amenityFromUrl] == "true"){
+                    $scope.amenities[amenityFromUrl] = true;
+                    console.log(amenityFromUrl);
+                }
+
+            }
+
+            var setCheckinDateVal = document.getElementById("dp1566640682637");
+            var setCheckoutDateVal = document.getElementById("dp1566640682638");
+
+            setCheckinDateVal.value = getFormattedDate(queryParams.ci);
+            setCheckoutDateVal.value = getFormattedDate(queryParams.co);
+
+            delete queryParams.ci;
+            delete queryParams.co;
+
+            function getFormattedDate(timestamp){
+
+                var d = new Date(parseInt(timestamp.trim()+"000"));
+
+                console.log(parseInt(timestamp.trim()+"000"));
+
+                var month =   d.getMonth();
+                var year =  d.getFullYear();
+                var date =  d.getDate();
+                var dateString = month+"/"+date+"/"+year;
+                console.log(dateString);
+                return dateString;
+            }
+        };
+
+        setTimeout($scope.fillFilterValuesInHTML,500);
+        
+
+//============ Filter End ========== 
 
         $scope.loadMoreHotelsData = function () {
             $scope.hotel.page = $scope.hotel.page + 1;
@@ -440,7 +561,7 @@ var app = angular.module('stay', ['angular.filter'])
         };
 
 
-
+        
 
 
 

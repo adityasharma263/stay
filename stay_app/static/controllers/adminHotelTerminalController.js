@@ -60,9 +60,6 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
                     respsonse.data.result.cities.forEach(city => {
                         $scope.searchResult.push({ name: city, is_city: true });
                     });
-
-                    console.log(cityArrayObj, $scope.searchResult);
-
                 })
                 .catch(function (err) {
                     console.log("err ", err);
@@ -85,7 +82,10 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
         $http.get("/api/v1/hotel/terminal", { params: HotelFilter })
             .then(function (response) {
                 $scope.hotelDetails = response.data.result.hotel;
-                console.log($scope.hotelDetails);
+                setTimeout(() => {
+                console.log("onHotelSelect = ",$scope.hotelDetails);
+                    
+                }, 500);
             })
             .catch(function (err) {
                 console.log(err);
@@ -194,6 +194,8 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
     // filterFor is used for dynamic code, value either 'b2b' or 'b2c'
     $scope.getSelectedDeal = function (dealsArray, filterFor) {
         // console.log("dealsArray= ", dealsArray);
+        if(!dealsArray)
+        return;
         var selectedDeal = dealsArray.filter(function (deal) {
             return deal[filterFor+"_selected_deal"];
         });
@@ -209,7 +211,7 @@ app.controller("adminHotelTerminalController", function ($scope, $http, toaster)
 
     $scope.loadMore = function () {
 
-        HotelFilter.page = page++;
+        HotelFilter.page = ++page;
 
         // page++;
 

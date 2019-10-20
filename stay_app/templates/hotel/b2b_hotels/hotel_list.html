@@ -2,8 +2,48 @@
     content%}
 
 <style>
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  margin: 10px auto;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: black;
+  cursor: pointer;
+  border-radius: 50px
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: black;
+  cursor: pointer;
+  border-radius: 50px
+}
+
+.check-square.filters-option label{
+    display:block !important;
+}
 
 
+.check-square.filters-option label > input[type='checkbox']{
+    display:none !important;
+}
 
 </style>
 <div class="page-title-container">
@@ -44,7 +84,7 @@
                                                 <div class="datepicker-wrap from-today">
                                                     <input name="date_from" type="text" autocomplete="off"
                                                         class="input-text full-width" placeholder="mm/dd/yy"
-                                                        ng-model="hotel.ci" ng-value="hotel.ci | date: 'EEE,dd MMM yy'" id="dp1566640682637">
+                                                        ng-model="hotel.ci1" id="dp1566640682637">
                                                     <img class="ui-datepicker-trigger" src="" alt="" title="">
                                                 </div>
                                             </div>
@@ -53,13 +93,13 @@
                                                 <div class="datepicker-wrap from-today">
                                                     <input name="date_to" type="text" autocomplete="off"
                                                         class="input-text full-width" placeholder="mm/dd/yy"
-                                                        ng-model="hotel.co" ng-value="hotel.co | date: 'EEE,dd MMM yy'" id="dp1566640682638">
+                                                        ng-model="hotel.co1" id="dp1566640682638">
                                                     <img class="ui-datepicker-trigger" src="" alt="" title="">
                                                 </div>
                                             </div>
                                         </div>
                                         <br>
-                                        <button class="btn-medium icon-check uppercase full-width">search again</button>
+                                        <button class="btn-medium icon-check uppercase full-width" ng-click="checkInCheckOutFilter()" >search again</button>
                                     </form>
                                 </div>
                             </div>
@@ -73,224 +113,268 @@
 
                                     <div id="price-range" class="form-group">
                                         <div class="ng-cloak">
-                                            <label>Max Price:</label>
-                                            <input type="range" min="200" max="100000" value="2000"
-                                                ng-model="hotel.price_end">
-                                            <p>Value: <span>[[hotel.end_price]]</span></p>
+                                            <p>Value: <span>[[hotel.price_end]]</span></p>
+
+                                            <input type="range" min="{{minimumPriceForFilter}}" max="100000" value="2000" class="slider"
+                                                ng-model="hotel.price_end" >
+
+                                                <label>Max Price: 100000</label>
+                                        
 
                                         </div>
                                     </div>
                                     <br>
                                     <button class="btn-medium icon-check uppercase full-width"
-                                        ng-click="getHotelsData()">search again</button>
+                                        ng-click="priceFilter()">search again</button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="panel style1 arrow-right">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#amenities-filter" class="collapsed">Amenities</a>
+                                <a data-toggle="collapse" target="_self" href="#amenities-filter" class="collapsed">Amenities</a>
                             </h4>
                             <div id="amenities-filter" class="panel-collapse collapse" style="height: 0px;">
                                 <div class="panel-content">
 
                                     <div id="amenities-range" class="form-group">
-
-
-                                        <input type="checkbox" value="1" ng-model="amenities.room_cleaning_service"
-                                            style="width:5px;position: absolute;" id="Room_cleaning_service1" />
-                                        <label for="Room_cleaning_service1">
                                             <ul class="check-square filters-option">
-                                                <li>
-                                                    <a onclick="return false;" href="javascript:void(0)">
+                                                <li ng-class="{'active': amenities.room_cleaning_service}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1" ng-model="amenities.room_cleaning_service" />
                                                         Room Cleaning Service
-                                                    </a>
-
+                                                    </label>
+                                                    </span>
+                                                    
                                                 </li>
-                                            </ul>
-                                        </label>
-
-                                        <div class="ng-cloak">
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="Room_cleaning_service">
+                                                <li ng-class="{'active': amenities.banquets}">
+                                                    <span>
+                                                    <label>
                                                         <input type="checkbox" value="1"
-                                                            ng-model="amenities.room_cleaning_service" />&nbsp;&nbsp;
-                                                        Room Cleaning Service
+                                                            ng-model="amenities.banquets" /> Banquets
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="banquets">
-                                                        <input type="checkbox" value="2"
-                                                            ng-model="amenities.banquets" />&nbsp;&nbsp; Banquets
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.bar}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.bar" /> Bars
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="bar">
-                                                        <input type="checkbox" value="3"
-                                                            ng-model="amenities.bar" />&nbsp;&nbsp; Bar
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.child_baby_cot}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.child_baby_cot" /> Child Baby Cot
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="child_baby_cot">
-                                                        <input type="checkbox" value="4"
-                                                            ng-model="amenities.child_baby_cot" />&nbsp;&nbsp; Child
-                                                        Baby Cot
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.couple_friendly}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.couple_friendly" /> Couple Friendly
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for=" couple_friendly">
-                                                        <input type="checkbox"
-                                                            ng-model="amenities.couple_friendly" />&nbsp;&nbsp;
-                                                        Couple Friendly
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.parking}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.parking" /> Parking
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="parking">
-                                                        <input type="checkbox"
-                                                            ng-model="amenities.parking" />&nbsp;&nbsp;
-                                                        Parking
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.conference_room}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.conference_room" /> Conference Room
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="conference_room">
-                                                        <input type="checkbox" value="4"
-                                                            ng-model="amenities.conference_room" />&nbsp;&nbsp;
-                                                        Conference Room
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.doorman}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.doorman" /> Doorman
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="doorman">
-                                                        <input type="checkbox" value="5"
-                                                            ng-model="amenities.doorman" />&nbsp;&nbsp; Doorman
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.express_check_in_out}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.express_check_in_out" /> Express Check in Out
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="express_check_in_out">
-                                                        <input type="checkbox" value="6"
-                                                            ng-model="amenities.express_check_in_out" />&nbsp;&nbsp;
-                                                        Express Check in Out
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.gym}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.gym" /> Gym
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="gym">
-                                                        <input type="checkbox" value="7"
-                                                            ng-model="amenities.gym" />&nbsp;&nbsp; Gym
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.hairdresser}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.hairdresser" /> Hairdresser
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="hairdresser">
-                                                        <input type="checkbox" value="8"
-                                                            ng-model="amenities.hairdresser" />&nbsp;&nbsp;
-                                                        Hairdresser
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.indoor_swimming_pool}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.indoor_swimming_pool" /> Indoor Swimming Pool
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="indoor_swimming_pool">
-                                                        <input type="checkbox" value="9"
-                                                            ng-model="amenities.indoor_swimming_pool" />&nbsp;&nbsp;
-                                                        Indoor Swimming Pool
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.laundry_service}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.laundry_service" /> Laundry Service
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="laundry_service">
-                                                        <input type="checkbox" value="10"
-                                                            ng-model="amenities.laundry_service" />&nbsp;&nbsp;
-                                                        Laundry Service
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.lift}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.lift" /> Lift
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="lift">
-                                                        <input type="checkbox" value="11"
-                                                            ng-model="amenities.lift" />&nbsp;&nbsp; Lift
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.non_smoking_smoking_rooms}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.non_smoking_smoking_rooms" /> Smoking / Non Rooms
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="non_smoking_smoking_rooms">
-                                                        <input type="checkbox" value="14"
-                                                            ng-model="amenities.non_smoking_smoking_rooms" />&nbsp;&nbsp;
-                                                        Smoking / Non Rooms
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.outdoor_swimming_pool}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.outdoor_swimming_pool" /> Outdoor Swimming Pool
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="outdoor_swimming_pool">
-                                                        <input type="checkbox" value="13"
-                                                            ng-model="amenities.outdoor_swimming_pool" />&nbsp;&nbsp;
-                                                        Outdoor Swimming Pool
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.pet_allowance}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.pet_allowance" /> Pet Allowance
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="pet_allowance">
-                                                        <input type="checkbox" value="14"
-                                                            ng-model="amenities.pet_allowance" />&nbsp;&nbsp; Pet
-                                                        Allowance
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.pool}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.pool" /> Pool
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="pool">
-                                                        <input type="checkbox" value="15"
-                                                            ng-model="amenities.pool" />&nbsp;&nbsp; Pool
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="porter_service">
-                                                        <input type="checkbox" value="16"
-                                                            ng-model="amenities.porter_service" />&nbsp;&nbsp; Porter
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.porter_service}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.porter_service" /> Porter
                                                         Service
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="restaurant">
-                                                        <input type="checkbox" value="17"
-                                                            ng-model="amenities.restaurant" />&nbsp;&nbsp; Restaurant
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.restaurant}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.restaurant" /> Restaurant
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="spa">
-                                                        <input type="checkbox" value="18"
-                                                            ng-model="amenities.spa" />&nbsp;&nbsp; SPA
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.spa}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.spa" /> SPA
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="terrace">
-                                                        <input type="checkbox" value="19"
-                                                            ng-model="amenities.terrace" />&nbsp;&nbsp; Terrace
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.terrace}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.terrace" /> Terrace
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="twenty_four_hr_reception">
-                                                        <input type="checkbox" value="20"
-                                                            ng-model="amenities.twenty_four_hr_reception" />&nbsp;&nbsp;
-                                                        24hr Reception
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.twenty_four_hr_reception}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.twenty_four_hr_reception" /> 24hr Reception
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="twenty_four_hr_room_service">
-                                                        <input type="checkbox" value="21"
-                                                            ng-model="amenities.twenty_four_hr_room_service" />&nbsp;&nbsp;
-                                                        24hr Room Service
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.twenty_four_hr_room_service}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.twenty_four_hr_room_service" /> 24hr Room Service
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="wheelchair_accessible">
-                                                        <input type="checkbox" value="22"
-                                                            ng-model="amenities.wheelchair_accessible" />&nbsp;&nbsp;
-                                                        Wheelchair Accessible
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.wheelchair_accessible}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.wheelchair_accessible" /> Wheelchair Accessible
                                                     </label>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 small" style="height: 45px;">
-                                                    <label for="wifi_in_lobby">
-                                                        <input type="checkbox" value="23"
-                                                            ng-model="amenities.wifi_in_lobby" />&nbsp;&nbsp; Wifi in
-                                                        Lobby
+                                                    </span>
+                                                    
+                                                </li>
+                                                <li ng-class="{'active': amenities.wifi_in_lobby}">
+                                                    <span>
+                                                    <label>
+                                                        <input type="checkbox" value="1"
+                                                            ng-model="amenities.wifi_in_lobby" /> Wifi in Lobby
                                                     </label>
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
+                                                    </span>
+                                                    
+                                                </li>
+                                            </ul>
                                     </div>
                                     <br>
                                     <button class="btn-medium icon-check uppercase full-width"
@@ -382,7 +466,7 @@
 
                     <table id="search" class="table table-hover input-text full-width" class="ng-cloak" style="background-color:#f9f9f9;  text-transform: capitalize; overflow: hidden;">
 
-                            <tbody id="search" class="input-text full-width"" >
+                            <tbody id="search" class="input-text full-width" >
                               <tr class="ng-cloak" ng-repeat="city in cities | limitTo:2" >
                                 <td class="ng-cloak" style="border: 0" id="start" ng-click="result([[city]],'city')">
                                     <i class="soap-icon-departure" style="color: #000; font-size: 16px;  transition-delay: 6s;"></i> &nbsp [[city]]</td>

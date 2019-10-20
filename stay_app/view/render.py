@@ -7,6 +7,9 @@ from flask import render_template, request, make_response, jsonify, abort, redir
 import requests
 from Crypto.Cipher import AES
 from functools import wraps
+from stay_app.lib.send_email import SendEmail
+import random
+import time
 import base64
 import binascii
 import datetime
@@ -42,7 +45,7 @@ def login_required(f):
                     session["partner_data"] = partner_data
                     session["hash"] = str(request.cookies["hash"])
         elif dev_mode:
-            php_url = str(app.config["PARTNER_DOMAIN_URL"]) + "/api/v1/partner.php"
+            php_url = str(app.config["PARTNER_DEV_URL"]) + "/api/v1/partner.php"
             partner_data = requests.get(url=php_url, params={"mobile": str(app.config["PARTNER_MOBILE"])}).json()
             if partner_data.get("error"):
                 return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
@@ -79,7 +82,7 @@ def admin_login_required(f):
                     session["admin_data"] = admin_data
                     session["hash2"] = str(request.cookies["hash2"])
         elif dev_mode:
-            php_url = str(app.config["ADMIN_DOMAIN_URL"]) + "/api/v1/admin.php"
+            php_url = str(app.config["ADMIN_DEV_URL"]) + "/api/v1/admin.php"
             admin_data = requests.get(url=php_url, params={"username": str(app.config["ADMIN_USERNAME"])}).json()
             if admin_data.get("error"):
                 return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
@@ -170,18 +173,44 @@ def admin_terminal():
         return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
 
 
+@app.route('/admin/send-email', methods=['GET', 'POST'])
+@admin_login_required
+def send_email():
+    if 'admin_data' in session:
+        admin_data = session["admin_data"]
+        if request.method == 'GET':
+            return render_template("hotel/admin/send_email.html", name=admin_data["name"])
+        else:
+            result = request.json
+            response = []
+            for email_to in result['to']:
+                response.append(SendEmail().send_email(result['sender'], email_to, result['subject'],
+                                                       result['sender_pwd'], result['msg_html'], result['msg_plain'],
+                                                       result['attachment_file']))
+                time.sleep(random.randint(1, 20))
+            return jsonify(response)
+
+    else:
+        return redirect(str(app.config["ADMIN_DOMAIN_URL"]), code=302)
+
+
 #================= Booking hotels ==========================
 
 
 @app.route('/hotel/booking', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def booking():
-    if True or 'partner_data' in session:
-        # partner_data = session["partner_data"]
+    if 'partner_data' in session:
+        partner_data = session["partner_data"]
         if request.method == 'GET':
-            if True or partner_data["status"] == 'Approved':
+            if partner_data["status"] == 'Approved':
+                response = requests.get(str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id" : partner_data["id"]})
+
+                cart_data = response.json()
+                 
+                
                 # return render_template('hotel/booking/booking.html', partner_data=partner_data)
-                return render_template('hotel/booking/booking.html')
+                return render_template('hotel/booking/booking.html', cart_data=cart_data)
             else:
                 return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
                "click here  FOR THE APPROVAL </b></a>"
@@ -216,17 +245,22 @@ def booking():
 def cart():
     if 'partner_data' in session:
         partner_data = session["partner_data"]
-        if request.method == 'post':
+        if request.method == 'POST':
             cart = request.json
+            no_of_deal = cart.pop("no_of_deal", 0)
+            cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart',
+                                     params={"partner_id": partner_data["id"]}).json()
+            cart['cart_id'] = cart_data["result"]["cart"][0]["id"]# if the partner loged in the cart is exist
             cart_deal_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart/deal', params=cart).json()
             if cart_deal_data["result"]["cart_deal"]:
                 cart_deal_id = cart_deal_data["result"]["cart_deal"][0]["id"]# always one element in array
-                response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
+                response = requests.put(str(app.config["API_URL"]) + '/api/v1/cart/deal/' + str(cart_deal_id), json={"no_of_deals": no_of_deal})
             else:
                 cart_data = requests.get(url=str(app.config["API_URL"]) + '/api/v1/cart', params={"partner_id": partner_data["id"]}).json()
                 cart['cart_id'] = cart_data["result"]["cart"][0]["id"]
-                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart.json())
-            return response.json()
+                print(cart)
+                response = requests.post(str(app.config["API_URL"]) + '/api/v1/cart/deal', json=cart)
+            return jsonify(response.json())
     else:
         return redirect(str(app.config["PARTNER_DOMAIN_URL"]) + '/login.php', code=302)
 
