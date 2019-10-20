@@ -15,6 +15,7 @@ from stay_app.model.hotel import BookingDeal
 from stay_app.model.hotel import Cart
 from stay_app.model.hotel import CartDeal
 from stay_app.model.hotel import PriceCalendar
+from stay_app.model.hotel import Packages, Cities, Experiences, Inclusions, PackageBooking
 from stay_app import ma
 from marshmallow_enum import EnumField
 from stay_app.schema.base import safe_execute
@@ -252,4 +253,46 @@ class BookingSchema(ma.ModelSchema):
 
     class Meta:
         model = Booking
+        exclude = ('updated_at', 'created_at')
+
+
+#-------------------------------------------------------Package-------------------------------------------
+
+
+class CitiesSchema(ma.ModelSchema):
+
+    class Meta:
+        model = Cities
+        exclude = ('updated_at', 'created_at')
+
+
+class ExperiencesSchema(ma.ModelSchema):
+
+    class Meta:
+        model = Experiences
+        exclude = ('updated_at', 'created_at')
+
+
+class InclusionsSchema(ma.ModelSchema):
+
+    class Meta:
+        model = Inclusions
+        exclude = ('updated_at', 'created_at')
+
+
+class PackageSchema(ma.ModelSchema):
+
+    cities = ma.Nested(CitiesSchema, many=True)
+    experiences = ma.Nested(ExperiencesSchema, many=True)
+    inclusions = ma.Nested(InclusionsSchema, many=False)
+
+    class Meta:
+        model = Packages
+        exclude = ('updated_at', 'created_at')
+
+
+class PackageBookingSchema(ma.ModelSchema):
+
+    class Meta:
+        model = PackageBooking
         exclude = ('updated_at', 'created_at')
