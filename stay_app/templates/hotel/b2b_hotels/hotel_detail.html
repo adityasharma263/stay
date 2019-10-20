@@ -474,15 +474,20 @@
                         </div>
                         <div class="sidebar col-md-3">
                                 <article class="detailed-logo">
-                                    {% for room in hotel_data.rooms %}
-                                    {% if room.b2b_lowest_price_room %}
-                                    <figure>
-                                        <img src="{{room.image_url}}" alt="">
+                                        {% for room in hotel_data.rooms %}
+                                        {% for deal in room.deals %}
+                                        {% if deal.b2b_lowest_price %}
+                                    <figure style="padding:  0px 0px;">
+                                            <img src="{{room.image_url}}" alt="Room Image">
                                     </figure>
-                                    {% endif %}
-                                    {% endfor %}
+                                    {% endif %}                                        
+                                        {% endfor %}
+                                        {% endfor %}
+                                   
                                     <div class="details">
-                                        <h2 class="box-title">{{hotel_data.name}}<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">{{hotel_data.city}}</span></small></h2>
+                                        <h2 class="box-title"  style="text-transform: capitalize;">{{hotel_data.name}}
+                                            <small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">{{hotel_data.city}}</span></small></h2>
+                                        
                                         <span class="price clearfix">
                                             <!-- <small class="pull-left">Mni. avg/night</small>
                                             <span class="pull-right">₹ </span> -->
