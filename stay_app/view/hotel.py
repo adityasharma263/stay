@@ -180,7 +180,7 @@ def hotel_b2b_list_api():
         args.pop('price_start', None)
         args.pop('price_end', None)
         page = request.args.get('page', 1)
-        per_page = request.args.get('per_page', 10)
+        per_page = request.args.get('per_page', 1000)
         args.pop('page', None)
         args.pop('per_page', None)
         check_in = request.args.get('ci')
