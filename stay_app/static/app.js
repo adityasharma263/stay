@@ -17,8 +17,8 @@ var app = angular.module('stay', ['angular.filter'])
             $scope.hotel.ci = new Date();
         // $scope.hotel.co = new Date();
             $scope.hotel.co = new Date();
-        // }
-        // $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
+    // }
+        $scope.hotel.co.setDate($scope.hotel.co.getDate() + 1);
 
         
 
