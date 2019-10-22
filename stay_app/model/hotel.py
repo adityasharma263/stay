@@ -360,6 +360,104 @@ class BookingDeal(Base):
         return '<booking_id %r>' % self.booking_id
 
 
+class Packages(Base):
+
+    __tablename__ = 'package'
+
+    package_name = db.Column(db.String)
+    package_url = db.Column(db.String, nullable=True)
+    featured_image = db.Column(db.String, nullable=True)
+    accommodation_type = db.Column(db.Integer, nullable=True)
+    rating = db.Column(db.DECIMAL, nullable=True)
+    duration = db.Column(db.String, nullable=True)
+    price_for_adult = db.Column(db.Integer, nullable=True)
+    price_for_child = db.Column(db.Integer, nullable=True)
+    valid_from = db.Column(db.DateTime(timezone=True), nullable=True)
+    valid_till = db.Column(db.DateTime(timezone=True), nullable=True)
+    inclusions = db.relationship('Inclusions', uselist=False, backref='package')
+    experiences = db.relationship('Experiences', backref='package')
+    cities = db.relationship('Cities', backref='package')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<package_name %r>' % self.package_name
+
+
+class Inclusions(Base):
+    __tablename__ = 'inclusions'
+
+    package_id = db.Column(db.Integer, db.ForeignKey('package.id'), unique=True, nullable=False)
+    hotel = db.Column(db.Boolean, default=False, nullable=True)
+    visa = db.Column(db.Boolean, default=False, nullable=True)
+    transfer = db.Column(db.Boolean, default=False, nullable=True)
+    flight = db.Column(db.Boolean, default=False, nullable=True)
+    meals = db.Column(db.Boolean, default=False, nullable=True)
+    experiences = db.Column(db.Boolean, default=False, nullable=True)
+    hotel_assistance = db.Column(db.Boolean, default=False, nullable=True)
+    activities = db.Column(db.Boolean, default=False, nullable=True)
+    airport_transfer = db.Column(db.Boolean, default=False, nullable=True)
+    inter_city_transfer = db.Column(db.Boolean, default=False, nullable=True)
+    sightseeing = db.Column(db.Boolean, default=False, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<pool %r>' % self.sightseeing
+
+
+class Cities(Base):
+    __tablename__ = 'cities'
+
+    package_id = db.Column(db.Integer, db.ForeignKey('package.id'), nullable=False)
+    city_name = db.Column(db.String, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<city_name %r>' % self.city_name
+
+
+class Experiences(Base):
+    __tablename__ = 'experiences'
+
+    package_id = db.Column(db.Integer, db.ForeignKey('package.id'), nullable=False)
+    experience_name = db.Column(db.String, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<Experience_name %r>' % self.Experience_name
+
+
+class PackageBooking(Base):
+    __tablename__ = 'package_booking'
+
+    package_id = db.Column(db.Integer, db.ForeignKey('package.id'), nullable=False)
+    package_booking_no = db.Column(db.String, nullable=True)
+    trip_start_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    trip_end_date = db.Column(db.DateTime(timezone=True), nullable=True)
+    customer_name = db.Column(db.String, nullable=True)
+    customer_mail = db.Column(db.String, nullable=True)
+    customer_contact = db.Column(db.String, nullable=True)
+    price_per_adult = db.Column(db.Integer, nullable=True)
+    price_per_child = db.Column(db.Integer, nullable=True)
+    no_of_adult = db.Column(db.Integer, nullable=True)
+    no_of_child = db.Column(db.Integer, nullable=True)
+    total_price = db.Column(db.Integer, nullable=True)
+    status = db.Column(db.Enum(Status))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<Experience_name %r>' % self.Experience_name
+
+
 # class Invoice(Base):
 #
 #     __tablename__ = 'invoice'
