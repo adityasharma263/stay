@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="stay" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]-->
+<head>
+    <!-- Page Title -->
+    <title> The Travel Square </title>
+    <!-- Meta Tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="The Travel Square">
+    <meta name="description" content="">
+    <meta name="distribution" content="global">
+    <meta name="country" content="india">
+    <meta name="copyright" content="The Travel Square">
+    <meta name="revisit-after" content="1 hour">
+    <meta name="designer" content="The Travel Square">
+    <meta name="language" content="english">
+    <meta name="robots" content="index, follow">
+    <meta name="rating" content="general">
+    <meta name="publisher" content="The Travel Square">
+    <meta property="og:title" content="The Travel Square">
+    <meta property="og:description" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta property="og:image" content="">
+    <meta name="twitter:card" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta name="keywords" content="The Travel Square is a Unique B2B Platform For Travel Agents to Get Best Quotes For Their Travel Booking Leads . Our Network is a Profesional B2B Connection of More Than 5000+ Travel Agents Around the Globe at More Than 250+ Destinations in the World . The Travel Square is Simple to Use , Efficient and Cost Savvy , Which Can Make More Margins in Travel Sales and Make Travel Agents Earn 150% More Profits.">
+    <meta name="format-detection" content="7428558566">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="http://thetravelsquare.in/files/bootstrap.min.css">
+    <link rel="stylesheet" href="http://thetravelsquare.in/files/font-awesome.min.css">
+    <link rel="stylesheet" href="http://thetravelsquare.in/files/animate.min.css">
+    <link rel="stylesheet" href="http://thetravelsquare.in/flaticon.css">  
+    <link rel="stylesheet" type="text/css" href="http://thetravelsquare.in/files/settings.css" media="screen">  
+    <link rel="stylesheet" type="text/css" href="http://thetravelsquare.in/files/flexslider.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://thetravelsquare.in/files/jquery.bxslider.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://thetravelsquare.in/styles.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://thetravelsquare.in/files/style.css" media="screen">
+     <link href="http://thetravelsquare.in/files/css" rel="stylesheet" type="text/css">
+
+    <link id="main-style" rel="stylesheet" href="/files/style-light-yellow.css">    
+    
+    
+    
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="http://thetravelsquare.in/files/updates.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://thetravelsquare.in/files/custom.css">
+    
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="http://thetravelsquare.in/files/responsive.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+    
+   <script>
+    function clearCoor() {
+        document.getElementById("demo").style.display = "none";
+    }
+    function myFunction(e) {
+        document.getElementById("demo").style.display="block"
+    }
+   </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- remove cookie lib -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-cookies.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+    <body ng-controller="{% block controller%}{% endblock %}" >
+        <div>
+        <div id="page-wrapper">
+        <header id="header" class="navbar-static-top">
+                <div class="topnav hidden-xs">
+                    <div class="container">
+                        
+                    <ul class="quick-menu pull-right">
+                        <li class="ribbon">
+                           <font color="black"> <a class="button white btn-small uppercase" style="height: 30px; font-size: 1em; color:black">Hello &ensp; {{ name }}</a></font>
+                            <ul class="menu mini uppercase left">
+                                <li><a href="">Dashboard Home</a></li>
+                                <li><a href="http://partner.thetravelsquare.in/logout.php">Log Out</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="/booking-cart"></a></li>
+                            </li>
+                            <li><a href="/hotel/booking" target="_self"><img height="27" width="30" src="http://thetravelsquare.in/images/cart-image.png"/></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+
+        <div class="main-header">
+                    <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">Mobile Menu Toggle
+                    </a>
+                    <div class="container">
+
+                        <h1 class="navbar-brand" style="height: 20%;">
+                            <a href="http://business.thetravelsquare.in/hotel" title="The Travel Square">
+                               <img src="http://thetravelsquare.in/images/the-travel-square-india-logo.png" alt="The Travel Square Logo">
+                            </a>
+                        </h1>
+
+
+                        <nav id="main-menu" role="navigation">
+                            <ul class="menu">
+                                <!-- <li><a href="/dashboard">Home</a> </li> -->
+                                <li><a href="http://business.thetravelsquare.in/packages" target="_blank">Holidays</a></li>
+                                <li><a href="http://business.thetravelsquare.in/hotel" target="_blank">Hotels</a></li>
+                                <li><a href="http://business.thetravelsquare.in/coming-soon" target="_blank">Flights</a> </li>
+                                <!-- <li><a href="http://business.thetravelsquare.in/coming-soon" target="_blank">Restaurants</a> </li> -->
+                                <li><a href="http://business.thetravelsquare.in/coming-soon" target="_blank">Experiences</a> </li>
+                                <li><a href="http://business.thetravelsqaure.in/coming-soon" target="_blank">Cabs</a> </li>
+                                <li><a href="http://business.thetravelsquare.in/coming-soon" target="_blank">Visa</a> </li>
+                                <li><a href="http://business.thetravelsquare.in/coming-soon" target="_blank">Buses</a> </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <nav id="mobile-menu-01" class="mobile-menu collapse">
+                        <ul id="mobile-primary-menu" class="menu">
+                            <!-- <li><a href="http://business.thetravelsquare.in/dashboard">Home</a> </li> -->
+                            <li><a href="http://business.thetravelsquare.in/packages">Holidays</a> </li>
+                            <li><a href="http://business.thetravelsquare.in/hotel">Hotels</a> </li>
+                            <li><a href="http://business.thetravelsquare.in/coming-soon">Flights</a> </li>
+                            <li><a href="http://business.thetravelsquare.in/coming-soon">Experiences</a> </li>
+                            <li><a href="http://business.thetravelsquare.in/coming-soon">Cabs</a> </li>
+                            <li><a href="http://business.thetravelsquare.in/coming-soon">Visa</a> </li>
+                            <li><a href="http://business.thetravelsquare.in/coming-soon">Buses</a> </li>
+                        </ul>
+
+                        <ul class="mobile-topnav container">
+                            <li class="ribbon">
+                                <font color="white"><a class="button white btn-small uppercase" style="height: 30px; font-size: 1em; color:black">Hello &ensp; {{ name }}</a></font>
+                                <ul class="menu mini uppercase left">
+                                    <li><a href="http://partner.thetravelsquare.in">Dashboard Home</a></li>
+                                    <li><a href="http://partner.thetravelsquare.in/logout.php">Log Out</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="http://business.thetravelsquare.in/booking-cart"><img height="27" width="30" src="http://thetravelsquare.in/images/cart-image.png"></a></li>
+                        </ul>
+                    </nav>
+                </div>
+        </header>
+        
