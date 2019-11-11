@@ -452,3 +452,7 @@ def privacy_policy():
     return render_template('hotel/b2b_hotels/privacy-policy.html')
 
 
+@app.route('/enquiry')
+def enquiry():
+    return render_template('hotel/b2b_hotels/enquiry.html')
+
