@@ -456,3 +456,15 @@ def privacy_policy():
 def enquiry():
     return render_template('hotel/b2b_hotels/enquiry.html')
 
+
+
+######################## PACKAGE ##########################
+
+
+@app.route('/package-booking')
+def package_booking():
+    return render_template('hotel/b2b_hotels/package-booking.html')
+
+@app.route('/package-confirmation')
+def package_confirmation():
+    return render_template('hotel/b2b_hotels/package-confirmation.html')
