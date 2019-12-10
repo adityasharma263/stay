@@ -482,7 +482,7 @@ def activities():
 
 @app.route('/holidays')
 def holidays():
-    return render_template('hotel/b2b_hotels/holidays.html')
+    return render_template('hotel/b2b_hotels/coming-soon.html')
 
 @app.route('/visa')
 def visa_soon():
