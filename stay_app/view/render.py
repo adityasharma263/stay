@@ -468,3 +468,38 @@ def package_booking():
 @app.route('/package-confirmation')
 def package_confirmation():
     return render_template('hotel/b2b_hotels/package-confirmation.html')
+
+
+############################ COMING SOON ############################
+
+@app.route('/cabs')
+def cabs():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
+@app.route('/experiences')
+def activities():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
+@app.route('/holidays')
+def holidays():
+    return render_template('hotel/b2b_hotels/holidays.html')
+
+@app.route('/visa')
+def visa_soon():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
+@app.route('/buses')
+def buses():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
+@app.route('/events')
+def events():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
+@app.route('/bus')
+def bus():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
+
+@app.route('/forex')
+def forex():
+    return render_template('hotel/b2b_hotels/coming-soon.html')
