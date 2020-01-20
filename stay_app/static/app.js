@@ -606,8 +606,9 @@ var app = angular.module('stay', ['angular.filter'])
        var getSimilarHotels = function () {
            $http({
                method: 'GET',
-               url: api_url + '/api/v1/hotel?city=' + $scope.hotel[0].city
+               url: api_url + '/api/v1/hotel?city=' + $scope.hotel.city
            }).then(function successCallback(response) {
+            console.log(response);
 
                for (var i = 0; i < response.data.result.hotel.length; i++) {
                    if (response.data.result.hotel[i].id == $scope.hotel[0].id) {
