@@ -212,8 +212,7 @@ def booking():
                 # return render_template('hotel/booking/booking.html', partner_data=partner_data)
                 return render_template('hotel/booking/booking.html', cart_data=cart_data)
             else:
-                return "YOU ARE NOT APPROVED FOR BOOKING  <br><a href =" + str(app.config["BUSINESS_DOMAIN_URL"]) + "/lta-registration.php'></b>" + \
-               "click here  FOR THE APPROVAL </b></a>"
+                return render_template('hotel/booking/not-approved.html')
         else:
             booking_details = request.json
             booking_details['status'] = 'P'
