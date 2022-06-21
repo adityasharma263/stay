@@ -21,7 +21,7 @@ marshmallow==2.19.5
 marshmallow-enum==1.4.1
 marshmallow-sqlalchemy==0.13.1
 Naked==0.1.31
-numpy==1.16.4
+numpy==1.22.0
 promise==2.2.1
 psycopg2==2.8.3
 pycrypto==2.6
